@@ -1,0 +1,28 @@
+<mat-toolbar>
+  <mat-toolbar-row class="justify-content-between">
+    <button mat-icon-button (click)="toggleSidebar()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div>HR MANAGER</div>
+    <div class="row mr-2 ml-auto">
+      <ul class="row m-0 align-items-center">
+        <li>
+            <button mat-icon-button><mat-icon>mail</mat-icon></button>
+            <button mat-icon-button><mat-icon>sms</mat-icon></button>
+            <button mat-icon-button><mat-icon>
+              <span class="material-symbols-outlined">notifications
+              </span></mat-icon></button>
+
+            <img src="./assets/images/user.jpg" alt="" class="user-image mr-1 p-2" />
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>
+              <mat-icon>exit_to_app</mat-icon>
+              Logout
+            </button>
+          </mat-menu>
+        </li>
+      </ul>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
