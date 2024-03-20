@@ -25,6 +25,7 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatCardModule} from '@angular/material/card';
 import { NotificationComponent } from './notification/notification.component';
 import { PiechartComponent } from './piechart/piechart.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 
@@ -40,6 +41,7 @@ import { PiechartComponent } from './piechart/piechart.component';
     ResetpwordComponent,
     NotificationComponent,
     PiechartComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,

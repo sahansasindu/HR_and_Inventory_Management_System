@@ -12,6 +12,7 @@ export class LoginComponent {
   password: string = '';
 
   constructor(private router: Router) {} // Inject Router
+  showPassword: boolean = false;
 
   userLogin() {
     console.log(this.password);
@@ -21,5 +22,14 @@ export class LoginComponent {
       // Navigate to dashboard component if login is successful
       this.router.navigate(['/container']);
     }
+  }
+
+  userSignup() {
+
+    this.router.navigate(['/signup']);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }
