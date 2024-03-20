@@ -22,17 +22,15 @@
           </div>
 
         </div>
-        <div class="mb-4 row">
+        <div class="mb-5 row">
           <label for="username" class="col-sm-3 col-form-label"><b>Password:</b></label>
           <div class="col-sm-9">
             <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Enter your password">
             <!-- Checkbox to toggle password visibility -->
-            <input type="checkbox" id="showPasswordCheckbox" name="showpword"[(ngModel)]="showPassword" (change)="togglePasswordVisibility()">
+            <input type="checkbox" id="showPasswordCheckbox"  (change)="togglePasswordVisibility()">
             <label for="showPasswordCheckbox">Show Password</label>
           </div>
         </div>
-
-
 
         <div class="mb-5 row justify-content-end">
           <label for="password" class="forget-pw text-end col-sm-9"><a routerLink="container">Forget Password?</a></label>
