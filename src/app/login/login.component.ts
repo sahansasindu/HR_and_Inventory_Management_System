@@ -19,7 +19,7 @@ export class LoginComponent {
 
     if (this.username === 'sahan' && this.password === 'sahan') {
       // Navigate to dashboard component if login is successful
-      this.router.navigate(['/home']);
+      this.router.navigate(['/container']);
     }
   }
 }

@@ -34,14 +34,38 @@
 }
 
 .text-muted {
-  color: #6c757d;
+  color: #ef0505;
 }
 
 #part1{
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 #part2{
-  margin-bottom: 70px;
+  margin-bottom: 60px;
+}
+p {
+  font-size: 14px; /* Adjust the font size as needed */
+  color: #000000;
 }
 
+h4{
+  color: #000000;
+
+}
+
+h6{
+  color: #000000;
+
+}
+
+hr{
+  height: 2px; /* Adjust the height as needed */
+  background-color: #000; /* Optional: Change the color */
+  border: none; /* Optional: Remove the default border */
+  margin: 20px 0; /* Optional: Adjust margin for spacing */
+}
+
+.icon{
+  padding-right: 50px;
+}

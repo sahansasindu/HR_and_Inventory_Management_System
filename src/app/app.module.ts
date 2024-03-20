@@ -21,6 +21,11 @@ import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './login/login.component';
 import { ContainerComponent } from './container/container.component';
 import { ResetpwordComponent } from './resetpword/resetpword.component';
+import {MatBadgeModule} from '@angular/material/badge';
+import {MatCardModule} from '@angular/material/card';
+import { NotificationComponent } from './notification/notification.component';
+import { PiechartComponent } from './piechart/piechart.component';
+
 
 
 @NgModule({
@@ -33,6 +38,8 @@ import { ResetpwordComponent } from './resetpword/resetpword.component';
     LoginComponent,
     ContainerComponent,
     ResetpwordComponent,
+    NotificationComponent,
+    PiechartComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +54,8 @@ import { ResetpwordComponent } from './resetpword/resetpword.component';
     MatSidenavModule,
     MatButtonModule,
     FormsModule,
+    MatBadgeModule,
+    MatCardModule,
   ],
   providers: [
     provideClientHydration(),

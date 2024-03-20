@@ -2,7 +2,7 @@
   text-align: center;
   padding: 2.6rem 1rem;
   img {
-    width: 130px;
+    width: 150px;
   }
 }
 
@@ -21,6 +21,7 @@
 .mat-divider {
   border-top-width: 2px;
   border-color: white;
+  margin-top: 0px;
 }
 
 .mat-list-item {
