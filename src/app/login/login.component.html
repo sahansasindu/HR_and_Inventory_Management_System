@@ -27,7 +27,7 @@
           <div class="col-sm-9">
             <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" [(ngModel)]="password" class="form-control" placeholder="Enter your password">
             <!-- Checkbox to toggle password visibility -->
-            <input type="checkbox" id="showPasswordCheckbox" [(ngModel)]="showPassword" (change)="togglePasswordVisibility()">
+            <input type="checkbox" id="showPasswordCheckbox" name="showpword"[(ngModel)]="showPassword" (change)="togglePasswordVisibility()">
             <label for="showPasswordCheckbox">Show Password</label>
           </div>
         </div>
