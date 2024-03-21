@@ -74,6 +74,7 @@
           "configurations": {
             "production": {
               "buildTarget": "HR_and_Inventory_Management_System:build:production"
+
             },
             "development": {
               "buildTarget": "HR_and_Inventory_Management_System:build:development"
