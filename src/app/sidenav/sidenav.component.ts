@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidenav',
@@ -6,5 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './sidenav.component.css'
 })
 export class SidenavComponent {
-
+constructor(private router:Router) {
+}
+  backtologin() {
+    this.router.navigate(['/login']).then(r => true);
+  }
 }

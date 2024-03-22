@@ -68,13 +68,15 @@ export class SignupComponent {
          }
        ).then(response => {
          // Handle the response here
-         console.log("Response from server:", response);
+         alert("Response from server:"+ response);
          // You can perform further actions based on the response
          alert("User registered successfully!");
+         this.cancelPage();
+         this.clearData();
        }).catch(error => {
          // Handle errors here
          console.error("Error registering user:", error);
-         alert("User name or Password Already Exist...");
+         alert("User name or Email Already Exist..."+error);
        });
     }
   }
