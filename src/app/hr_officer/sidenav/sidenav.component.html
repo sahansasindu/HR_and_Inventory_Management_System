@@ -1,0 +1,21 @@
+<mat-nav-list>
+  <div class="logo py-0">
+    <img src="../../../assets/images/logo.png" alt="Company Logo" />
+  </div>
+  <mat-divider></mat-divider>
+  <h2 class="mt-2">Applications</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./dashboard']">
+    <mat-icon>dashboard</mat-icon> Dashboard
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./home']">
+    <mat-icon>person_add</mat-icon> Add New Employee
+  </a>
+  <a mat-list-item> <mat-icon>person_search</mat-icon> View Employees  </a>
+  <a mat-list-item> <mat-icon>summarize</mat-icon> Medical Reports  </a>
+  <a mat-list-item> <mat-icon>fact_check</mat-icon>  Employee Attendance</a>
+  <a mat-list-item> <mat-icon>transfer_within_a_station</mat-icon> Employee Leave </a>
+  <a mat-list-item> <mat-icon>currency_exchange</mat-icon> Employee Salary</a>
+  <a mat-list-item> <mat-icon>manage_accounts</mat-icon> Manage Accounts </a>
+  <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+</mat-nav-list>
