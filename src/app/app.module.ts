@@ -6,7 +6,7 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import { HeaderComponent } from './hr_officer/header/header.component';
 import { SidenavComponent } from './hr_officer/sidenav/sidenav.component';
 import { DashboardComponent } from './hr_officer/dashboard/dashboard.component';
-import {MatDrawerContainer} from "@angular/material/sidenav";
+// Import Angular Material modules
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -14,13 +14,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from "@angular/forms";
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from "@angular/forms";
 import { LoginComponent } from './common/login/login.component';
 import { ContainerComponent } from './hr_officer/container/container.component';
 import { ResetpwordComponent } from './common/resetpword/resetpword.component';
-import {MatBadgeModule} from '@angular/material/badge';
-import {MatCardModule} from '@angular/material/card';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatCardModule } from '@angular/material/card';
 import { NotificationComponent } from './hr_officer/notification/notification.component';
 import { PiechartComponent } from './hr_officer/piechart/piechart.component';
 import { SignupComponent } from './common/signup/signup.component';
@@ -28,6 +28,8 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
+// Import provideHttpClient withFetch
+import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -49,7 +51,6 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MatDrawerContainer,
     BrowserAnimationsModule,
     MatListModule,
     MatDividerModule,
@@ -61,10 +62,12 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
     FormsModule,
     MatBadgeModule,
     MatCardModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(),
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
   ],
   bootstrap: [AppComponent]
 })

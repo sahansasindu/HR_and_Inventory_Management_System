@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {AxiosService} from "../../axios.service";
-import {response} from "express";
 
 @Component({
   selector: 'app-signup',
@@ -17,7 +16,6 @@ export class SignupComponent {
   tpno:string = "";
   role:string = "";
   emp_ID:string="";
-  toleset:Set<string>=new Set<string>();
 
   constructor(private axiosService:AxiosService,private router: Router) {} // Inject Router
 
@@ -38,11 +36,9 @@ export class SignupComponent {
 
   }
 
-   async submitData() {
+  async submitData() {
 
-
-
-    if(this.role=="" || this.password=="" || this.email=="" || this.username=="" || this.tpno==""){
+    if(this.role=="" || this.password=="" || this.email=="" || this.username=="" || this.tpno=="" || this.emp_ID==""){
         alert("Please Fill The All Fields...")
     }else if(this.username.length>8 || this.username.length<3){
         alert("Please use between 3 and 8 characters for user Name.....")
@@ -54,32 +50,45 @@ export class SignupComponent {
       alert("Please Enter Validate Phone Numbers...")
     }else {
 
-      console.log(this.role);
-      console.log(this.password);
-      console.log(this.email);
-      console.log(this.username);
-      console.log(this.tpno);
-      console.log(this.emp_ID);
+      //console.log(this.role);
+      //console.log(this.password);
+     // console.log(this.email);
+      //console.log(this.username);
+      //console.log(this.tpno);
+      //console.log(this.emp_ID);
 
        this.axiosService.request(
          "POST",
-         "userregister", {
-           "contact": this.tpno,
-           "email": this.email,
-           "password": this.password,
-           "role": this.role,
-           "username": this.username
+         "/userregister", {
+               "username": this.username,
+               "password": this.password,
+               "email": this.email,
+               "contact": this.tpno,
+               "role": this.role,
+               "employeeid":this.emp_ID
          }
-       ).then(response => {
-         // Handle the response here
-         console.log("Response from server:", response);
-         // You can perform further actions based on the response
-         alert("User registered successfully!");
-       }).catch(error => {
-         // Handle errors here
-         console.error("Error registering user:", error);
-         alert("User name or Password Already Exist...");
-       });
+       )
+           .then(response => {
+             // Handle back end response
+             //console.log("Response from server:", response);
+             // Check if there's a success message
+             if (response.data && response.data.message) {
+               alert(response.data.message);
+             } else {
+               alert("User registered successfully!");
+               this.clearData();
+             }
+           })
+           .catch(error => {
+             // Handle errors
+             //console.error("Error registering user:", error);
+             // Check if there's an error message from the server
+             if (error.response && error.response.data && error.response.data.message) {
+               alert(error.response.data.message);
+             } else {
+               alert("An error occurred while registering the user.");
+             }
+           });
     }
   }
 
