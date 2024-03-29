@@ -22,10 +22,11 @@
   flex-direction: column;
 }
 
-#empty-bottles { top: 0; left: 50%; transform: translate(-50%, -50%); }
-#washing-bottles { right: 0; top: 50%; transform: translate(50%, -50%); }
-#finished-goods { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
-#for-agents { left: 0; top: 50%; transform: translate(-50%, -50%); }
+  #empty-bottles { top: 0; left: 50%; transform: translate(-50%, -50%);}
+  #washing-bottles { right: 0; top: 50%; transform: translate(50%, -50%); }
+  #finished-goods { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+  #for-agents { left: 0; top: 50%; transform: translate(-50%, -50%); }
+
 
 .process-title {
   font-size: 1.4em;

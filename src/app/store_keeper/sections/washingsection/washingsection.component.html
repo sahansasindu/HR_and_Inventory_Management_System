@@ -1,8 +1,107 @@
 <div class="d-flex page__box p-1 mt-0">
 
-
   <div class="parallel-div col-9">
-    Washing Section
+    <div class="washsection-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Details</button>
+        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Changes</button>
+      </div>
+      <div class="mat-table-container">
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Employee ID -->
+          <ng-container matColumnDef="employeeid">
+            <mat-header-cell *matHeaderCellDef> Employee ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.employeeid }} </mat-cell>
+          </ng-container>
+
+          <!-- Employee Name -->
+          <ng-container matColumnDef="employeename">
+            <mat-header-cell *matHeaderCellDef> Employee Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.employeename }} </mat-cell>
+          </ng-container>
+
+          <!-- Damage Bottles Column -->
+          <ng-container matColumnDef="damage_bottles">
+            <mat-header-cell *matHeaderCellDef> Number Of Damage Bottles </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.damage_bottles }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Date Column -->
+          <ng-container matColumnDef="submit_date">
+            <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
+          </ng-container>
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [class.highlighted]="row === selectedRow"
+                   (click)="selectRow(row)"></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+
+    <!-- show the add details form -->
+    <div class="add-details-container" *ngIf="isAddDetailsVisible">
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleAddDetails()">Close</button>
+
+      <!-- Add damage bottle details -->
+      <form class="details-form">
+        <h2>Add damages caused by employees</h2>
+
+        <label for="employeeId">Employee ID:</label>
+        <input type="text" id="employeeId" name="employeeId" required>
+
+        <label for="employeename">Employee Name:</label>
+        <input type="text" id="employeename" name="employeename" required>
+
+        <label for="damagedBottlesbyEployee">Number Of Damage Empty Bottles:</label>
+        <input type="number" id="damagedBottlesbyEployee" name="damagedBottlesbyEployee" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- show the update details form-->
+    <div class="update-container" *ngIf="isUpdateVisible">
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
+
+      <form class="details-form">
+        <h2>Update  damage changes caused by employees</h2>
+
+        <label for="updateemployeeId">Employee ID:</label>
+        <input type="text" id="updateemployeeId" name="updateemployeeId" required>
+
+        <label for="updateemployeename">Employee Name:</label>
+        <input type="text" id="updateemployeename" name="updateemployeename" required>
+
+        <label for="updatedamagedBottlesbyEployee">Number Of Damage Empty Bottles:</label>
+        <input type="number" id="updatedamagedBottlesbyEployee" name="damagedBottlesbyEployee" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+      </form>
+
+    </div>
   </div>
 
   <div class="left-div col-3 text-right" id="div3"></div>
