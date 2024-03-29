@@ -30,6 +30,12 @@ import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
 // Import provideHttpClient withFetch
 import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
+import { DashboardstoreComponent } from './store_keeper/dashboardstore/dashboardstore.component';
+import { HeaderstoreComponent } from './store_keeper/headerstore/headerstore.component';
+import { SidemenubarstoreComponent } from './store_keeper/sidemenubarstore/sidemenubarstore.component';
+import { NotificationcomComponent } from './common/notificationcom/notificationcom.component';
+import { ProductioncricleComponent } from './common/productioncricle/productioncricle.component';
+import { ContainerstoreComponent } from './store_keeper/containerstore/containerstore.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +53,12 @@ import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/h
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
+    HeaderstoreComponent,
+    SidemenubarstoreComponent,
+    NotificationcomComponent,
+    ProductioncricleComponent,
+    ContainerstoreComponent,
+    DashboardstoreComponent,
   ],
   imports: [
     BrowserModule,

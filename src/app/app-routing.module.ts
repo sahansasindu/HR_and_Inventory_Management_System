@@ -6,7 +6,8 @@ import {LoginComponent} from "./common/login/login.component";
 import {SignupComponent}from "./common/signup/signup.component";
 import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.component';
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
-
+import {ContainerstoreComponent} from './store_keeper/containerstore/containerstore.component';
+import {DashboardstoreComponent} from './store_keeper/dashboardstore/dashboardstore.component'
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -24,10 +25,18 @@ const routes: Routes = [
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
     ]},
 
+  //set the paths storekeeper dashboard
+  {path:'storekeeper',component:ContainerstoreComponent,children:[
+      {path:'dashboardstore',component: DashboardstoreComponent},
+      { path: '', redirectTo: 'dashboardstore', pathMatch: 'full' },
+    ]},
 
 
-  { path: '', redirectTo: 'container', pathMatch: 'full' },
+
+  //{ path: '', redirectTo: 'container', pathMatch: 'full' },
   // Other routes if needed
+
+
 ];
 
 

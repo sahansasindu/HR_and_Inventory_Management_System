@@ -1,0 +1,21 @@
+
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+mat-drawer {
+  width: 260px;
+}
+mat-drawer-container {
+  height: 100%;
+}
+
+mat-drawer {
+  background: linear-gradient(to bottom, #3288bd, #7a88e7);
+}
+
+
+

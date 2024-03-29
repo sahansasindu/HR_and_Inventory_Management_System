@@ -23,7 +23,7 @@ export class LoginComponent {
       this.router.navigate(['/container']);
     }else if(this.username === 'kamal' && this.password === 'kamal'){
 
-      this.router.navigate(['/hrmcontainer']);
+      this.router.navigate(['/storekeeper']);
 
     }
   }
