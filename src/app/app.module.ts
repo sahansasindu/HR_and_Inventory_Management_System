@@ -28,6 +28,8 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatInputModule } from '@angular/material/input';
 // Import provideHttpClient withFetch
 import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardstoreComponent } from './store_keeper/dashboardstore/dashboardstore.component';
@@ -36,6 +38,10 @@ import { SidemenubarstoreComponent } from './store_keeper/sidemenubarstore/sidem
 import { NotificationcomComponent } from './common/notificationcom/notificationcom.component';
 import { ProductioncricleComponent } from './common/productioncricle/productioncricle.component';
 import { ContainerstoreComponent } from './store_keeper/containerstore/containerstore.component';
+import { EmptysectionComponent } from './store_keeper/sections/emptysection/emptysection.component';
+import { WashingsectionComponent } from './store_keeper/sections/washingsection/washingsection.component';
+import { MilkproductionsectionComponent } from './store_keeper/sections/milkproductionsection/milkproductionsection.component';
+import { LoardingsectionComponent } from './store_keeper/sections/loardingsection/loardingsection.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +65,10 @@ import { ContainerstoreComponent } from './store_keeper/containerstore/container
     ProductioncricleComponent,
     ContainerstoreComponent,
     DashboardstoreComponent,
+    EmptysectionComponent,
+    WashingsectionComponent,
+    MilkproductionsectionComponent,
+    LoardingsectionComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,6 +85,8 @@ import { ContainerstoreComponent } from './store_keeper/containerstore/container
     MatBadgeModule,
     MatCardModule,
     HttpClientModule,
+    MatInputModule,
+    MatTableModule,
   ],
   providers: [
     provideClientHydration(),

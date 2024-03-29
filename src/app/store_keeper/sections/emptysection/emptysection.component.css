@@ -1,0 +1,133 @@
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page__box {
+  background-color: #ffffff;
+  height: 650px;
+  border-radius: 5px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1%;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+
+#div3 {
+  margin-left: 2px;
+  background-color: #d2d2d2;
+  border: 2px solid #d2d2d2;
+  border-radius: 2%;
+}
+
+
+
+
+
+/* Media queries */
+
+@media (max-width: 992px) {
+  .parallel-div {
+    flex-direction: column;
+  }
+
+  .custom-div,
+  .left-div {
+    width: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+    padding-bottom: 485px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    height: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__box {
+    height: auto;
+  }
+
+  #div1,
+  #div2,
+  #div3 {
+    height: auto;
+  }
+}
+.emptysection-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+.mat-form-field {
+  width: 50%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width: 300px;
+}
+
+.mat-table-container {
+
+  max-height: 450px; /* Adjust this value to the desired table body height */
+  overflow-y: scroll;
+}
+
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+
+.mat-table {
+  display: block;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 8px;
+  min-width: 120px; /* Or your preferred min-width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make sure to set a min-width for the table container equal to the total width of all columns */
+.mat-table-container {
+  min-width: 450px; /* This is just an example; calculate the total width of your columns */
+}
+
+.highlighted{
+  background-color: #ccdff5;
+}

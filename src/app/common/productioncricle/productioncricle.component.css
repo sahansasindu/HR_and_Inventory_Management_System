@@ -1,0 +1,41 @@
+.bottle-routing {
+  position: relative;
+  width: 600px; /* Adjust as needed */
+  height: 450px; /* Adjust as needed */
+  margin: auto;
+  padding: 20px;
+  border: 5px solid #00ffeb;
+  top: 95px;
+}
+
+.process-step {
+  background-color: #b4ecff;
+  border-radius: 10%;
+  width: 180px; /* Adjust as needed */
+  height: 180px; /* Adjust as needed */
+  position: absolute;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#empty-bottles { top: 0; left: 50%; transform: translate(-50%, -50%); }
+#washing-bottles { right: 0; top: 50%; transform: translate(50%, -50%); }
+#finished-goods { bottom: 0; left: 50%; transform: translate(-50%, 50%); }
+#for-agents { left: 0; top: 50%; transform: translate(-50%, -50%); }
+
+.process-title {
+  font-size: 1.4em;
+  color: #000000;
+  font-weight: bold;
+}
+
+.process-count {
+  font-size: 1.2em;
+  color: #1c0f0f;
+}
+
+

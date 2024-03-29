@@ -7,4 +7,14 @@ import { Component } from '@angular/core';
 })
 export class ProductioncricleComponent {
 
+  // Variables to hold the quantities, you can also fetch these from a service
+  emptyBottles: number = 0;
+  washingBottles: number = 0;
+  finishedGoods: number = 0;
+  forAgents: number = 0;
+
+  constructor() {
+
+  }
+
 }

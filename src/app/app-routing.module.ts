@@ -8,6 +8,12 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import {ContainerstoreComponent} from './store_keeper/containerstore/containerstore.component';
 import {DashboardstoreComponent} from './store_keeper/dashboardstore/dashboardstore.component'
+import {EmptysectionComponent} from "./store_keeper/sections/emptysection/emptysection.component";
+import {LoardingsectionComponent} from "./store_keeper/sections/loardingsection/loardingsection.component";
+import {WashingsectionComponent} from "./store_keeper/sections/washingsection/washingsection.component";
+import {
+  MilkproductionsectionComponent
+} from "./store_keeper/sections/milkproductionsection/milkproductionsection.component";
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -27,13 +33,18 @@ const routes: Routes = [
 
   //set the paths storekeeper dashboard
   {path:'storekeeper',component:ContainerstoreComponent,children:[
-      {path:'dashboardstore',component: DashboardstoreComponent},
       { path: '', redirectTo: 'dashboardstore', pathMatch: 'full' },
+
+      {path:'dashboardstore',component: DashboardstoreComponent},
+      {path:'emptysection',component: EmptysectionComponent},
+      {path:'loardingsection',component: LoardingsectionComponent},
+      {path:'washingsection',component: WashingsectionComponent},
+      {path:'milkproductionsection',component: MilkproductionsectionComponent},
     ]},
 
 
 
-  //{ path: '', redirectTo: 'container', pathMatch: 'full' },
+  //{ path: '', redirectTo: 'container', pathMatch: 'full' ,
   // Other routes if needed
 
 
