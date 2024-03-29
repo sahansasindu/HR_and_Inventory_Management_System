@@ -1,0 +1,127 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page__box {
+  background-color: #ffffff;
+  height: 800px;
+  border-radius: 1px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  background-color: #f1eded;
+  border-radius: 1px;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+#div1 {
+  height: 790px;
+  background-color: #e8e0e0;
+}
+
+
+
+#div3 {
+  margin-left: 3px;
+  background-color: #9d9898;
+  border-radius: 2%;
+}
+
+
+
+
+
+
+/* Media queries */
+
+@media (max-width: 1000px) {
+  .parallel-div {
+    flex-direction: column;
+  }
+
+  .custom-div,
+  .left-div {
+    width: 100%;
+  }
+
+
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    height: 100%;
+  }
+
+
+}
+
+@media (max-width: 400px) {
+  .page__box {
+    height: auto;
+  }
+
+  #div1{
+    height: auto;
+    color: black;
+  }
+
+  #div3 {
+    height: auto;
+
+  }
+}
+.employee-profile-container {
+  max-width: 800px;
+  margin: auto;
+  background-color: #51b9c0; /* Change as per your theme */
+  padding: 20px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.profile-icon {
+   /* Profile icon background */
+  border-radius: 50%;
+  padding: 10px;
+  color: #111111;
+  font-size: 48px; /* Adjust as needed */
+}
+
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: center;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin: 20px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 20px;
+}
+
+button {
+  margin-right: 8px;
+}
+
+/* If you have additional specific stylings for your fields and labels, add them here */

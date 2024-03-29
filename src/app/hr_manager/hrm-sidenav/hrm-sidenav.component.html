@@ -5,20 +5,37 @@
   <mat-divider></mat-divider>
   <h2 class="mt-2">Applications</h2>
 
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./app-hrm-dashboard']">
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrm-dashboard']">
     <mat-icon>dashboard</mat-icon>Dashboard
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./home']">
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-update']">
     <mat-icon>person_add</mat-icon> Update Employee
   </a>
-  <a mat-list-item> <mat-icon>format_list_bulleted</mat-icon> Leave & Medical </a>
-  <a mat-list-item> <mat-icon>summarize</mat-icon> Employee Details  </a>
-  <a mat-list-item> <mat-icon>note_add</mat-icon> Medical Approval </a>
-  <a mat-list-item> <mat-icon>fact_check</mat-icon> Employee Attendance</a>
-  <a mat-list-item> <mat-icon>transfer_within_a_station</mat-icon> Manage Users </a>
-  <a mat-list-item> <mat-icon>task</mat-icon> Leave Approval</a>
-  <a mat-list-item> <mat-icon>currency_exchange</mat-icon> Employee Salary </a>
-  <a mat-list-item> <mat-icon>manage_accounts</mat-icon> Manage Accounts </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./leave-medical']">
+    <mat-icon>format_list_bulleted</mat-icon> Leave & Medical
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-details']">
+    <mat-icon>summarize</mat-icon> Employee Details
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./medical-approve']">
+    <mat-icon>note_add</mat-icon> Medical Approval
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-attendance']">
+    <mat-icon>fact_check</mat-icon> Employee Attendance
+  </a>
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./manage-user']">
+  <mat-icon>transfer_within_a_station</mat-icon> Manage Users
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./leave-approve']">
+  <mat-icon>task</mat-icon> Leave Approval
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-salary']">
+  <mat-icon>currency_exchange</mat-icon> Employee Salary
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./manage-acc']">
+  <mat-icon>manage_accounts</mat-icon> Manage Accounts
+  </a>
 
   <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
 </mat-nav-list>
