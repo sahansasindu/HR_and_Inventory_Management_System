@@ -42,6 +42,7 @@ import { EmptysectionComponent } from './store_keeper/sections/emptysection/empt
 import { WashingsectionComponent } from './store_keeper/sections/washingsection/washingsection.component';
 import { MilkproductionsectionComponent } from './store_keeper/sections/milkproductionsection/milkproductionsection.component';
 import { LoardingsectionComponent } from './store_keeper/sections/loardingsection/loardingsection.component';
+import {MatOption, MatSelect} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -87,6 +88,8 @@ import { LoardingsectionComponent } from './store_keeper/sections/loardingsectio
     HttpClientModule,
     MatInputModule,
     MatTableModule,
+    MatSelect,
+    MatOption,
   ],
   providers: [
     provideClientHydration(),
