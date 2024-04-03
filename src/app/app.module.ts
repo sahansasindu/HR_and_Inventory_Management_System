@@ -30,7 +30,10 @@ import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatInputModule } from '@angular/material/input';
+
+import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
 // Import provideHttpClient withFetch
+
 import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardstoreComponent } from './store_keeper/dashboardstore/dashboardstore.component';
 import { HeaderstoreComponent } from './store_keeper/headerstore/headerstore.component';
@@ -43,6 +46,15 @@ import { WashingsectionComponent } from './store_keeper/sections/washingsection/
 import { MilkproductionsectionComponent } from './store_keeper/sections/milkproductionsection/milkproductionsection.component';
 import { LoardingsectionComponent } from './store_keeper/sections/loardingsection/loardingsection.component';
 import {MatOption, MatSelect} from "@angular/material/select";
+import { ContainerstoremanagerComponent } from './production_manager/containerstoremanager/containerstoremanager.component';
+import { DashboardstoremanagerComponent } from './production_manager/dashboardstoremanager/dashboardstoremanager.component';
+import { HeaderstoremanagerComponent } from './production_manager/headerstoremanager/headerstoremanager.component';
+import { SidemenubarstoremanagerComponent } from './production_manager/sidemenubarstoremanager/sidemenubarstoremanager.component';
+import { ManageagentComponent } from './production_manager/productionsections/manageagent/manageagent.component';
+import { ManageissueComponent } from './production_manager/productionsections/manageissue/manageissue.component';
+import { ManagebottlestockComponent } from './production_manager/productionsections/managebottlestock/managebottlestock.component';
+import { ManagebottledamageComponent } from './production_manager/productionsections/managebottledamage/managebottledamage.component';
+import { ManageproductionreportsComponent } from './production_manager/productionsections/manageproductionreports/manageproductionreports.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +82,15 @@ import {MatOption, MatSelect} from "@angular/material/select";
     WashingsectionComponent,
     MilkproductionsectionComponent,
     LoardingsectionComponent,
+    ContainerstoremanagerComponent,
+    DashboardstoremanagerComponent,
+    HeaderstoremanagerComponent,
+    SidemenubarstoremanagerComponent,
+    ManageagentComponent,
+    ManageissueComponent,
+    ManagebottlestockComponent,
+    ManagebottledamageComponent,
+    ManageproductionreportsComponent,
   ],
   imports: [
     BrowserModule,
@@ -90,6 +111,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatTableModule,
     MatSelect,
     MatOption,
+    CanvasJSAngularStockChartsModule
   ],
   providers: [
     provideClientHydration(),

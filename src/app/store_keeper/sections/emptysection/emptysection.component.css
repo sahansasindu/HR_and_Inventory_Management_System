@@ -101,6 +101,7 @@ body {
 
   max-height: 450px; /* Adjust this value to the desired table body height */
   overflow-y: scroll;
+
 }
 
 .mat-header-row {

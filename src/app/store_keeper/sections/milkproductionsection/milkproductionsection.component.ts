@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
@@ -6,7 +6,7 @@ import {MatTableDataSource} from "@angular/material/table";
   templateUrl: './milkproductionsection.component.html',
   styleUrl: './milkproductionsection.component.css'
 })
-export class MilkproductionsectionComponent{
+export class MilkproductionsectionComponent implements OnInit{
   displayedColumns: string[] = ['finished_id', 'amunt_finished','batch_code', 'finished_status', 'submit_date', 'submit_time'];
   dataSource = new MatTableDataSource<TableElement>([]);
   selectedRow: Element | null = null;
@@ -31,6 +31,13 @@ export class MilkproductionsectionComponent{
   selectedRow2: Element | null = null;
 
   ELEMENT_DATA2:TableElement2[]=[
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },

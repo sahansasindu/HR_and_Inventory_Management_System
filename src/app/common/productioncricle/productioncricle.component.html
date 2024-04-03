@@ -1,18 +1,15 @@
-<div class="bottle-routing">
-  <div class="process-step" id="empty-bottles">
-    <div class="process-title">Empty Bottles</div>
-    <div class="process-count">{{ emptyBottles }}</div>
-  </div>
-  <div class="process-step" id="washing-bottles">
-    <div class="process-title">Washing Bottles</div>
-    <div class="process-count">{{ washingBottles }}</div>
-  </div>
-  <div class="process-step" id="finished-goods">
-    <div class="process-title">Finished Goods</div>
-    <div class="process-count">{{ finishedGoods }}</div>
-  </div>
-  <div class="process-step" id="for-agents">
-    <div class="process-title">For Agents</div>
-    <div class="process-count">{{ forAgents }}</div>
+
+<div class="chart-container-position">
+
+  <div class="chart-container">
+    <div class="btn-group">
+      <button class="btn btn-outline-success" (click)="this.resizeChart($event, 25)">Small</button>
+      <button class="btn btn-outline-success" (click)="this.resizeChart($event, 50)">Medium</button>
+      <button class="btn btn-success" (click)="this.resizeChart($event, 100)">Large</button>
+    </div>
+    <div class="chart-dalily">
+      <canvasjs-chart [options]="chartOptions" [styles]="{width: width, height:'360px'}" (chartInstance)="getChartInstance($event)" ></canvasjs-chart>
+
+    </div>
   </div>
 </div>

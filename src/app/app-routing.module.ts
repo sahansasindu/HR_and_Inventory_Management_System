@@ -11,9 +11,11 @@ import {DashboardstoreComponent} from './store_keeper/dashboardstore/dashboardst
 import {EmptysectionComponent} from "./store_keeper/sections/emptysection/emptysection.component";
 import {LoardingsectionComponent} from "./store_keeper/sections/loardingsection/loardingsection.component";
 import {WashingsectionComponent} from "./store_keeper/sections/washingsection/washingsection.component";
+import {MilkproductionsectionComponent} from "./store_keeper/sections/milkproductionsection/milkproductionsection.component";
+import {ContainerstoremanagerComponent} from "./production_manager/containerstoremanager/containerstoremanager.component";
 import {
-  MilkproductionsectionComponent
-} from "./store_keeper/sections/milkproductionsection/milkproductionsection.component";
+  DashboardstoremanagerComponent
+} from "./production_manager/dashboardstoremanager/dashboardstoremanager.component";
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -40,6 +42,11 @@ const routes: Routes = [
       {path:'loardingsection',component: LoardingsectionComponent},
       {path:'washingsection',component: WashingsectionComponent},
       {path:'milkproductionsection',component: MilkproductionsectionComponent},
+    ]},
+  {path:'productionmanager',component:ContainerstoremanagerComponent,children:[
+      { path: '', redirectTo: 'dashboardstoremanager', pathMatch: 'full' },
+
+      {path:'dashboardstoremanager',component: DashboardstoremanagerComponent},
     ]},
 
 

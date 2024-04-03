@@ -1,0 +1,32 @@
+<mat-nav-list>
+  <div class="logo py-0">
+    <img src="../../../assets/images/logo.png" alt="Company Logo" />
+  </div>
+  <mat-divider></mat-divider>
+  <h2 class="mt-2">Production Manager</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./dashboardstoremanager']">
+    <mat-icon>dashboard</mat-icon> Dashboard
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./xxxx']">
+    <mat-icon>real_estate_agent</mat-icon> Manage Agent
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./xxxx']">
+    <mat-icon>new_releases</mat-icon> Manage Issues
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./xxxx']">
+    <mat-icon>inventory</mat-icon>  Milk Bottles  Stock
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./xxxx']">
+    <mat-icon>broken_image</mat-icon>  Bottle Damages
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./xxxx']">
+    <mat-icon>description</mat-icon> Production Reports
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['/xxxx']">
+    <mat-icon>manage_accounts</mat-icon> Manage Profile
+  </a>
+
+  <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+</mat-nav-list>
+

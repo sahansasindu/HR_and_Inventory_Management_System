@@ -1,8 +1,186 @@
 <div class="d-flex page__box p-1 mt-0">
 
-
   <div class="parallel-div col-9">
-    Loading Section
+
+    <div class="loardingsection-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Loading Details</button>
+        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Loading Changes</button>
+      </div>
+      <div class="mat-table-container">
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Empty Unit ID Column -->
+          <ng-container matColumnDef="loading_id">
+            <mat-header-cell *matHeaderCellDef> Loading ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.loading_id }} </mat-cell>
+          </ng-container>
+
+          <!-- Empty Bottles Column -->
+          <ng-container matColumnDef="bottle_amount">
+            <mat-header-cell *matHeaderCellDef> Bottle Amount </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.bottle_amount }} </mat-cell>
+          </ng-container>
+
+          <!-- Damage Bottles Column -->
+          <ng-container matColumnDef="batch_code">
+            <mat-header-cell *matHeaderCellDef> Batch Code </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.batch_code }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Date Column -->
+          <ng-container matColumnDef="submit_date">
+            <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Time Column -->
+          <ng-container matColumnDef="submit_time">
+            <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_time | date:'shortTime' }} </mat-cell>
+          </ng-container>
+
+          <!-- For Washing Column -->
+          <ng-container matColumnDef="agent_id">
+            <mat-header-cell *matHeaderCellDef> Agent ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
+          </ng-container>
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [class.highlighted]="row === selectedRow"
+                   (click)="selectRow(row)"></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+
+    <!-- show the add details form -->
+    <div class="add-details-container" *ngIf="isAddDetailsVisible">
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="showAgentDetails()">Show Agents Details</button>
+      </div>
+
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleAddDetails()">Close</button>
+
+      <form class="details-form">
+        <h2>Add Daily Loading Bottles Details</h2>
+
+        <label for="milkBottlesAmount">Bottle Amount:</label>
+        <input type="number" id="milkBottlesAmount" name="milkBottlesAmount" required>
+
+        <label for="batchCode">Batch Code:</label>
+        <input type="number" id="batchCode" name="batchCode" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <label for="agentID">agent ID:</label>
+        <input type="text" id="agentID" name="agentID" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- show the update details form-->
+    <div class="update-container" *ngIf="isUpdateVisible">
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="showAgentDetails()">Show Agents Details</button>
+      </div>
+
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
+
+      <form class="details-form">
+        <h2>Update Daily Loading Bottles Details Changes</h2>
+
+        <label for="lodingBottlesupdate">Number Of Milk Bottles:</label>
+        <input type="number" id="lodingBottlesupdate" name="lodingBottlesupdate" required>
+
+        <label for="batchCodeupdate">Batch Code:</label>
+        <input type="number" id="batchCodeupdate" name="batchCodeupdate" required>
+
+        <label for="EmployeeIDupdate">Employee ID:</label>
+        <input type="number" id="EmployeeIDupdate" name="EmployeeIDupdate" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit">Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- agent details table-->
+    <div class="agent-details-container" *ngIf="showAgentDetailsFlag">
+
+      <div class="button-container">
+        <button mat-raised-button class="close-button" color="warn" (click)="closeAgent()">Close</button>
+      </div>
+      <div class="mat-table-container">
+
+        <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+          <!-- Empty Unit ID Column -->
+          <ng-container matColumnDef="agent_id">
+            <mat-header-cell *matHeaderCellDef> Agent ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
+          </ng-container>
+
+          <!-- Empty Bottles Column -->
+          <ng-container matColumnDef="agent_Address">
+            <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_Address }} </mat-cell>
+          </ng-container>
+
+          <!-- Damage Bottles Column -->
+          <ng-container matColumnDef="agency_name">
+            <mat-header-cell *matHeaderCellDef> Agency Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agency_name }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Date Column -->
+          <ng-container matColumnDef="agent_name">
+            <mat-header-cell *matHeaderCellDef> Agent Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Time Column -->
+          <ng-container matColumnDef="agent_contact">
+            <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_contact }} </mat-cell>
+          </ng-container>
+
+          <!-- For Washing Column -->
+          <ng-container matColumnDef="agent_mail">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_mail }} </mat-cell>
+          </ng-container>
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns2" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row2; columns: displayedColumns2;"
+                   [class.highlighted]="row2 === selectedRow2"
+                   (click)="selectRow2(row2)"></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+
   </div>
 
   <div class="left-div col-3 text-right" id="div3"></div>
