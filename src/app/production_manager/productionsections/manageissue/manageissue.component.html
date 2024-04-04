@@ -1,1 +1,26 @@
-<p>manageissue works!</p>
+<div class="d-flex page__box p-1 mt-0">
+
+
+
+
+
+  <div class="parallel-div col-9">
+    <div class="issue-management-container">
+
+      <div class="button-container">
+        <button mat-flat-button color="primary" >Manage Issues</button>
+      </div>
+
+      <div class="issue-chart">
+        <canvasjs-chart (chartInstance)="getChartInstance($event)"></canvasjs-chart>
+        <button mat-raised-button class="close-button" color="warn" *ngIf="this.isButtonVisible" (click)="handleClick($event)"> < Back</button>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="left-div col-3 text-right" id="div3">
+  </div>
+</div>
+

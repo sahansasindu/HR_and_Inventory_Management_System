@@ -13,9 +13,18 @@ import {LoardingsectionComponent} from "./store_keeper/sections/loardingsection/
 import {WashingsectionComponent} from "./store_keeper/sections/washingsection/washingsection.component";
 import {MilkproductionsectionComponent} from "./store_keeper/sections/milkproductionsection/milkproductionsection.component";
 import {ContainerstoremanagerComponent} from "./production_manager/containerstoremanager/containerstoremanager.component";
+import {DashboardstoremanagerComponent} from "./production_manager/dashboardstoremanager/dashboardstoremanager.component";
+import {ManageagentComponent} from "./production_manager/productionsections/manageagent/manageagent.component";
 import {
-  DashboardstoremanagerComponent
-} from "./production_manager/dashboardstoremanager/dashboardstoremanager.component";
+  ManagebottledamageComponent
+} from "./production_manager/productionsections/managebottledamage/managebottledamage.component";
+import {
+  ManagebottlestockComponent
+} from "./production_manager/productionsections/managebottlestock/managebottlestock.component";
+import {ManageissueComponent} from "./production_manager/productionsections/manageissue/manageissue.component";
+import {
+  ManageproductionreportsComponent
+} from "./production_manager/productionsections/manageproductionreports/manageproductionreports.component";
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -47,6 +56,11 @@ const routes: Routes = [
       { path: '', redirectTo: 'dashboardstoremanager', pathMatch: 'full' },
 
       {path:'dashboardstoremanager',component: DashboardstoremanagerComponent},
+      {path:'manageagent',component: ManageagentComponent},
+      {path:'manageissues',component: ManageissueComponent},
+      {path:'managebottlestock',component: ManagebottlestockComponent},
+      {path:'managebottledamage',component: ManagebottledamageComponent},
+      {path:'managereportsproduction',component: ManageproductionreportsComponent},
     ]},
 
 

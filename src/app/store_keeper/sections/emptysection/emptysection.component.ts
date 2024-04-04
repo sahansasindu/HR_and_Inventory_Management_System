@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-
 @Component({
   selector: 'app-emptysection',
   templateUrl: './emptysection.component.html',

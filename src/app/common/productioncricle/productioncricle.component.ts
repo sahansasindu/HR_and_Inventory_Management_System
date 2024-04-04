@@ -1,4 +1,4 @@
-import { Component, DoCheck, AfterViewChecked, ElementRef  } from '@angular/core';
+import {Component, DoCheck, AfterViewChecked, ElementRef, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-productioncricle',
@@ -10,6 +10,7 @@ export class ProductioncricleComponent implements AfterViewChecked , DoCheck{
   width = "80%";
   widthChanged = false;
   prevWidth = "";
+
 
   getChartInstance(chart: object) {
     this.chart = chart;
@@ -43,7 +44,7 @@ export class ProductioncricleComponent implements AfterViewChecked , DoCheck{
 
   chartOptions = {
     title: {
-      text: "Current Bottle Stock Status"
+      text: "Current Bottle Stock"
     },
     theme: "light2",
     animationEnabled: true,

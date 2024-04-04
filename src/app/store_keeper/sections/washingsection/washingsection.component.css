@@ -163,6 +163,7 @@ body {
 }
 
 .details-form input[type="number"],
+.details-form input[type="text"],
 .details-form input[type="date"] {
   padding: 5px;
   margin-top: 5px;
@@ -196,6 +197,7 @@ body {
 
 @media (max-width: 480px) {
   .details-form input[type="number"],
+  .details-form input[type="text"],
   .details-form input[type="date"] {
     width: 100%; /* Ensure inputs are full width on small screens */
   }
