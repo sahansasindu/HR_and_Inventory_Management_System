@@ -36,7 +36,6 @@ import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts'
 
 import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
 import { DashboardstoreComponent } from './store_keeper/dashboardstore/dashboardstore.component';
-import { HeaderstoreComponent } from './store_keeper/headerstore/headerstore.component';
 import { SidemenubarstoreComponent } from './store_keeper/sidemenubarstore/sidemenubarstore.component';
 import { NotificationcomComponent } from './common/notificationcom/notificationcom.component';
 import { ProductioncricleComponent } from './common/productioncricle/productioncricle.component';
@@ -55,6 +54,7 @@ import { ManageissueComponent } from './production_manager/productionsections/ma
 import { ManagebottlestockComponent } from './production_manager/productionsections/managebottlestock/managebottlestock.component';
 import { ManagebottledamageComponent } from './production_manager/productionsections/managebottledamage/managebottledamage.component';
 import { ManageproductionreportsComponent } from './production_manager/productionsections/manageproductionreports/manageproductionreports.component';
+import {User} from "./model/usermodel";
 
 @NgModule({
   declarations: [
@@ -72,7 +72,6 @@ import { ManageproductionreportsComponent } from './production_manager/productio
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
-    HeaderstoreComponent,
     SidemenubarstoreComponent,
     NotificationcomComponent,
     ProductioncricleComponent,
@@ -117,6 +116,7 @@ import { ManageproductionreportsComponent } from './production_manager/productio
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
+    User
   ],
   bootstrap: [AppComponent]
 })

@@ -58,15 +58,15 @@ export class ManageissueComponent implements data{
       indexLabelPlacement: "inside",
       indexLabelFontColor: "white",
       dataPoints: [
-        { y: 551160, name: "New Visitors", color: "#058dc7", indexLabel: "40%" },
-        { y: 329840, name: "Returning Visitors", color: "#50b432", indexLabel: "10%" },
-        { y: 329840, name: "Key Visitors", color: "#f5b633", indexLabel: "30%" },
-        { y: 329840, name: "False Visitors", color: "#c22cff", indexLabel: "20%" }
+        { y: 551160, name: "Issue One", color: "#058dc7", indexLabel: "40%" },
+        { y: 329840, name: "Issue Two", color: "#50b432", indexLabel: "10%" },
+        { y: 329840, name: "Issue Three", color: "#f5b633", indexLabel: "30%" },
+        { y: 329840, name: "Issue Four", color: "#c22cff", indexLabel: "20%" }
       ]
     }],
-    "New Visitors": [{
+    "Issue One": [{
       color: "#058dc7",
-      name: "New Visitors",
+      name: "Issue One",
       type: "column",
       dataPoints: [
         { label: "first week Jan", y: 42600 },
@@ -75,9 +75,9 @@ export class ManageissueComponent implements data{
         { label: "fourth week Jan", y: 48240 },
       ]
     }],
-    "Returning Visitors": [{
+    "Issue Two": [{
       color: "#50b432",
-      name: "Returning Visitors",
+      name: "Issue Two",
       type: "column",
       dataPoints: [
         { label: "first week Jan", y: 42600 },
@@ -86,9 +86,9 @@ export class ManageissueComponent implements data{
         { label: "fourth week Jan", y: 48240 },
       ]
     }],
-    "Key Visitors": [{
+    "Issue Three": [{
       color: "#f5b633",
-      name: "Key Visitors",
+      name: "Issue Three",
       type: "column",
       dataPoints: [
         { label: "first week Jan", y: 42600 },
@@ -97,9 +97,9 @@ export class ManageissueComponent implements data{
         { label: "fourth week Jan", y: 48240 },
       ]
     }],
-    "False Visitors": [{
+    "Issue Four": [{
       color: "#c22cff",
-      name: "False Visitors",
+      name: "Issue Four",
       type: "column",
       dataPoints: [
         { label: "first week Jan", y: 42600 },
