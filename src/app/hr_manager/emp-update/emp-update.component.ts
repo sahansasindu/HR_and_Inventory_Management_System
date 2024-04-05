@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+
 @Component({
   selector: 'app-emp-update',
   templateUrl: './emp-update.component.html',
@@ -18,6 +19,8 @@ export class EmpUpdateComponent {
     this.selected = e.target.value
   }
   constructor(private fb: FormBuilder) {
+
+
     this.form = this.fb.group({
       employeeId: ['', Validators.required],
       address: ['', Validators.required],

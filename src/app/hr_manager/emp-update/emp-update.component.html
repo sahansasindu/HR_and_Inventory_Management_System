@@ -39,11 +39,20 @@
               <mat-option value="unmarried">Unmarried</mat-option>
             </mat-select>
           </mat-form-field>
+          <mat-form-field class="form-field" appearance="fill">
+            <mat-label>Name</mat-label>
+            <input matInput placeholder="Name">
+          </mat-form-field>
         </div>
         <div class="form-fields">
           <mat-form-field class="form-field" appearance="fill">
             <mat-label>Department</mat-label>
             <input matInput placeholder="Department">
+          </mat-form-field>
+          <mat-form-field class="form-field" appearance="fill">
+            <input matInput [matDatepicker]="datepicker" placeholder="Date of Birth">
+            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+            <mat-datepicker #datepicker></mat-datepicker>
           </mat-form-field>
         </div>
         <div class="form-fields">
@@ -51,18 +60,27 @@
             <mat-label>Section</mat-label>
             <input matInput placeholder="Section">
           </mat-form-field>
+          <mat-form-field class="form-field" appearance="fill">
+            <mat-label>Gender</mat-label>
+            <input matInput placeholder="Gender">
+            <mat-select>
+              <mat-option value="male">Male</mat-option>
+              <mat-option value="female">Female</mat-option>
+            </mat-select>
+          </mat-form-field>
         </div>
         <div class="form-fields">
           <mat-form-field class="form-field" appearance="fill">
             <mat-label>Occupation</mat-label>
             <input matInput placeholder="Occupation">
           </mat-form-field>
+          <mat-form-field class="form-field" appearance="fill">
+            <mat-label>Contact No</mat-label>
+            <input matInput placeholder="Contact No">
+          </mat-form-field>
         </div>
             <!-- Place this form field and the rest in a similar fashion -->
-          <mat-form-field class="form-field" appearance="fill">
-            <mat-label>Name</mat-label>
-            <input matInput placeholder="Name">
-          </mat-form-field>
+
 
           <!-- Action buttons -->
           <div class="form-actions">

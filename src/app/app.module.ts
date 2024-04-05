@@ -42,6 +42,8 @@ import {MatInput} from "@angular/material/input";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatOption, MatSelect} from "@angular/material/select";
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import {MatOption, MatSelect} from "@angular/material/select";
     MatFormFieldModule,
     MatSelect,
     MatOption,
+    MatMomentDateModule,
+    MatTableModule,
   ],
   providers: [
     provideClientHydration(),

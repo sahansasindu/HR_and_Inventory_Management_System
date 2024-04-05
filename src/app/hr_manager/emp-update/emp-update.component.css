@@ -27,18 +27,11 @@ body {
   background-color: #e8e0e0;
 }
 
-
-
 #div3 {
   margin-left: 3px;
   background-color: #9d9898;
   border-radius: 2%;
 }
-
-
-
-
-
 
 /* Media queries */
 
@@ -51,16 +44,12 @@ body {
   .left-div {
     width: 100%;
   }
-
-
 }
 
 @media (max-width: 768px) {
   .left-div {
     height: 100%;
   }
-
-
 }
 
 @media (max-width: 400px) {
@@ -79,10 +68,10 @@ body {
   }
 }
 .employee-profile-container {
-  max-width: 800px;
+  max-width: 600px;
   margin: auto;
   background-color: #51b9c0; /* Change as per your theme */
-  padding: 20px;
+  padding: 10px;
   border-radius: 8px;
   display: flex;
   flex-direction: column;
@@ -101,7 +90,19 @@ body {
   color: #111111;
   font-size: 48px; /* Adjust as needed */
 }
+.employee-profile-container{
+  display: flex;
+  justify-content: center; /* Center the form horizontally */
+  align-items: center; /* Center the form vertically */
+  height: 100vh;
+}
+.employee-profile-form{
+  width: 300px; /* Set a fixed width for the form */
+  padding: 20px;
 
+  border-radius: 5px;
+
+}
 .form-fields {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -111,7 +112,7 @@ body {
 
 .mat-form-field {
   width: 100%;
-  margin: 20px;
+  margin-bottom: 15px;
 }
 
 .form-actions {
@@ -124,4 +125,33 @@ button {
   margin-right: 8px;
 }
 
-/* If you have additional specific stylings for your fields and labels, add them here */
+
+.form-fields {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  align-items: center;
+  margin-bottom: 10px; /* Add or adjust margin-bottom property */
+}
+
+.mat-form-field {
+  width: 100%;
+  margin: 20px; /* Adjust margin property */
+  margin-top: 0; /* Reset top margin */
+}
+
+.mat-form-field .mat-form-field-label {
+  font-size: 12px; /* Adjust font size of the label */
+  display: block;
+  font-weight: bold;
+}
+
+.mat-form-field .mat-input-element {
+  height: 25px; /* Adjust input field height */
+    width: calc(100% - 10px); /* Adjust width to account for padding */
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+
+}
+
