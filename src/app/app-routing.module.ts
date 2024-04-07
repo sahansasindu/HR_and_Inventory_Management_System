@@ -25,6 +25,13 @@ import {ManageissueComponent} from "./production_manager/productionsections/mana
 import {
   ManageproductionreportsComponent
 } from "./production_manager/productionsections/manageproductionreports/manageproductionreports.component";
+import {ManageuserprofileComponent} from "./common/manageuserprofile/manageuserprofile.component";
+import {
+  ProductionmanageruserprofileComponent
+} from "./production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component";
+import {
+  StorekeeperuserprfileComponent
+} from "./store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component";
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
@@ -51,6 +58,7 @@ const routes: Routes = [
       {path:'loardingsection',component: LoardingsectionComponent},
       {path:'washingsection',component: WashingsectionComponent},
       {path:'milkproductionsection',component: MilkproductionsectionComponent},
+      {path:'storekeeperUserprofile',component: StorekeeperuserprfileComponent},
     ]},
   {path:'productionmanager',component:ContainerstoremanagerComponent,children:[
       { path: '', redirectTo: 'dashboardstoremanager', pathMatch: 'full' },
@@ -61,6 +69,7 @@ const routes: Routes = [
       {path:'managebottlestock',component: ManagebottlestockComponent},
       {path:'managebottledamage',component: ManagebottledamageComponent},
       {path:'managereportsproduction',component: ManageproductionreportsComponent},
+      {path:'productionmanagerUserprofile',component: ProductionmanageruserprofileComponent},
     ]},
 
 

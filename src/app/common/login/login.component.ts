@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {User} from "../../model/usermodel";
-import {animate} from "@angular/animations";
-import {AxiosService} from "../../axios.service";
-import {Authervice} from "../../model/authservice/authervice";
+import {UserService} from "../../service/services/user.service";
+import {AuthService} from "../../model/authservice/auth.service";
 
 @Component({
   selector: 'app-login',
@@ -15,27 +14,44 @@ export class LoginComponent {
   inputusername: string = "";
   inputpassword: string = "";
 
-
   showPassword: boolean = false;
 
-  constructor(private router: Router,private autho:Authervice,private user:User) {
+  private routes: { [role in UserRole]?: string } = {
+    "HR_Manager": '/',
+    "Accountant": '/',
+    "Production_Manager": '/productionmanager',
+    "Store_Keeper": '/storekeeper'
+  };
 
-  }
+  constructor(private router: Router, private authService: AuthService, private useS:UserService) {}
 
-  userLogin() {
-
+  async userLogin() {
     if (this.inputusername === "" || this.inputpassword === "") {
-      alert("Please You Should Enter User name and Password");
-    } else  {
-      this.autho.login(this.inputusername,this.inputpassword);
-      if(this.autho.User.role=="HR_Manager"){
-        this.router.navigate(['/productionmanager']);
+      alert("Please enter username and password.");
+      return;
+    }
+
+    try {
+
+      const user = await this.authService.login(this.inputusername, this.inputpassword);
+      this.useS.setUser(user);
+
+      const roleBasedRoute = this.routes[user.role as UserRole];
+      if (!roleBasedRoute) {
+        alert("Role not recognized, cannot navigate to dashboard.");
+        return;
       }
+
+      await this.router.navigate([roleBasedRoute], { queryParams: { token: user.token } });
+
+    } catch (error) {
+
+      alert("Error Login User Name Or Password Not Match.");
+      this.inputusername='';
+      this.inputpassword='';
     }
   }
 
-  //this.router.navigate(['/productionmanager']);
-  //this.router.navigate(['/storekeeper']);
 
   userSignup() {
     this.router.navigate(['/signup']);
@@ -45,5 +61,6 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
 
-  protected readonly animate = animate;
 }
+
+type UserRole = 'HR_Manager' | 'Accountant' | 'Production_Manager' | 'Store_Keeper';

@@ -15,7 +15,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
-import { FormsModule } from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './common/login/login.component';
 import { ContainerComponent } from './hr_officer/container/container.component';
 import { ResetpwordComponent } from './common/resetpword/resetpword.component';
@@ -55,6 +55,10 @@ import { ManagebottlestockComponent } from './production_manager/productionsecti
 import { ManagebottledamageComponent } from './production_manager/productionsections/managebottledamage/managebottledamage.component';
 import { ManageproductionreportsComponent } from './production_manager/productionsections/manageproductionreports/manageproductionreports.component';
 import {User} from "./model/usermodel";
+import { ManageuserprofileComponent } from './common/manageuserprofile/manageuserprofile.component';
+import { ProductionmanageruserprofileComponent } from './production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component';
+import { StorekeeperuserprfileComponent } from './store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component';
+import {NgxSpinnerModule} from "ngx-spinner";
 
 @NgModule({
   declarations: [
@@ -90,33 +94,39 @@ import {User} from "./model/usermodel";
     ManagebottlestockComponent,
     ManagebottledamageComponent,
     ManageproductionreportsComponent,
+    ManageuserprofileComponent,
+    ProductionmanageruserprofileComponent,
+    StorekeeperuserprfileComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    FormsModule,
-    MatBadgeModule,
-    MatCardModule,
-    HttpClientModule,
-    MatInputModule,
-    MatTableModule,
-    MatSelect,
-    MatOption,
-    CanvasJSAngularStockChartsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        FormsModule,
+        MatBadgeModule,
+        MatCardModule,
+        HttpClientModule,
+        MatInputModule,
+        MatTableModule,
+        MatSelect,
+        MatOption,
+        CanvasJSAngularStockChartsModule,
+        ReactiveFormsModule,
+        NgxSpinnerModule,
+    ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
-    User
+    User,
+
   ],
   bootstrap: [AppComponent]
 })

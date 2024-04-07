@@ -67,14 +67,10 @@ export class SignupComponent {
           "email": user.email,
           "contact": user.contact,
           "role": user.role,
-          "employeeid":user.empID
+          "employee":user.empID
         }
       )
         .then(response => {
-
-          // Handle back end response
-          //console.log("Response from server:", response);
-          // Check if there's a success message
 
           if (response.data && response.data.message) {
             alert(response.data.message);
@@ -86,9 +82,6 @@ export class SignupComponent {
         })
         .catch(error => {
 
-          // Handle errors
-          //console.error("Error registering user:", error);
-          // Check if there's an error message from the server
 
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);

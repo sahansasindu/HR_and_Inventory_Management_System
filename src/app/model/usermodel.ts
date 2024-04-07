@@ -1,21 +1,26 @@
-import axios from "axios";
-import {AxiosService} from "../axios.service";
 
 export class User {
 
 
 
-  private _id:number=0;
-  private _username: string='';
-  private _password: string='';
-  private _contact:string ='';
-  private _email:string='';
-  private _role:string='';
-  private _empID:string='';
-  private _token:string='';
+  private _id:number;
+  private _username: string;
+  private _password: string;
+  private _contact:string ;
+  private _email:string;
+  private _role:string;
+  private _empID:string;
+  private _token:string;
 
   constructor() {
-
+    this._id = 0;
+    this._username = '';
+    this._password = '';
+    this._contact = '';
+    this._email = '';
+    this._role = '';
+    this._empID = '';
+    this._token = '';
   }
   get id(): number {
     return this._id;
