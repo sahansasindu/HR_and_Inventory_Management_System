@@ -51,7 +51,7 @@
           <!-- Submit Time Column -->
           <ng-container matColumnDef="submit_time">
             <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.submit_time | date:'shortTime' }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_time }}  </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->
@@ -64,13 +64,13 @@
       </div>
     </div>
 
-    <!-- show the add details form -->
+    <!-- show the daily empty bottles add details form -->
     <div class="add-details-container" *ngIf="isAddDetailsVisible">
       <button mat-raised-button class="close-button" color="warn" (click)="toggleAddDetails()">Close</button>
 
       <!-- Add empty bottle details -->
-      <form class="details-form">
-        <h2>Empty Bottles Details Entry Form</h2>
+      <form class="details-form" name="addDailyEmpty">
+        <h2>Daily Empty Bottles Details Entry Form</h2>
 
         <label for="emptyBottles">Number Of Total Empty Milk Bottles:</label>
         <input type="number" id="emptyBottles" name="emptyBottles" required>
@@ -82,8 +82,8 @@
         <input type="date" id="date" name="date" required>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="accent" (click)="clearemptybottleform()">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="submitDailyEmpty()">Submit</button>
         </div>
       </form>
     </div>
@@ -92,18 +92,21 @@
     <div class="update-container" *ngIf="isUpdateVisible">
       <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
 
-      <form class="details-form">
+      <form class="details-form" [formGroup]="updateForm">
         <h2>Update Empty Bottles Changes</h2>
 
+        <label for="emptyBottlesupdate">ID :</label>
+        <input type="number" id="emptyBottlesupdateId" formControlName="emptyBottlesupdateId" required>
+
         <label for="emptyBottlesupdate">Number Of Total Empty Milk Bottles:</label>
-        <input type="number" id="emptyBottlesupdate" name="emptyBottlesupdate" required>
+        <input type="number" id="emptyBottlesupdate" formControlName="emptyBottlesupdate" required>
 
         <label for="damagedBottlesupdate">Number Of Damage Empty Bottles:</label>
-        <input type="number" id="damagedBottlesupdate" name="damagedBottlesupdate" required>
+        <input type="number" id="damagedBottlesupdate" formControlName="damagedBottlesupdate" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="updateChanges()">Submit</button>
         </div>
       </form>
 
