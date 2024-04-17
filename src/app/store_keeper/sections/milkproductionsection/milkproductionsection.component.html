@@ -27,9 +27,9 @@
           </ng-container>
 
           <!-- Empty Bottles Column -->
-          <ng-container matColumnDef="amunt_finished">
+          <ng-container matColumnDef="amount">
             <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.amunt_finished }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
           </ng-container>
 
           <!-- Damage Bottles Column -->
@@ -74,26 +74,26 @@
       <form class="details-form">
         <h2>Add Daily Finished Details</h2>
 
-        <label for="finishedBottles">Number Of Total Finished Milk Bottles:</label>
-        <input type="number" id="finishedBottles" name="finishedBottles" required>
+        <label for="add_finishedBottles">Number Of Total Finished Milk Bottles:</label>
+        <input type="number" id="add_finishedBottles" name="add_finishedBottles" required>
 
-        <label for="batch_code">Batch Code:</label>
-        <input type="text" id="batch_code" name="batch_code" required>
+        <label for="add_batch_code">Batch Code:</label>
+        <input type="text" id="add_batch_code" name="add_batch_code" required>
 
-        <label for="status">Finished Status</label>
-        <select id="status" name="status" required>
+        <label for="add_status">Finished Status</label>
+        <select id="add_status" name="add_status" required>
 
           <option value="Good">Good</option>
           <option value="Bad">Bad</option>
 
         </select>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+        <label for="add_date">Date:</label>
+        <input type="date" id="add_date" name="add_date" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="submitDailyFinished()">Submit</button>
         </div>
       </form>
     </div>

@@ -1,5 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
+import {AxiosService} from "../../../axios.service";
 
 @Component({
   selector: 'app-milkproductionsection',
@@ -7,23 +8,19 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrl: './milkproductionsection.component.css'
 })
 export class MilkproductionsectionComponent implements OnInit{
-  displayedColumns: string[] = ['finished_id', 'amunt_finished','batch_code', 'finished_status', 'submit_date', 'submit_time'];
+
+  constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
+  }
+
+  displayedColumns: string[] = ['finished_id', 'amount','batch_code', 'finished_status', 'submit_date', 'submit_time'];
   dataSource = new MatTableDataSource<TableElement>([]);
-  selectedRow: Element | null = null;
+  selectedRow: TableElement | null = null;
 
-  // You will replace this with your actual data
+  // this TableElemet for Daily Finish goods table
   ELEMENT_DATA: TableElement[] = [
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
-    { finished_id: 1, amunt_finished: 10,batch_code: "B001", finished_status: "GOOD", submit_date: new Date(), submit_time: new Date() },
 
-    // ... more data
   ];
+
 
 //this dataSource2 for production issue tables
   displayedColumns2: string[] = ['DailyIssueID', 'damage_Amount_Issue','issue_Name', 'IssueEmployeeID'];
@@ -49,7 +46,8 @@ export class MilkproductionsectionComponent implements OnInit{
   ];
 
   ngOnInit() {
-    this.dataSource.data = this.ELEMENT_DATA;
+
+    this.fetchfinishedMilkBottleDetails().then(r => {});
     this.dataSource2.data = this.ELEMENT_DATA2;
     this.fetchStatusOptions();
   }
@@ -68,7 +66,7 @@ export class MilkproductionsectionComponent implements OnInit{
     ];
   }
 
-  selectRow(row: Element): void {
+  selectRow(row: TableElement): void {
     this.selectedRow = row;
   }
 
@@ -105,7 +103,6 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleAddDetails(): void {
     this.isAddDetailsVisible = !this.isAddDetailsVisible;
 
-    // Ensure update div is closed when opening add details
     if (this.isAddDetailsVisible) {
       this.isUpdateVisible = false;
       this.isProductionVisible=false;
@@ -114,7 +111,6 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleProdction(): void {
     this.isProductionVisible = !this.isProductionVisible;
 
-    // Ensure update div is closed when opening add details
     if (this.isProductionVisible) {
       this.isUpdateVisible = false;
       this.isAddDetailsVisible=false;
@@ -123,24 +119,94 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleUpdate(): void {
     this.isUpdateVisible = !this.isUpdateVisible;
 
-    // Ensure add details div is closed when opening update
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
       this.isProductionVisible=false;
     }
   }
 
-  //get All Issue Types in the database
+  private async fetchfinishedMilkBottleDetails() {
 
+
+  }
+
+
+  //add daily finish kalkiri milks status
+  async submitDailyFinished() {
+
+    const token = localStorage.getItem('token');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+
+    const add_finishedBottles = (document.getElementById('add_finishedBottles') as HTMLInputElement).value;
+    const add_batch_code = (document.getElementById('add_batch_code') as HTMLInputElement).value;
+    const add_status = (document.getElementById('add_status') as HTMLInputElement).value;
+    const add_date = (document.getElementById('add_date') as HTMLInputElement).value;
+
+    const finishedBottles = parseInt(add_finishedBottles);
+
+    // Early validation to ensure all fields are filled
+    if (isNaN(finishedBottles) || add_date === "" || add_batch_code==="" || add_status==="") {
+      alert("Please Fill All Details");
+      return;
+    }
+
+    const formDate = new Date((document.getElementById('add_date') as HTMLInputElement).value);
+    const formattedDate = formDate.toISOString().split('T')[0]; // Gets 'YYYY-MM-DD'
+    const currentTime = new Date();
+    const formattedTime = currentTime.toTimeString().split(' ')[0]; // Gets 'HH:MM:SS'
+
+    const formElement = new TableElement({
+      amount:finishedBottles,
+      batch_code: add_batch_code,
+      finished_status: add_status,
+      submit_date: formattedDate,
+      submit_time: formattedTime
+    });
+
+    try {
+      const response = await this.axiosService.request("POST", "/adddailyfinishedmilk", formElement, headers)
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Submission successful");
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+    } catch (error) {
+
+      alert("Error submitting form");
+      console.error('Error submitting form', error);
+    }
+
+  }
 }
 
-export interface TableElement {
-  finished_id: number;
-  amunt_finished: number;
-  batch_code: String;
-  finished_status: String;
-  submit_date: Date;
-  submit_time: Date;
+export class TableElement {
+
+  finished_id: number=0;
+  amount: number=0;
+  batch_code: string='';
+  finished_status: string='';
+  submit_date: string='';
+  submit_time: string='';
+
+
+  constructor(init?: Partial<TableElement>) {
+    Object.assign(this, init);
+  }
+
+
 }
 
 export interface TableElement2 {

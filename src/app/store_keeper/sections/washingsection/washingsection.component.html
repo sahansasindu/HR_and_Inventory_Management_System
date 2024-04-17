@@ -19,27 +19,27 @@
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
           <!-- Employee ID -->
-          <ng-container matColumnDef="employeeid">
-            <mat-header-cell *matHeaderCellDef> Employee ID </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.employeeid }} </mat-cell>
+          <ng-container matColumnDef="daily_damage_id">
+            <mat-header-cell *matHeaderCellDef> Damage ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.daily_damage_id }} </mat-cell>
           </ng-container>
 
           <!-- Employee Name -->
-          <ng-container matColumnDef="employeename">
-            <mat-header-cell *matHeaderCellDef> Employee Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.employeename }} </mat-cell>
+          <ng-container matColumnDef="damage_amount">
+            <mat-header-cell *matHeaderCellDef> Damage Amount </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.damage_amount }} </mat-cell>
           </ng-container>
 
           <!-- Damage Bottles Column -->
-          <ng-container matColumnDef="damage_bottles">
-            <mat-header-cell *matHeaderCellDef> Number Of Damage Bottles </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.damage_bottles }} </mat-cell>
+          <ng-container matColumnDef="employee_id">
+            <mat-header-cell *matHeaderCellDef> Employee ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.employee_id}} </mat-cell>
           </ng-container>
 
           <!-- Submit Date Column -->
-          <ng-container matColumnDef="submit_date">
+          <ng-container matColumnDef="date">
             <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.date | date }} </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->
@@ -57,24 +57,22 @@
       <button mat-raised-button class="close-button" color="warn" (click)="toggleAddDetails()">Close</button>
 
       <!-- Add damage bottle details -->
-      <form class="details-form">
+      <form class="details-form" name="addDailyDamages">
         <h2>Add damages caused by employees</h2>
 
-        <label for="employeeId">Employee ID:</label>
-        <input type="text" id="employeeId" name="employeeId" required>
+        <label for="add_employee_id">Employee ID:</label>
+        <input type="text" id="add_employee_id" name="add_employee_id" required placeholder="ETFxxxxx">
 
-        <label for="employeename">Employee Name:</label>
-        <input type="text" id="employeename" name="employeename" required>
 
-        <label for="damagedBottlesbyEployee">Number Of Damage Empty Bottles:</label>
-        <input type="number" id="damagedBottlesbyEployee" name="damagedBottlesbyEployee" required>
+        <label for="add_damage_amount">Number Of Damage Empty Bottles:</label>
+        <input type="number" id="add_damage_amount" name="add_damage_amount" required>
 
-        <label for="date">Date:</label>
-        <input type="date" id="date" name="date" required>
+        <label for="add_date">Date:</label>
+        <input type="date" id="add_date" name="add_date" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="submitDailyDamages()">Submit</button>
         </div>
       </form>
     </div>
@@ -83,28 +81,30 @@
     <div class="update-container" *ngIf="isUpdateVisible">
       <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
 
-      <form class="details-form">
+      <form class="details-form" [formGroup]="updateForm">
         <h2>Update  damage changes caused by employees</h2>
 
-        <label for="updateemployeeId">Employee ID:</label>
-        <input type="text" id="updateemployeeId" name="updateemployeeId" required>
+        <label for="daily_damage_id">Damage ID:</label>
+        <input type="number" id="daily_damage_id" formControlName="daily_damage_id" required>
 
-        <label for="updateemployeename">Employee Name:</label>
-        <input type="text" id="updateemployeename" name="updateemployeename" required>
+        <label for="employee_id">Employee ID:</label>
+        <input type="text" id="employee_id" formControlName="employee_id" required>
 
-        <label for="updatedamagedBottlesbyEployee">Number Of Damage Empty Bottles:</label>
-        <input type="number" id="updatedamagedBottlesbyEployee" name="damagedBottlesbyEployee" required>
+        <label for="damage_amount">Number Of Damage Empty Bottles:</label>
+        <input type="number" id="damage_amount" formControlName="damage_amount" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="damageupdateChanges()">Submit</button>
         </div>
       </form>
 
     </div>
   </div>
 
-  <div class="left-div col-3 text-right" id="div3"></div>
+  <div class="left-div col-3 text-right" id="div3">
+
+  </div>
 
 </div>
 

@@ -14,14 +14,14 @@ export class EmptysectionComponent implements OnInit{
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
     this.updateForm = new FormGroup({
-      emptyBottlesupdateId: new FormControl({value: '', disabled: true},Validators.required),
-      emptyBottlesupdate: new FormControl(''),
-      damagedBottlesupdate: new FormControl('')
+      id: new FormControl({value: '', disabled: true},Validators.required),
+      empty_bottles: new FormControl(''),
+      damage_bottles: new FormControl('')
     });
   }
 
 
-  displayedColumns: string[] = ['empty_unit_id', 'empty_bottles','damage_bottles', 'for_washing', 'submit_date', 'submit_time'];
+  displayedColumns: string[] = ['id', 'empty_bottles','damage_bottles', 'for_washing', 'submit_date', 'submit_time'];
   dataSource = new MatTableDataSource<TableElement>([]);
   selectedRow: TableElement | null = null;
   // You will replace this with your actual data
@@ -35,7 +35,6 @@ export class EmptysectionComponent implements OnInit{
 
   selectRow(row: TableElement): void {
     this.selectedRow = row;
-    this.updateChanges().then(r => {});
     console.log(this.selectedRow);
 
   }
@@ -46,7 +45,6 @@ export class EmptysectionComponent implements OnInit{
   //the method use for visible to the add details form
   toggleAddDetails(): void {
     this.isAddDetailsVisible = !this.isAddDetailsVisible;
-    // Ensure update div is closed when opening add details
     if (this.isAddDetailsVisible) {
       this.isUpdateVisible = false;
     }
@@ -59,9 +57,9 @@ export class EmptysectionComponent implements OnInit{
     }
 
     this.updateForm.setValue({
-      emptyBottlesupdateId:this.selectedRow.id,
-      emptyBottlesupdate: this.selectedRow.empty_bottles,
-      damagedBottlesupdate: this.selectedRow.damage_bottles,
+      id:this.selectedRow.id,
+      empty_bottles: this.selectedRow.empty_bottles,
+      damage_bottles: this.selectedRow.damage_bottles,
     });
 
     this.isUpdateVisible = !this.isUpdateVisible;
@@ -133,7 +131,7 @@ export class EmptysectionComponent implements OnInit{
   async fetchEmptyBottleDetails() {
 
     if (!isPlatformBrowser(this.platformId)) {
-      return; // Exit if not in the browser environment
+      return;
     }
 
     const token = localStorage.getItem('token');
@@ -142,6 +140,7 @@ export class EmptysectionComponent implements OnInit{
     try {
       const response = await this.axiosService.request('GET', '/getEmptyBottle', {}, headers);
       this.dataSource.data = response.data;
+      //console.log(response.data)
       this.ELEMENT_DATA=this.dataSource.data;
       console.log('Empty bottle details fetched successfully:', response.data);
     } catch (error) {
@@ -154,13 +153,16 @@ export class EmptysectionComponent implements OnInit{
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
     const formData = this.updateForm.getRawValue();
 
+    console.log(formData)
     try {
       const response = await this.axiosService.request('PUT', '/updateEmptyBottle', formData, headers);
+      alert("Update successful")
       console.log('Update successful', response);
-      // Additional success handling here
+      await this.fetchEmptyBottleDetails();
     } catch (error) {
+      alert("Error updating details")
       console.error('Error updating details', error);
-      // Error handling here
+
     }
   }
 
