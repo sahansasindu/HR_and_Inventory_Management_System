@@ -53,7 +53,7 @@
           <!-- Submit Time Column -->
           <ng-container matColumnDef="submit_time">
             <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.submit_time | date:'shortTime' }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_time }} </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->
@@ -102,17 +102,21 @@
     <div class="update-container" *ngIf="isUpdateVisible">
       <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
 
-      <form class="details-form">
+      <!-- The finished goods update Chnages  details form-->
+      <form class="details-form" [formGroup]="updateForm">
         <h2>Update Changes Daily Finished Details</h2>
 
-        <label for="finishedBottlesupdated">Number Of Total Finished Milk Bottles:</label>
-        <input type="number" id="finishedBottlesupdated" name="finishedBottles" required>
+        <label for="finished_id">Finished ID:</label>
+        <input type="number" id="finished_id" formControlName="finished_id" required>
 
-        <label for="batch_code_updated">Batch Code:</label>
-        <input type="text" id="batch_code_updated" name="batch_code" required>
+        <label for="amount">Number Of Total Finished Milk Bottles:</label>
+        <input type="number" id="amount" formControlName="amount" required>
 
-        <label for="status_updated">Finished Status</label>
-        <select id="status_updated" name="status_updated" required>
+        <label for="batch_code">Batch Code:</label>
+        <input type="text" id="batch_code" formControlName="batch_code" required>
+
+        <label for="finished_status">Finished Status</label>
+        <select id="finished_status" formControlName="finished_status" required>
 
           <option value="Good">Good</option>
           <option value="Bad">Bad</option>
@@ -121,7 +125,7 @@
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="finishedupdateChanges()">Submit</button>
         </div>
       </form>
 

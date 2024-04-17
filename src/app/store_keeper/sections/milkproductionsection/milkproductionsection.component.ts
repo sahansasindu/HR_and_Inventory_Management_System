@@ -1,6 +1,8 @@
 import {Component, Inject, OnInit, PLATFORM_ID} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../../axios.service";
+import {isPlatformBrowser} from "@angular/common";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-milkproductionsection',
@@ -9,7 +11,18 @@ import {AxiosService} from "../../../axios.service";
 })
 export class MilkproductionsectionComponent implements OnInit{
 
+
+  updateForm: FormGroup;
+
+
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
+
+    this.updateForm = new FormGroup({
+      finished_id: new FormControl({value: '', disabled: true},Validators.required),
+      amount: new FormControl(''),
+      batch_code: new FormControl(''),
+      finished_status: new FormControl('')
+    });
   }
 
   displayedColumns: string[] = ['finished_id', 'amount','batch_code', 'finished_status', 'submit_date', 'submit_time'];
@@ -28,18 +41,6 @@ export class MilkproductionsectionComponent implements OnInit{
   selectedRow2: Element | null = null;
 
   ELEMENT_DATA2:TableElement2[]=[
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
     { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
@@ -117,6 +118,19 @@ export class MilkproductionsectionComponent implements OnInit{
     }
   }
   toggleUpdate(): void {
+
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+    this.updateForm.setValue({
+      finished_id:this.selectedRow.finished_id,
+      amount:this.selectedRow.amount,
+      batch_code: this.selectedRow.batch_code,
+      finished_status: this.selectedRow.finished_status,
+    });
+
     this.isUpdateVisible = !this.isUpdateVisible;
 
     if (this.isUpdateVisible) {
@@ -125,8 +139,26 @@ export class MilkproductionsectionComponent implements OnInit{
     }
   }
 
+  //get finished good data to table
   private async fetchfinishedMilkBottleDetails() {
 
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+
+    try {
+      const response = await this.axiosService.request('GET', '/getDailyFinishedMilkBottle', {}, headers);
+      this.dataSource.data = response.data;
+      //console.log(response.data)
+      this.ELEMENT_DATA=this.dataSource.data;
+      console.log('Finish milk details fetched successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching Finish milk details:', error);
+      //alert('Failed to fetch wash bottle details');
+    }
 
   }
 
@@ -187,6 +219,42 @@ export class MilkproductionsectionComponent implements OnInit{
 
       alert("Error submitting form");
       console.error('Error submitting form', error);
+    }
+    await this.fetchfinishedMilkBottleDetails();
+
+  }
+
+
+  //update changes for finished milk production
+ async finishedupdateChanges() {
+
+    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+    const formData = this.updateForm.getRawValue();
+
+    console.log(formData)
+    try {
+      const response = await this.axiosService.request('PUT', '/updatefinishedMilk', formData, headers)
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Update successful")
+            console.log('Update successful', response);
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+      await this.fetchfinishedMilkBottleDetails();
+    } catch (error) {
+      alert("Error updating details")
+      console.error('Error updating details', error);
     }
 
   }

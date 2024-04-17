@@ -132,6 +132,7 @@ export class WashingsectionComponent implements OnInit{
   }
 
   async damageupdateChanges() {
+
     const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
     const formData = this.updateForm.getRawValue();
 
