@@ -1,4 +1,20 @@
 export class Agent {
+  get deleteReason(): string {
+    return this._deleteReason;
+  }
+
+  set deleteReason(value: string) {
+    this._deleteReason = value;
+  }
+  get deletedAt(): string {
+    return this._deletedAt;
+  }
+
+  set deletedAt(value: string) {
+    this._deletedAt = value;
+  }
+
+
 
   private _agent_id: string='';
   private _address: string='';
@@ -6,6 +22,8 @@ export class Agent {
   private _agent_name: string='';
   private _contact_number: string='';
   private _email: string='';
+  private _deletedAt:string='';
+  private _deleteReason:string='';
 
   get email(): string {
     return this._email;

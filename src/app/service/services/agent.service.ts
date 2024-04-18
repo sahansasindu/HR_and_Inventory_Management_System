@@ -24,7 +24,7 @@ export class AgentService {
   //pass new agent details for database save
   async addAgent(agent: Agent): Promise<Agent> {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = {
       Authorization: `Bearer ${token}`
     };
@@ -67,16 +67,43 @@ export class AgentService {
     return agent;
   }
 
-  deleteAgent(id: number): void {
+  async deleteAgent(id: string, reason: string): Promise<void> {
 
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const token = localStorage.getItem('currentUser');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    console.log("Token:", token);
+    try {
+      await this.axiosService.request('PATCH', `/deleteAgentDetails/${id}?deleteReason=${encodeURIComponent(reason)}`, {}, headers)
+        .then(response => {
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Deletion successful");
+          }
+        })
+        .catch(error => {
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("An error occurred during deletion.");
+          }
+        });
+    } catch (error) {
+      alert("Error deleting agent");
+      console.error('Error deleting agent:', error);
+    }
   }
+
 
   async updateAgent(agent: Agent): Promise<Agent>{
 
     if (!isPlatformBrowser(this.platformId)) {
       return agent;
     }
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     try {
@@ -123,7 +150,7 @@ export class AgentService {
     if (!isPlatformBrowser(this.platformId)) {
       return this.ELEMENT_DATA_AGENT;
     }
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     try {
@@ -136,6 +163,42 @@ export class AgentService {
     }
 
     return this.ELEMENT_DATA_AGENT;
+  }
+
+
+  //undo agent details
+  async undoDeleteAgent(agentId: string): Promise<void> {
+
+
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+    const token = localStorage.getItem('currentUser');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    console.log("Token:", token);
+
+    try {
+      await this.axiosService.request('PATCH', `/undoDeleteAgentDetails/${agentId}?`, {}, headers)
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Agent undeletion successful");
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("An error occurred during undeletion.");
+          }
+        });
+    } catch (error) {
+      alert("Error undeleting agent");
+      console.error('Error undeleting agent:', error);
+    }
   }
 
 }

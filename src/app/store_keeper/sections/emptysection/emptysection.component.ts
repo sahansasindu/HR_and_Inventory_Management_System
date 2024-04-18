@@ -74,7 +74,7 @@ export class EmptysectionComponent implements OnInit{
   //this method for add new empty bottle stoke from agents
   async submitDailyEmpty() {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = {
       Authorization: `Bearer ${token}`
     };
@@ -134,7 +134,7 @@ export class EmptysectionComponent implements OnInit{
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     try {
@@ -150,7 +150,9 @@ export class EmptysectionComponent implements OnInit{
   }
 
   async updateChanges() {
-    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+
+    const token = localStorage.getItem('currentUser');
+    const headers = token ? { Authorization: `Bearer ${token}` } : {};
     const formData = this.updateForm.getRawValue();
 
     console.log(formData)

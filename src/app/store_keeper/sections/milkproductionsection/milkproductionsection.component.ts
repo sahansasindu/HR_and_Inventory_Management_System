@@ -146,7 +146,7 @@ export class MilkproductionsectionComponent implements OnInit{
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     try {
@@ -166,7 +166,7 @@ export class MilkproductionsectionComponent implements OnInit{
   //add daily finish kalkiri milks status
   async submitDailyFinished() {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = {
       Authorization: `Bearer ${token}`
     };
@@ -228,7 +228,7 @@ export class MilkproductionsectionComponent implements OnInit{
   //update changes for finished milk production
  async finishedupdateChanges() {
 
-    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+    const headers = { Authorization: `Bearer ${localStorage.getItem('currentUser')}` };
     const formData = this.updateForm.getRawValue();
 
     console.log(formData)

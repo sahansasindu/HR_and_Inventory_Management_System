@@ -13,6 +13,12 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 export class ManageagentComponent implements OnInit{
 
   updateFormAgent : FormGroup;
+  deleteFormAgent:FormGroup;
+  showUndoOption: boolean = false;
+  undoRequested: boolean = false;
+  undoTimeout: any;
+
+  currentAgentIdForDeletion: string | null = null;
 
   constructor(private agentService:AgentService) {
 
@@ -23,6 +29,16 @@ export class ManageagentComponent implements OnInit{
       updateAgencyName: new FormControl(''),
       updateContact: new FormControl(''),
       updateAgentEmail: new FormControl('')
+    });
+
+    this.deleteFormAgent = new FormGroup({
+      remo_agent_id: new FormControl({value: '', disabled: true},Validators.required),
+      remo_agent_name: new FormControl({value: '', disabled: true},Validators.required),
+      remo_address: new FormControl({value: '', disabled: true},Validators.required),
+      remo_agency_name:new FormControl({value: '', disabled: true},Validators.required),
+      remo_contact_number: new FormControl({value: '', disabled: true},Validators.required),
+      remo_email: new FormControl({value: '', disabled: true},Validators.required),
+      reason_status: new FormControl('')
     });
   }
 
@@ -84,6 +100,22 @@ export class ManageagentComponent implements OnInit{
   }
 
   deleteAnget() {
+
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+    this.deleteFormAgent.setValue({
+      remo_agent_id:this.selectedRow.agent_id,
+      remo_agent_name:this.selectedRow.agent_name,
+      remo_address:this.selectedRow.address,
+      remo_agency_name:this.selectedRow.agency_name,
+      remo_contact_number:this.selectedRow.contact_number,
+      remo_email:this.selectedRow.email,
+      reason_status:this.selectedRow.deleteReason
+    });
+
     this.isRemoveAgentVisible=!this.isRemoveAgentVisible;
     if(this.isRemoveAgentVisible){
       this.isUpdateAgentVisible=false;
@@ -264,6 +296,60 @@ export class ManageagentComponent implements OnInit{
 
       alert(error)
 
+    }
+  }
+
+  //this method implement for get agent details within undo opting to delete agent in the system
+  async deleteAgentDetails() {
+
+
+    let deletedAgent = new Agent();
+
+    deletedAgent.agent_id=this.deleteFormAgent.get("remo_agent_id")?.value;
+    deletedAgent.deleteReason=this.deleteFormAgent.get("reason_status")?.value;
+
+    if(deletedAgent.deleteReason===null){
+      alert("Please Should Enter Valid Reason...")
+      return;
+    }
+    this.currentAgentIdForDeletion = deletedAgent.agent_id;
+
+    // Display the undo option in the form
+    this.showUndoOption = true;
+    this.undoRequested = false;
+
+    // Set a timeout for the actual deletion
+    this.undoTimeout = setTimeout(async () => {
+      if (!this.undoRequested && this.currentAgentIdForDeletion) {
+        try {
+          await this.agentService.deleteAgent(this.currentAgentIdForDeletion, deletedAgent.deleteReason);
+
+          await this.ngOnInit();
+        } catch (error) {
+          console.error('Error deleting agent:', error);
+          alert("Error deleting agent");
+        }
+      }
+      this.showUndoOption = false;
+      this.currentAgentIdForDeletion = null;
+    }, 10000);
+  }
+
+  async undoDelete() {
+
+    clearTimeout(this.undoTimeout);
+    this.undoRequested = true;
+
+    if (this.currentAgentIdForDeletion) {
+      try {
+        await this.agentService.undoDeleteAgent(this.currentAgentIdForDeletion);
+        await this.ngOnInit();
+      } catch (error) {
+        console.error('Error undoing agent deletion:', error);
+        alert("Error undoing deletion");
+      }
+      this.showUndoOption = false;
+      this.currentAgentIdForDeletion = null;
     }
   }
 }

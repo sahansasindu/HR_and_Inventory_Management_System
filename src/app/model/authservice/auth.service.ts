@@ -57,7 +57,7 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.removeItem('token');
+    localStorage.removeItem('currentUser');
   }
   isLoggedIn(): Observable<boolean> {
     return this.loggedIn.asObservable();

@@ -77,7 +77,7 @@ export class WashingsectionComponent implements OnInit{
   //using this method the storekeeper can add daily damages by employees during bottle washing
   async submitDailyDamages() {
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = {
       Authorization: `Bearer ${token}`
     };
@@ -133,7 +133,7 @@ export class WashingsectionComponent implements OnInit{
 
   async damageupdateChanges() {
 
-    const headers = { Authorization: `Bearer ${localStorage.getItem('token')}` };
+    const headers = { Authorization: `Bearer ${localStorage.getItem('currentUser')}` };
     const formData = this.updateForm.getRawValue();
 
     console.log(formData)
@@ -169,7 +169,7 @@ export class WashingsectionComponent implements OnInit{
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
     try {
