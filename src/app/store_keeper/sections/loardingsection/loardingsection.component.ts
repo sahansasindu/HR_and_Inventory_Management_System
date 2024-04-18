@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
+import {Agent} from "node:http";
 
 @Component({
   selector: 'app-loardingsection',
@@ -28,37 +29,21 @@ export class LoardingsectionComponent implements OnInit{
 
 
   displayedColumns2: string[] = ['agent_id', 'agent_Address','agency_name', 'agent_name', 'agent_contact','agent_mail',];
-  dataSource2 = new MatTableDataSource<TableElement3>([]);
-  selectedRow2: Element | null = null;
-  // You will replace this with your actual data
-  ELEMENT_DATA2: TableElement3[] = [
+  dataSource2 = new MatTableDataSource<Agent>([]);
+  selectedRow2: Agent | null = null;
+  ELEMENT_DATA2: Agent[] = [
 
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" },
-    { agent_id: 1, agent_Address: "kaluthara wadduwa",agency_name: "Thilakasiri PVT LTD",agent_name: "Kamal", agent_contact: "0771981995",agent_mail:"danidutharuka12345@gmail.com" }
-
-    // ... more data
   ];
 
   ngOnInit() {
     this.dataSource.data = this.ELEMENT_DATA;
-    this.dataSource2.data = this.ELEMENT_DATA2;
   }
 
   selectRow(row: Element): void {
     this.selectedRow = row;
   }
 
-  selectRow2(row2: Element): void {
+  selectRow2(row2: Agent): void {
     this.selectedRow2 = row2;
   }
 
@@ -103,16 +88,6 @@ export interface TableElement {
   submit_date: Date;
   submit_time: Date;
   agent_id:String;
-
-}
-
-export interface TableElement3 {
-  agent_id: number;
-  agent_Address: String;
-  agency_name: String;
-  agent_name: String;
-  agent_contact: String;
-  agent_mail:String;
 
 }
 

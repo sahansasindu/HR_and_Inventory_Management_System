@@ -29,47 +29,47 @@
 
 
       <div class="mat-table-container">
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSourceAgent" class="mat-elevation-z8">
 
 
-          <ng-container matColumnDef="agentId">
-            <mat-header-cell *matHeaderCellDef> Empty Unit ID </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agentId }} </mat-cell>
+          <ng-container matColumnDef="agent_id">
+            <mat-header-cell *matHeaderCellDef>  ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
           </ng-container>
 
 
-          <ng-container matColumnDef="agentaddress">
-            <mat-header-cell *matHeaderCellDef> Empty Bottles </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agentaddress }} </mat-cell>
+          <ng-container matColumnDef="agent_name">
+            <mat-header-cell *matHeaderCellDef>  Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
           </ng-container>
 
 
-          <ng-container matColumnDef="agaencyname">
-            <mat-header-cell *matHeaderCellDef> Damage Bottles </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agaencyname }} </mat-cell>
+          <ng-container matColumnDef="agency_name">
+            <mat-header-cell *matHeaderCellDef> Agency Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agency_name }} </mat-cell>
           </ng-container>
 
 
-          <ng-container matColumnDef="agentname">
-            <mat-header-cell *matHeaderCellDef> For Washing </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agentname }} </mat-cell>
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.address }} </mat-cell>
           </ng-container>
 
 
-          <ng-container matColumnDef="agentcontact">
-            <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agentcontact}} </mat-cell>
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.email}} </mat-cell>
           </ng-container>
 
 
-          <ng-container matColumnDef="agentmail">
-            <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agentmail}} </mat-cell>
+          <ng-container matColumnDef="contact_number">
+            <mat-header-cell *matHeaderCellDef> Contact  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.contact_number}} </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->
           <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
-          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlighted]="row === selectedRow" (click)="selectRow(row)"></mat-row>
 
         </mat-table>
       </div>
@@ -83,24 +83,24 @@
       <form class="details-form">
         <h2>Agent Registration Entry Form</h2>
 
-        <label >Agent Name:</label>
-        <input type="text" required>
+        <label for="addAgentName">Agent Name:</label>
+        <input type="text" required id="addAgentName" name="addAgentName">
 
-        <label >Address:</label>
-        <input type="text" required>
+        <label for="addAgentAddress">Address:</label>
+        <input type="text" required id="addAgentAddress" name="addAgentAddress">
 
-        <label >Agency Name:</label>
-        <input type="text" required>
+        <label for="addAgencyName">Agency Name:</label>
+        <input type="text" required id="addAgencyName" name="addAgencyName">
 
-        <label >Contact Number:</label>
-        <input type="text" required>
+        <label for="addContact">Contact Number:</label>
+        <input type="text" required id="addContact" name="addContact" maxlength="10" placeholder="07XXXXXXXX">
 
-        <label >Email:</label>
-        <input type="text" required>
+        <label for="addAgentEmail">Email:</label>
+        <input type="text" required id="addAgentEmail" name="addAgentEmail">
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="addNewAgent()">Submit</button>
         </div>
       </form>
 
@@ -110,30 +110,30 @@
     <div class="production-forms-details-container" *ngIf="isUpdateAgentVisible">
 
       <button mat-raised-button class="close-button" color="warn" (click)="updateAnget()">Close</button>
-      <form class="details-form">
+      <form class="details-form"  [formGroup]="updateFormAgent">
         <h2>Update Agent Details Changes</h2>
 
-        <label >Agent ID:</label>
-        <input type="text" required>
+        <label for="updateAgentId">Agent ID:</label>
+        <input type="text" required id="updateAgentId" formControlName="updateAgentId">
 
-        <label >Agent Name:</label>
-        <input type="text" required>
+        <label for="updateAgentName">Agent Name:</label>
+        <input type="text" required id="updateAgentName" formControlName="updateAgentName">
 
-        <label >Address:</label>
-        <input type="text" required>
+        <label for="updateAgentAddress">Address:</label>
+        <input type="text" required id="updateAgentAddress" formControlName="updateAgentAddress">
 
-        <label >Agency Name:</label>
-        <input type="text" required>
+        <label for="updateAgencyName">Agency Name:</label>
+        <input type="text" required id="updateAgencyName" formControlName="updateAgencyName">
 
-        <label >Contact Number:</label>
-        <input type="text" required>
+        <label for="updateContact">Contact Number:</label>
+        <input type="text" required id="updateContact" formControlName="updateContact" maxlength="10" placeholder="07XXXXXXXX">
 
-        <label >Email:</label>
-        <input type="text" required>
+        <label for="updateAgentEmail">Email:</label>
+        <input type="text" required id="updateAgentEmail" formControlName="updateAgentEmail">
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="updateAgentDetails()" >Submit</button>
         </div>
       </form>
 

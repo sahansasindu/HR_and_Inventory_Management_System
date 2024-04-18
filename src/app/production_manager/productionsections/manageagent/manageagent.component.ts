@@ -1,17 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-
-
-
-export interface Agent {
-  agentId: string;
-  agentaddress	:string;
-  agaencyname	:string;
-  agentname	:string;
-  agentcontact	:string;
-  agentmail:string;
-  // Define other agent properties here
-}
+import {Agent} from "../../../model/agentmodel";
+import {AgentService} from "../../../service/services/agent.service";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -21,27 +12,31 @@ export interface Agent {
 })
 export class ManageagentComponent implements OnInit{
 
-  displayedColumns: string[] = ['agentId', 'agentaddress','agaencyname', 'agentname', 'agentcontact','agentmail',];
-  dataSource = new MatTableDataSource<Agent>([]);
-  // You will replace this with your actual data
-  ELEMENT_DATA: Agent[] = [
+  updateFormAgent : FormGroup;
 
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
-    { agentId: "1", agentaddress: "kaluthara",agaencyname: "milk",agentname: "kawinda", agentcontact: "0771981995",agentmail:"xxx" },
+  constructor(private agentService:AgentService) {
+
+    this.updateFormAgent = new FormGroup({
+      updateAgentId: new FormControl({value: '', disabled: true},Validators.required),
+      updateAgentName: new FormControl(''),
+      updateAgentAddress: new FormControl(''),
+      updateAgencyName: new FormControl(''),
+      updateContact: new FormControl(''),
+      updateAgentEmail: new FormControl('')
+    });
+  }
+
+  displayedColumns: string[] = ['agent_id', 'agent_name','agency_name', 'address', 'email','contact_number',];
+  dataSourceAgent = new MatTableDataSource<Agent>([]);
+  selectedRow: Agent | null = null;
 
 
-    // ... more data
-  ];
+  selectRow(row: Agent): void {
+    this.selectedRow = row;
+    console.log(this.selectedRow);
+
+  }
+
   isAddAgentVisible: boolean=false;
   isUpdateAgentVisible: boolean=false;
   isRemoveAgentVisible: boolean=false;
@@ -49,8 +44,9 @@ export class ManageagentComponent implements OnInit{
 
   chartOptions: any;
 
-  ngOnInit() {
-    this.dataSource.data = this.ELEMENT_DATA;
+  async ngOnInit() {
+
+    this.dataSourceAgent.data = await this.agentService.getAllAgents();
     this.agentDetailsChart();
   }
 
@@ -64,6 +60,21 @@ export class ManageagentComponent implements OnInit{
   }
 
   updateAnget() {
+
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+    this.updateFormAgent.setValue({
+      updateAgentId:this.selectedRow.agent_id,
+      updateAgentName:this.selectedRow.agent_name,
+      updateAgentAddress:this.selectedRow.address,
+      updateAgencyName:this.selectedRow.agency_name,
+      updateContact:this.selectedRow.contact_number,
+      updateAgentEmail:this.selectedRow.email
+  });
+
     this.isUpdateAgentVisible=!this.isUpdateAgentVisible;
     if(this.isUpdateAgentVisible){
       this.isAddAgentVisible=false;
@@ -82,11 +93,11 @@ export class ManageagentComponent implements OnInit{
   }
 
   viweagentboughtMilk() {
-    this.isviweAgentVisible=!this.isviweAgentVisible;
-    if(this.isviweAgentVisible){
-      this.isUpdateAgentVisible=false;
-      this.isRemoveAgentVisible=false;
-      this.isAddAgentVisible=false;
+    this.isviweAgentVisible = !this.isviweAgentVisible;
+    if (this.isviweAgentVisible) {
+      this.isUpdateAgentVisible = false;
+      this.isRemoveAgentVisible = false;
+      this.isAddAgentVisible = false;
     }
   }
 
@@ -174,6 +185,85 @@ export class ManageagentComponent implements OnInit{
             { x: new Date(2022, 0, 16), y: 800 }
           ]
         }]
+    }
+  }
+
+
+  //this method for add new agent to system
+  async addNewAgent() {
+
+    let agent=new Agent();
+    agent.agent_name=(document.getElementById('addAgentName') as HTMLInputElement).value;
+    agent.agency_name=(document.getElementById('addAgencyName') as HTMLInputElement).value;
+    agent.address=(document.getElementById('addAgentAddress') as HTMLInputElement).value;
+    agent.email=(document.getElementById('addAgentEmail') as HTMLInputElement).value;
+    agent.contact_number=(document.getElementById('addContact') as HTMLInputElement).value;
+
+    if(agent.agent_name==="" || agent.agency_name==="" || agent.address==="" || agent.email==="" || agent.contact_number===""){
+      alert("Please Fill All Details")
+      return;
+    }
+    if(!agent.isValidEmail()){
+      alert("Please Enter Valid Email")
+      return;
+    }
+    if(!agent.isValidPhoneNumber()){
+      alert("Please Enter Valid Mobile NUmber")
+      return;
+    }
+    if (agent.contact_number.length<10){
+      alert("Invalid Phone Number")
+      return;
+    }
+
+    try {
+      await this.agentService.addAgent(agent);
+      await this.ngOnInit();
+
+    }catch (error){
+
+      alert(error)
+
+    }
+  }
+
+  async updateAgentDetails() {
+
+    let updatedAgent = new Agent();
+
+    updatedAgent.agent_id=this.updateFormAgent.get("updateAgentId")?.value;
+    updatedAgent.agent_name=this.updateFormAgent.get("updateAgentName")?.value;
+    updatedAgent.address=this.updateFormAgent.get("updateAgentAddress")?.value;
+    updatedAgent.agency_name = this.updateFormAgent.get("updateAgencyName")?.value;
+    updatedAgent.contact_number = this.updateFormAgent.get("updateContact")?.value;
+    updatedAgent.email = this.updateFormAgent.get("updateAgentEmail")?.value;
+
+    if(updatedAgent.agent_id=="" || updatedAgent.agent_name==="" || updatedAgent.address==="" || updatedAgent.agency_name==="" || updatedAgent.contact_number==="" || updatedAgent.email===""){
+      alert("Please Fill All Details")
+      return;
+    }
+    if(!updatedAgent.isValidEmail()){
+      alert("Please Enter Valid Email")
+      return;
+    }
+    if(!updatedAgent.isValidPhoneNumber()){
+      alert("Please Enter Valid Mobile NUmber")
+      return;
+    }
+    if (updatedAgent.contact_number.length<10){
+      alert("Invalid Phone Number")
+      return;
+    }
+
+    try {
+      await this.agentService.updateAgent(updatedAgent);
+      await this.ngOnInit();
+      console.log(updatedAgent);
+
+    }catch (error){
+
+      alert(error)
+
     }
   }
 }

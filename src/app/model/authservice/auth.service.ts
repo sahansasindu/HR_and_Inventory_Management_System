@@ -9,7 +9,9 @@ import { UserService } from "../../service/services/user.service";
 @Injectable({
   providedIn: 'root'
 })
+
 export class AuthService {
+
   private loggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private axiosService: AxiosService, private userService: UserService) { }
@@ -43,6 +45,7 @@ export class AuthService {
       throw error;
     }
   }
+
 
   decodeToken(token: string): any {
     try {

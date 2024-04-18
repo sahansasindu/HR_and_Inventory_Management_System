@@ -243,3 +243,7 @@ button {
   margin-top: 20px; /* Adjust spacing between form and buttons */
   text-align: center;
 }
+
+.highlighted{
+  background-color: #ccdff5;
+}
