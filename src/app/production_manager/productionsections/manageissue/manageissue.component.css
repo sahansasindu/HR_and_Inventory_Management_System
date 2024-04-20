@@ -32,9 +32,6 @@ body {
 }
 
 
-
-
-
 /* Media queries */
 
 @media (max-width: 992px) {
@@ -139,4 +136,22 @@ body {
   position: relative;
   max-width: 860px;
   margin-top: 60px;
+}
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+.form-buttons {
+  margin-top: 20px; /* Adjust spacing between form and buttons */
+  text-align: center;
+}
+
+.form-buttons button {
+  margin-top: 20px ;
+  margin-right: 25px;
+  text-align: center;
 }

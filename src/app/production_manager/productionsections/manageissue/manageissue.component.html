@@ -1,14 +1,11 @@
 <div class="d-flex page__box p-1 mt-0">
 
 
-
-
-
   <div class="parallel-div col-9">
-    <div class="issue-management-container">
+    <div class="issue-management-container" *ngIf="!isManageProductionIssues">
 
       <div class="button-container">
-        <button mat-flat-button color="primary" >Manage Issues</button>
+        <button mat-flat-button color="primary" (click)="manageIssue()">Manage Issues</button>
       </div>
 
       <div class="issue-chart">
@@ -17,10 +14,130 @@
       </div>
 
     </div>
-  </div>
 
+    <div class="manage-production-issue" *ngIf="isManageProductionIssues">
+
+      <div *ngIf="!isaddNewIssue && !isupdateIssue && !isdeleteIssue">
+        <button mat-raised-button  class="close-button" color="warn" (click)="manageIssue()"> <mat-icon>arrow_back</mat-icon> </button>
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="visibleaddIssue()">Add New Issue </button>
+          <button mat-raised-button color="primary" (click)="visibleupdateIssue()">Update Issue Details</button>
+          <button mat-raised-button color="primary" (click)="visibleDeleteIssue()">Delete Issue Details</button>
+        </div>
+
+        <div class="mat-table-container">
+          <mat-table [dataSource]="dataSourceIssue" class="mat-elevation-z8">
+
+
+            <ng-container matColumnDef="issue_id">
+              <mat-header-cell *matHeaderCellDef>  Issue ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.issue_id }} </mat-cell>
+            </ng-container>
+
+
+            <ng-container matColumnDef="issue_name">
+              <mat-header-cell *matHeaderCellDef>  Issue Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.issue_id }} </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlighted]="row === selectedRow" (click)="selectRow(row)"></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+
+      <div *ngIf="isaddNewIssue">
+
+        <button mat-raised-button class="close-button" color="warn" (click)="visibleaddIssue()">Close</button>
+        <form class="details-form">
+          <h2>Add New Issue</h2>
+
+          <label for="addAgentName">Agent Name:</label>
+          <input type="text" required id="addAgentName" name="addAgentName">
+
+          <label for="addAgentAddress">Address:</label>
+          <input type="text" required id="addAgentAddress" name="addAgentAddress">
+
+          <label for="addAgencyName">Agency Name:</label>
+          <input type="text" required id="addAgencyName" name="addAgencyName">
+
+          <label for="addContact">Contact Number:</label>
+          <input type="text" required id="addContact" name="addContact" maxlength="10" placeholder="07XXXXXXXX">
+
+          <label for="addAgentEmail">Email:</label>
+          <input type="text" required id="addAgentEmail" name="addAgentEmail">
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="isupdateIssue">
+
+        <button mat-raised-button class="close-button" color="warn" (click)="visibleupdateIssue()">Close</button>
+        <form class="details-form">
+          <h2>Update Issue Changes</h2>
+
+          <label for="addAgentName">Agent Name:</label>
+          <input type="text" required  name="addAgentName">
+
+          <label for="addAgentAddress">Address:</label>
+          <input type="text" required  name="addAgentAddress">
+
+          <label for="addAgencyName">Agency Name:</label>
+          <input type="text" required  name="addAgencyName">
+
+          <label for="addContact">Contact Number:</label>
+          <input type="text" required  name="addContact" maxlength="10" placeholder="07XXXXXXXX">
+
+          <label for="addAgentEmail">Email:</label>
+          <input type="text" required  name="addAgentEmail">
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <div *ngIf="isdeleteIssue">
+
+        <button mat-raised-button class="close-button" color="warn" (click)="visibleDeleteIssue()">Close</button>
+        <form class="details-form">
+          <h2>Delete Issue Details</h2>
+
+          <label for="addAgentName">Agent Name:</label>
+          <input type="text" required  name="addAgentName">
+
+          <label for="addAgentAddress">Address:</label>
+          <input type="text" required  name="addAgentAddress">
+
+          <label for="addAgencyName">Agency Name:</label>
+          <input type="text" required  name="addAgencyName">
+
+          <label for="addContact">Contact Number:</label>
+          <input type="text" required  name="addContact" maxlength="10" placeholder="07XXXXXXXX">
+
+          <label for="addAgentEmail">Email:</label>
+          <input type="text" required  name="addAgentEmail">
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
 
   <div class="left-div col-3 text-right" id="div3">
+
   </div>
+
 </div>
 

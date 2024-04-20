@@ -188,6 +188,7 @@ button {
   gap: 8px; /* This creates a gap between items. Adjust as needed. */
   width: 700px;
 }
+
 .search-container{
   flex-direction: column;
   display: flex;
@@ -218,8 +219,8 @@ button {
 .details-form {
   display: flex;
   flex-direction: column;
-  max-width: 600px; /* Adjust max-width as needed */
-  margin: 20px auto; /* Center the form horizontally */
+  max-width: 600px;
+  margin: 20px auto;
 }
 
 .form-row {
@@ -247,3 +248,4 @@ button {
 .highlighted{
   background-color: #ccdff5;
 }
+
