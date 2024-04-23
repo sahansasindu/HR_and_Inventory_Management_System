@@ -74,3 +74,159 @@ body {
     height: auto;
   }
 }
+.report-management-container {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 992px) {
+  .report-management-container {
+    padding: 10px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .report-management-container {
+    max-width: 100%;
+  }
+}
+
+mat-card {
+  margin: 20px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+mat-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 94, 255, 0.73);
+  color: white;
+  padding: 10px;
+}
+
+mat-card-title {
+  font-size: 20px;
+  flex: 1;
+  text-align: center;
+}
+
+
+mat-card-content {
+  padding: 15px;
+  background-color: #f7f7f7;
+}
+
+
+mat-tab-group {
+  background-color: #fff;
+  border-radius: 4px;
+}
+
+
+mat-tab-label {
+  font-weight: bold;
+  color: #333;
+}
+
+
+mat-card-actions {
+
+  background-color: #6fa9af;
+  flex-shrink: 1;
+  padding: 0;
+  margin-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: flex-end; /* Align its children to the right */
+}
+
+button.mat-button {
+  color: #1976d2;
+  border: 1px solid #1976d2;
+  border-radius: 4px;
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: #fd3e3e;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+button.mat-button:hover {
+  background-color: #1976d2;
+  color: rgba(0, 72, 255, 0.66);
+}
+
+button.mat-button.clicked {
+  background-color: #4CAF50;
+}
+
+.swap-button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 12px 12px;
+  text-align: center;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 4px #2874a6;
+  transition: all 0.3s ease 0s;
+  width: 350px;
+  margin-left: 37px;
+  margin-top: 5px;
+  flex-shrink: 1;
+}
+
+.swap-button:hover {
+  background-color: #ff3939;
+  box-shadow: 0 2px #7e1818;
+  transform: translateY(-2px);
+}
+
+mat-icon {
+
+  display: flex;
+  align-items: center;
+}
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+
+@media (max-width: 768px) {
+  .button-container {
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .swap-button,
+  mat-card-actions {
+    width: 100%;
+  }
+}
+
+
+
+
+
+

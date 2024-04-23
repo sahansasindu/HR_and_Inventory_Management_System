@@ -142,10 +142,10 @@ body {
   position: relative;
 }
 .close-button {
-  position: absolute; /* Absolute position within the parent container */
-  top: 10px; /* Adjust the value as needed */
-  right: 10px; /* Adjust the value as needed */
-  padding: 5px 10px; /* Padding for aesthetics */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
 }
 .details-form {
   display: flex;

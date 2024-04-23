@@ -75,7 +75,7 @@ body {
   }
 }
 .chartBottle{
-  margin-top: 200px;
+  margin-top: 135px;
 }
 
 .form-container {
@@ -89,7 +89,6 @@ body {
   z-index: 10;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .form-container {
     width: 100%;

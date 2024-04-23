@@ -59,6 +59,13 @@ import { ManageuserprofileComponent } from './common/manageuserprofile/manageuse
 import { ProductionmanageruserprofileComponent } from './production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component';
 import { StorekeeperuserprfileComponent } from './store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component';
 import {NgxSpinnerModule} from "ngx-spinner";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import { DailyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/daily-report/daily-production-report.component';
+import { WeeklyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/weekly-report/weekly-production-report.component';
+import { MonthlyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/monthly-report/monthly-production-report.component';
+import { AgentDailyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-daily-report/agent-daily-report.component';
+import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
+import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
 
 @NgModule({
   declarations: [
@@ -97,30 +104,38 @@ import {NgxSpinnerModule} from "ngx-spinner";
     ManageuserprofileComponent,
     ProductionmanageruserprofileComponent,
     StorekeeperuserprfileComponent,
+    DailyProductionReportComponent,
+    WeeklyProductionReportComponent,
+    MonthlyProductionReportComponent,
+    AgentDailyReportComponent,
+    AgentWeeklyReportComponent,
+    AgentMonthlyReportComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        BrowserAnimationsModule,
-        MatListModule,
-        MatDividerModule,
-        MatIconModule,
-        MatMenuModule,
-        MatToolbarModule,
-        MatSidenavModule,
-        MatButtonModule,
-        FormsModule,
-        MatBadgeModule,
-        MatCardModule,
-        HttpClientModule,
-        MatInputModule,
-        MatTableModule,
-        MatSelect,
-        MatOption,
-        CanvasJSAngularStockChartsModule,
-        ReactiveFormsModule,
-        NgxSpinnerModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    MatListModule,
+    MatDividerModule,
+    MatIconModule,
+    MatMenuModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    FormsModule,
+    MatBadgeModule,
+    MatCardModule,
+    HttpClientModule,
+    MatInputModule,
+    MatTableModule,
+    MatSelect,
+    MatOption,
+    CanvasJSAngularStockChartsModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    MatTabGroup,
+    MatTab,
+  ],
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),

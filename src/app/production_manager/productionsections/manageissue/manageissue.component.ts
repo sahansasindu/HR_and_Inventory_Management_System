@@ -78,6 +78,7 @@ export class ManageissueComponent implements data{
 
   visitorsDrilldownedChartOptions = {
     animationEnabled: true,
+    exportEnabled: true,
     theme: "light2",
     axisY: {
       gridThickness: 0,
@@ -88,6 +89,7 @@ export class ManageissueComponent implements data{
 
   newVSReturningVisitorsOptions = {
     animationEnabled: true,
+    exportEnabled: true,
     theme: "light2",
     title: {
       text: "Weekly Milk Production Issues"

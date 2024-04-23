@@ -2,11 +2,7 @@
 <div class="chart-container-position">
 
   <div class="chart-container">
-    <div class="btn-group">
-      <button class="btn btn-outline-success" (click)="this.resizeChart($event, 25)">Small</button>
-      <button class="btn btn-outline-success" (click)="this.resizeChart($event, 50)">Medium</button>
-      <button class="btn btn-success" (click)="this.resizeChart($event, 100)">Large</button>
-    </div>
+
     <div class="chart-dalily">
       <canvasjs-chart [options]="chartOptions" [styles]="{width: width, height:'360px'}" (chartInstance)="getChartInstance($event)" ></canvasjs-chart>
 

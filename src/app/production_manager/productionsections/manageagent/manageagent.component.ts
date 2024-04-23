@@ -137,6 +137,7 @@ export class ManageagentComponent implements OnInit{
 
     this.chartOptions = {
       animationEnabled: true,
+      exportEnabled: true,
       theme: "light2",
       title:{
         text: "Milk Purchase Details"
