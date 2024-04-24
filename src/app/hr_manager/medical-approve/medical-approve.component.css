@@ -58,6 +58,14 @@
 .mat-form-field{
   width: 100%;
 }
-
+.mat-raised-button{
+  margin-top: 10px;
+}
+.mat-header-cell{
+  background-color: #51b9c0;
+}
+.table.mat-table{
+  background-color: #51b9c0;
+}
 
 

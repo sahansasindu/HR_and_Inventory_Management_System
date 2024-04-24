@@ -1,0 +1,77 @@
+.page__box {
+  background-color: #ffffff;
+  height: 800px;
+  border-radius: 1px;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #f1eded;
+  border-radius: 1px;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+#div1 {
+  height: 790px;
+  background-color: #e8e0e0;
+}
+
+#div3 {
+  margin-left: 3px;
+  background-color: #9d9898;
+  border-radius: 2%;
+}
+.form-actions {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+
+  width: 100%;
+  height: 100%;
+}
+.button-container{
+  display:flex;
+  justify-content: center;
+
+  margin: 250px 0;
+  gap: 40px;
+  width: 400px;
+}
+.reject-button {
+  margin-left: 5px;
+}
+.approve-button{
+  margin-right: 20px;
+}
+.search-option{
+  margin-top: 20px;
+  border-radius: 1px;
+  width: 800px;
+
+}
+.mat-form-field{
+  width: 100%;
+}
+
+.mat-header-row {
+  min-width: 100%;
+
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight:bold;
+}
+.mat-raised-button{
+  margin:15px 0;
+}
+/* Change background color of table rows on hover */
+
+
+

@@ -1,1 +1,68 @@
-<p>emp-details works!</p>
+<div class="d-flex page__box p-1 mt-0">
+  <div class="parallel-div col-9">
+    <div class="div1 col-8 custom-div" id="div1">
+      <div class="search-option">
+        <mat-form-field appearance="fill">
+          <mat-label>Who you are looking for?</mat-label>
+          <input matInput placeholder=" ">
+          <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+
+      <div class="card-con">
+        <div class="container">
+          <div class="card">
+            <div class="card-content">
+              <form #employeeForm="ngForm" class="d-flex flex-column">
+                <div class="row">
+                  <!-- Left side content -->
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <div class="profile-img" id="profile-img"><img src="../../../assets/images/profile.jpg" alt="Profile"></div>
+                      <div class="prof-cont">
+                        <label>ID</label>
+                        <input type="text" class="form-control" name="id" [(ngModel)]="employee.id" readonly>
+                        <label>Position</label>
+                        <input type="text" class="form-control" name="position" [(ngModel)]="employee.position" readonly>
+                        <label>Department</label>
+                        <input type="text" class="form-control" name="department" [(ngModel)]="employee.department" readonly>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right side content -->
+        <div class="container2">
+
+          <div class="card card2" id="card2"> <!-- Added card2 class -->
+            <form #employeeForm="ngForm" class="d-flex flex-column">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group2">
+                    <h4>Personal Details</h4>
+                    <div><label>Employee Name</label></div>
+                    <div><input type="text" class="form-control" name="name" [(ngModel)]="employee.name" readonly></div>
+                    <label>Age</label>
+                    <input type="number" class="form-control" name="age" [(ngModel)]="employee.age" readonly>
+                    <label>Gender</label>
+                    <input type="text" class="form-control" name="gender" [(ngModel)]="employee.gender" readonly>
+                    <label>Birthday</label>
+                    <input type="date" class="form-control" name="birthday" [(ngModel)]="employee.birthday" readonly>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="left-div col-3 text-right" id="div3">
+  </div>
+</div>

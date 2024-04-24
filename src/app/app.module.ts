@@ -45,6 +45,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatTableModule } from '@angular/material/table';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +98,7 @@ import { MatTableModule } from '@angular/material/table';
     MatOption,
     MatMomentDateModule,
     MatTableModule,
+
   ],
   providers: [
     provideClientHydration(),

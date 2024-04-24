@@ -45,10 +45,15 @@ body {
     width: 100%;
   }
 }
-
 @media (max-width: 768px) {
-  .left-div {
-    height: 100%;
+  .employee-profile-form {
+    width: 80%; /* Adjust the width for medium-sized screens */
+  }
+}
+
+@media (max-width: 576px) {
+  .employee-profile-form {
+    width: 90%; /* Adjust the width for smaller screens */
   }
 }
 
@@ -68,11 +73,11 @@ body {
   }
 }
 .employee-profile-container {
-  max-width: 600px;
+  max-width: 1000px;
   margin: auto;
   background-color: #51b9c0; /* Change as per your theme */
   padding: 10px;
-  border-radius: 8px;
+  border-radius: 18px;
   display: flex;
   flex-direction: column;
 }
@@ -96,12 +101,12 @@ body {
   align-items: center; /* Center the form vertically */
   height: 100vh;
 }
-.employee-profile-form{
-  width: 300px; /* Set a fixed width for the form */
+.employee-profile-form {
+  width: 90%; /* Set a percentage width for responsiveness */
+  max-width: 400px; /* Set a maximum width to limit the form's width on larger screens */
   padding: 20px;
-
   border-radius: 5px;
-
+  margin: auto; /* Center the form horizontally */
 }
 .form-fields {
   display: grid;
