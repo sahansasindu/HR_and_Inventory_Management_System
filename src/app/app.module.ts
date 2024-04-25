@@ -28,6 +28,9 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
+import { HrmNotificationComponent } from './hr_manager/hrm-notification/hrm-notification.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +48,8 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
+    HrmNotificationComponent,
+    HrmLeaveAndMedicalComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
     FormsModule,
     MatBadgeModule,
     MatCardModule,
+    ScrollingModule
   ],
   providers: [
     provideClientHydration(),

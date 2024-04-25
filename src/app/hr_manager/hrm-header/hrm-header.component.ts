@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './hrm-header.component.html',
   styleUrl: './hrm-header.component.css'
 })
-export class HrmHeaderComponent {
+export class HrmHeaderComponent implements OnInit{
 
   @Output() toggleSidebarForMe = new EventEmitter<unknown>();
 
