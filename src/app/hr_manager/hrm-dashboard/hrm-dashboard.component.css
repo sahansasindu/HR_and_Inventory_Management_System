@@ -32,9 +32,10 @@ body {
 }
 
 #div3 {
-  margin-left: 20px;
   background-color: #b5abab;
   border-radius: 10px;
+  height: 650px;
+  margin-top: 30px;
 }
 
 .link-btn_1{

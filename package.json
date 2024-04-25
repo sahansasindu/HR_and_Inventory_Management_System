@@ -23,6 +23,7 @@
     "@angular/platform-server": "^17.2.0",
     "@angular/router": "^17.2.0",
     "@angular/ssr": "^17.2.1",
+    "@canvasjs/angular-charts": "^1.2.0",
     "axios": "^1.6.8",
     "chart.js": "^4.4.2",
     "cors": "^2.8.5",

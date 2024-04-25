@@ -2,7 +2,8 @@
 <div class="d-flex page__box p-1 mt-0">
 
   <div class="parallel-div col-9">
-    <div class="leave-and-medical-details">
+
+    <div class="leave-and-medical-details" *ngIf="!isLeaveVisible">
 
       <div class="detail-section">
     <span class="icon">
@@ -19,21 +20,79 @@
       <mat-divider></mat-divider>
 
       <div class="detail-section">
+
     <span class="icon">
-      <button class="btn-2">
+      <button class="btn-2" (click)="swaptoLeave()">
         <img src="../../../assets/images/exit.png" alt="Leave Logo" />
       </button>
     </span>
-        <br><br>
+        <br><br><br><br><br><br><br><br><br>
         <span class="text">
-          <button class="btn"><b> Leaving Details </b> </button>
+          <button class="btn" (click)="swaptoLeave()"><b> Leaving Details </b> </button>
     </span>
+
       </div>
 
     </div>
 
+    <div class="leave-details" *ngIf="isLeaveVisible">
+
+
+      <button class="btn" (click)="swaptoLeave()"><b> Back Details </b> </button>
+      <!-- Inside hrm-leave-details.component.html -->
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+        <!-- Employee ID Column -->
+        <ng-container matColumnDef="employeeId">
+          <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="employeeName">
+          <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef> Department </th>
+          <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef> Date </th>
+          <td mat-cell *matCellDef="let element"> {{element.date}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+          <th mat-header-cell *matHeaderCellDef> Type </th>
+          <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="reason">
+          <th mat-header-cell *matHeaderCellDef> Reason </th>
+          <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="approvalState">
+          <th mat-header-cell *matHeaderCellDef> Approval State </th>
+          <td mat-cell *matCellDef="let element"> {{element.approvalState}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+
+
+    </div>
+
+
+
+
   </div>
 
-  <div class="left-div col-3 text-right" id="div3">Div</div>
+
+  <div class="left-div col-3 text-right" id="div3">
+    Div
+  </div>
 </div>
 

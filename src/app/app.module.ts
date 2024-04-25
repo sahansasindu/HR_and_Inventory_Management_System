@@ -31,6 +31,7 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
 import { HrmNotificationComponent } from './hr_manager/hrm-notification/hrm-notification.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
+import {MatTableModule} from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/
     FormsModule,
     MatBadgeModule,
     MatCardModule,
-    ScrollingModule
+    ScrollingModule,
+    MatTableModule
   ],
   providers: [
     provideClientHydration(),
@@ -75,3 +77,5 @@ import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+
