@@ -1,0 +1,118 @@
+
+<div class="container">
+  <div class="row justify-content-center mt-1">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>ADD PAYROLL DETAILS</span>
+
+        </div>
+
+        <div class="card-body">
+          <form>
+
+            <div class="form-group">
+              <label for="basicamount">Basic amount:</label>
+              <input type="number" id="basicamount" name="basicamount" [(ngModel)]="basicamount" class="form-control" placeholder="basic amount">
+            </div>
+
+            <div class="form-group">
+              <label for="br1">Basic allowance1:</label>
+              <input type="number" id="br1" name="br1" [(ngModel)]="br1"  class="form-control" placeholder="basic allowance1">
+            </div>
+
+            <div class="form-group">
+              <label for="br2">Basic allowance2:</label>
+              <input type="number" id="br2" name="br2" [(ngModel)]="br2"  class="form-control" placeholder="basic allowance2" >
+            </div>
+
+            <div class="form-group">
+              <label for="depName">Department name:</label>
+              <select id="depName" [(ngModel)]="depName"  name="depName" class="form-control" required>
+                <option value="" selected disabled>Select a department</option>
+                <option value="Financial">Financial </option>
+                <option value="Human resources">Human resources</option>
+                <option value="Sells marketing">Sells and marketing</option>
+                <option value="Administration">Administration</option>
+                <option value="Quality assurance">Quality assurance</option>
+                <option value="Production">Production</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="gpass_amount">Getpass amount:</label>
+              <input type="number" id="gpass_amount"  [(ngModel)]="gpass_amount"  name="gpass_amount"   class="form-control" placeholder="getpass amount" maxlength="10">
+            </div>
+            <div class="form-group">
+              <label for="Initial_days">Initial days:</label>
+              <input type="text" id="Initial_days"  [(ngModel)]="Initial_days"    name="Initial_days"   class="form-control" placeholder="initial days" maxlength="10">
+            </div>
+
+            <div class="form-group">
+              <label for="noamount">Initial nopay amount:</label>
+              <input type="number" id="noamount" name="nopay_amount"  [(ngModel)]="nopay_amount"  class="form-control" placeholder="initial nopay amount" maxlength="10">
+            </div>
+
+            <div class="form-group">
+              <label for="jrole">Job role:</label>
+              <select id="jrole" [(ngModel)]="job_role" name="role" class="form-control" required>
+                <option value="" selected disabled>Select a role</option>
+                <option value="HR manager">HR manager</option>
+                <option value="Accountant">Accountant</option>
+                <option value="Production manager">Production manager</option>
+                <option value="Store keeper">Store keeper</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ot_amount">Ot amount:</label>
+              <input type="number" id="ot_amount" name="ot_amount"  [(ngModel)]="ot_amount"  class="form-control" placeholder="ot amount" maxlength="10">
+            </div>
+
+            <div class="form-group">
+              <label for="salary_type">Salary type:</label>
+              <select id="salary_type" [(ngModel)]="salary_type" name="salary_type" class="form-control" required>
+                <option value="" selected disabled>Select a salary type</option>
+                <option value="Production">Production</option>
+                <option value="Store">Stores</option>
+                <option value="Office staff">Office staff</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="section_name">Section name:</label>
+              <select id="section_name" [(ngModel)]="section_name" name="section_name" class="form-control" required>
+                <option value="" selected disabled>Select a section name</option>
+                <option value="Bottle washing">Bottle washing</option>
+                <option value="Yogurt section">Yogurt section</option>
+                <option value="UHT">UHT</option>
+                <option value="Packet">Packet</option>
+                <option value="Ice cream">Ice cream</option>
+                <option value="Milk toffy">Milk toffy</option>
+              </select>
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="subsistant">Subsistant</label>
+              <input type="number" id="subsistant" name="subsistant"  [(ngModel)]="subsistant"  class="form-control" placeholder="subsistant" maxlength="10">
+            </div>
+
+
+            <div class="form-group d-flex justify-content-center">
+              <button type="submit"  (click)="back()"  class="btn btn-secondary" id="clearButton">back</button>
+              <button type="submit"  (click)="submitData()"  class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

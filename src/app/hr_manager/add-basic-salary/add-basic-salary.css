@@ -1,0 +1,132 @@
+@import "../hrm-dashboard/hrm-dashboard.component.css";
+
+.page__box {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+.second-part {
+  order: 2;
+  width: 100%;
+  height: 80%;
+  border: 1px solid black; /* Add border to second-part */
+}
+
+.btn-group .btn {
+  margin-right: 10px;
+}
+
+.table thead.bg-dark.text-white {
+  background-color: #148e94 !important;
+}
+
+
+.card-header {
+  background-color: #b3d0e1; /* Change background color of card header */
+  color: #333; /* Change text color of card header */
+}
+
+
+
+.black-text {
+  color: black;
+}
+/* External CSS file (styles.css) */
+
+/* Style the dropdown container */
+.dropdown-container {
+  position: relative;
+}
+
+/* Style the dropdown list */
+.dropdown-container select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+
+/* Style the dropdown arrow */
+.dropdown-container::after {
+  content: "\25BC"; /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+/* Style the dropdown list when it's open */
+.dropdown-container select:focus {
+  outline: none;
+  border-color: #007bff; /* Border color when focused */
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Box shadow when focused */
+}
+
+/* Style the dropdown options */
+.dropdown-container select option {
+  padding: 8px;
+}
+#depName{
+  border: 1px solid black;
+}
+
+@media (max-width: 480px) {
+
+  .page__box {
+    width: 1050px;
+  }
+
+  .card-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-bar {
+    margin-bottom: 10px;
+  }
+
+  .btn-group {
+    flex-direction: column;
+  }
+
+  .btn-group a {
+    margin-bottom: 5px;
+  }
+}
+
+.spinner-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(231, 222, 222, 0.7);
+  z-index: 1000;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

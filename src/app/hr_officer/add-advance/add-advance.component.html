@@ -1,0 +1,166 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="show()">ADVANCE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show2()">LOAN</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show3()">VIEW ADVANCE STATE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show4()">LOAN STATE</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+<div class="d-flex page__box p-1 mt-0"*ngIf="isVisible1">
+  <div class="container">
+    <h2 class="text-center"><u>Salary Advance</u></h2>
+    <form>
+      <div class="form-group">
+        <label for="empId">Employee ID:</label>
+        <input type="text" class="form-control" id="empId" name="empId" [(ngModel)]="empid">
+      </div>
+      <div class="form-group">
+        <label for="amount">Amount:</label>
+        <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="amount">
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason:</label>
+        <textarea class="form-control" id="reason" name="reason" [(ngModel)]="reson" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select class="form-control" id="status" name="status"  [(ngModel)]="astatus"  style="margin-bottom: 20px;">
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData1()">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Loan Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="empIdl">Employee ID:</label>
+        <input type="text" class="form-control" id="empIdl" name="empIdl" [(ngModel)]="lempid" >
+      </div>2
+
+      <div class="form-group">
+        <label for="loandetails">Loan details:</label>
+        <textarea class="form-control" id="loandetails" name="ldetails" rows="3" [(ngModel)]="loandetails"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="loanamount">Loan amount:</label>
+        <input type="number" class="form-control" id="loanamount" name="loanamount" [(ngModel)]="lamount" >
+      </div>
+
+      <div class="form-group">
+        <label for="interestamount">Interest amount:</label>
+        <input type="number" class="form-control" id="interestamount" name="interestamount" [(ngModel)]="liamount" >
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData2()">Submit</button>
+    </form>
+  </div>
+
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">View Advance State</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+        </div>
+      </div>
+
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Amount</td>
+            <td>Reason</td>
+            <td>State</td>
+            <td>Emp ID</td>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of loandata">
+            <td>RS.{{ item.amount }}</td>
+            <td>{{ item.reson }}</td>
+            <td>{{ item.status }}</td>
+            <td>{{ item.emp_id}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">LOAN STATE</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <input type="text" class="form-control" id="empid" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+        </div>
+      </div>
+
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Emp ID</td>
+            <td>Loan details</td>
+            <td>Loan amount</td>
+            <td>Interest amount</td>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of  loarddata">
+            <td>{{ item.emp_id }}</td>
+            <td>{{ item.loan_details }}</td>
+            <td>{{ item.loan_amount}}</td>
+            <td>{{ item.interest_amount}}</td>
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
