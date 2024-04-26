@@ -1,0 +1,14 @@
+<div>
+  <app-model-deductionform
+    [deductionamount]="deductionData.deduction_amount"
+    [depName]="deductionData.department_name"
+    [job_role]="deductionData.job_role"
+    [salary_type]="deductionData.salary_type"
+    [section_name]="deductionData.section_name"
+    [deduction_type]="deductionData.deduction_type"
+    [headerTitle]="'Update Deduction'"
+    (formSubmit)="handleFormSubmit($event)"
+    (backAction)="onBack()">
+  </app-model-deductionform>
+</div>
+``

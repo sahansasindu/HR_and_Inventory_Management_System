@@ -1,0 +1,13 @@
+<div>
+  <app-model-loan
+    [lempid]="loandata.emp_id"
+    [loandetails]="loandata.loan_details"
+    [lamount]="loandata.loan_amount"
+    [liamount]="loandata.interest_amount"
+    [headerTitle]="'Update Loan'"
+    (formSubmit)="handleFormSubmit($event)"
+    (backAction)="onBack()">
+  </app-model-loan>
+</div>
+``
+

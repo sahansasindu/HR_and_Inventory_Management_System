@@ -1,0 +1,33 @@
+.chart-container {
+  width: 80%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-top: 30px;
+  text-align: center;
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    padding-top: 20px;
+  }
+}
+
+
+canvas {
+  display: block;
+  width: 40%;
+  height: auto;
+
+  /* Responsive styles */
+  @media (max-width: 768px) {
+    width: 60%;
+  }
+
+  @media (max-width: 480px) {
+    width: 80%;
+  }
+}

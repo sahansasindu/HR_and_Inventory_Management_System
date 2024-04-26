@@ -1,0 +1,15 @@
+<div>
+  <app-model-allowancesform
+    [allowance_amount]="allowanceData.allowances_amount"
+    [depName]="allowanceData.department_name"
+    [job_role]="allowanceData.job_role"
+    [salary_type]="allowanceData.salary_type"
+    [section_name]="allowanceData.section_name"
+    [allowance_type]="allowanceData.allowances_type"
+    [headerTitle]="'Update Alllowances'"
+    (formSubmit)="handleFormSubmit($event)"
+    (backAction)="onBack()">
+  </app-model-allowancesform>
+</div>
+
+

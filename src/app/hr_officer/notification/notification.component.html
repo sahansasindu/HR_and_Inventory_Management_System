@@ -1,0 +1,4 @@
+<!-- notification.component.html -->
+<div [ngClass]="{'notification': true, 'success': type === 'success', 'error': type === 'error', 'info': type === 'info'}">
+  <p>{{ message }}</p>
+</div>

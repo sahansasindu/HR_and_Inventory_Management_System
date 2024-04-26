@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row justify-content-center mt-1">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <h2 class="text-center"><u>Salary Advance</u></h2>
+
+        </div>
+
+        <div class="card-body">
+          <form>
+
+            <div class="form-group">
+              <label for="empId">Employee ID:</label>
+              <input type="text" class="form-control" id="empId" name="empId" [(ngModel)]="empid">
+            </div>
+            <div class="form-group">
+              <label for="amount">Amount:</label>
+              <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="amount">
+            </div>
+            <div class="form-group">
+              <label for="reason">Reason:</label>
+              <textarea class="form-control" id="reason" name="reason" [(ngModel)]="reson" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="status">Status:</label>
+              <select class="form-control" id="status" name="status"  [(ngModel)]="astatus"  style="margin-bottom: 20px;">
+                <option value="pending">Pending</option>
+              </select>
+            </div>
+
+
+            <div class="form-group d-flex justify-content-center">
+              <button type="button" (click)="back()" class="btn btn-secondary" id="clearButton">back</button>
+              <button type="submit" class="btn btn-primary" (click)="submitData1()">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

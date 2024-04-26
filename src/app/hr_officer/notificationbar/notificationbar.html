@@ -1,0 +1,16 @@
+<div>
+  <h1>{{ currentDate | date:'shortTime' }}</h1>
+  <h6>{{ currentDate | date:'fullDate' }}</h6>
+</div>
+<hr>
+<!-- app.component.html -->
+<div>
+  <button (click)="addSuccessNotification('Success notification')">Show Success Notification</button>
+  <button (click)="addErrorNotification('Error notification')">Show Error Notification</button>
+  <button (click)="addInfoNotification('Info notification')">Show Info Notification</button>
+  <button (click)="clearNotifications()">Clear Notifications</button>
+</div>
+
+<div *ngFor="let notification of notifications">
+  <app-notification [message]="notification.message" [type]="notification.type"></app-notification>
+</div>
