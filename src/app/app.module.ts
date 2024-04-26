@@ -28,15 +28,10 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
-import { EmpUpdateComponent } from './hr_manager/emp-update/emp-update.component';
-import { LeaveMedicalComponent } from './hr_manager/leave-medical/leave-medical.component';
 import { EmpDetailsComponent } from './hr_manager/emp-details/emp-details.component';
 import { MedicalApproveComponent } from './hr_manager/medical-approve/medical-approve.component';
-import { EmpAttendanceComponent } from './hr_manager/emp-attendance/emp-attendance.component';
 import { ManageUserComponent } from './hr_manager/manage-user/manage-user.component';
 import { LeaveApproveComponent } from './hr_manager/leave-approve/leave-approve.component';
-import { EmpSalaryComponent } from './hr_manager/emp-salary/emp-salary.component';
-import { ManageAccComponent } from './hr_manager/manage-acc/manage-acc.component';
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
@@ -62,15 +57,10 @@ import { MatTableModule } from '@angular/material/table';
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
-    EmpUpdateComponent,
-    LeaveMedicalComponent,
     EmpDetailsComponent,
     MedicalApproveComponent,
-    EmpAttendanceComponent,
     ManageUserComponent,
     LeaveApproveComponent,
-    EmpSalaryComponent,
-    ManageAccComponent,
   ],
   imports: [
     BrowserModule,
