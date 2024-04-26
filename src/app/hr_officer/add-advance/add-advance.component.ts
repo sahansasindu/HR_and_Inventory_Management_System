@@ -110,32 +110,43 @@ export class AddAdvanceComponent {
 
 
   submitData1() {
-    console.log(this.empid);
-    this.axiosService.request(
-      "POST",
-      "addAdvance", {
-        "emp_id": this.empid,
-        "amount": this.amount,
-        "reson": this.reson,
-        "status": this.astatus,
+    if (!this.empid || !this.amount || !this.reson) {
+      alert('Please fill in all required fields.');
+      return;
+    }
 
-      }
-      ,{}).then(response => {
-      console.log("Response from server:", response);
-      alert("Add advance successfully!");
-    }).catch(error => {
-      console.error("Error updating user details:", error);
-      let errorMessage = "An error occurred while updating user details. Please try again later.";
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      alert(errorMessage);
-    });
-
-    this.empid="";
-    this.amount="";
-    this.reson="";
-    this.astatus="";
+    this.axiosService
+      .request(
+        "POST",
+        "addAdvance",
+        {
+          "emp_id": this.empid,
+          "amount": this.amount,
+          "reson": this.reson,
+          "status": this.astatus,
+        },
+        {}
+      )
+      .then(response => {
+        console.log("Response from server:", response);
+        alert("Add advance successfully!");
+        this.resetForm();
+      })
+      .catch(error => {
+        console.error("Error updating user details:", error);
+        let errorMessage =
+          "An error occurred while updating user details. Please try again later.";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+        alert(errorMessage);
+      });
+  }
+  resetForm() {
+    this.empid = "";
+    this.amount = "";
+    this.reson = "";
+    this.astatus = "";
   }
 
 

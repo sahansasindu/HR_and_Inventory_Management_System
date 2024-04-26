@@ -21,11 +21,14 @@ export class EmployeeLeaveComponent {
   ltype: any;
   reason: any;
   astatus: any;
-  loandata: any[] = [];
-  id: any;
+
   employeeId:any;
+  loarddata1: any[] = [];
+  loarddata: any[] = [];
   filteredData: any[] = [];
-  sa: any[]=[];
+  filteredData2: any[] = [];
+  filteritem1: any[]=[];
+  filteritem: any[]=[];
 
 
 
@@ -35,7 +38,9 @@ export class EmployeeLeaveComponent {
   date: any;
   greason: any;
   gstate: any;
-  loarddata: any[] = [];
+
+
+
 
 
 
@@ -50,6 +55,7 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = false;
     this.isVisible3 = false;
     this.isVisible4 = false;
+    this.employeeId="";
 
   }
 
@@ -58,6 +64,7 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = true;
     this.isVisible3 = false;
     this.isVisible4 = false;
+    this.employeeId="";
 
   }
 
@@ -66,6 +73,8 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = false;
     this.isVisible3 = true;
     this.isVisible4 = false;
+    this.employeeId="";
+    this.fetchLeaveData();
   }
   show4() {
 
@@ -73,99 +82,22 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = false;
     this.isVisible3 = false;
     this.isVisible4 = true;
-    this. fetchDeductionData2();
+    this. fetchgetepassdata();
+    this.employeeId="";
   }
 
   fetchLeaveData() {
     this.axiosService.request('GET', 'getLeave', null,{})
       .then(response => {
-        this.loandata = response.data;
+        this.loarddata1 = response.data;
         this.filteredData =response.data;
-        console.log(this.loandata); // Corrected logging statement
+        console.log(this.loarddata1); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
 
-  submitData() {
-    console.log(this.empid);
-    this.axiosService.request(
-      "POST",
-      "addLeave",
-      {
-        "end_time": this.endtime,
-        "leave_type": this.ltype,
-        "reson": this.reason,
-        "start_time": this.stime,
-        "status": this.astatus,
-        "emp_id": this.empid
-      }
-    ,{}).then(response => {
-      console.log("Response from server:", response);
-      alert("User details updated successfully!");
-    }).catch(error => {
-      console.error("Error updating user details:", error);
-      alert("Error updating user details. Please try again.");
-    });
-  }
-
-  filterByEmployeeId() {
-    console.log("Employee ID input:", this.employeeId); // Check input value
-    if (this.employeeId === "") {
-      this.fetchLeaveData();
-      console.log("Empty employee ID, fetching all data");
-    } else {
-      this.loandata=this.filteredData;
-      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.sa = this.loandata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
-      console.log("Filtered data:", this.filteredData); // Check filtered data
-      this.loandata=this.sa;
-    }
-  }
-
-
-  submitData2() {
-
-    console.log(this.empid);
-    this.axiosService.request(
-      "POST",
-      "addGatepass", {
-        "date": this.date,
-        "in_time": this.intime,
-        "out_time": this.outtime,
-        "reson": this.greason,
-        "status": this.gstate,
-        "emp_id": this.gempid,
-
-      }
-      ,{}).then(response => {
-      console.log("Response from server:", response);
-      alert("User details updated successfully!");
-    }).catch(error => {
-      console.error("Error updating user details:", error);
-      let errorMessage = "An error occurred while updating user details. Please try again later.";
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      alert(errorMessage);
-    });
-  }
-
-  fetchDeductionData2() {
-
-    this.axiosService.request('GET', '/getGatepass', null,{})
-      .then(response => {
-        this.loarddata = response.data;
-        //this.filteredData =response.data;
-        console.log(this.loandata); // Corrected logging statement
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-
-
-      });
-  }
 
   onTimeChange(type: 'in' | 'out', newTime: string) {
     const date = new Date();
@@ -181,6 +113,125 @@ export class EmployeeLeaveComponent {
       this.outtime = formattedTime; // Set the formatted time for Out Time
     }
   }
+
+
+
+
+  submitData() {
+
+    if (!this.empid || !this.endtime || !this.ltype|| !this.reason|| !this.stime|| !this.astatus) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+    console.log(this.empid);
+    this.axiosService.request(
+      "POST",
+      "addLeave",
+      {
+        "end_time": this.endtime,
+        "leave_type": this.ltype,
+        "reson": this.reason,
+        "start_time": this.stime,
+        "status": this.astatus,
+        "emp_id": this.empid
+      }
+    ,{}).then(response => {
+      console.log("Response from server:", response);
+      alert("add leave successfully!");
+    }).catch(error => {
+      console.error("Error add leave details:", error);
+      alert("Error add leave details. Please try again.");
+    });
+
+    this.endtime="";
+    this.ltype="";
+    this.reason="";
+    this.stime="";
+    this.astatus="";
+    this.empid="";
+
+  }
+
+  filterByEmployeeId() {
+
+    if (this.employeeId === "") {
+      this.fetchLeaveData();
+      this.fetchgetepassdata();
+
+    } else {
+      this.loarddata1=this.filteredData;
+      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.filteritem1 = this.loarddata1.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+      console.log("Filtered data:", this.filteredData);
+      this.loarddata1=this.filteritem1;
+
+
+      this.loarddata=this.filteredData2;
+      const lowerCaseEmpId2 = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.filteritem = this.loarddata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId2);
+      this.loarddata=this.filteritem;
+
+    }
+  }
+
+
+  submitData2() {
+
+    if (!this.date || !this.intime || !this.outtime || !this.greason|| !this.gstate|| !this.gempid) {
+      alert('Please fill in all required fields.');
+      return;
+    }
+
+    console.log(this.empid);
+    this.axiosService.request(
+      "POST",
+      "addGatepass", {
+        "date": this.date,
+        "in_time": this.intime,
+        "out_time": this.outtime,
+        "reson": this.greason,
+        "status": this.gstate,
+        "emp_id": this.gempid,
+
+      }
+      ,{}).then(response => {
+      console.log("Response from server:", response);
+      alert("add gatepass successfully!");
+    }).catch(error => {
+      console.error("Error add gatepass details:", error);
+      let errorMessage = "An error occurred while updating user details. Please try again later.";
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message;
+      }
+      alert(errorMessage);
+    });
+
+    this.date="";
+    this.intime="";
+    this.outtime="";
+    this.greason="";
+    this.gstate="";
+    this.gempid="";
+
+
+  }
+
+  fetchgetepassdata() {
+
+    this.axiosService.request('GET', '/getGatepass', null,{})
+      .then(response => {
+        this.loarddata = response.data;
+        this.filteredData2 =response.data;
+        console.log(this.loarddata1); // Corrected logging statement
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+
+
+      });
+  }
+
+
 
 
 }
