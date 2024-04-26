@@ -10,15 +10,15 @@ export class UserService {
   private userSubject = new BehaviorSubject<User | null>(null);
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
-    this.initUser();
+    if (isPlatformBrowser(this.platformId)) {
+      this.initUser();
+    }
   }
 
   private initUser(): void {
-    if (isPlatformBrowser(this.platformId)) {
-      const user = this.getUserFromStorage();
-      if (user) {
-        this.userSubject.next(user);
-      }
+    const user = this.getUserFromStorage();
+    if (user) {
+      this.userSubject.next(user);
     }
   }
 

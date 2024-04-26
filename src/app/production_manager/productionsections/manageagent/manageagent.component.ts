@@ -42,7 +42,7 @@ export class ManageagentComponent implements OnInit{
     });
   }
 
-  displayedColumns: string[] = ['agent_id', 'agent_name','agency_name', 'address', 'email','contact_number',];
+  displayedColumns: string[] = ['agent_id', 'agent_name','agency_name', 'address', 'email','contact_number'];
   dataSourceAgent = new MatTableDataSource<Agent>([]);
   selectedRow: Agent | null = null;
 

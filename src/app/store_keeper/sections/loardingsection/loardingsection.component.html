@@ -17,7 +17,7 @@
       </div>
       <div class="mat-table-container">
 
-        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSource1" class="mat-elevation-z8">
 
           <!-- Empty Unit ID Column -->
           <ng-container matColumnDef="loading_id">
@@ -114,7 +114,7 @@
         <label for="batchCodeupdate">Batch Code:</label>
         <input type="number" id="batchCodeupdate" name="batchCodeupdate" required>
 
-        <label for="EmployeeIDupdate">Employee ID:</label>
+        <label for="EmployeeIDupdate">Agent ID:</label>
         <input type="number" id="EmployeeIDupdate" name="EmployeeIDupdate" required>
 
         <div class="form-buttons">
@@ -142,9 +142,9 @@
           </ng-container>
 
           <!-- Empty Bottles Column -->
-          <ng-container matColumnDef="agent_Address">
-            <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agent_Address }} </mat-cell>
+          <ng-container matColumnDef="agent_name">
+            <mat-header-cell *matHeaderCellDef> Agent Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
           </ng-container>
 
           <!-- Damage Bottles Column -->
@@ -154,21 +154,21 @@
           </ng-container>
 
           <!-- Submit Date Column -->
-          <ng-container matColumnDef="agent_name">
-            <mat-header-cell *matHeaderCellDef> Agent Name </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.address }} </mat-cell>
           </ng-container>
 
           <!-- Submit Time Column -->
-          <ng-container matColumnDef="agent_contact">
-            <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agent_contact }} </mat-cell>
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
           </ng-container>
 
           <!-- For Washing Column -->
-          <ng-container matColumnDef="agent_mail">
-            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agent_mail }} </mat-cell>
+          <ng-container matColumnDef="contact_number">
+            <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.contact_number }} </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->

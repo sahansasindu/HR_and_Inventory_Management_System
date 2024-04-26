@@ -53,7 +53,7 @@ export class SignupComponent {
       alert("Please use between 8 and 10 characters for the password...");
     } else if (!user.isValidEmail()) {
       alert("Please enter a valid email...");
-    } else if (!user.isValidPhoneNumber()) {
+    } else if (!user.isValidPhoneNumber(user.contact)) {
       alert("Please enter a valid phone number...");
     }else if(user.contact.length < 10) {
       alert("Please enter a valid phone number...");

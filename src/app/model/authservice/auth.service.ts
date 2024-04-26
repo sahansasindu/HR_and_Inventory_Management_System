@@ -35,6 +35,8 @@ export class AuthService {
       user.empID = userData.employee;
       user.token = userData.token;
 
+      //console.log("login token",user.token)
+
       localStorage.setItem('currentUser', JSON.stringify(user));
       this.userService.setUser(user); // Store user details in UserService
       this.loggedIn.next(true);

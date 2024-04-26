@@ -86,8 +86,14 @@ export class User {
   }
 
   // Method to validate phone number
-  isValidPhoneNumber(): boolean {
-    const regex = /^\d+$/;
-    return regex.test(this._contact);
+  isValidPhoneNumber(phoneNumber:string):boolean {
+
+    const localRegex = /^0(7[0125678])\d{7}$/;
+    const internationalRegex = /^\+94(7[0125678])\d{7}$/;
+    return localRegex.test(phoneNumber) || internationalRegex.test(phoneNumber);
   }
+
+
+
+
 }

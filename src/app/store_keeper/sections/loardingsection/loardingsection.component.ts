@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {Agent} from "node:http";
+import {AgentService} from "../../../service/services/agent.service";
+import {Agent} from "../../../model/agentmodel";
 
 @Component({
   selector: 'app-loardingsection',
@@ -8,35 +9,31 @@ import {Agent} from "node:http";
   styleUrl: './loardingsection.component.css'
 })
 export class LoardingsectionComponent implements OnInit{
+  constructor(private agentService:AgentService) {
+  }
 
   displayedColumns: string[] = ['loading_id', 'bottle_amount','batch_code', 'submit_date', 'submit_time','agent_id',];
-  dataSource = new MatTableDataSource<TableElement>([]);
+  dataSource1 = new MatTableDataSource<TableElement>([]);
   selectedRow: Element | null = null;
   // You will replace this with your actual data
   ELEMENT_DATA: TableElement[] = [
 
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-    { loading_id: 1, bottle_amount: 10,batch_code: "000B1",submit_date: new Date(), submit_time: new Date(),agent_id:"EPF00001" },
-
-
-    // ... more data
   ];
 
-
-  displayedColumns2: string[] = ['agent_id', 'agent_Address','agency_name', 'agent_name', 'agent_contact','agent_mail',];
+  displayedColumns2: string[] = ['agent_id', 'agent_name','agency_name', 'address', 'email','contact_number'];
   dataSource2 = new MatTableDataSource<Agent>([]);
   selectedRow2: Agent | null = null;
-  ELEMENT_DATA2: Agent[] = [
+  ELEMENT_DATA_AGENT: Agent[] = [
 
   ];
 
-  ngOnInit() {
-    this.dataSource.data = this.ELEMENT_DATA;
+
+  async ngOnInit() {
+
+    this.dataSource1.data = this.ELEMENT_DATA;
+    this.ELEMENT_DATA_AGENT=await this.agentService.getAllAgents();
+    this.dataSource2.data=this.ELEMENT_DATA_AGENT;
+
   }
 
   selectRow(row: Element): void {
@@ -59,6 +56,9 @@ export class LoardingsectionComponent implements OnInit{
     if (this.isAddDetailsVisible) {
       this.isUpdateVisible = false;
     }
+    if(!this.isAddDetailsVisible){
+      this.closeAgent()
+    }
   }
 
   toggleUpdate(): void {
@@ -66,6 +66,9 @@ export class LoardingsectionComponent implements OnInit{
     // Ensure add details div is closed when opening update
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
+    }
+    if(!this.isUpdateVisible){
+      this.closeAgent()
     }
   }
 

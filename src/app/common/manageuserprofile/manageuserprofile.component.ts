@@ -1,8 +1,7 @@
-
 import { Component, OnInit, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { User } from "../../model/usermodel";
-import { UserService } from "../../service/services/user.service";
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { User } from '../../model/usermodel';
+import { UserService } from '../../service/services/user.service';
 import { isPlatformBrowser } from '@angular/common';
 
 @Component({
@@ -15,18 +14,20 @@ export class ManageuserprofileComponent implements OnInit {
   isEditMode = false;
 
   constructor(
-    private fb: FormBuilder,
-    private userService: UserService,
-    @Inject(PLATFORM_ID) private platformId: Object
+    private fb: FormBuilder, private userService: UserService, @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.userProfileForm = this.createFormGroup(fb);
+    console.log("form Bulder",this.fb);
+    this.saveProfile();
   }
 
   ngOnInit() {
     if (isPlatformBrowser(this.platformId)) {
+      this.loadFormState();
       this.userService.getUser().subscribe(user => {
         if (user) {
           this.updateForm(user);
+          this.saveFormState();  // Ensure user data is saved whenever it's updated
         }
       });
     }
@@ -66,12 +67,37 @@ export class ManageuserprofileComponent implements OnInit {
       employeeid: user.empID
     });
   }
+
   saveProfile() {
     if (this.userProfileForm.valid) {
       console.log('Profile saved:', this.userProfileForm.value);
-      // Adapt this part as needed to actually save the profile using UserService
+      if (isPlatformBrowser(this.platformId)) {
+        this.saveFormState();  // Explicitly save the form state when saving the profile
+      }
       this.toggleEditMode();
     }
   }
-}
 
+  saveFormState() {
+    if (isPlatformBrowser(this.platformId)) {
+      const formValue = this.userProfileForm.value;
+      localStorage.setItem('currentUser', JSON.stringify(formValue));
+    }
+  }
+
+  loadFormState() {
+    if (isPlatformBrowser(this.platformId)) {
+      const data = localStorage.getItem('currentUser');
+      if (data) {
+        console.log(data)
+        this.userProfileForm.patchValue(JSON.parse(data), { emitEvent: false });
+        const parsedData = JSON.parse(data);
+        console.log("presentData",parsedData)
+        this.userProfileForm.get('id')?.setValue(parsedData.id, { emitEvent: false });
+        this.userProfileForm.get("employeeid")?.setValue(parsedData.employeeid, { emitEvent: false });
+        this.userProfileForm.get("roles")?.setValue(parsedData.roles, { emitEvent: false });
+      }
+    }
+  }
+
+}
