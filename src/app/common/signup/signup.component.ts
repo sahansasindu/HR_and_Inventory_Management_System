@@ -70,7 +70,7 @@ export class SignupComponent {
            "role": this.role,
            "username": this.username
          }
-       ).then(response => {
+       ,{}).then(response => {
          // Handle the response here
          console.log("Response from server:", response);
          // You can perform further actions based on the response
