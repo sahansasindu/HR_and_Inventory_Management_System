@@ -72,91 +72,15 @@ body {
 
   }
 }
-.employee-profile-container {
-  max-width: 1000px;
-  margin: auto;
-  background-color: #51b9c0; /* Change as per your theme */
-  padding: 10px;
-  border-radius: 18px;
-  display: flex;
-  flex-direction: column;
-}
-
-.profile-header {
-  display: flex;
-  justify-content: flex-end;
-  margin-bottom: 20px;
-}
-
-.profile-icon {
-   /* Profile icon background */
-  border-radius: 50%;
-  padding: 10px;
-  color: #111111;
-  font-size: 48px; /* Adjust as needed */
-}
-.employee-profile-container{
-  display: flex;
-  justify-content: center; /* Center the form horizontally */
-  align-items: center; /* Center the form vertically */
-  height: 100vh;
-}
-.employee-profile-form {
-  width: 90%; /* Set a percentage width for responsiveness */
-  max-width: 400px; /* Set a maximum width to limit the form's width on larger screens */
-  padding: 20px;
-  border-radius: 5px;
-  margin: auto; /* Center the form horizontally */
-}
-.form-fields {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  align-items: center;
-}
-
-.mat-form-field {
-  width: 100%;
-  margin-bottom: 15px;
-}
-
-.form-actions {
-  display: flex;
-  justify-content: space-between;
-  padding-top: 20px;
-}
-
-button {
-  margin-right: 8px;
-}
 
 
-.form-fields {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-  align-items: center;
-  margin-bottom: 10px; /* Add or adjust margin-bottom property */
-}
 
-.mat-form-field {
-  width: 100%;
-  margin: 20px; /* Adjust margin property */
-  margin-top: 0; /* Reset top margin */
-}
 
-.mat-form-field .mat-form-field-label {
-  font-size: 12px; /* Adjust font size of the label */
-  display: block;
-  font-weight: bold;
-}
 
-.mat-form-field .mat-input-element {
-  height: 25px; /* Adjust input field height */
-    width: calc(100% - 10px); /* Adjust width to account for padding */
-    padding: 5px;
-    border: 1px solid #ccc;
-    border-radius: 3px;
 
-}
+
+
+
+
+
 

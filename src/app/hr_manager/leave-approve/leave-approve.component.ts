@@ -19,4 +19,8 @@ export class LeaveApproveComponent {
     console.log('Search term:', this.searchTerm);
   }
 
+
+  onViewPdf() {
+
+  }
 }
