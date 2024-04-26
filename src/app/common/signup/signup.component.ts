@@ -63,12 +63,13 @@ export class SignupComponent {
 
        this.axiosService.request(
          "POST",
-         "userregister", {
+         "/userregister", {
            "contact": this.tpno,
            "email": this.email,
            "password": this.password,
            "role": this.role,
-           "username": this.username
+           "username": this.username,
+           "employee":this.emp_ID,
          }
        ,{}).then(response => {
          // Handle the response here
