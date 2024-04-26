@@ -31,7 +31,6 @@ import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.compon
 import { EmployeeSalaryComponent } from './hr_manager/employee-salary/employee-salary.component';
 import { AddBasicSalary } from './hr_manager/add-basic-salary/add-basic-salary';
 
-
 import { ModelDeductionformComponent } from './hr_manager/model-deductionform/model-deductionform.component';
 import { AllowancesComponent }from './hr_manager/allowances/allowances.component';
 import {DeductionComponent} from './hr_manager/deduction/deduction.component';
@@ -63,16 +62,9 @@ import { NotificationComponent } from './hr_officer/notification/notification.co
 import { GeneratesalaryComponent } from './hr_officer/generatesalary/generatesalary.component';
 import { SalaryAdvanceComponent } from './hr_manager/salary-advance/salary-advance.component';
 import { AddLoanComponent } from './hr_manager/add-loan/add-loan.component';
-
-
-
-
-
-
-
-
-
-
+import { ModelLoanComponent } from './hr_manager/model-loan/model-loan.component';
+import { UpdateLoanComponent } from './hr_manager/update-loan/update-loan.component';
+import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advance.component';
 
 
 
@@ -119,11 +111,9 @@ import { AddLoanComponent } from './hr_manager/add-loan/add-loan.component';
     GeneratesalaryComponent,
     SalaryAdvanceComponent,
     AddLoanComponent,
-
-
-
-
-
+    ModelLoanComponent,
+    UpdateLoanComponent,
+    UpdateAdvanceComponent,
 
 
 

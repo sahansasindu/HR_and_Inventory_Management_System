@@ -70,7 +70,7 @@ export class LoanComponent implements OnInit  {
 
 
   Update(id: any) {
-    this.router.navigate(['deductionupdate',id]);
+    this.router.navigate(['update-loan',id]);
   }
 
 
@@ -79,13 +79,13 @@ export class LoanComponent implements OnInit  {
   Delete(id: any) {
 
 
-    this.axiosService.request('DELETE', 'deleteDeduction', { deduction_id: id },{})
+    this.axiosService.request('DELETE', '/deleteLoan', { loan_id: id },{})
       .then(response => {
 
         this.fetchDeductionData();
         console.log("Response from server:", response);
 
-        alert("Deduction deleted successfully!");
+        alert("Loan deleted successfully!");
 
 
 

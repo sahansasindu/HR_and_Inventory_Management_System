@@ -19,7 +19,6 @@
         </div>
       </div>
       <div class="btn-group">
-        <a class="btn btn-success" (click)="addpayrolldetails()">Create New [+]</a>
         <a class="btn btn-primary" (click)="Back()">Back</a>
       </div>
     </div>
@@ -44,8 +43,8 @@
             <td>{{ item.reson }}</td>
             <td>{{ item.status }}</td>
             <td style="white-space: nowrap;">
-              <a class="btn btn-primary" (click)="Update(item.allowances_id)">Update</a>
-              <a class="btn btn-danger" (click)="Delete(item.allowances_id)">Delete</a>
+              <a class="btn btn-primary" (click)="Update(item.advance_salary_id)">Update</a>
+              <a class="btn btn-danger" (click)="Delete(item.advance_salary_id)">Delete</a>
             </td>
           </tr>
           </tbody>

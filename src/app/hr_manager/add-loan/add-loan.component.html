@@ -1,46 +1,7 @@
-<div class="container">
-  <div class="row justify-content-center mt-1">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header d-flex justify-content-between align-items-center">
-
-        <h2>Loan Form</h2>
-        </div>
-        <div class="card-body">
-
-      <form>
-      <div class="form-group">
-        <label for="empIdl">Employee ID:</label>
-        <input type="text" class="form-control" id="empIdl" name="empIdl" [(ngModel)]="lempid" >
-      </div>
-
-      <div class="form-group">
-        <label for="loandetails">Loan details:</label>
-        <textarea class="form-control" id="loandetails" name="ldetails" rows="3" [(ngModel)]="loandetails"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="loanamount">Loan amount:</label>
-        <input type="number" class="form-control" id="loanamount" name="loanamount" [(ngModel)]="lamount" >
-      </div>
-
-      <div class="form-group">
-        <label for="interestamount">Interest amount:</label>
-        <input type="number" class="form-control" id="interestamount" name="interestamount" [(ngModel)]="liamount" >
-      </div>
-
-        <div class="form-group d-flex justify-content-center">
-          <button type="button" (click)="back()" class="btn btn-secondary" id="clearButton">back</button>
-          <button type="button" (click)="submitData2() " class="btn btn-primary">Submit</button>
-        </div>
-
-     </form>
-
-        </div>
-      </div>
-    </div>
-  </div>
+<div>
+  <app-model-loan
+    (formSubmit)="handleFormSubmit($event)"
+    [headerTitle]="'Add Loan'"
+    (backAction)="onBack()">
+  </app-model-loan>
 </div>
-
-
-

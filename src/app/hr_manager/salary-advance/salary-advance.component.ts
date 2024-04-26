@@ -64,13 +64,11 @@ export class SalaryAdvanceComponent {
   }
 
 
-  addpayrolldetails() {
-    this.router.navigate(['./add-allowances']);
-  }
+
 
 
   Update(id: any) {
-    this.router.navigate(['UpdateAllowance',id]);
+    this.router.navigate(['update-advance',id]);
   }
 
 
@@ -79,13 +77,13 @@ export class SalaryAdvanceComponent {
   Delete(id: any) {
 
 
-    this.axiosService.request('DELETE', 'deleteAllowance', { allowances_id: id },{})
+    this.axiosService.request('DELETE', 'deleteAdvance', { advance_salary_id: id },{})
       .then(response => {
 
         this.fetchInvoiceData();
         console.log("Response from server:", response);
 
-        alert("Allowance deleted successfully!");
+        alert("Advance deleted successfully!");
 
 
 

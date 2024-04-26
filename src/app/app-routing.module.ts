@@ -28,6 +28,8 @@ import { ManageAccountComponent } from './hr_officer/manage-account/manage-accou
 import { GeneratesalaryComponent } from './hr_officer/generatesalary/generatesalary.component';
 import { SalaryAdvanceComponent } from './hr_manager/salary-advance/salary-advance.component';
 import { AddLoanComponent } from './hr_manager/add-loan/add-loan.component';
+import { UpdateLoanComponent } from './hr_manager/update-loan/update-loan.component';
+import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advance.component';
 
 
 
@@ -82,6 +84,8 @@ const routes: Routes = [
 
   { path: 'loan', component: LoanComponent},
   { path: 'add-loan', component: AddLoanComponent},
+  { path: 'update-loan/:id', component: UpdateLoanComponent},
+  { path: 'update-advance/:id', component: UpdateAdvanceComponent},
 
 
 

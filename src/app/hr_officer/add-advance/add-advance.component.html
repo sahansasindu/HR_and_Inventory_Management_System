@@ -6,13 +6,10 @@
         <a class="nav-link" (click)="show()">ADVANCE</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="show2()">LOAN</a>
+        <a class="nav-link" (click)="show2()">VIEW ADVANCE STATE</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="show3()">VIEW ADVANCE STATE</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" (click)="show4()">LOAN STATE</a>
+        <a class="nav-link" (click)="show3()">LOAN STATE</a>
       </li>
     </ul>
   </div>
@@ -48,41 +45,10 @@
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-
-<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
-  <div class="container mt-4">
-    <h2 class="text-center mb-4">Loan Form</h2>
-    <form>
-      <div class="form-group">
-        <label for="empIdl">Employee ID:</label>
-        <input type="text" class="form-control" id="empIdl" name="empIdl" [(ngModel)]="lempid" >
-      </div>2
-
-      <div class="form-group">
-        <label for="loandetails">Loan details:</label>
-        <textarea class="form-control" id="loandetails" name="ldetails" rows="3" [(ngModel)]="loandetails"></textarea>
-      </div>
-
-      <div class="form-group">
-        <label for="loanamount">Loan amount:</label>
-        <input type="number" class="form-control" id="loanamount" name="loanamount" [(ngModel)]="lamount" >
-      </div>
-
-      <div class="form-group">
-        <label for="interestamount">Interest amount:</label>
-        <input type="number" class="form-control" id="interestamount" name="interestamount" [(ngModel)]="liamount" >
-      </div>
-
-      <button type="submit" class="btn btn-primary" (click)="submitData2()">Submit</button>
-    </form>
-  </div>
-
-</div>
-
 <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
   <div class="card" style="width:100%">
     <h3 class="m-3 text-center">View Advance State</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -109,8 +75,8 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of loandata">
-            <td>RS.{{ item.amount }}</td>
+          <tr *ngFor="let item of loarddata1">
+            <td>Rs.{{ item.amount }}</td>
             <td>{{ item.reson }}</td>
             <td>{{ item.status }}</td>
             <td>{{ item.emp_id}}</td>
@@ -124,7 +90,7 @@
 </div>
 <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
   <div class="card" style="width:100%">
     <h3 class="m-3 text-center">LOAN STATE</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -154,8 +120,8 @@
           <tr *ngFor="let item of  loarddata">
             <td>{{ item.emp_id }}</td>
             <td>{{ item.loan_details }}</td>
-            <td>{{ item.loan_amount}}</td>
-            <td>{{ item.interest_amount}}</td>
+            <td>Rs.{{ item.loan_amount}}</td>
+            <td>Rs.{{ item.interest_amount}}</td>
 
           </tr>
           </tbody>

@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { AxiosService } from "../../axios.service";
-import { ActivatedRoute, Router } from "@angular/router";
+import {Component, Input} from '@angular/core';
+import {AxiosService} from "../../axios.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-update-allowancedetails',
-  templateUrl: './update-allowancedetails.component.html',
-  styleUrls: ['./update-allowancedetails.component.css'] // Change styleUrl to styleUrls
+  selector: 'app-update-loan',
+  templateUrl: './update-loan.component.html',
+  styleUrl: './update-loan.component.css'
 })
-export class UpdateAllowancedetailsComponent implements OnInit {
+export class UpdateLoanComponent {
+
 
   id: any;
-  allowanceData = {
-    allowances_amount: null,
-    allowances_id: null,
-    department_name: "",
-    job_role: "",
-    salary_type: "",
-    section_name: "",
-    allowances_type: "",
+  loandata = {
+    emp_id: "",
+    loan_details:"",
+    loan_amount:"",
+    interest_amount:"",
+
   };
 
   constructor(private axiosService: AxiosService, private router: Router, private route: ActivatedRoute) {}
@@ -30,10 +29,10 @@ export class UpdateAllowancedetailsComponent implements OnInit {
   }
 
   fetchAllowanceData() { // Changed from fetchInvoiceData to fetchAllowanceData
-    this.axiosService.request('GET', `/getAllowanceByID/${this.id}`, null,{})
+    this.axiosService.request('GET', `/getLoanByID/${this.id}`, null,{})
       .then(response => {
-        Object.assign(this.allowanceData, response.data);
-        console.log(this.allowanceData);
+        Object.assign(this.loandata, response.data);
+        console.log(this.loandata);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -43,13 +42,13 @@ export class UpdateAllowancedetailsComponent implements OnInit {
   handleFormSubmit(formData: any) {
     const updatedFormData = {
       ...formData,
-      allowances_id: this.id
+      emp_id: this.id
     };
 
     this.axiosService.request("PUT", "/updateLone", updatedFormData,{}) // Changed from "/updateDeduction" to "/updateAllowance"
       .then(response => {
         console.log("Response from server:", response);
-        alert("loan details add successfully!");
+        alert("loan details update successfully!");
       }).catch(error => {
       console.error("Error updating loan details:", error);
       let errorMessage = "An error occurred while updating loan details. Please try again later.";
@@ -62,6 +61,7 @@ export class UpdateAllowancedetailsComponent implements OnInit {
   }
 
   onBack() {
-    this.router.navigate(['/allowance']); // Changed to navigate to '/allowance' route
+    this.router.navigate(['/loan']); // Changed to navigate to '/allowance' route
   }
 }
+
