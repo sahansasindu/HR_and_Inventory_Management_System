@@ -12,7 +12,6 @@ import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-appr
 import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
 import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
 
-import {ManageAccComponent} from "./hr_manager/manage-acc/manage-acc.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -36,7 +35,6 @@ const routes: Routes = [
       {path:'emp-details',component: EmpDetailsComponent},
       {path:'manage-user',component: ManageUserComponent},
       {path:'leave-approve',component: LeaveApproveComponent},
-      {path:'manage-acc',component: ManageAccComponent},
     ]},
 
 
