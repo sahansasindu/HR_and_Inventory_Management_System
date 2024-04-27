@@ -55,7 +55,7 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatDatepicker, MatDatepickerToggle} from "@angular/material/datepicker";
 import { Notificationbar } from './hr_officer/notificationbar/notificationbar';
 import { NotificationComponent } from './hr_officer/notification/notification.component';
@@ -97,6 +97,7 @@ import { MonthlyProductionReportComponent } from './production_manager/productio
 import { AgentDailyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-daily-report/agent-daily-report.component';
 import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
 import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
+import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
 
 
 
@@ -205,7 +206,8 @@ import { AgentMonthlyReportComponent } from './production_manager/productionsect
     NgxSpinnerModule,
     MatTab,
     MatTabGroup,
-
+    FormsModule,
+    CanvasJSAngularStockChartsModule,
 
 
   ],
