@@ -46,7 +46,7 @@
           <!-- Submit Time Column -->
           <ng-container matColumnDef="submit_time">
             <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.submit_time | date:'shortTime' }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_time}} </mat-cell>
           </ng-container>
 
           <!-- For Washing Column -->
@@ -81,17 +81,17 @@
         <input type="number" id="milkBottlesAmount" name="milkBottlesAmount" required>
 
         <label for="batchCode">Batch Code:</label>
-        <input type="number" id="batchCode" name="batchCode" required>
+        <input type="text" id="batchCode" name="batchCode" required>
 
         <label for="date">Date:</label>
         <input type="date" id="date" name="date" required>
 
         <label for="agentID">agent ID:</label>
-        <input type="text" id="agentID" name="agentID" required>
+        <input type="number" id="agentID" name="agentID" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="submitLordingDetails()">Submit</button>
         </div>
       </form>
     </div>
@@ -135,43 +135,42 @@
 
         <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
 
-          <!-- Empty Unit ID Column -->
+
           <ng-container matColumnDef="agent_id">
             <mat-header-cell *matHeaderCellDef> Agent ID </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
           </ng-container>
 
-          <!-- Empty Bottles Column -->
+
           <ng-container matColumnDef="agent_name">
             <mat-header-cell *matHeaderCellDef> Agent Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
           </ng-container>
 
-          <!-- Damage Bottles Column -->
+
           <ng-container matColumnDef="agency_name">
             <mat-header-cell *matHeaderCellDef> Agency Name </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.agency_name }} </mat-cell>
           </ng-container>
 
-          <!-- Submit Date Column -->
+
           <ng-container matColumnDef="address">
             <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.address }} </mat-cell>
           </ng-container>
 
-          <!-- Submit Time Column -->
+
           <ng-container matColumnDef="email">
             <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.email }} </mat-cell>
           </ng-container>
 
-          <!-- For Washing Column -->
+
           <ng-container matColumnDef="contact_number">
             <mat-header-cell *matHeaderCellDef> Contact Number </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.contact_number }} </mat-cell>
           </ng-container>
 
-          <!-- Row Definitions -->
           <mat-header-row *matHeaderRowDef="displayedColumns2" class="mat-header-row"></mat-header-row>
           <mat-row *matRowDef="let row2; columns: displayedColumns2;"
                    [class.highlighted]="row2 === selectedRow2"
