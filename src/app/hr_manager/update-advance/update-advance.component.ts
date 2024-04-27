@@ -74,6 +74,6 @@ export class UpdateAdvanceComponent {
 
 
   back() {
-
+    this.router.navigate(['/salaryadvance']);
   }
 }

@@ -6,16 +6,13 @@
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
         <div class="form-group">
-          <select [(ngModel)]="selectedDepartment" class="form-control" (change)="filterByDepartment()" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial</option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sales and marketing">Sales and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
-          </select>
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+        </div>
+        &nbsp;
+
+        <b>Select Date:</b>
+        <div class="form-group">
+          <input type="date" class="form-control" id="datePicker" name="datePicker" [(ngModel)]="selectedDate" (change)="handleDateChange()">
         </div>
       </div>
     </div>
@@ -40,7 +37,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of loandata">
+        <tr *ngFor="let item of loarddata">
           <td>{{ item.employee_id }}</td>
           <td>{{ item.employee_name }}</td>
           <td>{{ item.address }}</td>
@@ -126,7 +123,7 @@
           <option value="annual">Annual</option>
         </select>
       </div>
-
+      <button type="submit" class="btn btn-primary" (click)="back()">Back</button>
       <button type="submit" class="btn btn-primary" (click)="handleFormSubmit()">Submit</button>
 
 

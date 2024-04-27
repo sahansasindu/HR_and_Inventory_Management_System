@@ -8,11 +8,13 @@ import { Router } from "@angular/router";
   styleUrls: ['./view-employee.component.css']
 })
 export class ViewEmployeeComponent implements OnInit {
-  loandata: any[] = [];
+
+  loarddata: any[] = [];
   id: any;
-  salaryheader2: any[] = [];
-  selectedDepartment: string = "";
-  isLoading: boolean = false;
+  loarddata1: any[] = [];
+
+
+
   isVisible1: boolean = true;
   isVisible2: boolean = false;
 
@@ -27,29 +29,68 @@ export class ViewEmployeeComponent implements OnInit {
   companystate: string = "";
   address: any;
   dob: any;
-  gender: any;
+  gender: any
+
+  employeeId: any;
+  selectedDate: any;
 
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
-    this.fetchDeductionData();
+    this.fetchEmployeeData();
     this.fetchEmployeeByID();
   }
 
-  fetchDeductionData() {
-    this.isLoading = true;
+  fetchEmployeeData() {
+
     this.axiosService.request('GET', '/getEmployee', null, {})
       .then(response => {
-        this.salaryheader2 = response.data;
-        this.loandata = response.data;
-        this.isLoading = false;
-        console.log(this.loandata); // Corrected logging statement
+        this.loarddata1 = response.data;
+        this.loarddata = response.data;
+
+        console.log(this.loarddata); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
+
+
+  filterByEmployeeId() {
+    if (this.employeeId === "") {
+      this.fetchEmployeeData()
+    } else {
+      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.loarddata = this.loarddata1.filter(item => item.employee_id.toString().toLowerCase() === lowerCaseEmpId);
+    }
+  }
+
+  handleDateChange() {
+    if (this.selectedDate instanceof Date === false) {
+      // Convert selectedDate to Date object if it's not already
+      this.selectedDate = new Date(this.selectedDate);
+    }
+    if (this.selectedDate && !isNaN(this.selectedDate.getTime())) {
+      const year = this.selectedDate.getFullYear();
+      const month = this.selectedDate.getMonth() + 1;
+      const formattedDate = `${year}-${month < 10 ? '0' + month : month}`;
+
+      this.filterByDate(formattedDate);
+    }
+  }
+
+  filterByDate(yearMonth: string) {
+    this.loarddata = this.loarddata.filter(item => {
+      const itemDate = new Date(item.dob);
+      const itemYear = itemDate.getFullYear();
+      const itemMonth = itemDate.getMonth() + 1;
+      const itemFormattedDate = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
+      return itemFormattedDate === yearMonth;
+    });
+  }
+
+
 
   fetchEmployeeByID() {
     if (!this.id) {
@@ -87,16 +128,6 @@ export class ViewEmployeeComponent implements OnInit {
   }
 
 
-  filterByDepartment() {
-    console.log(this.selectedDepartment);
-    if (this.selectedDepartment === "All") {
-      this.fetchDeductionData();
-    } else {
-      this.loandata = this.salaryheader2;
-      this.loandata = this.loandata.filter(item => item.department_name === this.selectedDepartment);
-    }
-  }
-
   Update(id: any) {
     this.isVisible1 = false;
     this.isVisible2 = true;
@@ -105,18 +136,20 @@ export class ViewEmployeeComponent implements OnInit {
     console.log(this.id);
   }
 
+
   Delete(id: any) {
     this.axiosService.request('DELETE', 'deleteEmployee', { employee_id: id }, {})
       .then(response => {
-        this.fetchDeductionData();
+        this.fetchEmployeeData();
         console.log("Response from server:", response);
-        alert("Deduction deleted successfully!");
+        alert("Employee details deleted successfully!");
       })
       .catch(error => {
         console.error("Error deleting Deduction:", error);
         alert("Error deleting Deduction!");
       });
   }
+
 
   handleFormSubmit() {
 
@@ -145,7 +178,7 @@ export class ViewEmployeeComponent implements OnInit {
       }
       , {}).then(response => {
       console.log("Response from server:", response);
-      alert("User details updated successfully!");
+      alert("Employee details updated successfully!");
     }).catch(error => {
       console.error("Error updating user details:", error);
       let errorMessage = "An error occurred while updating user details. Please try again later.";
@@ -154,5 +187,12 @@ export class ViewEmployeeComponent implements OnInit {
       }
       alert(errorMessage);
     });
+  }
+
+
+  back() {
+    this.isVisible1 = true;
+    this.isVisible2 = false;
+
   }
 }

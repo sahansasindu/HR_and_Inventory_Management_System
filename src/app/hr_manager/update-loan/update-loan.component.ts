@@ -61,7 +61,7 @@ export class UpdateLoanComponent {
   }
 
   onBack() {
-    this.router.navigate(['/loan']); // Changed to navigate to '/allowance' route
+    this.router.navigate(['/loan']);
   }
 }
 

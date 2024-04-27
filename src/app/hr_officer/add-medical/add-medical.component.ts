@@ -41,6 +41,7 @@ export class AddMedicalComponent {
   sdate: string = '';
   mstate: string = '';
   report: File | null = null;
+  employeeId: any;
 
   handleFileInput(event: any) {
     const files: FileList = event.target.files;
@@ -120,5 +121,9 @@ export class AddMedicalComponent {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+  }
+
+  filterByEmployeeId() {
+
   }
 }
