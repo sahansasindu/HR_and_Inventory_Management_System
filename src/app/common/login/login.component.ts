@@ -46,7 +46,7 @@ export class LoginComponent {
 
     } catch (error) {
 
-      alert("not navigate")
+      alert("user name or password not matched")
       console.log(error)
       this.inputusername='';
       this.inputpassword='';
