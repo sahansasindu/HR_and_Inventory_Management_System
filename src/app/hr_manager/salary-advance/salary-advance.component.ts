@@ -17,6 +17,7 @@ export class SalaryAdvanceComponent {
   salaryheader2: any[] = [];
   selectedDepartment: string = "";
   isLoading: boolean = false;
+  employeeId: any;
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
 
   filterByDepartment() {
@@ -96,4 +97,7 @@ export class SalaryAdvanceComponent {
       });
   }
 
+  filterByEmployeeId() {
+
+  }
 }

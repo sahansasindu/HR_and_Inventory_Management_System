@@ -22,26 +22,23 @@ export class EmployeeAttendanceComponent {
   show2() {
     this.isVisible1 = false;
     this.isVisible2 = true;
+    this.fetchAttendanceData();
 
   }
 
 
-  loandata: any[] = [];
+  loarddata: any[] = [];
   id: any;
 
 
-  salaryheader: any[] = [];
-  salaryheader2: any[] = [];
-  selectedDepartment: string = "";
   isLoading: boolean = false;
-  intime: string = ''; // Initialize intime as a string
-  outtime: string = ''; // Initialize outtime as a string
+  intime: string = '';
+  outtime: string = '';
   date: any;
   astate: any;
   eid: any;
   employeeId: any;
   filteredData: any[] = [];
-  sa: any[]=[];
   selectedDate: any;
 
 
@@ -58,7 +55,7 @@ export class EmployeeAttendanceComponent {
   fetchAttendanceData() {
     this.axiosService.request('GET', 'getAttendance', null, {})
       .then(response => {
-        this.loandata = response.data;
+        this.loarddata = response.data;
         this.filteredData = response.data;
       })
       .catch(error => {
@@ -82,6 +79,11 @@ export class EmployeeAttendanceComponent {
 
 
   submitData() {
+
+    if (!this.eid || !this.date || !this.intime|| !this.outtime|| !this.astate) {
+      alert('Please fill in all required fields.');
+      return;
+    }
     console.log(this.date)
     this.axiosService.request(
       "POST",
@@ -111,7 +113,7 @@ export class EmployeeAttendanceComponent {
       this.fetchAttendanceData();
     } else {
       const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.loandata = this.filteredData.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+      this.loarddata = this.filteredData.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
     }
   }
 
@@ -130,7 +132,7 @@ export class EmployeeAttendanceComponent {
   }
 
   filterByDate(yearMonth: string) {
-    this.loandata = this.loandata.filter(item => {
+    this.loarddata = this.loarddata.filter(item => {
       const itemDate = new Date(item.date);
       const itemYear = itemDate.getFullYear();
       const itemMonth = itemDate.getMonth() + 1;

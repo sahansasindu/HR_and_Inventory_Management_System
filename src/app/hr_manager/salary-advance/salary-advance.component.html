@@ -6,22 +6,15 @@
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
         <div class="form-group">
-          <select   [(ngModel)]="selectedDepartment" class="form-control" (change)="filterByDepartment()" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial </option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sels markating">Sels and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
-          </select>
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
         </div>
       </div>
       <div class="btn-group">
         <a class="btn btn-primary" (click)="Back()">Back</a>
       </div>
     </div>
+  </div>
+  <div>
     <div class="card-body">
       <!-- Existing Table -->
       <div class="card-body">

@@ -1,28 +1,21 @@
 <!-- Payroll Management Details Section -->
 <div class="d-flex page__box p-1 mt-0">
   <div class="card" style="width:100%">
-    <h3 class="m-3 text-center">Loan</h3>
+    <h3 class="m-3 text-center">LOAN</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
         <div class="form-group">
-          <select   [(ngModel)]="selectedDepartment" class="form-control" (change)="filterByDepartment()" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial </option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sels markating">Sels and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
-          </select>
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
         </div>
       </div>
       <div class="btn-group">
-        <a class="btn btn-success" (click)="addloandetails()">Create New [+]</a>
         <a class="btn btn-primary" (click)="Back()">Back</a>
       </div>
     </div>
+  </div>
+  <div>
+
     <div class="card-body">
       <!-- Existing Table -->
       <div class="card-body">
@@ -39,7 +32,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of loandata">
+          <tr *ngFor="let item of loarddata">
             <td>{{ item.emp_id }}</td>
             <td>{{ item.loan_details }}</td>
             <td>Rs.{{ item.loan_amount }}</td>
