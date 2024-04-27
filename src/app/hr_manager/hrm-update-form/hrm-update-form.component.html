@@ -1,0 +1,65 @@
+<div class="update-employee">
+  <form (ngSubmit)="onSubmit()">
+
+    <div class="form-field">
+      <label>Employee Name</label>
+      <input type="text" [(ngModel)]="employee.employeeName" name="employeeName">
+    </div>
+
+    <div class="form-field">
+      <label>Employee ID</label>
+      <input type="text" [(ngModel)]="employee.employeeId" name="employeeId">
+    </div>
+
+    <div class="form-field">
+      <label>Age</label>
+      <input type="text" [(ngModel)]="employee.age" name="age">
+    </div>
+
+    <div class="form-field">
+      <label>Address</label>
+      <input type="text" [(ngModel)]="employee.address" name="address">
+    </div>
+
+    <div class="form-field">
+      <label>Date Of Birth</label>
+      <input type="text" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+    </div>
+
+    <div class="form-field">
+      <label>Gender</label>
+      <input type="text" [(ngModel)]="employee.gender" name="gender">
+    </div>
+
+    <div class="form-field">
+      <label>Contact Number</label>
+      <input type="text" [(ngModel)]="employee.contactNumber" name="contactNumber">
+    </div>
+
+    <div class="form-field">
+      <label>Married or Unmarried</label>
+      <input type="text" [(ngModel)]="employee.maritalStatus" name="maritalStatus">
+    </div>
+
+    <div class="form-field">
+      <label>Department</label>
+      <input type="text" [(ngModel)]="employee.department" name="department">
+    </div>
+
+    <div class="form-field">
+      <label>Section</label>
+      <input type="text" [(ngModel)]="employee.section" name="section">
+    </div>
+
+    <div class="form-field">
+      <label>Occupation</label>
+      <input type="text" [(ngModel)]="employee.occupation" name="occupation">
+    </div>
+
+    <div class="form-actions">
+      <button type="button" (click)="onBack()">Back</button>
+      <button type="submit" (click)="onSubmit()">Update</button>
+    </div>
+  </form>
+</div>
+

@@ -41,6 +41,7 @@ import { EmployeeChartComponent } from './common/employee-chart/employee-chart.c
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { HrmUpdateFormComponent } from './hr_manager/hrm-update-form/hrm-update-form.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MatInputModule } from '@angular/material/input';
     HrmAttendanceComponent,
     HrmUpdateEmployeeDetailsComponent,
     DepartmentChartComponent,
-    EmployeeChartComponent
+    EmployeeChartComponent,
+    HrmUpdateFormComponent
 
   ],
   imports: [
@@ -88,7 +90,7 @@ import { MatInputModule } from '@angular/material/input';
     MatTabGroup,
     MatTab,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [
     provideClientHydration(),

@@ -12,6 +12,7 @@ export class HrmUpdateEmployeeDetailsComponent{
 
   // displayedColumns: string[] = ['employeeId', 'employeeName', 'age', 'address', 'dateofbirth', 'gender', 'contactno', 'marriedOrunmarried', 'department', 'section', 'occupation'];
   dataSource =ELEMENT_DATA;
+  router: any;
 
   // @ViewChild('MatPaginator') paginator!: MatPaginator;
   //
@@ -24,11 +25,10 @@ export class HrmUpdateEmployeeDetailsComponent{
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  isDashboadVisible: boolean =false;
-
-  swaptoDashboad() {
-    this.isDashboadVisible=!this.isDashboadVisible;
+  navigateToUpdateForm(employeeId: number) {
+    this.router.navigate(['/hrmupdateform', employeeId]);
   }
+
 }
 
 export interface PeriodicElement {
@@ -43,7 +43,6 @@ export interface PeriodicElement {
   department: string;
   section: string;
   occupation: string;
-
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [

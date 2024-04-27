@@ -31,16 +31,16 @@
   font-weight: bold;
 }
 
-  .backbtn {
-    background-color: #5E4BD7;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    padding: 10px 20px;
-    margin-top: 10px;
-    margin-left: 10px;
-    margin-bottom: 10px;
-  }
+  /*.backbtn {*/
+  /*  background-color: #5E4BD7;*/
+  /*  color: white;*/
+  /*  border: none;*/
+  /*  border-radius: 5px;*/
+  /*  padding: 10px 20px;*/
+  /*  margin-top: 10px;*/
+  /*  margin-left: 10px;*/
+  /*  margin-bottom: 10px;*/
+  /*}*/
 
 mat-form-field {
   width: 97%;

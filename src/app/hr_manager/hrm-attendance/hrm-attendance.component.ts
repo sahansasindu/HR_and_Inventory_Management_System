@@ -11,17 +11,11 @@ export class HrmAttendanceComponent {
   displayedColumns: string[] = ['date', 'employeeId', 'employeeName', 'inTime', 'outTime', 'present', 'absent', 'late', 'attendanceStatus'];
   dataSource = ELEMENT_DATA;
 
+
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
-
-  isDashboadVisible: boolean =false;
-
-  swaptoDashboad() {
-    this.isDashboadVisible=!this.isDashboadVisible;
-  }
 }
-
 
 export interface PeriodicElement {
   date: string;

@@ -1,35 +1,52 @@
-<div class="container">
+<div class="container" *ngIf="!isTotalEmployees && !isCurrentlyWork && !isTodayAbsents && !isShortLeavers && !isGatePass ">
+
+  <button class="btn-1" (click)="swaptoTotalEmployees()">
   <div class="card">
     <div class="card-content">
       <h5>Total Employees</h5>
       <p>200</p>
     </div>
   </div>
+  </button>
+
+  <button class="btn-1" (click)="swaptoCurrentlyWork()">
   <div class="card">
     <div class="card-content">
       <h5>Currently Work</h5>
       <p>183</p>
     </div>
   </div>
+  </button>
+
+  <button class="btn-1" (click)="swaptoTodayAbsents()">
   <div class="card">
     <div class="card-content">
       <h5>Today Absents</h5>
       <p>10</p>
     </div>
   </div>
+  </button>
   <br>
+
+  <button class="btn-1" (click)="swaptoShortLeavers()">
   <div class="card">
     <div class="card-content">
       <h5>Short Leavers</h5>
       <p>07</p>
     </div>
   </div>
+  </button>
+
+  <button class="btn-1" (click)="swaptoGatePass()">
   <div class="card">
     <div class="card-content">
       <h5>Gate Pass</h5>
       <p>05</p>
     </div>
   </div>
+  </button>
+
+  <button class="btn-1">
   <div class="card">
     <div class="card-content">
       <h5>Report Management</h5>
@@ -38,4 +55,353 @@
       </div>
     </div>
   </div>
+  </button>
 </div>
+
+
+
+<div class="table-details" *ngIf="isTotalEmployees">
+
+
+  <button class="backbtn" (click)="swaptoTotalEmployees()"><b> Back </b> </button>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search...">
+    <button mat-icon-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+
+  <!-- Inside hrm-leave-details.component.html -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+    <!-- Employee ID Column -->
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Department </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="section">
+      <th mat-header-cell *matHeaderCellDef> Section </th>
+      <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupation">
+      <th mat-header-cell *matHeaderCellDef> Occupation </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+<!--  <div class="page">-->
+<!--    <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                   showFirstLastButtons-->
+<!--                   aria-label="Select page of periodic elements">-->
+<!--    </mat-paginator>-->
+<!--  </div>-->
+</div>
+
+
+
+
+  <div class="table-details" *ngIf="isCurrentlyWork">
+
+
+    <button class="backbtn" (click)="swaptoCurrentlyWork()"><b> Back </b> </button>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Search</mat-label>
+      <input matInput placeholder="Search...">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <!-- Inside hrm-leave-details.component.html -->
+    <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+      <!-- Employee ID Column -->
+      <ng-container matColumnDef="employeeId">
+        <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="employeeName">
+        <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="department">
+        <th mat-header-cell *matHeaderCellDef> Department </th>
+        <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="section">
+        <th mat-header-cell *matHeaderCellDef> Section </th>
+        <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="occupation">
+        <th mat-header-cell *matHeaderCellDef> Occupation </th>
+        <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </mat-table>
+
+<!--    <div class="page">-->
+<!--      <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                     showFirstLastButtons-->
+<!--                     aria-label="Select page of periodic elements">-->
+<!--      </mat-paginator>-->
+<!--    </div>-->
+
+  </div>
+
+
+
+
+
+<div class="table-details" *ngIf="isTodayAbsents">
+
+
+  <button class="backbtn" (click)="swaptoTodayAbsents()"><b> Back </b> </button>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search...">
+    <button mat-icon-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+
+  <!-- Inside hrm-leave-details.component.html -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+    <!-- Employee ID Column -->
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Department </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="section">
+      <th mat-header-cell *matHeaderCellDef> Section </th>
+      <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupation">
+      <th mat-header-cell *matHeaderCellDef> Occupation </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+<!--  <div class="page">-->
+<!--    <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                   showFirstLastButtons-->
+<!--                   aria-label="Select page of periodic elements">-->
+<!--    </mat-paginator>-->
+<!--  </div>-->
+</div>
+
+
+
+
+<div class="table-details" *ngIf="isShortLeavers">
+
+
+  <button class="backbtn" (click)="swaptoShortLeavers()"><b> Back </b> </button>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search...">
+    <button mat-icon-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+
+  <!-- Inside hrm-leave-details.component.html -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+    <!-- Employee ID Column -->
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Department </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="section">
+      <th mat-header-cell *matHeaderCellDef> Section </th>
+      <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupation">
+      <th mat-header-cell *matHeaderCellDef> Occupation </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+<!--  <div class="page">-->
+<!--    <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                   showFirstLastButtons-->
+<!--                   aria-label="Select page of periodic elements">-->
+<!--    </mat-paginator>-->
+<!--  </div>-->
+</div>
+
+
+
+
+<div class="table-details" *ngIf="isGatePass">
+
+
+  <button class="backbtn" (click)="swaptoGatePass()"><b> Back </b> </button>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Search</mat-label>
+    <input matInput placeholder="Search...">
+    <button mat-icon-button matSuffix>
+      <mat-icon>search</mat-icon>
+    </button>
+  </mat-form-field>
+
+
+
+  <!-- Inside hrm-leave-details.component.html -->
+  <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+    <!-- Employee ID Column -->
+    <ng-container matColumnDef="employeeId">
+      <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="employeeName">
+      <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+      <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="department">
+      <th mat-header-cell *matHeaderCellDef> Department </th>
+      <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="section">
+      <th mat-header-cell *matHeaderCellDef> Section </th>
+      <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="occupation">
+      <th mat-header-cell *matHeaderCellDef> Occupation </th>
+      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </mat-table>
+<!--  <div class="page">-->
+<!--    <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                   showFirstLastButtons-->
+<!--                   aria-label="Select page of periodic elements">-->
+<!--    </mat-paginator>-->
+<!--  </div>-->
+</div>
+
+
+
+
+<!--<div class="table-details" *ngIf="isReportManagement">-->
+
+
+<!--  <button class="backbtn" (click)="swaptoReportManagement()"><b> Back </b> </button>-->
+
+<!--  <mat-form-field appearance="fill">-->
+<!--    <mat-label>Search</mat-label>-->
+<!--    <input matInput placeholder="Search...">-->
+<!--    <button mat-icon-button matSuffix>-->
+<!--      <mat-icon>search</mat-icon>-->
+<!--    </button>-->
+<!--  </mat-form-field>-->
+
+
+
+<!--  &lt;!&ndash; Inside hrm-leave-details.component.html &ndash;&gt;-->
+<!--  <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>-->
+
+<!--    &lt;!&ndash; Employee ID Column &ndash;&gt;-->
+<!--    <ng-container matColumnDef="employeeId">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Employee ID </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="employeeName">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Employee Name </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="department">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Department </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.department}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="section">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Section </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.section}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <ng-container matColumnDef="occupation">-->
+<!--      <th mat-header-cell *matHeaderCellDef> Occupation </th>-->
+<!--      <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>-->
+<!--    </ng-container>-->
+
+<!--    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>-->
+<!--    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>-->
+<!--  </mat-table>-->
+<!--  <div class="page">-->
+<!--    <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                   showFirstLastButtons-->
+<!--                   aria-label="Select page of periodic elements">-->
+<!--    </mat-paginator>-->
+<!--  </div>-->
+<!--</div>-->

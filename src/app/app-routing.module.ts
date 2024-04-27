@@ -9,6 +9,7 @@ import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.
 import {HrmLeaveAndMedicalComponent} from "./hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component";
 import {HrmAttendanceComponent} from "./hr_manager/hrm-attendance/hrm-attendance.component";
 import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
+import { HrmUpdateFormComponent } from './hr_manager/hrm-update-form/hrm-update-form.component';
 
 
 const routes: Routes = [
@@ -16,10 +17,12 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
 
+
   { path: 'container', component: ContainerComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]},
+
 
   { path: 'hrmcontainer', component: HrmContainerComponent, children: [
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
@@ -27,8 +30,10 @@ const routes: Routes = [
       { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
       { path: 'hrmattendance', component: HrmAttendanceComponent },
       { path: 'hrmleaveandmedical', component: HrmLeaveAndMedicalComponent },
-
     ]},
+
+  { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
+  { path: 'hrmupdateform/:id', component: HrmUpdateFormComponent },
 ];
 
 
