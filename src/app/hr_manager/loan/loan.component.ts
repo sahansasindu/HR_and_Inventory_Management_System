@@ -8,45 +8,32 @@ import {Router} from "@angular/router";
   styleUrl: './loan.component.css'
 })
 export class LoanComponent implements OnInit  {
-  loandata: any[] = [];
+  loarddata: any[] = [];
   id: any;
 
 
-
-  salaryheader: any[] = [];
-  salaryheader2: any[] = [];
-  selectedDepartment: string = "";
+  filtereddata: any[] = [];
   isLoading: boolean = false;
+  employeeId: any;
+
+
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
 
-  filterByDepartment() {
-    console.log(this.selectedDepartment)
 
 
-    if(this.selectedDepartment=="All"){
-      this.fetchDeductionData();
-    }else{
-      this.loandata=this.salaryheader2;
-      this.salaryheader = this.loandata.filter(item => item.department_name === this.selectedDepartment);
-      this.loandata=this.salaryheader;
-    }
-
-
-  }
   ngOnInit() {
-    this.fetchDeductionData();
+    this.fetchLoan();
   }
 
-  fetchDeductionData() {
+  fetchLoan() {
     this.isLoading = true;
     this.axiosService.request('GET', '/getLoan', null,{})
       .then(response => {
-        // console.log('Fetched data:', response.data); // Log the fetched data
-        this.salaryheader2 = response.data;
-        this.loandata = response.data;
+        this.filtereddata = response.data;
+        this.loarddata = response.data;
         this.isLoading = false;
         // Update Invoiceheader with the fetched data
-        console.log(this.loandata); // Corrected logging statement
+        console.log(this.loarddata);
 
 
 
@@ -58,22 +45,26 @@ export class LoanComponent implements OnInit  {
       });
   }
 
+  filterByEmployeeId() {
+    if (this.employeeId === "") {
+      this.fetchLoan();
+    } else {
+      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.loarddata = this.filtereddata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+    }
+  }
+
+
 
   Back() {
     this.router.navigate(['./hrmcontainer/esc']);
   }
 
 
-  addloandetails() {
-    this.router.navigate(['./add-loan']);
-  }
-
 
   Update(id: any) {
     this.router.navigate(['update-loan',id]);
   }
-
-
 
 
   Delete(id: any) {
@@ -82,7 +73,7 @@ export class LoanComponent implements OnInit  {
     this.axiosService.request('DELETE', '/deleteLoan', { loan_id: id },{})
       .then(response => {
 
-        this.fetchDeductionData();
+        this.fetchLoan();
         console.log("Response from server:", response);
 
         alert("Loan deleted successfully!");
@@ -97,5 +88,7 @@ export class LoanComponent implements OnInit  {
 
       });
   }
+
+
 
 }

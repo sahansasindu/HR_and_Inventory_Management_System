@@ -44,7 +44,7 @@ export class AddAdvanceComponent {
     this.isVisible1 = false;
     this.isVisible2 = true;
     this.isVisible3 = false;
-    this.fetchDeductionData();
+    this.fetchAdvance();
     this.employeeId="";
 
 
@@ -54,7 +54,7 @@ export class AddAdvanceComponent {
     this.isVisible1 = false;
     this.isVisible2 = false;
     this.isVisible3 = true;
-    this. fetchDeductionData2();
+    this. fetchLoan();
     this.employeeId="";
 
   }
@@ -68,8 +68,8 @@ export class AddAdvanceComponent {
   filterByEmployeeId() {
 
     if (this.employeeId === "") {
-      this.fetchDeductionData();
-      this. fetchDeductionData2();
+      this.fetchAdvance();
+      this. fetchLoan();
 
     } else {
       this.loarddata1=this.filteredData;
@@ -90,11 +90,11 @@ export class AddAdvanceComponent {
 
 
   ngOnInit() {
-    this.fetchDeductionData();
-    this.fetchDeductionData2();
+    this.fetchAdvance();
+    this.fetchLoan();
   }
 
-  fetchDeductionData() {
+  fetchAdvance() {
     this.axiosService.request('GET', '/getAdvance', null,{})
       .then(response => {
         this.loarddata1 = response.data;
@@ -150,7 +150,7 @@ export class AddAdvanceComponent {
   }
 
 
-  fetchDeductionData2() {
+  fetchLoan() {
     this.axiosService.request('GET', '/getLoan', null,{})
       .then(response => {
         this.loarddata = response.data;
