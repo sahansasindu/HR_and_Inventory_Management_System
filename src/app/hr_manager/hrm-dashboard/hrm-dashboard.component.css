@@ -36,6 +36,7 @@ body {
   border-radius: 10px;
   height: 650px;
   margin-top: 30px;
+  margin-left: 10px;
 }
 
 .link-btn_1{
@@ -75,6 +76,7 @@ body {
   border-color: #000000;
   margin-top: 0px;
   margin-bottom: 0px;
+  margin-left: 10px;
 }
 
 
@@ -116,4 +118,15 @@ body {
   #div3 {
     height: auto;
   }
+}
+
+.app-employee-chart {
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.mat-card-content {
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #00acea;
 }

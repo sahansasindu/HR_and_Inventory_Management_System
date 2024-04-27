@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { RouterOutlet } from '@angular/router';
+import {MatIcon} from "@angular/material/icon";
+import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 
 @Component({
   selector: 'app-hrm-dashboard',
@@ -8,7 +12,4 @@ import { Router } from '@angular/router';
 })
 export class HrmDashboardComponent {
 
-  toggleChart() {
-
-  }
 }

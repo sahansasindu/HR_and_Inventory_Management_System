@@ -1,17 +1,31 @@
 
 <div class="d-flex page__box p-1 mt-0">
-  <div class="parallel-div col-8">
+  <div class="parallel-div col-9">
     <div class="div1 col-4 custom-div" id="div1"><app-hrm-notification></app-hrm-notification></div>
-    <div>
-      <button md-button class="link-btn_1" (click)="toggleChart()"><mat-icon>submit</mat-icon>Departments</button>
-      <button md-button class="link-btn_2" (click)="toggleChart()"><mat-icon>submit</mat-icon>Employees</button>
-    </div>
-    <div>
-      <br>
-      <mat-divider></mat-divider>
-      <br>
-      <div class="div2 col-4 custom-div" id="div2"><app-piechart></app-piechart></div>
-    </div>
+
+   <div>
+    <mat-card>
+      <mat-card-content>
+        <mat-tab-group>
+          <div>
+          <mat-tab label="Department">
+
+            <app-department-chart></app-department-chart>
+
+          </mat-tab>
+          </div>
+
+          <div>
+          <mat-tab label="Employees">
+
+            <app-employee-chart></app-employee-chart>
+
+          </mat-tab>
+          </div>
+        </mat-tab-group>
+      </mat-card-content>
+    </mat-card>
+   </div>
   </div>
-    <div class="left-div col-4 text-right" id="div3">Div</div>
+    <div class="left-div col-3 text-right" id="div3">Div</div>
 </div>

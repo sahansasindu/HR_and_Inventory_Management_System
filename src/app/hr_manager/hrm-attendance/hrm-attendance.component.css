@@ -1,0 +1,49 @@
+
+#div3 {
+  background-color: #b5abab;
+  border-radius: 10px;
+  height: 650px;
+  margin-top: 30px;
+}
+
+.mat-elevation-z8 {
+  width: 100%;
+  align-items: center;
+  background-color: #afe7f8;
+  margin-left: 10px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  padding: 16px;
+  align-items: center;
+  /*display: flex;*/
+  justify-content: space-around;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+  .backbtn {
+    background-color: #5E4BD7;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+
+mat-form-field {
+  width: 97%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}

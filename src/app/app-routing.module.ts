@@ -7,6 +7,9 @@ import {SignupComponent}from "./common/signup/signup.component";
 import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.component';
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import {HrmLeaveAndMedicalComponent} from "./hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component";
+import {HrmAttendanceComponent} from "./hr_manager/hrm-attendance/hrm-attendance.component";
+import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
+
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -15,14 +18,14 @@ const routes: Routes = [
 
   { path: 'container', component: ContainerComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
-      //  { path: 'home', component: HomeComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
     ]},
 
   { path: 'hrmcontainer', component: HrmContainerComponent, children: [
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
       { path: 'hrmdashboard', component: HrmDashboardComponent },
-      //  { path: 'home', component: HomeComponent },
+      { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
+      { path: 'hrmattendance', component: HrmAttendanceComponent },
       { path: 'hrmleaveandmedical', component: HrmLeaveAndMedicalComponent },
 
     ]},

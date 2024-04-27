@@ -32,6 +32,15 @@ import { HrmNotificationComponent } from './hr_manager/hrm-notification/hrm-noti
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
 import {MatTableModule} from '@angular/material/table';
+import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import { HrmAttendanceComponent } from './hr_manager/hrm-attendance/hrm-attendance.component';
+import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
+import {MatPaginator} from "@angular/material/paginator";
+import { DepartmentChartComponent } from './common/department-chart/department-chart.component';
+import { EmployeeChartComponent } from './common/employee-chart/employee-chart.component';
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -51,6 +60,11 @@ import {MatTableModule} from '@angular/material/table';
     HrmSidenavComponent,
     HrmNotificationComponent,
     HrmLeaveAndMedicalComponent,
+    HrmAttendanceComponent,
+    HrmUpdateEmployeeDetailsComponent,
+    DepartmentChartComponent,
+    EmployeeChartComponent
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +82,13 @@ import {MatTableModule} from '@angular/material/table';
     MatBadgeModule,
     MatCardModule,
     ScrollingModule,
-    MatTableModule
+    MatTableModule,
+    CanvasJSAngularChartsModule,
+    MatPaginator,
+    MatTabGroup,
+    MatTab,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
     provideClientHydration(),
