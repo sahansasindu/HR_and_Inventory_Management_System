@@ -13,17 +13,23 @@
 
             <div class="form-group">
               <label for="username">Employee ID:</label>
-              <input type="text" id="Employee ID" name="emp_ID" [(ngModel)]="emp_ID" class="form-control" placeholder="Employee id">
+
+              <input type="text" id="Employee ID" name="emp_ID" [(ngModel)]="inputempID" class="form-control" placeholder="Employee id">
+
             </div>
 
             <div class="form-group">
               <label for="username">Username:</label>
-              <input type="text" id="Username" name="username" [(ngModel)]="username" class="form-control" placeholder="Username">
+
+              <input type="text" id="Username" name="username" [(ngModel)]="inputusername" class="form-control" placeholder="Username">
+
             </div>
             <div class="form-group">
               <label for="password">Password:</label>
               <div class="input-group">
-                <input type="{{ showPassword ? 'text' : 'password' }}" id="Password"  name="password" [(ngModel)]="password" class="form-control" placeholder="Password" >
+
+                <input type="{{ showPassword ? 'text' : 'password' }}" id="Password"  name="password" [(ngModel)]="inputpassword" class="form-control" placeholder="Password" >
+
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="button" id="sbutten" (click)="togglePasswordVisibility()" >
                     {{ showPassword ? 'Hide' : 'Show' }}
@@ -33,15 +39,16 @@
             </div>
             <div class="form-group">
               <label for="username">Email:</label>
-              <input type="text" id="Email" name="email" [(ngModel)]="email" class="form-control" placeholder="Email" >
+
+              <input type="text" id="Email" name="email" [(ngModel)]="inputemail" class="form-control" placeholder="Email" >
             </div>
             <div class="form-group">
               <label for="username">Contact No:</label>
-              <input type="text" id="Contact_No" name="tpno" [(ngModel)]="tpno" class="form-control" placeholder="Contact No" maxlength="10">
+              <input type="text" id="Contact_No" name="tpno" [(ngModel)]="inputcontact" class="form-control" placeholder="Contact No +947.. OR  07.." maxlength="12">
             </div>
             <div class="form-group">
               <label for="role">Role:</label>
-              <select id="Role" [(ngModel)]="role" name="role" class="form-control" required>
+              <select id="Role" [(ngModel)]="inputrole" name="role" class="form-control" required>
                 <option value="" selected disabled>Select a role</option>
                 <option value="HR_Manager">HR_Manager</option>
                 <option value="Accountant">Accountant</option>

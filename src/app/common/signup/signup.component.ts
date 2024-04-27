@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {AxiosService} from "../../axios.service";
 import {response} from "express";
+import {User} from "../../model/usermodel";
 
 @Component({
   selector: 'app-signup',
@@ -9,92 +10,91 @@ import {response} from "express";
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-
   showPassword: boolean = false;
-  username: string = "";
-  password: string = "";
-  email: string = "";
-  tpno:string = "";
-  role:string = "";
-  emp_ID:string="";
-  toleset:Set<string>=new Set<string>();
 
-  constructor(private axiosService:AxiosService,private router: Router) {} // Inject Router
+  protected inputusername: string='';
+  protected inputpassword: string='';
+  protected inputcontact:string ='';
+  protected inputemail:string='';
+  protected inputrole:string='';
+  protected inputempID:string='';
 
 
+  constructor(private axiosService: AxiosService, private router: Router) {}
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
   }
 
-  clearData() {
+  clearData(): void {
 
-    this.username = "";
-    this.password = "";
-    this.email = "";
-    this.role = "";
-    this.tpno = "";
-    this.emp_ID="";
-
+    this.inputusername='';
+    this.inputpassword='';
+    this.inputcontact='';
+    this.inputemail='';
+    this.inputrole='';
+    this.inputempID='';
   }
 
-   async submitData() {
+  async submitData(): Promise<void> {
 
+    let user=new User();
+    user.username=this.inputusername;
+    user.password=this.inputpassword;
+    user.email=this.inputemail;
+    user.contact=this.inputcontact;
+    user.role=this.inputrole;
+    user.empID=this.inputempID;
 
-
-    if(this.role=="" || this.password=="" || this.email=="" || this.username=="" || this.tpno==""){
-        alert("Please Fill The All Fields...")
-    }else if(this.username.length>8 || this.username.length<3){
-        alert("Please use between 3 and 8 characters for user Name.....")
-    }else if(this.password.length<8 || this.password.length>10){
-      alert("Please Use between 8 and 10 characters for the password...")
-    }else if(!this.isValidEmail(this.email)){
-      alert("Please Enter Validate Email...")
-    }else if(!this.isValidPhoneNumber(this.tpno)){
-      alert("Please Enter Validate Phone Numbers...")
+    if (user.username === "" || user.password === "" || user.email === "" || user.contact === "" || user.role === "" || user.empID === "") {
+      alert("Please Fill All Fields...");
+    } else if (user.username.length > 8 || user.username.length < 3) {
+      alert("Please use between 3 and 8 characters for the username...");
+    } else if (user.password.length < 8 || user.password.length > 10) {
+      alert("Please use between 8 and 10 characters for the password...");
+    } else if (!user.isValidEmail()) {
+      alert("Please enter a valid email...");
+    } else if (!user.isValidPhoneNumber(user.contact)) {
+      alert("Please enter a valid phone number...");
+    }else if(user.contact.length < 10) {
+      alert("Please enter a valid phone number...");
     }else {
 
-      console.log(this.role);
-      console.log(this.password);
-      console.log(this.email);
-      console.log(this.username);
-      console.log(this.tpno);
-      console.log(this.emp_ID);
+      this.axiosService.request(
+        "POST",
+        "/userregister", {
+          "username": user.username,
+          "password": user.password,
+          "email": user.email,
+          "contact": user.contact,
+          "role": user.role,
+          "employee":user.empID
+        }
+      )
+        .then(response => {
 
-       this.axiosService.request(
-         "POST",
-         "userregister", {
-           "contact": this.tpno,
-           "email": this.email,
-           "password": this.password,
-           "role": this.role,
-           "username": this.username
-         }
-       ,{}).then(response => {
-         // Handle the response here
-         console.log("Response from server:", response);
-         // You can perform further actions based on the response
-         alert("User registered successfully!");
-       }).catch(error => {
-         // Handle errors here
-         console.error("Error registering user:", error);
-         alert("User name or Password Already Exist...");
-       });
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("User registered successfully!");
+            this.clearData();
+            this.cancelPage();
+          }
+        })
+        .catch(error => {
+
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("An error occurred while registering the user.");
+          }
+        });
     }
   }
 
-  isValidPhoneNumber(phoneNumber: string): boolean {
-    // This regex checks for a sequence of digits, which is a simple way to validate a phone number that includes only numbers.
-    const regex = /^\d+$/;
-    return regex.test(phoneNumber);
-  }
-  isValidEmail(email: string): boolean {
-    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
-    return emailRegex.test(email);
-  }
 
-  cancelPage() {
-
+  cancelPage(): void {
     this.router.navigate(['/login']);
   }
 }

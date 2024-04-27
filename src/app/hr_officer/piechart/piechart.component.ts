@@ -1,7 +1,9 @@
+
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
 import { AxiosService } from '../../axios.service';
 import { Router } from '@angular/router';
+
 
 // Register the required Chart.js components
 Chart.register(...registerables);
@@ -25,6 +27,7 @@ export class PiechartComponent implements OnInit {
   ngOnInit(): void {
     this.createChart();
     this.fetchDeductionData();
+
   }
 
   createChart() {

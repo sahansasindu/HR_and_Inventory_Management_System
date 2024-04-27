@@ -7,6 +7,7 @@ import { HeaderComponent } from './hr_officer/header/header.component';
 import { SidenavComponent } from './hr_officer/sidenav/sidenav.component';
 import { DashboardComponent } from './hr_officer/dashboard/dashboard.component';
 import {MatDrawerContainer} from "@angular/material/sidenav";
+// Import Angular Material modules
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -15,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
-import {FormsModule} from "@angular/forms";
 import { LoginComponent } from './common/login/login.component';
 import { ContainerComponent } from './hr_officer/container/container.component';
 import { ResetpwordComponent } from './common/resetpword/resetpword.component';
@@ -65,7 +65,38 @@ import { AddLoanComponent } from './hr_manager/add-loan/add-loan.component';
 import { ModelLoanComponent } from './hr_manager/model-loan/model-loan.component';
 import { UpdateLoanComponent } from './hr_manager/update-loan/update-loan.component';
 import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advance.component';
-
+import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule,provideHttpClient, withFetch } from '@angular/common/http';
+import { DashboardstoreComponent } from './store_keeper/dashboardstore/dashboardstore.component';
+import { SidemenubarstoreComponent } from './store_keeper/sidemenubarstore/sidemenubarstore.component';
+import { NotificationcomComponent } from './common/notificationcom/notificationcom.component';
+import { ProductioncricleComponent } from './common/productioncricle/productioncricle.component';
+import { ContainerstoreComponent } from './store_keeper/containerstore/containerstore.component';
+import { EmptysectionComponent } from './store_keeper/sections/emptysection/emptysection.component';
+import { WashingsectionComponent } from './store_keeper/sections/washingsection/washingsection.component';
+import { MilkproductionsectionComponent } from './store_keeper/sections/milkproductionsection/milkproductionsection.component';
+import { LoardingsectionComponent } from './store_keeper/sections/loardingsection/loardingsection.component';
+import { ContainerstoremanagerComponent } from './production_manager/containerstoremanager/containerstoremanager.component';
+import { DashboardstoremanagerComponent } from './production_manager/dashboardstoremanager/dashboardstoremanager.component';
+import { HeaderstoremanagerComponent } from './production_manager/headerstoremanager/headerstoremanager.component';
+import { SidemenubarstoremanagerComponent } from './production_manager/sidemenubarstoremanager/sidemenubarstoremanager.component';
+import { ManageagentComponent } from './production_manager/productionsections/manageagent/manageagent.component';
+import { ManageissueComponent } from './production_manager/productionsections/manageissue/manageissue.component';
+import { ManagebottlestockComponent } from './production_manager/productionsections/managebottlestock/managebottlestock.component';
+import { ManagebottledamageComponent } from './production_manager/productionsections/managebottledamage/managebottledamage.component';
+import { ManageproductionreportsComponent } from './production_manager/productionsections/manageproductionreports/manageproductionreports.component';
+import {User} from "./model/usermodel";
+import { ManageuserprofileComponent } from './common/manageuserprofile/manageuserprofile.component';
+import { ProductionmanageruserprofileComponent } from './production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component';
+import { StorekeeperuserprfileComponent } from './store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component';
+import {NgxSpinnerModule} from "ngx-spinner";
+import {MatTab, MatTabGroup} from "@angular/material/tabs";
+import { DailyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/daily-report/daily-production-report.component';
+import { WeeklyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/weekly-report/weekly-production-report.component';
+import { MonthlyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/monthly-report/monthly-production-report.component';
+import { AgentDailyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-daily-report/agent-daily-report.component';
+import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
+import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
 
 
 
@@ -79,6 +110,7 @@ import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advan
     ContainerComponent,
     ResetpwordComponent,
     DashboardCardsection,
+    NotificationComponent,
     PiechartComponent,
     SignupComponent,
     HrmContainerComponent,
@@ -114,8 +146,33 @@ import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advan
     ModelLoanComponent,
     UpdateLoanComponent,
     UpdateAdvanceComponent,
-
-
+    SidemenubarstoreComponent,
+    NotificationcomComponent,
+    ProductioncricleComponent,
+    ContainerstoreComponent,
+    DashboardstoreComponent,
+    EmptysectionComponent,
+    WashingsectionComponent,
+    MilkproductionsectionComponent,
+    LoardingsectionComponent,
+    ContainerstoremanagerComponent,
+    DashboardstoremanagerComponent,
+    HeaderstoremanagerComponent,
+    SidemenubarstoremanagerComponent,
+    ManageagentComponent,
+    ManageissueComponent,
+    ManagebottlestockComponent,
+    ManagebottledamageComponent,
+    ManageproductionreportsComponent,
+    ManageuserprofileComponent,
+    ProductionmanageruserprofileComponent,
+    StorekeeperuserprfileComponent,
+    DailyProductionReportComponent,
+    WeeklyProductionReportComponent,
+    MonthlyProductionReportComponent,
+    AgentDailyReportComponent,
+    AgentWeeklyReportComponent,
+    AgentMonthlyReportComponent,
 
 
   ],
@@ -131,7 +188,6 @@ import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advan
     MatToolbarModule,
     MatSidenavModule,
     MatButtonModule,
-    FormsModule,
     MatBadgeModule,
     MatCardModule,
     MatCardModule,
@@ -143,12 +199,23 @@ import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advan
     ReactiveFormsModule,
     MatDatepickerToggle,
     MatDatepicker,
+    HttpClientModule,
+    MatTableModule,
+    ReactiveFormsModule,
+    NgxSpinnerModule,
+    MatTab,
+    MatTabGroup,
+
 
 
   ],
+
+
   providers: [
     provideClientHydration(),
     provideAnimationsAsync(),
+    provideHttpClient(withFetch()),
+    User,
 
   ],
   bootstrap: [AppComponent]

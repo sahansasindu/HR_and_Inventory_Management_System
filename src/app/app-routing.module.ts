@@ -17,7 +17,6 @@ import { UpdateDeductiondetailsComponent } from './hr_manager/update-deductionde
 import {AddSalarydetailsComponent}from './hr_manager/add-salarydetails/add-salarydetails.component';
 import {UpdateSalarydetailsComponent}from './hr_manager/update-salarydetails/update-salarydetails.component';
 import { LoanComponent } from './hr_manager/loan/loan.component';
-
 import { AddAdvanceComponent } from './hr_officer/add-advance/add-advance.component';
 import { AddNewEmployeeComponent } from './hr_officer/add-new-employee/add-new-employee.component';
 import { ViewEmployeeComponent } from './hr_officer/view-employee/view-employee.component';
@@ -30,14 +29,32 @@ import { SalaryAdvanceComponent } from './hr_manager/salary-advance/salary-advan
 import { AddLoanComponent } from './hr_manager/add-loan/add-loan.component';
 import { UpdateLoanComponent } from './hr_manager/update-loan/update-loan.component';
 import { UpdateAdvanceComponent } from './hr_manager/update-advance/update-advance.component';
-
-
-
-
-
-
-
-
+import {ContainerstoreComponent} from './store_keeper/containerstore/containerstore.component';
+import {DashboardstoreComponent} from './store_keeper/dashboardstore/dashboardstore.component'
+import {EmptysectionComponent} from "./store_keeper/sections/emptysection/emptysection.component";
+import {LoardingsectionComponent} from "./store_keeper/sections/loardingsection/loardingsection.component";
+import {WashingsectionComponent} from "./store_keeper/sections/washingsection/washingsection.component";
+import {MilkproductionsectionComponent} from "./store_keeper/sections/milkproductionsection/milkproductionsection.component";
+import {ContainerstoremanagerComponent} from "./production_manager/containerstoremanager/containerstoremanager.component";
+import {DashboardstoremanagerComponent} from "./production_manager/dashboardstoremanager/dashboardstoremanager.component";
+import {ManageagentComponent} from "./production_manager/productionsections/manageagent/manageagent.component";
+import {
+  ManagebottledamageComponent
+} from "./production_manager/productionsections/managebottledamage/managebottledamage.component";
+import {
+  ManagebottlestockComponent
+} from "./production_manager/productionsections/managebottlestock/managebottlestock.component";
+import {ManageissueComponent} from "./production_manager/productionsections/manageissue/manageissue.component";
+import {
+  ManageproductionreportsComponent
+} from "./production_manager/productionsections/manageproductionreports/manageproductionreports.component";
+import {ManageuserprofileComponent} from "./common/manageuserprofile/manageuserprofile.component";
+import {
+  ProductionmanageruserprofileComponent
+} from "./production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component";
+import {
+  StorekeeperuserprfileComponent
+} from "./store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -45,6 +62,7 @@ const routes: Routes = [
   {path:'signup',component:SignupComponent},
 
   { path: 'container', component: ContainerComponent, children: [
+    { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'addemployee', component:  AddNewEmployeeComponent },
       { path: 'viewemployee', component:  ViewEmployeeComponent },
@@ -54,23 +72,40 @@ const routes: Routes = [
       { path: 'manageacount', component:  ManageAccountComponent },
       { path: 'addadvance', component:  AddAdvanceComponent  },
       { path: 'generetesalary', component: GeneratesalaryComponent  },
-
-
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+    //  { path: 'home', component: HomeComponent }, production_copy_dilshan
+     
     ]},
 
   { path: 'hrmcontainer', component: HrmContainerComponent, children: [
       { path: 'hrmdashboard', component: HrmDashboardComponent },
-      { path: 'esc', component: EmployeeSalaryComponent},
 
+      { path: 'esc', component: EmployeeSalaryComponent},
 
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
     ]},
+    {path:'storekeeper',component:ContainerstoreComponent,children:[
+      { path: '', redirectTo: 'dashboardstore', pathMatch: 'full' },
 
+      {path:'dashboardstore',component: DashboardstoreComponent},
+      {path:'emptysection',component: EmptysectionComponent},
+      {path:'loardingsection',component: LoardingsectionComponent},
+      {path:'washingsection',component: WashingsectionComponent},
+      {path:'milkproductionsection',component: MilkproductionsectionComponent},
+      {path:'storekeeperUserprofile',component: StorekeeperuserprfileComponent},
+    ]},
+  {path:'productionmanager',component:ContainerstoremanagerComponent,children:[
+      { path: '', redirectTo: 'dashboardstoremanager', pathMatch: 'full' },
 
+      {path:'dashboardstoremanager',component: DashboardstoremanagerComponent},
+      {path:'manageagent',component: ManageagentComponent},
+      {path:'manageissues',component: ManageissueComponent},
+      {path:'managebottlestock',component: ManagebottlestockComponent},
+      {path:'managebottledamage',component: ManagebottledamageComponent},
+      {path:'managereportsproduction',component: ManageproductionreportsComponent},
+      {path:'productionmanagerUserprofile',component: ProductionmanageruserprofileComponent},
+    ]},
 
       { path: 'mdc', component: AddBasicSalary },
-
   { path: 'deduction', component: DeductionComponent},
   { path: 'allowance', component:  AllowancesComponent},
   { path: 'add-deduction', component: AddDeductionComponent },
@@ -88,19 +123,10 @@ const routes: Routes = [
   { path: 'update-advance/:id', component: UpdateAdvanceComponent},
 
 
-
-
-
-
-
-
-
-
   // Other routes if needed
 ];
 
 @NgModule({
-
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })

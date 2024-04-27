@@ -11,13 +11,10 @@ body {
   color: #495057;
 }
 
+
 .container{
   background-color: #62c1d3;
 }
-
-
-
-
 
 .parallel-div {
   display: flex;
@@ -37,14 +34,13 @@ body {
 
 #div2 {
   height: 488px;
-  background-color: #b7cbd3;
+  background-color: #9d9898;
 }
 
 #div3 {
   margin-left: 2px;
   background-color: #b7cbd3;
 }
-
 
 
 /* Media queries */

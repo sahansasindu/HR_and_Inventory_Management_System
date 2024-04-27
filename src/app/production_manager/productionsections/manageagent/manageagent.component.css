@@ -1,0 +1,251 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page__box {
+  background-color: #ffffff;
+  height: 700px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1%;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+
+#div3 {
+  margin-left: 2px;
+  background-color: #d2d2d2;
+  border: 2px solid #d2d2d2;
+  border-radius: 2%;
+}
+
+
+
+
+
+/* Media queries */
+
+@media (max-width: 992px) {
+  .parallel-div {
+    flex-direction: column;
+  }
+
+  .custom-div,
+  .left-div {
+    width: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+    padding-bottom: 485px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    height: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__box {
+    height: auto;
+  }
+
+  #div1,
+  #div2,
+  #div3 {
+    height: auto;
+  }
+}
+
+
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4; /* Assuming a light gray background */
+  margin: 0;
+  padding: 8px; /* Add padding to ensure content isn't flush to the edges */
+}
+
+/* Container for the management interface */
+.agent-management-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+/* Toolbar styles */
+mat-toolbar {
+  justify-content: start;
+  align-items: center;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.mat-form-field {
+  margin-right: 8px;
+  width: auto;
+}
+
+.mat-icon-button {
+  margin-left: -48px; /* Align search icon inside the input */
+}
+
+/* Button styles */
+button {
+  margin: 0 8px;
+  border-radius: 4px; /* Round the button corners to match the design */
+}
+
+.mat-table-container {
+
+  max-height: 450px; /* Adjust this value to the desired table body height */
+  overflow-y: scroll;
+
+}
+
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+
+.mat-table {
+  display: block;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 8px;
+  min-width: 120px; /* Or your preferred min-width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make sure to set a min-width for the table container equal to the total width of all columns */
+.mat-table-container {
+  min-width: 450px; /* This is just an example; calculate the total width of your columns */
+}
+
+/* Responsive design adjustments */
+@media (max-width: 992px) {
+  .agent-management-container {
+    padding: 10px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agent-management-container {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  mat-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* Additional customizations may be required depending on exact Angular Material versions and custom components */
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width: 700px;
+}
+
+.search-container{
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width:100%;
+}
+.chartAgent{
+  margin-top: 10px;
+}
+
+.agentDetails-view table {
+  width: 100%;
+  border-collapse: collapse; /* Remove spacing between table cells */
+}
+
+.agentDetails-view td {
+  padding: 5px; /* Add padding to table cells */
+  border: none /* Add border to table cells */
+}
+
+.agentDetails-view td:first-child {
+  width: 150px; /* Set width for the first column */
+  font-weight: bold; /* Make the text bold in the first column */
+}
+
+.details-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px; /* Adjust spacing between rows */
+}
+
+.form-row label {
+  flex-basis: 150px; /* Adjust label width */
+  margin-right: 10px; /* Adjust spacing between label and input */
+  text-align: left;
+}
+
+.form-row input,
+.form-row select {
+  flex-grow: 1;
+}
+
+.form-buttons {
+  margin-top: 20px; /* Adjust spacing between form and buttons */
+  text-align: center;
+}
+
+.highlighted{
+  background-color: #ccdff5;
+}
+

@@ -1,0 +1,46 @@
+
+  <div class="manageUser">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title >User Profile</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <form [formGroup]="userProfileForm" class="user-profile-form">
+          <mat-form-field appearance="fill">
+            <mat-label>ID</mat-label>
+            <input matInput formControlName="id">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Contact</mat-label>
+            <input matInput formControlName="contact">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Roles</mat-label>
+            <input matInput formControlName="roles">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Employee ID</mat-label>
+            <input matInput formControlName="employeeid">
+          </mat-form-field>
+        </form>
+      </mat-card-content>
+      <mat-card-actions class="user-profile-actions">
+        <button mat-flat-button color="warn" (click)="toggleEditMode()" class="edit-button">
+          {{ isEditMode ? 'Cancel' : 'Edit' }}
+        </button>
+        <button mat-flat-button color="primary" (click)="saveProfile()" *ngIf="isEditMode" class="save-button">Save</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>

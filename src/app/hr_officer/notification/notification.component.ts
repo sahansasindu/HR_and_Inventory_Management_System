@@ -1,5 +1,7 @@
+
 // notification.component.ts
 import { Component, Input } from '@angular/core';
+
 
 @Component({
   selector: 'app-notification',

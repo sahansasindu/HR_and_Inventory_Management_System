@@ -1,0 +1,77 @@
+<div class="d-flex page__box p-1 mt-0">
+
+  <div class="parallel-div col-9">
+
+    <div class="button-container">
+      <button class="swap-button" (click)="swapMatCart()">
+        <label id="lablevalue">{{ labelValue }}</label>
+        <mat-icon>{{ isAgentReport ? 'arrow_back' : 'arrow_forward' }}</mat-icon>
+      </button>
+
+      <mat-card-actions>
+        <button mat-button>Download as PDF</button>
+      </mat-card-actions>
+    </div>
+
+    <div class="report-management-container" *ngIf="!isAgentReport">
+
+
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Production Reports</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-tab-group>
+            <mat-tab label="Daily">
+
+                <app-daily-production-report></app-daily-production-report>
+
+            </mat-tab>
+            <mat-tab label="Weekly">
+
+              <app-weekly-production-report></app-weekly-production-report>
+
+            </mat-tab>
+            <mat-tab label="Monthly">
+
+              <app-monthly-production-report></app-monthly-production-report>
+
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+
+    </div>
+
+    <div class="report-management-container" *ngIf="isAgentReport">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title>Agent Reports</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-tab-group>
+            <mat-tab label="Daily">
+
+              <app-agent-daily-report></app-agent-daily-report>
+
+            </mat-tab>
+            <mat-tab label="Weekly">
+
+              <app-agent-weekly-report></app-agent-weekly-report>
+
+            </mat-tab>
+            <mat-tab label="Monthly">
+
+            <app-agent-monthly-report></app-agent-monthly-report>
+
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div class="left-div col-3 text-right" id="div3">
+  </div>
+</div>
+
+
