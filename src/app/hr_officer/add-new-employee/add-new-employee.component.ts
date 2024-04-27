@@ -32,10 +32,14 @@ export class AddNewEmployeeComponent {
   }
 
   submitData() {
+    const token = localStorage.getItem('currentUser');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
     const formData = new FormData(); // Create FormData object to send form data including file
 
     // Append form data to FormData object
-    formData.append('employee_id', this.eid);
+    formData.append('employeeid', this.eid);
     formData.append('address', this.address);
     formData.append('company_status', this.cstatus);
     formData.append('contact', this.contactno);
@@ -50,7 +54,7 @@ export class AddNewEmployeeComponent {
     formData.append('sec_id', this.sid);
 
     // Send POST request with FormData
-    this.axiosService.request("POST", "addEmployee", formData,{})
+    this.axiosService.request("POST", "/addEmployee", formData,headers)
       .then(response => {
         console.log("Response from server:", response);
         alert("User details updated successfully!");

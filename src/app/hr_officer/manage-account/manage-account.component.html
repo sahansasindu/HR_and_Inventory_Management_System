@@ -1,24 +1,14 @@
 <div class="d-flex page__box p-1 mt-0">
-  <div class="container mt-4">
-    <h2 class="text-center mb-4">Manage Account</h2>
-    <form>
-      <div class="form-group">
-        <label for="username">Username:</label>
-        <input type="text" class="form-control" id="username" name="username" [(ngModel)]="username">
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="text" class="form-control" id="password" name="password" [(ngModel)]="password">
-      </div>
-      <div class="form-group">
-        <label for="contact">Contact NO:</label>
-        <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="contact">
-      </div>
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input type="email" class="form-control" id="email" name="email" style="margin-bottom: 20px;" [(ngModel)]="email">
-      </div>
-      <button type="submit" class="btn btn-primary" (click)="submitData()">Submit</button>
-    </form>
+
+
+
+
+
+  <div class="parallel-div col-9">
+    <app-manageuserprofile></app-manageuserprofile>
+  </div>
+
+
+  <div class="left-div col-3 text-right" id="div3">
   </div>
 </div>

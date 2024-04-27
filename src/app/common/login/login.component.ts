@@ -17,8 +17,8 @@ export class LoginComponent {
   showPassword: boolean = false;
 
   private routes: { [role in UserRole]?: string } = {
-    "HR_Manager": '/',
-    "Accountant": '/',
+    "HR_Manager": '/hrmcontainer',
+    "Accountant": '/container',
     "Production_Manager": '/productionmanager',
     "Store_Keeper": '/storekeeper'
   };
@@ -46,7 +46,8 @@ export class LoginComponent {
 
     } catch (error) {
 
-      alert("Error Login User Name Or Password Not Match.");
+      alert("not navigate")
+      console.log(error)
       this.inputusername='';
       this.inputpassword='';
     }

@@ -63,6 +63,7 @@ const routes: Routes = [
 
   { path: 'container', component: ContainerComponent, children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+
       { path: 'dashboard', component: DashboardComponent },
       { path: 'addemployee', component:  AddNewEmployeeComponent },
       { path: 'viewemployee', component:  ViewEmployeeComponent },
@@ -73,15 +74,15 @@ const routes: Routes = [
       { path: 'addadvance', component:  AddAdvanceComponent  },
       { path: 'generetesalary', component: GeneratesalaryComponent  },
     //  { path: 'home', component: HomeComponent }, production_copy_dilshan
-     
+
     ]},
 
   { path: 'hrmcontainer', component: HrmContainerComponent, children: [
-      { path: 'hrmdashboard', component: HrmDashboardComponent },
+      { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
 
+      { path: 'hrmdashboard', component: HrmDashboardComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
 
-      { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
     ]},
     {path:'storekeeper',component:ContainerstoreComponent,children:[
       { path: '', redirectTo: 'dashboardstore', pathMatch: 'full' },
@@ -105,7 +106,7 @@ const routes: Routes = [
       {path:'productionmanagerUserprofile',component: ProductionmanageruserprofileComponent},
     ]},
 
-      { path: 'mdc', component: AddBasicSalary },
+  { path: 'mdc', component: AddBasicSalary },
   { path: 'deduction', component: DeductionComponent},
   { path: 'allowance', component:  AllowancesComponent},
   { path: 'add-deduction', component: AddDeductionComponent },

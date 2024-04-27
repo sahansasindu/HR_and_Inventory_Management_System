@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from "@angular/router";
+import {AuthService} from "../../model/authservice/auth.service";
+import {UserService} from "../../service/services/user.service";
 
 @Component({
   selector: 'app-sidemenubarstore',
@@ -7,9 +9,11 @@ import {Router} from "@angular/router";
   styleUrl: './sidemenubarstore.component.css'
 })
 export class SidemenubarstoreComponent {
-  constructor(private router: Router) {} // Inject Router
+  constructor(private router: Router,private authService:AuthService,private userService:UserService) {} // Inject Router
   logout() {
 
+    this.authService.logout();
+    this.userService.clearUser();
     this.router.navigate(['/login']);
 
   }
