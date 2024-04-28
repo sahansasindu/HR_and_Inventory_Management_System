@@ -44,7 +44,7 @@ export class ViewEmployeeComponent implements OnInit {
 
   fetchEmployeeData() {
 
-    this.axiosService.request('GET', '/getEmployee', null, {})
+    this.axiosService.request('GET', '/getEmployee', {}, {})
       .then(response => {
         this.loarddata1 = response.data;
         this.loarddata = response.data;
