@@ -1,1 +1,8 @@
-<p>notificationcom works!</p>
+<div class="notification-box">
+  <div class="time-display" [innerHTML]="currentTime"></div>
+  <button class="clear-btn" (click)="clearNotifications()">Clear Notification</button>
+  <div class="birthday-notifications">
+    <button class="birthday-btn">Today's Birthdays</button>
+    <button class="birthday-btn">Upcoming Birthdays</button>
+  </div>
+</div>

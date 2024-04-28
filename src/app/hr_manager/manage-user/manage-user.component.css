@@ -29,7 +29,7 @@ body {
 
 #div3 {
   margin-left: 3px;
-  background-color: #9d9898;
+  background-color: #cfcdcd;
   border-radius: 2%;
 }
 
@@ -72,19 +72,86 @@ body {
 
   }
 }
-.search-option{
-  margin-top: 20px;
-  border-radius: 1px;
-  width: 800px;
+
+.table-container {
+  overflow-x: auto;
+}
+
+.mat-elevation-z8 {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.table-container {
+
+  max-height: 450px;
+  overflow-y: scroll;
+
+}
+
+.mat-header-row {
+  background-color: #239297;
+  font-weight: bold;
+}
+
+
+.table-container {
+  overflow-x: auto;
 }
 
 
 
 
+.mat-table.mat-header-cell {
+  display: block;
+  max-height: 450px;
+  overflow-y: auto;
+}
 
 
+.mat-cell,
+.mat-header-cell {
+  padding: 8px;
+  min-width: 120px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 
+.container{
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #d1c2c2;
+}
+
+.close-button {
+  position: absolute; /* Absolute position within the parent container */
+  top: 10px; /* Adjust the value as needed */
+  right: 10px; /* Adjust the value as needed */
+  padding: 5px 10px; /* Padding for aesthetics */
+}
+
+.details-container {
+  background-color: #e6f7ff;
+  border: 1px solid #b3d7ff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: auto;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .add-details-container {
+    padding: 10px;
+  }
+
+  .form-buttons button {
+    width: 48%; /* Ensure buttons do not overlap on small screens */
+  }
+}
 
 
 

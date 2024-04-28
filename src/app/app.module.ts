@@ -102,6 +102,7 @@ import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.co
 import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
 import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
 import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
+import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-manage-profile.component';
 
 
 
@@ -182,6 +183,7 @@ import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.componen
     MedicalApproveComponent,
     ManageUserComponent,
     LeaveApproveComponent,
+    HrmManageProfileComponent,
 
 
   ],
