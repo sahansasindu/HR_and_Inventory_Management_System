@@ -20,7 +20,8 @@ export class LeaveApproveComponent {
   }
 
 
-  onViewPdf() {
+  async onViewPdf() {
+
 
   }
 }

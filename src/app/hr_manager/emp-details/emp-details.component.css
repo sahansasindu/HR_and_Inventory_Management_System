@@ -3,7 +3,7 @@ body {
 }
 
 .page__box {
-  background-color: #ffffff;
+
   height: 800px;
   border-radius: 5px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
@@ -40,31 +40,8 @@ body {
   padding: 2px;
 }
 
-.form-group{
-  margin-bottom: 10px;
-  padding-top: 10px;
-  margin-left: 20px;
-}
-.form-group-cont {
-  float: right;
-  margin-right: 120px;
-  padding-left:170px;
-}
-.form-control {
-  width: 120px; /* Adjust width as needed */
-  font-size: 12px;
-  padding: 10px;
-}
 
-.profile-img{
-  padding-top: 5px;
-  border-radius: 50%;
-  margin-left: 5px;
-  align-items: center;
-  img {
-    width: 150px;
-  }
-}
+
 
 /* Media queries */
 
@@ -111,47 +88,37 @@ body {
   margin-left: 35px;
   color: #51b9c0;
 }
-.card {
-  margin-top: 15px;
-  width: 210px; /* Adjust width as needed */
-  height: 500px;
+
+.mat-elevation-z8 {
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  margin-left: 35px;
-}
-.prof-cont{
-  margin-top: 20px;
-  padding-bottom: 30px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
 
 }
 
-.card-content-per {
-  margin-left: 500px;
-  margin-top: 10px;
+.mat-table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.card-content-per h4 {
-  margin-bottom: 10px;
+.mat-table th.mat-header-cell {
+  background-color: #34a1ea !important; /* Header cell background color */
+  font-weight: bold;
+  padding: 12px;
+  text-align: left;
 }
 
-.card-content-per label {
-  margin-bottom: 5px;
+.mat-table td.mat-cell,
+.mat-table th.mat-header-cell {
+  border: 1px solid #a14d4d !important; /* Border color for all cells */
+  padding: 8px;
 }
 
-.card-content-per input {
-  margin-bottom: 10px;
+.mat-table tr:nth-child(even) {
+  background-color: #baa4a4 !important; /* Alternate row background color */
 }
-.container {
-  
+
+.mat-table tr:hover {
+  background-color: #195da1 !important; /* Hover color for rows */
 }
-.card2{
-  width: 300px;
-  float: right;
-  margin-bottom: 15px;
-}
-.container2 {
-  margin-left: auto; /* Pushes the container to the right */
-  margin-right: 35px; /* Adjust spacing as needed */
-}
+
 
