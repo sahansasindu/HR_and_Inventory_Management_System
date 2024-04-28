@@ -98,6 +98,10 @@ import { AgentDailyReportComponent } from './production_manager/productionsectio
 import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
 import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
 import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
+import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
+import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
+import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
+import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
 
 
 
@@ -174,6 +178,10 @@ import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
     AgentDailyReportComponent,
     AgentWeeklyReportComponent,
     AgentMonthlyReportComponent,
+    EmpDetailsComponent,
+    MedicalApproveComponent,
+    ManageUserComponent,
+    LeaveApproveComponent,
 
 
   ],

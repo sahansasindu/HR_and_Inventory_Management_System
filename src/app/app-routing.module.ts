@@ -55,6 +55,10 @@ import {
 import {
   StorekeeperuserprfileComponent
 } from "./store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component";
+import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
+import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
+import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
+import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -82,6 +86,12 @@ const routes: Routes = [
 
       { path: 'hrmdashboard', component: HrmDashboardComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
+      { path: '', redirectTo: 'hrm-dashboard', pathMatch: 'full' },
+      { path: 'hrm-dashboard', component: HrmDashboardComponent },
+      {path:'emp-details',component: EmpDetailsComponent},
+      {path:'medical-approve',component: MedicalApproveComponent},
+      {path:'manage-user',component: ManageUserComponent},
+      {path:'leave-approve',component: LeaveApproveComponent},
 
     ]},
     {path:'storekeeper',component:ContainerstoreComponent,children:[
