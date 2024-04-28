@@ -28,7 +28,6 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
-import { HrmNotificationComponent } from './hr_manager/hrm-notification/hrm-notification.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
 import {MatTableModule} from '@angular/material/table';
@@ -59,7 +58,6 @@ import { HrmUpdateFormComponent } from './hr_manager/hrm-update-form/hrm-update-
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
-    HrmNotificationComponent,
     HrmLeaveAndMedicalComponent,
     HrmAttendanceComponent,
     HrmUpdateEmployeeDetailsComponent,

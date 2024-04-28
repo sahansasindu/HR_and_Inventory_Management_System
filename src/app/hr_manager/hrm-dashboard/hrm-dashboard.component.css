@@ -1,6 +1,97 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 body {
+  background-color: #f5f5f5;
   font-family: Arial, sans-serif;
 }
+
+h2{
+  /*text-align: center;*/
+  color: #5E4BD7;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.card-content {
+  padding: 15px;
+}
+
+.card-content h5 {
+  font-family: 'Source Serif Pro', serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  /*margin-bottom: 10px;*/
+  color: #5E4BD7;
+}
+
+.card-content p {
+  text-align: center;
+  color: #000000;
+  font-weight: bold;
+  padding-top: 13px;
+  font-size: 20px;
+}
+
+.logo {
+  text-align: center;
+  padding: 2.6rem 1rem;
+  img {
+    width: 50px;
+  }
+}
+
+.card {
+  width: 240px;
+  height: 100px;
+  margin: 15px;
+  border-radius: 10px;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #66DCF6;
+  border: 2px solid #000000;
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 70%;
+    height: 40%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .card {
+    width: 200px;
+    height: 100px;
+  }
+}
+/* Path: src/app/hr_manager/hrm-notification/hrm-notification.component.html */
+
+
+.btn-1{
+  background: none;
+  border: none;
+  width: 250px;
+  height: 150px;
+  margin-bottom: 15px;
+}
+
 
 .page__box {
   background-color: #ffffff;
@@ -120,13 +211,59 @@ body {
   }
 }
 
-/*.app-employee-chart {*/
-/*  align-items: center;*/
-/*  height: 100%;*/
+.mat-elevation-z8 {
+  width: 100%;
+  align-items: center;
+  background-color: #afe7f8;
+  margin-left: 5px;
+  margin-bottom: 50px;
+}
+
+.mat-mdc-row .mat-mdc-cell {
+  border-bottom: 1px solid transparent;
+  border-top: 1px solid transparent;
+  cursor: pointer;
+  padding: 16px;
+  align-items: center;
+  /*display: flex;*/
+  justify-content: space-around;
+}
+
+.mat-mdc-row:hover .mat-mdc-cell {
+  border-color: currentColor;
+}
+
+.demo-row-is-clicked {
+  font-weight: bold;
+}
+
+.backbtn{
+  background-color: #5E4BD7;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-left: 10px;
+  margin-bottom: 10px;
+}
+
+/*mat-paginator {*/
+/*  background-color: rgba(0, 230, 244, 0.76);*/
+/*  color: #ffffff;*/
 /*  width: 100%;*/
+/*  margin-left: 5px;*/
+/*  border-radius: 5px;*/
+/*  font-size: 15px;*/
 /*}*/
 
-/*.mat-card-content {*/
-/*  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);*/
-/*  background-color: #00acea;*/
-/*}*/
+mat-form-field {
+  width: 98%;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+th{
+  font-weight: bold;
+}
+

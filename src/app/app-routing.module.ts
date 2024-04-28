@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: 'container', component: ContainerComponent, children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      // { path: 'hrm-update-form/:id', component: HrmUpdateFormComponent },
     ]},
 
 

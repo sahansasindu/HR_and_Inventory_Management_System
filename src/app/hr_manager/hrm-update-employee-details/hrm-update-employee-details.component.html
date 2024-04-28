@@ -3,6 +3,8 @@
 
   <div class="parallel-div col-9">
 
+    <br><h2>Update Employee Details</h2><br>
+
       <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
         <input matInput placeholder="Search...">
@@ -10,6 +12,8 @@
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
+
+    <div class="container" *ngIf="!isUpdateForm">
 
       <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
 
@@ -68,10 +72,17 @@
           <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
         </ng-container>
 
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="swaptoUpdateForm()">Update</button> </td>
+        </ng-container>
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="navigateToUpdateForm(row.employeeId)"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </mat-table>
       <br>
+
+    </div>
 
 <!--        <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
 <!--                       showFirstLastButtons-->

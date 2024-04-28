@@ -3,7 +3,7 @@
 
   <div class="parallel-div col-9">
 
-
+    <h2>Employee Attendance</h2><br>
       <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
         <input matInput placeholder="Search...">
@@ -40,20 +40,20 @@
           <td mat-cell *matCellDef="let element"> {{element.outTime}} </td>
         </ng-container>
 
-        <ng-container matColumnDef="present">
-          <th mat-header-cell *matHeaderCellDef> Present </th>
-          <td mat-cell *matCellDef="let element"> {{element.present}} </td>
-        </ng-container>
+<!--        <ng-container matColumnDef="present">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Present </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.present}} </td>-->
+<!--        </ng-container>-->
 
-        <ng-container matColumnDef="absent">
-          <th mat-header-cell *matHeaderCellDef> Absent </th>
-          <td mat-cell *matCellDef="let element"> {{element.absent}} </td>
-        </ng-container>
+<!--        <ng-container matColumnDef="absent">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Absent </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.absent}} </td>-->
+<!--        </ng-container>-->
 
-        <ng-container matColumnDef="late">
-          <th mat-header-cell *matHeaderCellDef> Late </th>
-          <td mat-cell *matCellDef="let element"> {{element.late}} </td>
-        </ng-container>
+<!--        <ng-container matColumnDef="late">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Late </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.late}} </td>-->
+<!--        </ng-container>-->
 
         <ng-container matColumnDef="attendanceStatus">
           <th mat-header-cell *matHeaderCellDef> Attendance Status </th>

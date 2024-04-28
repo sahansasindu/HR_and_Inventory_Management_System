@@ -1,3 +1,10 @@
+h2{
+  /*text-align: center;*/
+  color: #5E4BD7;
+  margin-top: 5px;
+  margin-left: 10px;
+}
+
 
 #div3 {
   background-color: #b5abab;
@@ -46,4 +53,8 @@ mat-form-field {
   width: 97%;
   margin-bottom: 10px;
   margin-left: 10px;
+}
+
+th{
+  font-weight: bold;
 }

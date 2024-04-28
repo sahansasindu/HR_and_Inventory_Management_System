@@ -7,8 +7,10 @@ import { Router } from '@angular/router';
   styleUrl: './hrm-update-employee-details.component.css'
 })
 export class HrmUpdateEmployeeDetailsComponent{
+
+
   sideBarOpen = true;
-  displayedColumns: string[] = ['employeeId', 'employeeName', 'department', 'section', 'occupation'];
+  displayedColumns: string[] = ['employeeId', 'employeeName', 'department', 'section', 'occupation','actions'];
 
   // displayedColumns: string[] = ['employeeId', 'employeeName', 'age', 'address', 'dateofbirth', 'gender', 'contactno', 'marriedOrunmarried', 'department', 'section', 'occupation'];
   dataSource =ELEMENT_DATA;
@@ -18,15 +20,20 @@ export class HrmUpdateEmployeeDetailsComponent{
   //
   // ngAfterViewInit() {
   //   this.dataSource.paginator = this.paginator;
-  //
   // }
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  navigateToUpdateForm(employeeId: number) {
-    this.router.navigate(['/hrmupdateform', employeeId]);
+  // navigateToUpdateForm(employeeId: number) {
+  //   this.router.navigate(['/hrmupdateform', employeeId]);
+  // }
+
+  isTotalEmployees: boolean =false;
+
+  swaptoUpdateForm() {
+    this.isTotalEmployees=!this.isTotalEmployees;
   }
 
 }
@@ -43,10 +50,11 @@ export interface PeriodicElement {
   department: string;
   section: string;
   occupation: string;
+  actions: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {employeeId: 1, employeeName: 'Kamal', department: 'IT', section: 'Software', occupation: 'Software Engineer'},
+  {employeeId: 1, employeeName: 'Kamal', department: 'IT', section: 'Software', occupation: 'Software Engineer', actions: 'Update'},
   // {employeeId: 1, employeeName: 'Kamal', age: 23 , address: 'Kandy', dateofbirth: '####', gender: 'Male' , contactno: '0701234567', marriedOrunmarried: 'Unmarried', department: 'IT', section: 'Software', occupation: 'Software Engineer'},
   // {employeeId: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   // {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},

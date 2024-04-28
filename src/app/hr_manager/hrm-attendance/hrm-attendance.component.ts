@@ -1,3 +1,5 @@
+// import {ChangeDetectorRef, Component} from '@angular/core';
+// import {AxiosService} from "../../axios.service";
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class HrmAttendanceComponent {
   sideBarOpen = true;
-  displayedColumns: string[] = ['date', 'employeeId', 'employeeName', 'inTime', 'outTime', 'present', 'absent', 'late', 'attendanceStatus'];
+  displayedColumns: string[] = ['date', 'employeeId', 'employeeName', 'inTime', 'outTime', 'attendanceStatus'];
   dataSource = ELEMENT_DATA;
 
 
@@ -23,14 +25,14 @@ export interface PeriodicElement {
   employeeName: string;
   inTime: string;
   outTime: string;
-  present: string;
-  absent: string;
-  late: string;
+  // present: string;
+  // absent: string;
+  // late: string;
   attendanceStatus: string;
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {date: '2024-04-10', employeeId: 1, employeeName: 'Kamal', inTime: '08:00 AM' , outTime: '04:00 PM', present: '####', absent: '####' , late: '####', attendanceStatus: '####'},
+  {date: '2024-04-10', employeeId: 1, employeeName: 'Kamal', inTime: '08:00 AM' , outTime: '04:00 PM', attendanceStatus: '####'},
   // {employeeId: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   // {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   // {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
