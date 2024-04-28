@@ -1,0 +1,157 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page__box {
+  background-color: #ffffff;
+  height: 700px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1%;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+
+#div3 {
+  margin-left: 2px;
+  background-color: #d2d2d2;
+  border: 2px solid #d2d2d2;
+  border-radius: 2%;
+}
+
+
+/* Media queries */
+
+@media (max-width: 992px) {
+  .parallel-div {
+    flex-direction: column;
+  }
+
+  .custom-div,
+  .left-div {
+    width: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+    padding-bottom: 485px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    height: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__box {
+    height: auto;
+  }
+
+  #div1,
+  #div2,
+  #div3 {
+    height: auto;
+  }
+}
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 40px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width: 700px;
+}
+
+.issue-management-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #ffffff;
+}
+
+@media (max-width: 992px) {
+  .issue-management-container {
+    padding: 10px;
+  }
+
+  .mat-form-field {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .issue-management-container {
+    max-width: 100%;
+  }
+}
+
+
+.issue-chart{
+  position: relative;
+  max-width: 900px;
+}
+@media (max-width: 992px) {
+  .issue-chart {
+    padding: 10px;
+  }
+
+}
+
+@media (max-width: 768px) {
+  .button-container {
+    max-width: 100%;
+  }
+}
+@media (max-width: 768px) {
+  .button-container {
+    max-width: 100%;
+  }
+}
+
+
+.issue-chart{
+  position: relative;
+  max-width: 860px;
+  margin-top: 60px;
+}
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+.form-buttons {
+  margin-top: 20px; /* Adjust spacing between form and buttons */
+  text-align: center;
+}
+
+.form-buttons button {
+  margin-top: 20px ;
+  margin-right: 25px;
+  text-align: center;
+}

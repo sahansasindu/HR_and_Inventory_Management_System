@@ -1,0 +1,248 @@
+<div class="d-flex page__box p-1 mt-0">
+
+  <div class="parallel-div col-9">
+
+    <div class="milkproduction-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible && !isProductionVisible">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Daily Finished</button>
+        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Changes</button>
+        <button mat-raised-button color="primary" (click)="toggleProdction()">Daily Production Issues</button>
+      </div>
+      <div class="mat-table-container">
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+          <!-- Empty Unit ID Column -->
+          <ng-container matColumnDef="finished_id">
+            <mat-header-cell *matHeaderCellDef> Finished ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.finished_id }} </mat-cell>
+          </ng-container>
+
+          <!-- Empty Bottles Column -->
+          <ng-container matColumnDef="amount">
+            <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
+          </ng-container>
+
+          <!-- Damage Bottles Column -->
+          <ng-container matColumnDef="batch_code">
+            <mat-header-cell *matHeaderCellDef> Batch Code </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.batch_code }} </mat-cell>
+          </ng-container>
+
+          <!-- For Washing Column -->
+          <ng-container matColumnDef="finished_status">
+            <mat-header-cell *matHeaderCellDef> Finished Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.finished_status }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Date Column -->
+          <ng-container matColumnDef="submit_date">
+            <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
+          </ng-container>
+
+          <!-- Submit Time Column -->
+          <ng-container matColumnDef="submit_time">
+            <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.submit_time }} </mat-cell>
+          </ng-container>
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [class.highlighted]="row === selectedRow"
+                   (click)="selectRow(row)"></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+
+    <!-- show the add details form -->
+    <div class="add-details-container" *ngIf="isAddDetailsVisible">
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleAddDetails()">Close</button>
+
+      <!-- Add Finished bottle details -->
+      <form class="details-form">
+        <h2>Add Daily Finished Details</h2>
+
+        <label for="add_finishedBottles">Number Of Total Finished Milk Bottles:</label>
+        <input type="number" id="add_finishedBottles" name="add_finishedBottles" required>
+
+        <label for="add_batch_code">Batch Code:</label>
+        <input type="text" id="add_batch_code" name="add_batch_code" required>
+
+        <label for="add_status">Finished Status</label>
+        <select id="add_status" name="add_status" required>
+
+          <option value="Good">Good</option>
+          <option value="Bad">Bad</option>
+
+        </select>
+
+        <label for="add_date">Date:</label>
+        <input type="date" id="add_date" name="add_date" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="submitDailyFinished()">Submit</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- show the update details form-->
+    <div class="update-container" *ngIf="isUpdateVisible">
+      <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
+
+      <!-- The finished goods update Chnages  details form-->
+      <form class="details-form" [formGroup]="updateForm">
+        <h2>Update Changes Daily Finished Details</h2>
+
+        <label for="finished_id">Finished ID:</label>
+        <input type="number" id="finished_id" formControlName="finished_id" required>
+
+        <label for="amount">Number Of Total Finished Milk Bottles:</label>
+        <input type="number" id="amount" formControlName="amount" required>
+
+        <label for="batch_code">Batch Code:</label>
+        <input type="text" id="batch_code" formControlName="batch_code" required>
+
+        <label for="finished_status">Finished Status</label>
+        <select id="finished_status" formControlName="finished_status" required>
+
+          <option value="Good">Good</option>
+          <option value="Bad">Bad</option>
+
+        </select>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="finishedupdateChanges()">Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- this section is created for  daily production issues by employees -->
+    <div class="production-container" *ngIf="isProductionVisible">
+
+      <div *ngIf="!addEmployeeIssueDetailsVisible && !updatechangeIsuesVisible">
+        <button mat-raised-button class="close-button" color="warn" (click)="toggleProdction()"> <mat-icon>arrow_back</mat-icon> </button>
+        <div class="button-container">
+          <button mat-raised-button color="primary" (click)="toggleProdctionIssuAdd()">Add Daily Issues</button>
+          <button mat-raised-button color="primary" (click)="toggleProdctionChnages()">Update Changes</button>
+        </div>
+
+        <div class="mat-table-container-producton">
+
+          <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
+
+            <!-- Issue ID -->
+            <ng-container matColumnDef="DailyIssueID">
+              <mat-header-cell *matHeaderCellDef> Daily Issue ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.DailyIssueID }} </mat-cell>
+            </ng-container>
+
+            <!-- Number Odf Damage Issue -->
+            <ng-container matColumnDef="damage_Amount_Issue">
+              <mat-header-cell *matHeaderCellDef> Damage Amount </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.damage_Amount_Issue }} </mat-cell>
+            </ng-container>
+
+            <!-- Issue Name -->
+            <ng-container matColumnDef="issue_Name">
+              <mat-header-cell *matHeaderCellDef> Issue Name </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.issue_Name }} </mat-cell>
+            </ng-container>
+
+            <!-- Employee ID -->
+            <ng-container matColumnDef="IssueEmployeeID">
+              <mat-header-cell *matHeaderCellDef> Employee ID </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.IssueEmployeeID }} </mat-cell>
+            </ng-container>
+
+            <!-- Row Definitions -->
+            <mat-header-row *matHeaderRowDef="displayedColumns2" class="mat-header-row"></mat-header-row>
+            <mat-row *matRowDef="let row2; columns: displayedColumns2;"
+                     [class.highlighted]="row2 === selectedRow2"
+                     (click)="selectRow2(row2)"></mat-row>
+
+          </mat-table>
+        </div>
+      </div>
+
+      <!-- this section is created for Add daily production issues by employees -->
+      <div *ngIf="addEmployeeIssueDetailsVisible">
+        <button mat-raised-button class="close-button" color="warn" (click)="toggleProdctionIssuAdd()">Close</button>
+
+        <!-- Add Finished bottle details -->
+        <form class="details-form">
+          <h2>Add Daily Issues By Employees</h2>
+
+          <label for="inputIssedamage">Number Of Total Damage Milk Bottles:</label>
+          <input type="number" id="inputIssedamage" name="inputIssedamage" required>
+
+
+          <label for="inputIssuename">Select Issue Type:</label>
+          <select id="inputIssuename" name="inputIssuename" required>
+
+            <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.text }}</option>
+
+          </select>
+
+          <label for="inputEmpID">Employee ID:</label>
+          <input type="text" id="inputEmpID" name="inputEmpID" required>
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- this section is created for update changes daily production issues by employees -->
+      <div *ngIf="updatechangeIsuesVisible">
+        <button mat-raised-button class="close-button" color="warn" (click)="toggleProdctionChnages()">Close</button>
+
+        <!-- Add Finished bottle details -->
+        <form class="details-form">
+          <h2>Update Changes Daily Issues</h2>
+
+          <label for="updateIssedamage">Number Of Total Damage Milk Bottles:</label>
+          <input type="number" id="updateIssedamage" name="updateIssedamage" required>
+
+
+          <label for="updateIssuename">Select Issue Type:</label>
+          <select id="updateIssuename" name="updateIssuename" required>
+
+            <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.text }}</option>
+
+          </select>
+
+          <label for="UpdateEmpID">Employee ID:</label>
+          <input type="text" id="UpdateEmpID" name="UpdateEmpID" required>
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="left-div col-3 text-right" id="div3"></div>
+
+</div>
+
+
+

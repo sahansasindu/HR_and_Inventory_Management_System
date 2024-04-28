@@ -1,0 +1,20 @@
+<div>
+  <app-model-basicsalaryform
+    [basicamount]="basicsalaryData.basic_amount"
+    [br1]="basicsalaryData.br_1"
+    [br2]="basicsalaryData.br_2"
+    [depName]="basicsalaryData.department_name"
+    [gpass_amount]="basicsalaryData.get_pass_amount"
+    [Initial_days]="basicsalaryData.initial_days"
+    [nopay_amount]="basicsalaryData.initial_nopay_amount"
+    [job_role]="basicsalaryData.job_role"
+    [ot_amount]="basicsalaryData.ot_amount"
+    [salary_type]="basicsalaryData.salary_type"
+    [section_name]="basicsalaryData.section_name"
+    [subsistant]="basicsalaryData.subsistant"
+    [headerTitle]="'Update Basic Salary'"
+    (formSubmit)="handleFormSubmit($event)"
+    (backAction)="onBack()">
+  </app-model-basicsalaryform>
+</div>
+``

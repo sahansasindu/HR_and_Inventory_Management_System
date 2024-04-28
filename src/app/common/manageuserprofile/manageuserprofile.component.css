@@ -1,0 +1,88 @@
+
+
+
+  .manageUser {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center content vertically */
+    background: linear-gradient(160deg, #00c6ff 0%, #6fa9af 100%);
+    border-radius: 10px;
+    padding:20px 10px 20px 10px;
+  }
+
+.user-profile-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+}
+
+.mat-card {
+  margin: 20px; /* Adds some space around the card */
+  overflow: hidden;
+  width: auto; /* Allows the card to size to the width of its content up to max-width */
+}
+
+.mat-card-header {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.mat-card-title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.mat-form-field {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.mat-form-field.mat-focused .mat-form-field-label {
+  color: #3f51b5;
+}
+.manageUser.mat-label{
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+input.mat-input-element {
+  font-size: 14px;
+}
+
+.user-profile-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  padding-top: 10px;
+}
+
+button.mat-flat-button {
+  padding: 6px 12px;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+/* Custom button styles for hover effect */
+button.mat-flat-button:hover {
+  opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .user-profile-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  button.mat-flat-button {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .edit-button, .save-button {
+    margin-top: 16px;
+  }
+}

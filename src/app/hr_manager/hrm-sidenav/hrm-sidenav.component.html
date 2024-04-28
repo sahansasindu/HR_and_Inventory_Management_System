@@ -1,3 +1,4 @@
+
 <mat-nav-list>
   <div class="logo py-0">
     <img src="../../../assets/images/logo.png" alt="Company Logo" />
@@ -21,10 +22,15 @@
   </a>
   <a mat-list-item> <mat-icon>task</mat-icon><b class="manu"> Leave Approval </b> </a>
   <a mat-list-item> <mat-icon>note_add</mat-icon><b class="manu"> Medical Approval </b></a>
-  <a mat-list-item> <mat-icon>currency_exchange</mat-icon><b class="manu"> Employee Salary </b> </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./esc']">
+    <mat-icon>currency_exchange</mat-icon> Employee Salary
+  </a>
   <a mat-list-item> <mat-icon>transfer_within_a_station</mat-icon><b class="manu"> Manage System Users </b> </a>
   <a mat-list-item> <mat-icon>manage_accounts</mat-icon><b class="manu">  Manage User Accounts </b> </a>
 
     <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+
+
+
 
 </mat-nav-list>

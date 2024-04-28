@@ -1,0 +1,42 @@
+.container{
+  background-color: #baced2;
+  width: 50%;
+}
+
+h2{
+
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+
+label{
+  padding-top: 15px;
+}
+.page__box {
+  background-color: #eae8e8;
+  border-radius: 8px;
+  padding: 20px;
+  height: 900px;
+
+}
+#stype{
+
+  margin-bottom: 17px;
+
+}
+/* Custom CSS for left-aligning the submit button */
+.form-align-left {
+  display: flex;
+  justify-content: flex-start;
+}
+
+/* Optional: Add margin to the button for spacing */
+.form-align-left .btn {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+.form-align-left .btn {
+  margin-right: 10px; /* Adjust as needed */
+}
+
+

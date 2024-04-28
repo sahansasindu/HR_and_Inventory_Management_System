@@ -1,0 +1,233 @@
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+.page__box {
+  background-color: #ffffff;
+  height: 700px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  color: #495057;
+}
+
+.parallel-div {
+  display: flex;
+  flex-direction: column;
+  background-color: rgb(255, 255, 255);
+  border: 2px solid rgb(255, 255, 255);
+  border-radius: 1%;
+}
+
+.custom-div {
+  width: 100%;
+  margin-bottom: 1px;
+}
+
+
+#div3 {
+  margin-left: 2px;
+  background-color: #d2d2d2;
+  border: 2px solid #d2d2d2;
+  border-radius: 2%;
+}
+
+
+
+
+
+/* Media queries */
+
+@media (max-width: 992px) {
+  .parallel-div {
+    flex-direction: column;
+  }
+
+  .custom-div,
+  .left-div {
+    width: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+    padding-bottom: 485px;
+  }
+}
+
+@media (max-width: 768px) {
+  .left-div {
+    height: 100%;
+  }
+
+  #div2 {
+    height: 480px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page__box {
+    height: auto;
+  }
+
+  #div1,
+  #div2,
+  #div3 {
+    height: auto;
+  }
+}
+.milkproduction-container {
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+.mat-form-field {
+  width: 50%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width: 700px;
+}
+
+
+.mat-table-container {
+
+  max-height: 450px; /* Adjust this value to the desired table body height */
+  overflow-y: scroll;
+}
+
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+
+.mat-table {
+  display: block;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 8px;
+  min-width: 120px; /* Or your preferred min-width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make sure to set a min-width for the table container equal to the total width of all columns */
+.mat-table-container {
+  min-width: 450px; /* This is just an example; calculate the total width of your columns */
+}
+
+.highlighted{
+  background-color: #ccdff5;
+}
+.add-details-container {
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+}
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
+}
+.details-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-form h2 {
+  color: #004d99; /* Heading color similar to the image */
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+.details-form label {
+  margin-top: 10px;
+  color: #005b99; /* Label color similar to the image */
+}
+
+.details-form input[type="number"],
+.details-form input[type="date"],
+.details-form input[type="text"],
+.details-form select{
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #b3d7ff; /* Input border color similar to the image */
+  border-radius: 5px;
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: space-between; /* This will place one button at each end */
+  gap: 15px; /* This adds a gap between the buttons */
+  margin-top: 20px;
+}
+
+/* If you want buttons to have the same width */
+.form-buttons button {
+  flex: 1; /* This will make both buttons take up equal space within the container */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .add-details-container {
+    padding: 10px;
+  }
+
+  .form-buttons button {
+    width: 48%; /* Ensure buttons do not overlap on small screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .details-form input[type="number"],
+  .details-form input[type="date"] {
+    width: 100%; /* Ensure inputs are full width on small screens */
+  }
+}
+
+.update-container{
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+}
+
+.production-container{
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+
+}
+.mat-table-container-producton {
+  min-width: 600px; /* This is just an example; calculate the total width of your columns */
+}
+.mat-table-container-producton {
+
+  max-height: 450px; /* Adjust this value to the desired table body height */
+  overflow-y: scroll;
+}

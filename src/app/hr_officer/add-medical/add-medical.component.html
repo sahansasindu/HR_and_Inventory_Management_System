@@ -1,0 +1,86 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="show()">ADD MEDICAL</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show2()">VIEW MEDICAL STATE</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible1">
+  <div class="container">
+    <h2>Employee Medical Form</h2>
+    <form (ngSubmit)="submitData()" enctype="multipart/form-data" >
+      <div class="form-group">
+        <label for="empId">Employee ID:</label>
+        <input type="text" class="form-control" id="empId" name="empId" >
+      </div>
+      <div class="form-group">
+        <label for="submitDate">Submit Date:</label>
+        <input type="date" class="form-control" id="submitDate" name="submitDate" >
+      </div>
+      <div class="form-group">
+        <label for="medicalStatus">Medical Status:</label>
+        <select class="form-control" id="medicalStatus" name="medicalStatus" >
+          <option value="clear">Clear</option>
+          <option value="pending">Pending</option>
+          <option value="unfit">Unfit</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="medicalReport">Medical Report (Photo):</label>
+        <input type="file" id="medicalReport" name="medicalReport"  (change)="handleFileInput($event)" style="display: none;" #fileInput >
+      </div>
+      <button type="button" class="btn btn-primary" (click)="fileInput.click()">Choose File</button><br><br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">View Medical State</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <div class="search-bar d-flex align-items-center">
+          <b>Search details :</b>
+          <div class="form-group">
+
+            <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Emp id</td>
+            <td>Submit date</td>
+            <td>Medical state</td>
+
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of loandata">
+            <td>{{ item.emp_id}}</td>
+            <td>{{ item.submit_date | date: 'yyyy-MM-dd HH:mm:ss' }}</td>
+            <td>{{ item.medical_status }}</td>
+
+
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

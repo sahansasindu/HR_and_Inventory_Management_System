@@ -1,0 +1,28 @@
+<mat-nav-list>
+  <div class="logo py-0">
+    <img src="../../../assets/images/logo.png" alt="Company Logo" />
+  </div>
+  <mat-divider></mat-divider>
+  <h2 class="mt-2">Storekeeper</h2>
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./dashboardstore']">
+    <mat-icon>dashboard</mat-icon> Dashboard
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emptysection']">
+    <mat-icon>add_box</mat-icon> Empty Section
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./washingsection']">
+    <mat-icon>add_box</mat-icon> Wash Bottle Section
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./milkproductionsection']">
+    <mat-icon>add_box</mat-icon> Production Milk
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./loardingsection']">
+    <mat-icon>local_shipping</mat-icon> Loading Section
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./storekeeperUserprofile']">
+    <mat-icon>manage_accounts</mat-icon> Manage Profile
+  </a>
+
+  <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+</mat-nav-list>
