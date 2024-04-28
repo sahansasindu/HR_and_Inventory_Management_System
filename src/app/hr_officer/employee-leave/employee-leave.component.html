@@ -1,0 +1,197 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="show()">ADD LEAVE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show2()">ADD GATEPASS</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show3()">VIEW LEAVE</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show4()">VIEW GATEPASS</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!------------------------------------------------------------------------------------------>
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible1">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Leave Application Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="empId">Employee ID:</label>
+        <input type="text" class="form-control" id="empId" name="empId" [(ngModel)]="empid">
+      </div>
+      <div class="form-group">
+        <label for="startTime">Start Time:</label>
+        <input type="date" class="form-control" id="startTime" name="startTime" [(ngModel)]="stime">
+      </div>
+      <div class="form-group">
+        <label for="endTime">End Time:</label>
+        <input type="date" class="form-control" id="endTime" name="endTime" [(ngModel)]="endtime">
+      </div>
+      <div class="form-group">
+        <label for="leaveType">Leave Type:</label>
+        <select class="form-control" id="leaveType" name="leaveType" [(ngModel)]="ltype">
+          <option value="annual">Annual Leave</option>
+          <option value="sick">Sick Leave</option>
+          <option value="unpaid">Unpaid Leave</option>
+          <!-- Add more options as needed -->
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason:</label>
+        <textarea class="form-control" id="reason" name="reason" rows="3" [(ngModel)]="reason"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select class="form-control" id="status" name="status" style="margin-bottom: 20px;" [(ngModel)]="astatus">
+          <option value="pending">Pending</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData()">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">Gate Pass Form</h2>
+    <form>
+      <div class="form-group">
+        <label for="empId">Employee ID:</label>
+        <input type="text" class="form-control" id="empId2" name="empId" [(ngModel)]="gempid" >
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" class="form-control" id="date" name="date" [(ngModel)]="date">
+      </div>
+      <div class="form-group">
+        <label for="inTime">In Time:</label>
+        <input type="time" class="form-control" id="inTime" name="inTime" style="margin-bottom: 20px;" [(ngModel)]="intime" (ngModelChange)="onTimeChange('in', $event)">
+      </div>
+
+      <div class="form-group">
+        <label for="outTime">Out Time:</label>
+        <input type="time" class="form-control" id="outTime" name="outTime" style="margin-bottom: 20px;" [(ngModel)]="outtime" (ngModelChange)="onTimeChange('out', $event)">
+      </div>
+      <div class="form-group">
+        <label for="reason">Reason:</label>
+        <textarea class="form-control" id="reason2" name="reason" rows="3" [(ngModel)]="greason"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="status">Status:</label>
+        <select class="form-control" id="status2" name="status" style="margin-bottom: 20px;" [(ngModel)]="gstate">
+          <option value="present">Pending</option>
+        </select>
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData2()">Submit</button>
+    </form>
+  </div>
+
+</div>
+
+  <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+  <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">View Advance State</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Emp ID</td>
+            <td>Start Date</td>
+            <td>End Date</td>
+            <td>Leave Type</td>
+            <td>Reason</td>
+            <td>State</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of loarddata1">
+            <td>{{ item.emp_id }}</td>
+            <td>{{ item.start_time }}</td>
+            <td>{{ item.end_time }}</td>
+            <td>{{ item.leave_type}}</td>
+            <td>{{ item.reson}}</td>
+            <td>{{ item.status}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+  <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+  <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
+    <div class="card" style="width:100%">
+      <h3 class="m-3 text-center">GATE PASS STATE</h3>
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="search-bar d-flex align-items-center">
+          <b>Search details :</b>
+          <div class="form-group">
+            <input type="text" class="form-control" id="empid" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          </div>
+        </div>
+
+      </div>
+      <div class="card-body">
+        <!-- Existing Table -->
+        <div class="card-body">
+          <!-- Existing Table -->
+          <table datatable class="table table-bordered">
+            <thead class="bg-dark text-white">
+            <tr>
+              <td>Emp ID</td>
+              <td>Date</td>
+              <td>Out Time</td>
+              <td>In Time</td>
+              <td>Reason</td>
+              <td>Status</td>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let item of  loarddata">
+              <td>{{ item.emp_id }}</td>
+              <td>{{ item.date | date: 'yyyy-MM-dd'  }}</td>
+              <td>{{ item.out_time }}</td>
+              <td>{{ item.in_time}}</td>
+              <td>{{ item.reson}}</td>
+              <td>{{ item.status}}</td>
+
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

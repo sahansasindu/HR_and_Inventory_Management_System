@@ -18,13 +18,14 @@
         <div class="mb-5 row">
           <label for="username" class="col-sm-3 col-form-label"><b>Username:</b></label>
           <div class="col-sm-9">
-            <input type="text" id="username" name="username"[(ngModel)]="inputusername" class="form-control" [ngModelOptions]="{standalone: true}" placeholder="Enter your username">
+            <input type="text" id="username" name="username" [(ngModel)]="inputusername" class="form-control" [ngModelOptions]="{standalone: true}" placeholder="Enter your username">
           </div>
 
         </div>
         <div class="mb-4 row">
           <label for="username" class="col-sm-3 col-form-label"><b>Password:</b></label>
           <div class="col-sm-9">
+
             <input type="{{ showPassword ? 'text' : 'password' }}" id="password" name="password" [(ngModel)]="inputpassword" class="form-control" placeholder="Enter your password">
             <!-- Checkbox to toggle password visibility -->
             <input type="checkbox" id="showPasswordCheckbox"  (change)="togglePasswordVisibility()">
@@ -76,4 +77,3 @@
     </div>
   </div>
 </div>
-

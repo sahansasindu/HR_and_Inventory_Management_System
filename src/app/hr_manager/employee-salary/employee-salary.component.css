@@ -1,0 +1,102 @@
+/* styles.css */
+
+@import "../hrm-dashboard/hrm-dashboard.component.css";
+
+/* Customize card background and border */
+.card {
+  background-color: #85b5cc;
+  border: 1px solid #000000;
+  border-radius: 30px;
+
+  /* Center the card */
+  display: flex;
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+}
+
+/* Customize card body padding, width, and height */
+.card-body {
+  width: 80%; /* Full width for better responsiveness */
+  height: 250px; /* Change height as needed */
+  padding: 20px; /* Add padding for better spacing */
+  box-sizing: border-box; /* Include padding in the width calculation */
+
+  /* Center items horizontally and vertically */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Horizontal centering */
+  align-items: center; /* Vertical centering */
+}
+
+/* Customize card title */
+.card-title {
+  color: #333;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin: 0; /* Remove default margin */
+}
+
+/* Customize card text */
+.card-text {
+  color: #666;
+  font-size: 1rem;
+}
+
+/* Customize card hover effect */
+.card:hover {
+  box-shadow: 0 4px 8px rgb(215, 43, 43);
+  transform: translateY(-2px);
+}
+
+/* Media query for reducing font size in small displays */
+@media (max-width: 480px) {
+  .card-title {
+    font-size: 1rem; /* Reduce font size for small displays */
+  }
+  h1 {
+    font-size: 20px; /* Reduce font size for smaller screens */
+  }
+
+  .page__box {
+    width: 690px;
+  }
+}
+
+
+.page__box {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  height: 140vh; /* Adjust height for full viewport height */
+}
+
+#box2{
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+  height: 100vh; /* Adjust height for full viewport height */
+
+}
+
+
+
+
+
+.card {
+  margin: 10px; /* Adjust margin as needed */
+}
+h1 {
+  position: absolute; /* Position the element absolutely */
+  top: 100px; /* Position at the top of its containing element */
+  left: 50%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  margin-top: 5px; /* Add top margin for spacing */
+
+}
+
+.card-body img {
+  max-width: 100%; /* Ensure images don't exceed card width */
+  max-height: 100%; /* Ensure images don't exceed card height */
+}

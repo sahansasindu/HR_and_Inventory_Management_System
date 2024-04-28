@@ -1,0 +1,69 @@
+<!-- Payroll Management Details Section -->
+<div class="d-flex page__box p-1 mt-0">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">ALLOWANCES</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <select   [(ngModel)]="selectedDepartment" class="form-control" (change)="filterByDepartment()" required>
+            <option value="" selected disabled>Select a department</option>
+            <option value="Financial">Financial </option>
+            <option value="Human resources">Human resources</option>
+            <option value="Sels markating">Sels and marketing</option>
+            <option value="Administration">Administration</option>
+            <option value="Quality assurance">Quality assurance</option>
+            <option value="Production">Production</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-success" (click)="addpayrolldetails()">Create New [+]</a>
+        <a class="btn btn-primary" (click)="Back()">Back</a>
+      </div>
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Department Name</td>
+            <td>Section Name</td>
+            <td>Job Role</td>
+            <td>Salary Type</td>
+            <td>Allowances Type</td>
+            <td>Allowance Amount</td>
+            <td>Action</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of salarydata">
+            <td>{{ item.department_name }}</td>
+            <td>{{ item.section_name }}</td>
+            <td>{{ item.job_role }}</td>
+            <td>{{ item.salary_type }}</td>
+            <td>Rs.{{ item.allowances_type }}</td>
+            <td>Rs.{{ item.allowances_amount }}</td>
+            <td style="white-space: nowrap;">
+              <a class="btn btn-primary" (click)="Update(item.allowances_id)">Update</a>
+              <a class="btn btn-danger" (click)="Delete(item.allowances_id)">Delete</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="isLoading" class="spinner-overlay">
+  <div class="spinner"></div>
+</div>
+
+
+
+
+

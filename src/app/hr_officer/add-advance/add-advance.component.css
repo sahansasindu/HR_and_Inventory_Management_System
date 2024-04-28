@@ -1,0 +1,21 @@
+
+.page__box {
+  background-color: #eae8e8;
+  border-radius: 8px;
+  padding: 20px;
+  height: 800px;
+
+}
+.container{
+  background-color: #baced2;
+  width: 50%;
+}
+h2{
+
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+
+label{
+  padding-top: 15px;
+}

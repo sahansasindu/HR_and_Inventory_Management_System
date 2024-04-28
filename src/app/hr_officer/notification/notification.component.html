@@ -1,20 +1,5 @@
-<div class="container">
-  <div class="card">
-    <div class="card-content">
-      <div class="demo-section">
-        <mat-icon matBadge="15" matBadgeColor="warn" class="custom-icon">group</mat-icon>
-      </div>
-      <h4>Total Employee</h4>
-      <p></p>
-    </div>
-  </div>
-  <div class="card">
-    <div class="card-content">
-      <div class="demo-section">
-        <mat-icon matBadge="15" matBadgeColor="warn" class="custom-icon">summarize</mat-icon>
-      </div>
-      <h4>Report Management</h4>
-      <p></p>
-    </div>
-  </div>
+
+<!-- notification.component.html -->
+<div [ngClass]="{'notification': true, 'success': type === 'success', 'error': type === 'error', 'info': type === 'info'}">
+  <p>{{ message }}</p>
 </div>

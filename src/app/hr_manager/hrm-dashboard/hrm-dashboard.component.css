@@ -14,7 +14,8 @@ body {
 .parallel-div {
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
+  background-color: #1647bb;
+
 }
 
 .custom-div {

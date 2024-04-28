@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
+import { AxiosService } from '../../axios.service';
+import { Router } from '@angular/router';
+
 
 // Register the required Chart.js components
 Chart.register(...registerables);
@@ -7,14 +11,23 @@ Chart.register(...registerables);
 @Component({
   selector: 'app-piechart',
   templateUrl: './piechart.component.html',
-  styleUrl: './piechart.component.css'
+  styleUrls: ['./piechart.component.css']
 })
-export class PiechartComponent {
-
+export class PiechartComponent implements OnInit {
   public chart: any;
+
+ // salaryheader: any[] = [];
+  //salaryheader2: any[] = [];
+ // selectedDepartment: string = "";
+  isLoading: boolean = false;
+  loandata: any[] = [];
+
+  constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.createChart();
+    this.fetchDeductionData();
+
   }
 
   createChart() {
@@ -22,12 +35,12 @@ export class PiechartComponent {
       type: 'doughnut', // Change the type to 'doughnut' for a doughnut chart
 
       data: {
-        labels: ['2022-05-10', '2022-05-11', '2022-05-12', '2022-05-13',
-          '2022-05-14', '2022-05-15', '2022-05-16', '2022-05-17'],
+        labels: ['Financial', 'Human resource', 'Sell & marketing', 'Administration',
+          'Quality assurance', 'Production'],
         datasets: [
           {
-            label: "Sales",
-            data: [467, 576, 572, 79, 92, 574, 573, 576], // Update data to numeric values
+            label: "Employees",
+            data: this.loandata.map(item => item[1]), // Use the length of each array as data
             backgroundColor: ['blue', 'red', 'green', 'orange', 'purple', 'pink', 'brown', 'yellow'] // Assign colors to each data point
           }
         ]
@@ -40,4 +53,25 @@ export class PiechartComponent {
     });
   }
 
+  fetchDeductionData() {
+    this.isLoading = true;
+    this.axiosService.request('GET', 'employeeCountByDepartment', null,{})
+      .then(response => {
+        console.log('Fetched data:', response.data); // Log the fetched data
+        //this.salaryheader2 = response.data;
+        this.loandata = response.data;
+        this.isLoading = false;
+        // Update Invoiceheader with the fetched data
+        console.log(this.loandata); // Corrected logging statement
+
+        // Update the chart after fetching data
+        if (this.chart) {
+          this.chart.data.datasets[0].data = this.loandata.map(item => item[1]);
+          this.chart.update();
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
 }

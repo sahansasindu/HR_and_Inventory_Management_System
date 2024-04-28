@@ -30,5 +30,6 @@
     "strictInputAccessModifiers": true,
     "strictTemplates": true,
     "esModuleInterop": true,
+
   }
 }
