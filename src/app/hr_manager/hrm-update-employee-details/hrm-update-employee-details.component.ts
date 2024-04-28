@@ -31,6 +31,7 @@ export class HrmUpdateEmployeeDetailsComponent{
   // }
 
   isTotalEmployees: boolean =false;
+  isUpdateForm: boolean=false;
 
   swaptoUpdateForm() {
     this.isTotalEmployees=!this.isTotalEmployees;
