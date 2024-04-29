@@ -1,0 +1,222 @@
+
+<div class="d-flex page__box p-1 mt-0">
+
+
+
+  <div class="parallel-div col-9">
+
+    <div class="agent-management-container" *ngIf="!isAddAgentVisible && !isUpdateAgentVisible && !isRemoveAgentVisible && !isviweAgentVisible">
+
+      <div class="search-container">
+
+        <mat-form-field appearance="fill">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Search">
+          <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+          </button>
+
+        </mat-form-field>
+
+      </div>
+
+      <div class="button-container">
+        <button mat-flat-button color="primary" (click)="registerNewAnget()">Register New Agent</button>
+        <button mat-flat-button color="primary" (click)="updateAnget()">Update</button>
+        <button mat-flat-button color="primary" (click)="deleteAnget()">Remove</button>
+        <button mat-flat-button color="primary" (click)="viweagentboughtMilk()">View Agent Details</button>
+      </div>
+
+
+      <div class="mat-table-container">
+        <mat-table [dataSource]="dataSourceAgent" class="mat-elevation-z8">
+
+
+          <ng-container matColumnDef="agent_id">
+            <mat-header-cell *matHeaderCellDef>  ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="agent_name">
+            <mat-header-cell *matHeaderCellDef>  Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agent_name }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="agency_name">
+            <mat-header-cell *matHeaderCellDef> Agency Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.agency_name }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="address">
+            <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.address }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="email">
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.email}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="contact_number">
+            <mat-header-cell *matHeaderCellDef> Contact  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.contact_number}} </mat-cell>
+          </ng-container>
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlighted]="row === selectedRow" (click)="selectRow(row)"></mat-row>
+
+        </mat-table>
+      </div>
+    </div>
+
+    <!-- add agent form -->
+    <div class="production-forms-details-container" *ngIf="isAddAgentVisible">
+
+      <button mat-raised-button class="close-button" color="warn" (click)="registerNewAnget()">Close</button>
+
+      <form class="details-form">
+        <h2>Agent Registration Entry Form</h2>
+
+        <label for="addAgentName">Agent Name:</label>
+        <input type="text" required id="addAgentName" name="addAgentName">
+
+        <label for="addAgentAddress">Address:</label>
+        <input type="text" required id="addAgentAddress" name="addAgentAddress">
+
+        <label for="addAgencyName">Agency Name:</label>
+        <input type="text" required id="addAgencyName" name="addAgencyName">
+
+        <label for="addContact">Contact Number:</label>
+        <input type="text" required id="addContact" name="addContact" maxlength="10" placeholder="07XXXXXXXX">
+
+        <label for="addAgentEmail">Email:</label>
+        <input type="text" required id="addAgentEmail" name="addAgentEmail">
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="addNewAgent()">Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- update agent form -->
+    <div class="production-forms-details-container" *ngIf="isUpdateAgentVisible">
+
+      <button mat-raised-button class="close-button" color="warn" (click)="updateAnget()">Close</button>
+      <form class="details-form"  [formGroup]="updateFormAgent">
+        <h2>Update Agent Details Changes</h2>
+
+        <label for="updateAgentId">Agent ID:</label>
+        <input type="text" required id="updateAgentId" formControlName="updateAgentId">
+
+        <label for="updateAgentName">Agent Name:</label>
+        <input type="text" required id="updateAgentName" formControlName="updateAgentName">
+
+        <label for="updateAgentAddress">Address:</label>
+        <input type="text" required id="updateAgentAddress" formControlName="updateAgentAddress">
+
+        <label for="updateAgencyName">Agency Name:</label>
+        <input type="text" required id="updateAgencyName" formControlName="updateAgencyName">
+
+        <label for="updateContact">Contact Number:</label>
+        <input type="text" required id="updateContact" formControlName="updateContact" maxlength="10" placeholder="07XXXXXXXX">
+
+        <label for="updateAgentEmail">Email:</label>
+        <input type="text" required id="updateAgentEmail" formControlName="updateAgentEmail">
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="updateAgentDetails()" >Submit</button>
+        </div>
+      </form>
+
+    </div>
+
+    <!-- remove agent form -->
+    <div class="production-forms-details-container" *ngIf="isRemoveAgentVisible">
+
+      <button mat-raised-button class="close-button" color="warn" (click)="deleteAnget()">Close</button>
+      <form class="details-form" [formGroup]="deleteFormAgent">
+        <h2>Remove Agent Details</h2>
+
+        <div class="form-row" >
+          <label for="remo_agent_id">Agent ID:</label>
+          <input type="text" id="remo_agent_id" formControlName="remo_agent_id" required>
+        </div>
+
+        <div class="form-row">
+          <label for="remo_agent_name">Agent Name:</label>
+          <input type="text" id="remo_agent_name" formControlName="remo_agent_name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="remo_address">Address:</label>
+          <input type="text" id="remo_address" formControlName="remo_address" required>
+        </div>
+
+        <div class="form-row">
+          <label for="remo_agency_name">Agency Name:</label>
+          <input type="text" id="remo_agency_name" formControlName="remo_agency_name" required>
+        </div>
+
+        <div class="form-row">
+          <label for="remo_contact_number">Contact Number:</label>
+          <input type="text" id="remo_contact_number" formControlName="remo_contact_number" required>
+        </div>
+
+        <div class="form-row">
+          <label for="remo_email">Email:</label>
+          <input type="text" id="remo_email" formControlName="remo_email" required>
+        </div>
+
+        <div class="form-row">
+          <label for="reason_status">Reason:</label>
+          <textarea id="reason_status" formControlName="reason_status" rows="3" cols="50" required></textarea>
+        </div>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent"  (click)="undoDelete()" *ngIf="showUndoOption">Undo Delete</button>
+          <button mat-raised-button color="primary" type="submit" (click)="deleteAgentDetails()">Confirm</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- view agent form -->
+    <div  *ngIf="isviweAgentVisible">
+
+      <button mat-raised-button class="close-button" color="warn" (click)="viweagentboughtMilk()" style="margin-left: 30px;margin-bottom: 5px">Close</button>
+      <div class="agentDetails-view" style="margin-top: 55px;margin-left: 50px">
+        <table>
+          <tr>
+            <td><strong>Agent Name :</strong></td>
+            <td>Danidu</td>
+          </tr>
+          <tr>
+            <td><strong>Agency Name :</strong></td>
+            <td>Danidu</td>
+          </tr>
+          <tr>
+            <td><strong>Address :</strong></td>
+            <td>Danidu</td>
+          </tr>
+        </table>
+      </div>
+
+        <div class="chartAgent">
+          <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+        </div>
+
+    </div>
+
+  </div>
+
+  <div class="left-div col-3 text-right" id="div3">
+  </div>
+</div>

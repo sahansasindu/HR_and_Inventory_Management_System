@@ -1,0 +1,54 @@
+/* styles.css */
+
+/* Style the form container */
+.page__box {
+  background-color: #eae8e8;
+  border-radius: 8px;
+  padding: 20px;
+  height: 800px;
+
+}
+
+.container{
+  background-color: #baced2;
+}
+
+h2{
+
+  padding-bottom: 20px;
+  padding-top: 30px;
+}
+
+label{
+  padding-top: 5px;
+}
+#cvlable{
+  padding-top: 15px;
+}
+
+/* Style the form fields and labels */
+mat-form-field {
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+/* Style the input fields */
+input.mat-input {
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  padding: 8px;
+}
+
+/* Style the submit button */
+button[type="submit"] {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background-color: #0056b3;
+}

@@ -1,0 +1,24 @@
+
+/* notification.component.css */
+.notification {
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.success {
+  background-color: lightgreen;
+  color: darkgreen;
+}
+
+.error {
+  background-color: salmon;
+  color: darkred;
+}
+
+.info {
+  background-color: lightblue;
+  color: darkblue;
+
+}

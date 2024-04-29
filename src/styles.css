@@ -1,0 +1,176 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+.production-forms-details-container {
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+}
+@media (max-width: 768px) {
+  .production-forms-details-container {
+    padding: 10px;
+  }
+
+  .form-buttons button {
+    width: 48%; /* Ensure buttons do not overlap on small screens */
+  }
+}
+
+
+
+.details-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.details-form h2 {
+  color: #004d99; /* Heading color similar to the image */
+  margin-bottom: 20px;
+  margin-top: 30px;
+}
+.details-form label {
+  margin-top: 10px;
+  color: #005b99; /* Label color similar to the image */
+}
+
+.details-form input[type="number"],
+.details-form input[type="text"],
+.details-form select,
+.details-form textarea,
+.details-form input[type="date"] {
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #b3d7ff; /* Input border color similar to the image */
+  border-radius: 5px;
+}
+
+@media (max-width: 480px) {
+  .details-form input[type="number"],
+  .details-form input[type="text"],
+  .details-form input[type="select"],
+  .details-form input[type="date"] {
+    width: 100%; /* Ensure inputs are full width on small screens */
+  }
+}
+.search-container{
+  flex-direction: column;
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width:100%;
+}
+ngx-spinner {
+  position: fixed; /* or 'absolute' */
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 9999; /* Ensure it's above other content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+.manage-production-issue{
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+
+}
+.mat-table-container {
+
+  max-height: 450px; /* Adjust this value to the desired table body height */
+  overflow-y: scroll;
+
+}
+
+.mat-header-row {
+  min-width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #51b9c0; /* Or whatever your table header background color is */
+  font-weight: bold;
+}
+
+.mat-table {
+  display: block;
+  width: 100%;
+}
+
+.mat-cell,
+.mat-header-cell {
+  padding: 8px;
+  min-width: 120px; /* Or your preferred min-width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Make sure to set a min-width for the table container equal to the total width of all columns */
+.mat-table-container {
+  min-width: 450px; /* This is just an example; calculate the total width of your columns */
+}
+.production-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  background-color: #f2f2f2;
+}
+
+@media (max-width: 992px) {
+  .production-container {
+    padding: 10px;
+  }
+  .mat-form-field {
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  button {
+    width: 100%;
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+  .agent-management-container {
+    max-width: 100%;
+  }
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-start; /* Aligns items to the start of the container */
+  margin: 16px 0;
+  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  width: 700px;
+}
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+
+.form-buttons button {
+  flex: 1;
+}

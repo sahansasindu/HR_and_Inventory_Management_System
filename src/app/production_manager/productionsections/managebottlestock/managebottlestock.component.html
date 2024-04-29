@@ -1,0 +1,42 @@
+<div class="d-flex page__box p-1 mt-0">
+
+
+  <div class="parallel-div col-9">
+
+    <div class="production-container" >
+
+
+      <div class="button-container">
+        <button mat-flat-button color="primary" (click)="toggleFormVisibility()">Add  New Purchased Bottles to Current Stock</button>
+      </div>
+
+
+      <div class="chartBottle">
+        <canvasjs-chart [options]="chartOptions" [styles]="{width: width, height:'360px'}" ></canvasjs-chart>
+      </div>
+
+      <div class="form-container" *ngIf="isFormVisible">
+        <form class="details-form">
+
+          <label for="addNewBottle">Add New Purchased Bottles :</label>
+          <input type="number" id="addNewBottle" name="addNewBottle" required>
+
+          <label for="date">Date:</label>
+          <input type="date" id="date" name="date" required>
+
+          <div class="form-buttons">
+            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="primary" type="submit" (click)="addBottlestock()">Add</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="left-div col-3 text-right" id="div3">
+  </div>
+</div>
+

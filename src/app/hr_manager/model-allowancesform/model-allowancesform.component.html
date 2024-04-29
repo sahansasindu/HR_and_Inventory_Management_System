@@ -1,0 +1,91 @@
+<div class="container">
+  <div class="row justify-content-center mt-1">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>{{headerTitle}}</span>
+
+        </div>
+
+        <div class="card-body">
+          <form>
+
+            <div class="form-group">
+              <label for="allowance_amount">Allowance Amount:</label>
+              <input type="number" id="allowance_amount" name="allowance_amount" [(ngModel)]="allowance_amount" class="form-control" placeholder="allowance amount">
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="allowance_type">Allowance Type:</label>
+              <select id="allowance_type" [(ngModel)]="allowance_type" name="allowance_type" class="form-control" required>
+                <option value="" selected disabled>Select a allowance type</option>
+                <option value="Production">Production</option>
+                <option value="Store">Stores</option>
+                <option value="Office staff">Office staff</option>
+              </select>
+            </div>
+
+
+            <div class="form-group">
+              <label for="depName">Department name:</label>
+              <select id="depName" [(ngModel)]="depName"  name="depName" class="form-control" required>
+                <option value="" selected disabled>Select a department</option>
+                <option value="Financial">Financial </option>
+                <option value="Human resources">Human resources</option>
+                <option value="Sells marketing">Sells and marketing</option>
+                <option value="Administration">Administration</option>
+                <option value="Quality assurance">Quality assurance</option>
+                <option value="Production">Production</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="jrole">Job role:</label>
+              <select id="jrole" [(ngModel)]="job_role" name="role" class="form-control" required>
+                <option value="" selected disabled>Select a role</option>
+                <option value="HR manager">HR manager</option>
+                <option value="Accountant">Accountant</option>
+                <option value="Production manager">Production manager</option>
+                <option value="Store keeper">Store keeper</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="salary_type">Salary type:</label>
+              <select id="salary_type" [(ngModel)]="salary_type" name="salary_type" class="form-control" required>
+                <option value="" selected disabled>Select a salary type</option>
+                <option value="Production">Production</option>
+                <option value="Store">Stores</option>
+                <option value="Office staff">Office staff</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="section_name">Section name:</label>
+              <select id="section_name" [(ngModel)]="section_name" name="section_name" class="form-control" required>
+                <option value="" selected disabled>Select a section name</option>
+                <option value="Bottle washing">Bottle washing</option>
+                <option value="Yogurt section">Yogurt section</option>
+                <option value="UHT">UHT</option>
+                <option value="Packet">Packet</option>
+                <option value="Ice cream">Ice cream</option>
+                <option value="Milk toffy">Milk toffy</option>
+              </select>
+            </div>
+
+            <div class="form-group d-flex justify-content-center">
+              <button type="button" (click)="back()" class="btn btn-secondary" id="clearButton">back</button>
+              <button type="button" (click)="submitData($event)" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
