@@ -62,7 +62,7 @@ export class ViewEmployeeComponent implements OnInit {
       this.fetchEmployeeData()
     } else {
       const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.loarddata = this.loarddata1.filter(item => item.employee_id.toString().toLowerCase() === lowerCaseEmpId);
+      this.loarddata = this.loarddata1.filter(item => item.employeeid.toString().toLowerCase() === lowerCaseEmpId);
     }
   }
 
@@ -77,16 +77,20 @@ export class ViewEmployeeComponent implements OnInit {
       const formattedDate = `${year}-${month < 10 ? '0' + month : month}`;
 
       this.filterByDate(formattedDate);
+
     }
   }
 
   filterByDate(yearMonth: string) {
+    console.log(yearMonth);
     this.loarddata = this.loarddata.filter(item => {
       const itemDate = new Date(item.dob);
       const itemYear = itemDate.getFullYear();
       const itemMonth = itemDate.getMonth() + 1;
       const itemFormattedDate = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
       return itemFormattedDate === yearMonth;
+
+      console.log(itemFormattedDate);
     });
   }
 
