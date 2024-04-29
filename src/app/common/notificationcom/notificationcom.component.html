@@ -1,6 +1,20 @@
 <div class="notification-box">
   <div class="time-display" [innerHTML]="currentTime"></div>
+
+
+  <div class="notifications">
+    <hr style="border: 2px solid black; font-weight: bold;">
+    <div class="notices">
+
+    </div>
+    <hr style="border: 2px solid black; font-weight: bold;">
+  </div>
+
+
   <button class="clear-btn" (click)="clearNotifications()">Clear Notification</button>
+
+
+
   <div class="birthday-notifications">
     <button class="birthday-btn">Today's Birthdays</button>
     <button class="birthday-btn">Upcoming Birthdays</button>
