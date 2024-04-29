@@ -9,9 +9,9 @@
 
 
 
-          <button mat-icon-button><mat-icon matBadge="15" matBadgeColor="warn">mail</mat-icon></button>
-          <button mat-icon-button><mat-icon matBadge="15" matBadgeColor="warn">sms</mat-icon></button>
-          <button mat-icon-button><mat-icon matBadge="15" matBadgeColor="warn">notifications</mat-icon></button>
+          <button mat-icon-button><mat-icon matBadge="{{ newMailCount }}" matBadgeColor="warn">mail</mat-icon></button>
+          <button mat-icon-button><mat-icon matBadge="{{ newMessageCount }}" matBadgeColor="warn">sms</mat-icon></button>
+          <button mat-icon-button><mat-icon matBadge="{{ newNotificationCount }}" matBadgeColor="warn">notifications</mat-icon></button>
 
           <img src="./assets/images/user.jpg" alt="" class="user-image mr-1 p-2" />
         </li>

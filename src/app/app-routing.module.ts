@@ -87,7 +87,6 @@ const routes: Routes = [
 
       { path: 'hrmdashboard', component: HrmDashboardComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
-      { path: '', redirectTo: 'hrm-dashboard', pathMatch: 'full' },
       { path: 'hrm-dashboard', component: HrmDashboardComponent },
       {path:'emp-details',component: EmpDetailsComponent},
       {path:'medical-approve',component: MedicalApproveComponent},
