@@ -103,7 +103,9 @@ import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.componen
 import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
 import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
 import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-manage-profile.component';
-
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MailBoxComponent } from './common/mail-box/mail-box.component';
+import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 
 
 @NgModule({
@@ -184,6 +186,8 @@ import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-m
     ManageUserComponent,
     LeaveApproveComponent,
     HrmManageProfileComponent,
+    MailBoxComponent,
+    ChatBoxComponent,
 
 
   ],
@@ -218,7 +222,7 @@ import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-m
     MatTabGroup,
     FormsModule,
     CanvasJSAngularStockChartsModule,
-
+    MatDialogModule,
 
   ],
 

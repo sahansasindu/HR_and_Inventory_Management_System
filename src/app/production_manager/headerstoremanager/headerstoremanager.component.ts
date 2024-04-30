@@ -13,6 +13,7 @@ export class HeaderstoremanagerComponent implements OnInit {
   newMessageCount: number=1;
   newNotificationCount: number=1;
 
+
   updateNewMailCount() {
     this.newMailCount++;
     this.newMessageCount++;
@@ -29,4 +30,6 @@ export class HeaderstoremanagerComponent implements OnInit {
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
+
+
 }

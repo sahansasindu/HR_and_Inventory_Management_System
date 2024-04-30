@@ -3,15 +3,19 @@
     <button mat-icon-button (click)="toggleSidebar()">
       <mat-icon>menu</mat-icon>
     </button>
+
     <div class="row mr-2 ml-auto">
       <ul class="row m-0 align-items-center">
         <li>
-
-
-
-          <button mat-icon-button><mat-icon matBadge="{{ newMailCount }}" matBadgeColor="warn">mail</mat-icon></button>
-          <button mat-icon-button><mat-icon matBadge="{{ newMessageCount }}" matBadgeColor="warn">sms</mat-icon></button>
-          <button mat-icon-button><mat-icon matBadge="{{ newNotificationCount }}" matBadgeColor="warn">notifications</mat-icon></button>
+          <button mat-icon-button >
+            <mat-icon matBadge="{{ newMailCount }}" matBadgeColor="warn">mail</mat-icon>
+          </button>
+          <button mat-icon-button >
+            <mat-icon matBadge="{{ newMessageCount }}" matBadgeColor="warn">sms</mat-icon>
+          </button>
+          <button mat-icon-button >
+            <mat-icon matBadge="{{ newNotificationCount }}" matBadgeColor="warn">notifications</mat-icon>
+          </button>
 
           <img src="./assets/images/user.jpg" alt="" class="user-image mr-1 p-2" />
         </li>
@@ -19,3 +23,4 @@
     </div>
   </mat-toolbar-row>
 </mat-toolbar>
+
