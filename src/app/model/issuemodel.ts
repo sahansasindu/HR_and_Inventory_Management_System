@@ -1,4 +1,5 @@
 export class ProductionIssue{
+
   get issue_name(): string {
     return this._issue_name;
   }

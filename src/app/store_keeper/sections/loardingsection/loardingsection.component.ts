@@ -175,7 +175,7 @@ export class LoardingsectionComponent implements OnInit{
     });
     console.log(formElement)
     try {
-      const response = await this.axiosService.request("POST", "/addLording", formElement, headers)
+        await this.axiosService.request("POST", "/addLording", formElement, headers)
         .then(response => {
 
           if (response.data && response.data.message) {

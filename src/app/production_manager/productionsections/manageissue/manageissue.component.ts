@@ -1,7 +1,8 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Agent} from "../../../model/agentmodel";
 import {ProductionIssue} from "../../../model/issuemodel";
+import {AxiosService} from "../../../axios.service";
 
 @Component({
   selector: 'app-manageissue',
@@ -9,18 +10,28 @@ import {ProductionIssue} from "../../../model/issuemodel";
   styleUrl: './manageissue.component.css'
 })
 
-export class ManageissueComponent implements data{
+export class ManageissueComponent implements data,OnInit{
 
   chart: any;
   isButtonVisible = false;
   isManageProductionIssues: boolean=false;
-  isaddNewIssue: boolean=false;
-  isupdateIssue: boolean=false;
-  isdeleteIssue: boolean=false;
 
+  constructor(private axiosService:AxiosService ) {
+  }
 
-  displayedColumns: string[] = ['issue_id', 'issue_name'];
-  dataSourceIssue = new MatTableDataSource<ProductionIssue>([]);
+  async ngOnInit() {
+    await this.getIssueDetails();
+  }
+
+  displayedColumns: string[] = ['issue_id', 'issue_name', 'actions'];
+  dataSourceIssue = new MatTableDataSource<ProductionIssue>([
+
+  ]);
+
+  ELEMENT_DATA_AGENT: ProductionIssue[] = [
+
+  ];
+
   selectedRow: ProductionIssue | null = null;
 
 
@@ -36,35 +47,58 @@ export class ManageissueComponent implements data{
 
   }
 
-  visibleaddIssue() {
+  async addNewIssue(): Promise<void> {
 
-    this.isaddNewIssue=!this.isaddNewIssue;
+    const inputField = document.getElementById('addNewIssue') as HTMLInputElement;
+    const issue_name = inputField.value;
 
-    if(this.isaddNewIssue){
-      this.isupdateIssue=false;
-      this.isdeleteIssue=false;
+    if (!issue_name) {
+      inputField.focus();
+      return;
+    }
+
+    try {
+      await this.axiosService.request("POST", `/addNewIssue/${issue_name}`, {}, {})
+        .then(response => {
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Submission successful");
+            inputField.value='';
+            this.getIssueDetails();
+          }
+        })
+        .catch(error => {
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("Submission Fail");
+          }
+        });
+    } catch (error) {
+      alert("Error submitting form");
+      console.error('Error submitting form', error);
     }
   }
 
-  visibleupdateIssue() {
+  async getIssueDetails():Promise<void>{
 
-    this.isupdateIssue=!this.isupdateIssue;
-
-    if(this.isupdateIssue){
-      this.isaddNewIssue=false;
-      this.isdeleteIssue=false;
+    try {
+      const response = await this.axiosService.request('GET', '/getIssueDetails', {}, {});
+      this.dataSourceIssue.data = response.data;
+      this.ELEMENT_DATA_AGENT = this.dataSourceIssue.data;
+      console.log('Issue Details fetched successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching Issue Details:', error);
     }
 
   }
 
-  visibleDeleteIssue() {
+  updateIssue(element:any) {
 
-    this.isdeleteIssue=!this.isdeleteIssue;
+  }
 
-    if(this.isdeleteIssue){
-      this.isupdateIssue=false;
-      this.isaddNewIssue=false;
-    }
+  deleteIssue(element:any) {
 
   }
 
