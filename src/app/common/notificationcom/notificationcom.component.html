@@ -1,1 +1,34 @@
-<p>notificationcom works!</p>
+<div class="notification-box">
+  <div class="time-display" [innerHTML]="currentTime"></div>
+
+
+  <div class="notifications">
+    <hr style="border: 2px solid black; font-weight: bold;">
+    <div class="notices">
+      <h1>dandiu</h1>
+      <h1>dandiu</h1>
+      <h1>dandiu</h1>
+    </div>
+    <hr style="border: 2px solid black; font-weight: bold;">
+  </div>
+
+
+  <button class="clear-btn" (click)="clearNotifications()">Clear Notification</button>
+
+
+
+  <div class="birthday-notifications">
+
+    <hr style="border: 2px solid black; font-weight: bold;">
+    <div class="notices">
+      <h1>dandiu</h1>
+      <h1>dandiu</h1>
+      <h1>dandiu</h1>
+
+    </div>
+    <hr style="border: 2px solid black; font-weight: bold;">
+
+    <button class="birthday-btn">Today's Birthdays</button>
+    <button class="birthday-btn">Upcoming Birthdays</button>
+  </div>
+</div>

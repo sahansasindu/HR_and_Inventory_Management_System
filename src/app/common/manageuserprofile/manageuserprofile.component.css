@@ -5,7 +5,6 @@
     display: flex;
     justify-content: center;
     align-items: center; /* Center content vertically */
-    background: linear-gradient(160deg, #00c6ff 0%, #6fa9af 100%);
     border-radius: 10px;
     padding:20px 10px 20px 10px;
   }
