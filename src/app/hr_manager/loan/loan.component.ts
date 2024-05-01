@@ -90,5 +90,9 @@ export class LoanComponent implements OnInit  {
   }
 
 
+  addloandetails() {
 
+    this.router.navigate(['./add-loan']);
+
+  }
 }

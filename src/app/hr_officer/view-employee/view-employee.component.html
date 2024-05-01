@@ -38,7 +38,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let item of loarddata">
-          <td>{{ item.employee_id }}</td>
+          <td>{{ item.employeeid }}</td>
           <td>{{ item.employee_name }}</td>
           <td>{{ item.address }}</td>
           <td>{{ item.gender }}</td>
@@ -51,8 +51,8 @@
           <td>{{ item.dep_id }}</td>
           <td>{{ item.sec_id }}</td>
           <td style="white-space: nowrap;">
-            <a class="btn btn-primary" (click)="Update(item.employee_id)">Update</a>
-            <a class="btn btn-danger" (click)="Delete(item.employee_id)">Delete</a>
+            <a class="btn btn-primary" (click)="Update(item.employeeid )">Update</a>
+            <a class="btn btn-danger" (click)="Delete(item.employeeid )">Delete</a>
           </td>
         </tr>
         </tbody>

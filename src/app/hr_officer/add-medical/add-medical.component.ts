@@ -68,10 +68,7 @@ export class AddMedicalComponent {
       formData.append('medical_status', medical_status);
       formData.append('medical_report', medical_report);
       this.axiosService
-        .request('POST', '/addMedical', formData,{
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }})
+        .request('POST', '/addMedical', formData,{})
         .then(response => {
           if (response.data && response.data.message) {
             alert(response.data.message);
