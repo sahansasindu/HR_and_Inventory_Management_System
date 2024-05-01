@@ -88,10 +88,23 @@ body {
 
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start of the container */
-  margin: 16px 0;
-  gap: 8px; /* This creates a gap between items. Adjust as needed. */
-  width: 500px;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+button {
+  max-width: 240px;
+  width: 100%;
+  padding: 10px 20px;
+}
+
+@media (min-width: 600px) {
+  button {
+    width: auto;
+    max-width: 240px;
+  }
 }
 
 
@@ -137,15 +150,15 @@ body {
   border: 1px solid #b3d7ff; /* Border color similar to the image */
   padding: 20px;
   border-radius: 10px;
-  max-width: 600px; /* Maximum width of the form */
-  margin: auto; /* Center the form */
+  max-width: 600px;
+  margin: auto;
   position: relative;
 }
 .close-button {
-  position: absolute; /* Absolute position within the parent container */
-  top: 10px; /* Adjust the value as needed */
-  right: 10px; /* Adjust the value as needed */
-  padding: 5px 10px; /* Padding for aesthetics */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
 }
 .details-form {
   display: flex;
@@ -153,13 +166,13 @@ body {
 }
 
 .details-form h2 {
-  color: #004d99; /* Heading color similar to the image */
+  color: #004d99;
   margin-bottom: 20px;
   margin-top: 30px;
 }
 .details-form label {
   margin-top: 10px;
-  color: #005b99; /* Label color similar to the image */
+  color: #005b99;
 }
 
 .details-form input[type="number"],

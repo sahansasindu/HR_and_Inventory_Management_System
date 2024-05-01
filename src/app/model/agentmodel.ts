@@ -75,7 +75,8 @@ export class Agent {
 
   // Method to validate phone number
   isValidPhoneNumber(): boolean {
-    const regex = /^\d+$/;
-    return regex.test(this.contact_number);
+    const localRegex = /^0(7[0125678])\d{7}$/;
+    const internationalRegex = /^\+94(7[0125678])\d{7}$/;
+    return localRegex.test(this.contact_number) || internationalRegex.test(this.contact_number);
   }
 }

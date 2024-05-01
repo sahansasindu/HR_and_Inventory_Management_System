@@ -13,7 +13,8 @@
 
       <div class="button-container">
         <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Loading Details</button>
-        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Loading Changes</button>
+        <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="toggleUpdate()">Update Loading Changes</button>
+        <button mat-raised-button color="primary" (click)="showAgentDetails()">Show Agents Details</button>
       </div>
       <div class="mat-table-container">
 
@@ -26,9 +27,9 @@
           </ng-container>
 
           <!-- Empty Bottles Column -->
-          <ng-container matColumnDef="bottle_amount">
+          <ng-container matColumnDef="amount">
             <mat-header-cell *matHeaderCellDef> Bottle Amount </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.bottle_amount }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
           </ng-container>
 
           <!-- Damage Bottles Column -->
@@ -50,9 +51,9 @@
           </ng-container>
 
           <!-- For Washing Column -->
-          <ng-container matColumnDef="agent_id">
+          <ng-container matColumnDef="ag_id">
             <mat-header-cell *matHeaderCellDef> Agent ID </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
+            <mat-cell *matCellDef="let element"> {{ element.ag_id }} </mat-cell>
           </ng-container>
 
           <!-- Row Definitions -->
@@ -105,21 +106,27 @@
 
       <button mat-raised-button class="close-button" color="warn" (click)="toggleUpdate()">Close</button>
 
-      <form class="details-form">
+      <form class="details-form" [formGroup]="updateForm">
         <h2>Update Daily Loading Bottles Details Changes</h2>
 
-        <label for="lodingBottlesupdate">Number Of Milk Bottles:</label>
-        <input type="number" id="lodingBottlesupdate" name="lodingBottlesupdate" required>
+        <label for="lodingBottlesupdate">Id:</label>
+        <input type="number" id="lodingBottlesupdate" formControlName="lodingBottlesupdate" required>
+
+        <label for="updateAmount">Agent ID:</label>
+        <input type="number" id="updateAmount" formControlName="updateAmount" required>
 
         <label for="batchCodeupdate">Batch Code:</label>
-        <input type="number" id="batchCodeupdate" name="batchCodeupdate" required>
+        <input type="text" id="batchCodeupdate" formControlName="batchCodeupdate" required>
 
-        <label for="EmployeeIDupdate">Agent ID:</label>
-        <input type="number" id="EmployeeIDupdate" name="EmployeeIDupdate" required>
+        <label for="dateUpdate">Date:</label>
+        <input type="date" id="dateUpdate" formControlName="dateUpdate" required>
+
+        <label for="agentIDupdate">Agent ID:</label>
+        <input type="number" id="agentIDupdate" formControlName="agentIDupdate" required>
 
         <div class="form-buttons">
           <button mat-raised-button color="accent">Clear</button>
-          <button mat-raised-button color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="primary" type="submit" (click)="updateLordingChanges()">Update</button>
         </div>
       </form>
 
