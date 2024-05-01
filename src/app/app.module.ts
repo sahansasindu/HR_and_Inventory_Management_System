@@ -98,8 +98,14 @@ import { AgentDailyReportComponent } from './production_manager/productionsectio
 import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
 import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
 import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
-
-
+import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
+import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
+import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
+import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
+import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-manage-profile.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MailBoxComponent } from './common/mail-box/mail-box.component';
+import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -174,6 +180,13 @@ import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
     AgentDailyReportComponent,
     AgentWeeklyReportComponent,
     AgentMonthlyReportComponent,
+    EmpDetailsComponent,
+    MedicalApproveComponent,
+    ManageUserComponent,
+    LeaveApproveComponent,
+    HrmManageProfileComponent,
+    MailBoxComponent,
+    ChatBoxComponent,
 
 
   ],
@@ -208,6 +221,7 @@ import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
     MatTabGroup,
     FormsModule,
     CanvasJSAngularStockChartsModule,
+    MatDialogModule,
 
 
   ],
@@ -218,8 +232,8 @@ import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     User,
-
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

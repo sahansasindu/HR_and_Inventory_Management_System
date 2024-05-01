@@ -1,0 +1,125 @@
+<div class="d-flex page__box p-1 mt-0">
+  <div class="parallel-div col-9">
+    <div class="container" *ngIf="!isCreateUser && !isDeleteUser">
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="swaptoCreateUser()">Create New User</button>
+        <button mat-raised-button color="primary" (click)="swaptoDeleteUser()">Delete User</button>
+      </div>
+
+      <div class="table-container mat-elevation-z8">
+
+        <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z8">
+
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef> ID </th>
+            <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+          </ng-container>
+
+          <!-- Username Column -->
+          <ng-container matColumnDef="username">
+            <th mat-header-cell *matHeaderCellDef> Username </th>
+            <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef> Email </th>
+            <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+          </ng-container>
+
+          <!-- Contact Column -->
+          <ng-container matColumnDef="contact">
+            <th mat-header-cell *matHeaderCellDef> Contact </th>
+            <td mat-cell *matCellDef="let user"> {{user.contact}} </td>
+          </ng-container>
+
+          <!-- Roles Column -->
+          <ng-container matColumnDef="roles">
+            <th mat-header-cell *matHeaderCellDef> Roles </th>
+            <td mat-cell *matCellDef="let user"> {{user.roles}} </td>
+          </ng-container>
+
+          <!-- Employee Column -->
+          <ng-container matColumnDef="employee">
+            <th mat-header-cell *matHeaderCellDef> Employee </th>
+            <td mat-cell *matCellDef="let user"> {{user.employee}} </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+
+    <div *ngIf="isCreateUser" class="details-container">
+
+      <button mat-raised-button  color="warn" (click)="swaptoCreateUser()">Close</button>
+      <form class="details-form" >
+        <h2>Register New System User Account</h2>
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="contact">Contact:</label>
+        <input type="text" id="contact" name="contact" required>
+
+        <label for="roles">Roles:</label>
+        <select id="roles"  name="roles" required>
+          <option value="" selected disabled>Select a role</option>
+          <option value="Accountant">Accountant</option>
+          <option value="Production_Manager">Production_Manager</option>
+          <option value="Store_Keeper">Store_Keeper</option>
+        </select>
+
+        <label for="employee">Employee:</label>
+        <input type="text" id="employee" name="employee" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent" type="button">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="registerNewUser()">Register</button>
+        </div>
+      </form>
+
+    </div>
+
+
+    <div *ngIf="isDeleteUser"  class="details-container">
+      <button mat-raised-button color="warn" (click)="swaptoDeleteUser()">Close</button>
+      <form class="details-form" name="deleteUser">
+        <h2>Delete User Details</h2>
+
+        <label for="emptyBottles">User Id:</label>
+        <input type="number" id="emptyBottles" name="emptyBottles" required>
+
+        <label for="damagedBottles">Job Role:</label>
+        <input type="text" id="damagedBottles" name="damagedBottles" required>
+
+        <label for="date">Date:</label>
+        <input type="date" id="date" name="date" required>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent" >Clear</button>
+          <button mat-raised-button color="primary" type="submit" >Register</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+  <div class="left-div col-3 text-right" id="div3">
+    <app-notificationcom></app-notificationcom>
+  </div>
+</div>

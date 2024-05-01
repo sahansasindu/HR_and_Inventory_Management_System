@@ -1,0 +1,55 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<div class="d-flex page__box p-1 mt-0">
+  <!-- Left side div -->
+  <div class="parallel-div col-9">
+    <div class="form-actions">
+      <div class="med-view">
+        <button mat-raised-button color="primary" (click)="onViewPdf()">View Leave Requests</button>
+
+        <div class="search-option">
+          <mat-form-field appearance="fill">
+            <mat-label>Search</mat-label>
+            <input matInput placeholder="Search here...">
+            <button mat-icon-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </div>
+
+        <table mat-table [dataSource]="dataSource">
+
+          <!-- Define columns -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell class="custom-header" *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let element">{{element.name}}</td>
+          </ng-container>
+
+          <ng-container matColumnDef="id">
+            <th mat-header-cell class="custom-header" *matHeaderCellDef>Id</th>
+            <td mat-cell *matCellDef="let element">{{element.id}}</td>
+          </ng-container>
+
+          <!-- Define table rows -->
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+      </div>
+      <div class="button-container">
+        <button mat-raised-button color="primary" class="approve-button">Approve</button>
+        <button mat-raised-button color="accent" class="reject-button">Reject</button>
+      </div>
+
+    </div>
+  </div>
+
+
+
+
+  <!-- Right side div -->
+  <div class="left-div col-3 text-right" id="div3">
+    <app-notificationcom></app-notificationcom>
+  </div>
+</div>
+
