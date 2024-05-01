@@ -1,4 +1,4 @@
-/*
+
 import { Component } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
@@ -71,7 +71,7 @@ export class AddNewEmployeeComponent {
 
   }
 }
-*/
+
 /*
 import { Component } from '@angular/core';
 import { AxiosService } from "../../axios.service";
@@ -146,7 +146,7 @@ export class AddNewEmployeeComponent {
 
 */
 
-import { Component } from '@angular/core';
+/*import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -216,4 +216,4 @@ export class AddNewEmployeeComponent {
         }
       });
   }
-}
+}*/
