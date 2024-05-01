@@ -13,8 +13,7 @@ export class ManageuserprofileComponent implements OnInit {
   userProfileForm: FormGroup;
   isEditMode = false;
 
-  constructor(
-    private fb: FormBuilder, private userService: UserService, @Inject(PLATFORM_ID) private platformId: Object
+  constructor(private fb: FormBuilder, private userService: UserService, @Inject(PLATFORM_ID) private platformId: Object
   ) {
     this.userProfileForm = this.createFormGroup(fb);
     console.log("form Bulder",this.fb);

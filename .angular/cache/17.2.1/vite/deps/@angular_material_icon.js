@@ -1,16 +1,17 @@
 import {
   DomSanitizer
-} from "./chunk-QUJXCTVM.js";
+
+} from "./chunk-U7CKJ3IQ.js";
 import {
   HttpClient
-} from "./chunk-7TNJTRYT.js";
+} from "./chunk-QMWXUTVU.js";
 import {
   MatCommonModule
-} from "./chunk-OHEXXK6W.js";
-import "./chunk-LR7YH36X.js";
+} from "./chunk-ZYQ6GXBN.js";
 import {
   DOCUMENT
-} from "./chunk-6PAWR2A7.js";
+} from "./chunk-MPQVVCC2.js";
+
 import {
   Attribute,
   ChangeDetectionStrategy,
@@ -44,7 +45,8 @@ import {
   ɵɵinjectAttribute,
   ɵɵprojection,
   ɵɵprojectionDef
-} from "./chunk-5AAT3ZA6.js";
+} from "./chunk-NFGITW35.js";
+
 import {
   Subscription,
   catchError,

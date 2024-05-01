@@ -1,5 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import { Router } from '@angular/router';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-hrm-header',
@@ -10,11 +12,13 @@ export class HrmHeaderComponent implements OnInit{
 
   @Output() toggleSidebarForMe = new EventEmitter<unknown>();
 
-  constructor(private router: Router) {}
+  constructor(){
 
-  ngOnInit(): void {}
+  }
+
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
   }
+
 }

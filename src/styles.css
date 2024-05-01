@@ -43,6 +43,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .details-form input[type="number"],
 .details-form input[type="text"],
+.details-form input[type="email"],
 .details-form select,
 .details-form textarea,
 .details-form input[type="date"] {

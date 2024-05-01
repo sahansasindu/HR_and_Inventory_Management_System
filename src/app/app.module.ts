@@ -30,7 +30,6 @@ import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
-import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
 import { HrmAttendanceComponent } from './hr_manager/hrm-attendance/hrm-attendance.component';
 import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
 import {MatPaginator} from "@angular/material/paginator";
@@ -104,7 +103,15 @@ import { MonthlyProductionReportComponent } from './production_manager/productio
 import { AgentDailyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-daily-report/agent-daily-report.component';
 import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
 import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
-import {MatDialogModule} from '@angular/material/dialog';
+import {CanvasJSAngularStockChartsModule} from "@canvasjs/angular-stockcharts";
+import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
+import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
+import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
+import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
+import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-manage-profile.component';
+import {MatDialog, MatDialogModule} from '@angular/material/dialog';
+import { MailBoxComponent } from './common/mail-box/mail-box.component';
+import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 
 @NgModule({
   declarations: [
@@ -184,6 +191,13 @@ import {MatDialogModule} from '@angular/material/dialog';
     AgentDailyReportComponent,
     AgentWeeklyReportComponent,
     AgentMonthlyReportComponent,
+    EmpDetailsComponent,
+    MedicalApproveComponent,
+    ManageUserComponent,
+    LeaveApproveComponent,
+    HrmManageProfileComponent,
+    MailBoxComponent,
+    ChatBoxComponent,
 
   ],
   imports: [
@@ -224,7 +238,9 @@ import {MatDialogModule} from '@angular/material/dialog';
     MatTabGroup,
     FormsModule,
     MatDialogModule,
-    MatDatepickerInput
+    MatDatepickerInput,
+    CanvasJSAngularStockChartsModule,
+    MatDialogModule,
   ],
 
 
@@ -233,8 +249,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     User,
-
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

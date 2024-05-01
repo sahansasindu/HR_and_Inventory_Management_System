@@ -76,7 +76,7 @@ body {
   justify-content: flex-start; /* Aligns items to the start of the container */
   margin: 40px 0;
   gap: 8px; /* This creates a gap between items. Adjust as needed. */
-  width: 700px;
+  width: 750px;
 }
 
 .issue-management-container {
@@ -154,4 +154,9 @@ body {
   margin-top: 20px ;
   margin-right: 25px;
   text-align: center;
+}
+.button-container-action {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
 }

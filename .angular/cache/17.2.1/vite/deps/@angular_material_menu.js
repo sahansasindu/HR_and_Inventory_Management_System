@@ -2,11 +2,14 @@ import {
   Overlay,
   OverlayConfig,
   OverlayModule
-} from "./chunk-DKCQKJKW.js";
+} from "./chunk-XEZU3VQJ.js";
 import {
   DomPortalOutlet,
   TemplatePortal
-} from "./chunk-FDO6HP5Y.js";
+} from "./chunk-56H24GVS.js";
+import {
+  CdkScrollableModule
+} from "./chunk-CW24ACTC.js";
 import {
   animate,
   state,
@@ -103,6 +106,7 @@ import {
   ɵɵtemplate,
   ɵɵviewQuery
 } from "./chunk-5AAT3ZA6.js";
+
 import {
   Subject,
   Subscription,

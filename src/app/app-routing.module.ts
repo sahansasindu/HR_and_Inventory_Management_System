@@ -58,6 +58,13 @@ import {
 import {
   StorekeeperuserprfileComponent
 } from "./store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component";
+import {LeaveApproveComponent} from "./hr_manager/leave-approve/leave-approve.component";
+import {ManageUserComponent} from "./hr_manager/manage-user/manage-user.component";
+import {MedicalApproveComponent} from "./hr_manager/medical-approve/medical-approve.component";
+import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.component";
+import {HrmManageProfileComponent} from "./hr_manager/hrm-manage-profile/hrm-manage-profile.component";
+import {MailBoxComponent} from "./common/mail-box/mail-box.component";
+import {ChatBoxComponent} from "./common/chat-box/chat-box.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -78,6 +85,10 @@ const routes: Routes = [
       { path: 'manageacount', component:  ManageAccountComponent },
       { path: 'addadvance', component:  AddAdvanceComponent  },
       { path: 'generetesalary', component: GeneratesalaryComponent  },
+      { path: 'mailboxNavigate', component: MailBoxComponent},
+      { path: 'chatboxNavigate', component: ChatBoxComponent},
+    //  { path: 'home', component: HomeComponent }, production_copy_dilshan
+
     ]},
 
 
@@ -88,6 +99,15 @@ const routes: Routes = [
       { path: 'hrmattendance', component: HrmAttendanceComponent },
       { path: 'hrmleaveandmedical', component: HrmLeaveAndMedicalComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
+      { path: 'hrm-dashboard', component: HrmDashboardComponent },
+      {path:'emp-details',component: EmpDetailsComponent},
+      {path:'medical-approve',component: MedicalApproveComponent},
+      {path:'manage-user',component: ManageUserComponent},
+      {path:'HrmManageProfile',component: HrmManageProfileComponent},
+      {path:'leave-approve',component: LeaveApproveComponent},
+      { path: 'mailboxNavigate', component: MailBoxComponent},
+      { path: 'chatboxNavigate', component: ChatBoxComponent},
+
     ]},
 
 
@@ -103,7 +123,10 @@ const routes: Routes = [
       {path:'washingsection',component: WashingsectionComponent},
       {path:'milkproductionsection',component: MilkproductionsectionComponent},
       {path:'storekeeperUserprofile',component: StorekeeperuserprfileComponent},
+        { path: 'mailboxNavigate', component: MailBoxComponent},
+        { path: 'chatboxNavigate', component: ChatBoxComponent},
     ]},
+
   {path:'productionmanager',component:ContainerstoremanagerComponent,children:[
       { path: '', redirectTo: 'dashboardstoremanager', pathMatch: 'full' },
 
@@ -111,9 +134,12 @@ const routes: Routes = [
       {path:'manageagent',component: ManageagentComponent},
       {path:'manageissues',component: ManageissueComponent},
       {path:'managebottlestock',component: ManagebottlestockComponent},
-      {path:'managebottledamage',component: ManagebottledamageComponent},
       {path:'managereportsproduction',component: ManageproductionreportsComponent},
       {path:'productionmanagerUserprofile',component: ProductionmanageruserprofileComponent},
+      {path:'managebottledamage',component: ManagebottledamageComponent},
+      { path: 'mailboxNavigate', component: MailBoxComponent},
+      { path: 'chatboxNavigate', component: ChatBoxComponent},
+
     ]},
 
   { path: 'mdc', component: AddBasicSalary },

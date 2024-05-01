@@ -1,0 +1,59 @@
+.notification-box {
+  border: 1px solid #ccc;
+  background-color: #f9f9f9;
+  padding: 15px;
+  display: flex;
+  box-sizing: border-box;
+  border-radius: 5px;
+  margin: 20px;
+  flex-direction: column;
+}
+.notices{
+  padding: 5px;
+  display: flex;
+  box-sizing: border-box;
+  flex-direction: column;
+  height: auto;
+}
+
+.time-display {
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.clear-btn {
+  background-color: #007bff;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.birthday-notifications {
+  display: flex;
+  flex-direction: column;
+}
+
+.birthday-btn {
+  background-color: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 5px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 768px) {
+  .notification-box {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

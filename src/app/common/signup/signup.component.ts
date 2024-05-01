@@ -82,8 +82,6 @@ export class SignupComponent {
           }
         })
         .catch(error => {
-
-
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
