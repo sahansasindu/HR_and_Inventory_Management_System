@@ -94,20 +94,14 @@ export class ViewEmployeeComponent implements OnInit {
     });
   }
 
-
-
   fetchEmployeeByID() {
-    if (!this.id) {
-      console.error('Employee ID is missing.');
-      return;
-    }
 
-    const endpoint = `getEmployeeByID/${this.id}`; // Assuming the ID is part of the URL
-    this.axiosService.request('GET', endpoint, null, {})
+    this.axiosService.request('GET', `getEmployeeByID/${this.id}`, {}, {})
       .then(response => {
+
         console.log('Response:', response); // Log the entire response for debugging
         if (response.data) {
-          this.empID=response.data.employee_id;
+          this.empID=response.data.employeeid;
           this.address = response.data.address;
           this.contactno = response.data.contact;
           this.companystate = response.data.company_status;
@@ -119,8 +113,6 @@ export class ViewEmployeeComponent implements OnInit {
           this.empname = response.data.employee_name;
           this.dob=response.data.dob;
           this.gender=response.data.gender;
-
-
 
         } else {
           console.error('Empty response data.');
@@ -193,10 +185,11 @@ export class ViewEmployeeComponent implements OnInit {
     });
   }
 
-
   back() {
     this.isVisible1 = true;
     this.isVisible2 = false;
-
   }
+
+
+
 }
