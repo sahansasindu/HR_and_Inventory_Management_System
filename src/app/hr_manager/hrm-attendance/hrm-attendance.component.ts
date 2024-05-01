@@ -1,23 +1,63 @@
-// import {ChangeDetectorRef, Component} from '@angular/core';
-// import {AxiosService} from "../../axios.service";
-import { Component } from '@angular/core';
+// import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {provideNativeDateAdapter} from '@angular/material/core';
+import {MatIcon} from "@angular/material/icon";
+import {MatTable} from "@angular/material/table";
+import { Component, ViewChild } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-hrm-attendance',
   templateUrl: './hrm-attendance.component.html',
-  styleUrl: './hrm-attendance.component.css'
+  styleUrl: './hrm-attendance.component.css',
 })
 export class HrmAttendanceComponent {
   sideBarOpen = true;
   displayedColumns: string[] = ['date', 'employeeId', 'employeeName', 'inTime', 'outTime', 'attendanceStatus'];
-  dataSource = ELEMENT_DATA;
-
+  // dataSource = ELEMENT_DATA;
+  dataSource: MatTableDataSource<PeriodicElement>;
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  constructor(private http: HttpClient) {
+    this.dataSource = new MatTableDataSource<PeriodicElement>();
+    this.paginator = new MatPaginator(null!, null!); // Initializing paginator
+    this.sort = new MatSort(); // Initializing sort
+  }
+
+  ngOnInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    this.getAttendanceData();
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getAttendanceData() {
+    this.http.get<any>('http://localhost:8080/attendance').subscribe(
+      data => {
+        this.dataSource.data = data;
+      },
+      error => {
+        console.log('Error fetching attendance data:', error);
+      }
+    );
+  }
 }
+
 
 export interface PeriodicElement {
   date: string;
@@ -25,22 +65,6 @@ export interface PeriodicElement {
   employeeName: string;
   inTime: string;
   outTime: string;
-  // present: string;
-  // absent: string;
-  // late: string;
   attendanceStatus: string;
 }
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {date: '2024-04-10', employeeId: 1, employeeName: 'Kamal', inTime: '08:00 AM' , outTime: '04:00 PM', attendanceStatus: '####'},
-  // {employeeId: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  // {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  // {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  // {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  // {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  // {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  // {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  // {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  // {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
 

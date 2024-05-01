@@ -1,14 +1,13 @@
-// import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import {MatIcon} from "@angular/material/icon";
 
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectorRef, Component, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
-// import {PeriodicElement} from "../hrm-notification/hrm-notification.component";
+import {AxiosService} from "../../axios.service";
 
 @Component({
   selector: 'app-hrm-dashboard',
@@ -17,6 +16,11 @@ import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
 })
 export class HrmDashboardComponent {
   sideBarOpen = true; // Fixed the assignment, should be '=' not ':'
+
+  totalEmployeeCount: number = 0;
+
+  // constructor(private axiosService: AxiosService, Private router: Router, private cdr: ChangeDetectorRef) {}
+
 
 
   displayedColumns: string[] = ['employeeId', 'employeeName', 'department', 'section', 'occupation'];

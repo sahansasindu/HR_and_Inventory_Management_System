@@ -5,32 +5,41 @@
   </div>
   <!--  <mat-divider></mat-divider>-->
   <h2 class="mt-2">HR MANAGER</h2>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmdashboard']">
-    <mat-icon>dashboard</mat-icon><b class="manu"> Dashboard </b>
+
+
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmdashboard']"> <div class="mat-icon-name">
+    <mat-icon>dashboard</mat-icon> Dashboard </div>
   </a>
-  <a mat-list-item>
-    <mat-icon>summarize</mat-icon><b class="manu"> Employee Details  </b>
+  <a mat-list-item><div class="mat-icon-name" >
+    <mat-icon>summarize</mat-icon> Employee Details </div>
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmupdateemployeedetails']">
-    <mat-icon>person_add</mat-icon><b class="manu">  Update Employee </b>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmupdateemployeedetails']"> <div class="mat-icon-name">
+    <mat-icon>person_add</mat-icon>  Update Employee </div>
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmattendance']">
-    <mat-icon>fact_check</mat-icon><b class="manu"> Employee Attendance </b>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmattendance']"> <div class="mat-icon-name">
+    <mat-icon>fact_check</mat-icon> Employee Attendance </div>
   </a>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmleaveandmedical']">
-    <mat-icon>format_list_bulleted</mat-icon><b class="manu"> Leave & Medical Details </b>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmleaveandmedical']"> <div class="mat-icon-name">
+    <mat-icon>format_list_bulleted</mat-icon> Leave & Medical Details </div>
   </a>
-  <a mat-list-item> <mat-icon>task</mat-icon><b class="manu"> Leave Approval </b> </a>
-  <a mat-list-item> <mat-icon>note_add</mat-icon><b class="manu"> Medical Approval </b></a>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./esc']">
-    <mat-icon>currency_exchange</mat-icon> Employee Salary
+  <a mat-list-item> <div class="mat-icon-name">
+    <mat-icon>task</mat-icon> Leave Approval </div>
   </a>
-  <a mat-list-item> <mat-icon>transfer_within_a_station</mat-icon><b class="manu"> Manage System Users </b> </a>
-  <a mat-list-item> <mat-icon>manage_accounts</mat-icon><b class="manu">  Manage User Accounts </b> </a>
+  <a mat-list-item> <div class="mat-icon-name">
+    <mat-icon>note_add</mat-icon> Medical Approval </div>
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./esc']"> <div class="mat-icon-name">
+    <mat-icon>currency_exchange</mat-icon> Employee Salary </div>
+  </a>
+  <a mat-list-item> <div class="mat-icon-name">
+    <mat-icon>transfer_within_a_station</mat-icon> Manage System Users </div>
+  </a>
+
+  <a mat-list-item> <div class="mat-icon-name">
+    <mat-icon>manage_accounts</mat-icon>   Manage User Accounts </div>
+  </a>
 
     <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
-
-
-
 
 </mat-nav-list>

@@ -9,8 +9,6 @@ import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.
 import {HrmLeaveAndMedicalComponent} from "./hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component";
 import {HrmAttendanceComponent} from "./hr_manager/hrm-attendance/hrm-attendance.component";
 import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
-import { HrmUpdateFormComponent } from './hr_manager/hrm-update-form/hrm-update-form.component';
-
 import { EmployeeSalaryComponent  } from './hr_manager/employee-salary/employee-salary.component';
 import { AddBasicSalary } from './hr_manager/add-basic-salary/add-basic-salary';
 import { AllowancesComponent }from './hr_manager/allowances/allowances.component';
@@ -72,7 +70,6 @@ const routes: Routes = [
 
       { path: 'dashboard', component: DashboardComponent },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      // { path: 'hrm-update-form/:id', component: HrmUpdateFormComponent },
       { path: 'addemployee', component:  AddNewEmployeeComponent },
       { path: 'viewemployee', component:  ViewEmployeeComponent },
       { path: 'employeemedical', component:  AddMedicalComponent },
@@ -81,7 +78,6 @@ const routes: Routes = [
       { path: 'manageacount', component:  ManageAccountComponent },
       { path: 'addadvance', component:  AddAdvanceComponent  },
       { path: 'generetesalary', component: GeneratesalaryComponent  },
-    //  { path: 'home', component: HomeComponent }, production_copy_dilshan
     ]},
 
 
@@ -91,11 +87,9 @@ const routes: Routes = [
       { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
       { path: 'hrmattendance', component: HrmAttendanceComponent },
       { path: 'hrmleaveandmedical', component: HrmLeaveAndMedicalComponent },
+      { path: 'esc', component: EmployeeSalaryComponent},
     ]},
 
-  { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
-  { path: 'hrmupdateform/:id', component: HrmUpdateFormComponent },
-  { path: 'esc', component: EmployeeSalaryComponent},
 
 
 

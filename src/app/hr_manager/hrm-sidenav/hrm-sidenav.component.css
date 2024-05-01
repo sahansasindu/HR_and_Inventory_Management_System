@@ -13,15 +13,6 @@
   padding-top: 4px;
 }
 
-.manu{
-  /*color: #ffffff;*/
-  vertical-align: center;
-  text-align: center;
-  padding-bottom: 5px;
-  padding-top: 3px;
-  font-size: 15px;
-}
-
 .mt-2{
   color: #000000;
   vertical-align: center;
@@ -43,6 +34,10 @@
   font-size: 0.8rem;
   height: 44px;
   margin-bottom: 4px;
+}
+
+.mat-icon-name{
+  font-size: 14.8px;
 }
 
 .mat-list-item-content {

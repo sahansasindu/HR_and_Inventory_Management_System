@@ -1,12 +1,11 @@
 // employee-chart.component.ts
 import { Component } from '@angular/core';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   selector: 'app-employee-chart',
   templateUrl: './employee-chart.component.html',
   styleUrls: ['./employee-chart.component.css'],
-  providers: [CanvasJSAngularChartsModule] // Include CanvasJSAngularChartsModule as provider
+  // Include CanvasJSAngularChartsModule as provider
 })
 export class EmployeeChartComponent {
   chartOptions = {

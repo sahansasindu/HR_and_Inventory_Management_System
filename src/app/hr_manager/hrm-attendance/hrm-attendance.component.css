@@ -1,10 +1,8 @@
 h2{
-  /*text-align: center;*/
   color: #5E4BD7;
   margin-top: 5px;
   margin-left: 10px;
 }
-
 
 #div3 {
   background-color: #b5abab;
@@ -14,7 +12,7 @@ h2{
 }
 
 .mat-elevation-z8 {
-  width: 100%;
+  width: 80%;
   align-items: center;
   background-color: #afe7f8;
   margin-left: 10px;
@@ -26,7 +24,6 @@ h2{
   cursor: pointer;
   padding: 16px;
   align-items: center;
-  /*display: flex;*/
   justify-content: space-around;
 }
 
@@ -38,21 +35,13 @@ h2{
   font-weight: bold;
 }
 
-  /*.backbtn {*/
-  /*  background-color: #5E4BD7;*/
-  /*  color: white;*/
-  /*  border: none;*/
-  /*  border-radius: 5px;*/
-  /*  padding: 10px 20px;*/
-  /*  margin-top: 10px;*/
-  /*  margin-left: 10px;*/
-  /*  margin-bottom: 10px;*/
-  /*}*/
-
-mat-form-field {
-  width: 97%;
-  margin-bottom: 10px;
+.search-container {
+  width: 95%;
+  /*margin-bottom: 10px;*/
   margin-left: 10px;
+}
+.date-container {
+  width: 45%;
 }
 
 th{

@@ -30,13 +30,12 @@ import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
-import {CanvasJSAngularChartsModule} from "@canvasjs/angular-charts";
+import { CanvasJSAngularStockChartsModule } from '@canvasjs/angular-stockcharts';
 import { HrmAttendanceComponent } from './hr_manager/hrm-attendance/hrm-attendance.component';
 import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
 import {MatPaginator} from "@angular/material/paginator";
 import { DepartmentChartComponent } from './common/department-chart/department-chart.component';
 import { EmployeeChartComponent } from './common/employee-chart/employee-chart.component';
-import { HrmUpdateFormComponent } from './hr_manager/hrm-update-form/hrm-update-form.component';
 import { EmployeeSalaryComponent } from './hr_manager/employee-salary/employee-salary.component';
 import { AddBasicSalary } from './hr_manager/add-basic-salary/add-basic-salary';
 
@@ -65,7 +64,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepicker, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { Notificationbar } from './hr_officer/notificationbar/notificationbar';
 import { NotificationComponent } from './hr_officer/notification/notification.component';
 import { GeneratesalaryComponent } from './hr_officer/generatesalary/generatesalary.component';
@@ -105,7 +104,7 @@ import { MonthlyProductionReportComponent } from './production_manager/productio
 import { AgentDailyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-daily-report/agent-daily-report.component';
 import { AgentWeeklyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-weekly-report/agent-weekly-report.component';
 import { AgentMonthlyReportComponent } from './production_manager/productionsections/manageproductionreports/agent-monthly-report/agent-monthly-report.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -129,7 +128,6 @@ import { AgentMonthlyReportComponent } from './production_manager/productionsect
     HrmUpdateEmployeeDetailsComponent,
     DepartmentChartComponent,
     EmployeeChartComponent,
-    HrmUpdateFormComponent,
     EmployeeSalaryComponent,
     AddBasicSalary,
     ModelDeductionformComponent,
@@ -204,7 +202,7 @@ import { AgentMonthlyReportComponent } from './production_manager/productionsect
     MatCardModule,
     ScrollingModule,
     MatTableModule,
-    CanvasJSAngularChartsModule,
+    CanvasJSAngularStockChartsModule,
     MatPaginator,
     MatTabGroup,
     MatTab,
@@ -225,7 +223,8 @@ import { AgentMonthlyReportComponent } from './production_manager/productionsect
     MatTab,
     MatTabGroup,
     FormsModule,
-   
+    MatDialogModule,
+    MatDatepickerInput
   ],
 
 

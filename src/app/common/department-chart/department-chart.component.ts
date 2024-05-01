@@ -1,12 +1,10 @@
 // department-chart.component.ts
 import { Component } from '@angular/core';
-import { CanvasJSAngularChartsModule } from '@canvasjs/angular-charts';
 
 @Component({
   selector: 'app-department-chart',
   templateUrl: './department-chart.component.html',
-  styleUrls: ['./department-chart.component.css'],
-  providers: [CanvasJSAngularChartsModule] // Include CanvasJSAngularChartsModule as provider
+  styleUrls: ['./department-chart.component.css'], // Include CanvasJSAngularChartsModule as provider
 })
 export class DepartmentChartComponent {
   chartOptions = {

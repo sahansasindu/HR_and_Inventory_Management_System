@@ -10,32 +10,36 @@ export class HrmUpdateEmployeeDetailsComponent{
 
 
   sideBarOpen = true;
-  displayedColumns: string[] = ['employeeId', 'employeeName', 'department', 'section', 'occupation','actions'];
+  // displayedColumns: string[] = ['employeeId', 'employeeName', 'department', 'section', 'occupation','actions'];
 
-  // displayedColumns: string[] = ['employeeId', 'employeeName', 'age', 'address', 'dateofbirth', 'gender', 'contactno', 'marriedOrunmarried', 'department', 'section', 'occupation'];
+  displayedColumns: string[] = ['employeeId', 'employeeName', 'address', 'dateofbirth', 'department', 'section', 'occupation','actions'];
   dataSource =ELEMENT_DATA;
   router: any;
-
-  // @ViewChild('MatPaginator') paginator!: MatPaginator;
-  //
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  // }
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  // navigateToUpdateForm(employeeId: number) {
-  //   this.router.navigate(['/hrmupdateform', employeeId]);
-  // }
 
-  isTotalEmployees: boolean =false;
   isUpdateForm: boolean=false;
 
   swaptoUpdateForm() {
-    this.isTotalEmployees=!this.isTotalEmployees;
+    this.isUpdateForm=!this.isUpdateForm;
   }
+
+  employee = {
+    employeeName: '',
+    employeeId: '',
+    age: '',
+    address: '',
+    dateOfBirth: '',
+    gender: '',
+    contactNumber: '',
+    maritalStatus: '',
+    department: '',
+    section: '',
+    occupation: '',
+  };
 
 }
 
@@ -43,8 +47,8 @@ export interface PeriodicElement {
   employeeId: number;
   employeeName: string;
   // age: number;
-  // address: string;
-  // dateofbirth: string;
+  address: string;
+  dateofbirth: string;
   // gender: string;
   // contactno: string;
   // marriedOrunmarried: string;
@@ -55,8 +59,8 @@ export interface PeriodicElement {
 }
 
 const ELEMENT_DATA: PeriodicElement[] = [
-  {employeeId: 1, employeeName: 'Kamal', department: 'IT', section: 'Software', occupation: 'Software Engineer', actions: 'Update'},
-  // {employeeId: 1, employeeName: 'Kamal', age: 23 , address: 'Kandy', dateofbirth: '####', gender: 'Male' , contactno: '0701234567', marriedOrunmarried: 'Unmarried', department: 'IT', section: 'Software', occupation: 'Software Engineer'},
+  // {employeeId: 1, employeeName: 'Kamal', department: 'IT', section: 'Software', occupation: 'Software Engineer', actions: 'Update'},
+  {employeeId: 1, employeeName: 'Kamal', address: 'Kandy', dateofbirth: '####', department: 'IT', section: 'Software', occupation: 'Software Engineer', actions: 'Update'},
   // {employeeId: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
   // {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
   // {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
