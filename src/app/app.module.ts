@@ -107,7 +107,6 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MailBoxComponent } from './common/mail-box/mail-box.component';
 import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -224,6 +223,7 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     CanvasJSAngularStockChartsModule,
     MatDialogModule,
 
+
   ],
 
 
@@ -232,8 +232,8 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     User,
-
   ],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -121,9 +121,9 @@ const routes: Routes = [
       {path:'manageagent',component: ManageagentComponent},
       {path:'manageissues',component: ManageissueComponent},
       {path:'managebottlestock',component: ManagebottlestockComponent},
-      {path:'micromanagement',component: ManagebottledamageComponent},
       {path:'managereportsproduction',component: ManageproductionreportsComponent},
       {path:'productionmanagerUserprofile',component: ProductionmanageruserprofileComponent},
+      {path:'managebottledamage',component: ManagebottledamageComponent},
       { path: 'mailboxNavigate', component: MailBoxComponent},
       { path: 'chatboxNavigate', component: ChatBoxComponent},
 
