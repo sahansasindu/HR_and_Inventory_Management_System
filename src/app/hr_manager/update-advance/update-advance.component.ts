@@ -49,7 +49,7 @@ export class UpdateAdvanceComponent {
     console.log(this.id);
     this.axiosService.request(
       "PUT",
-      "updateAdvance",
+      "/hrandproduction/updateAdvance",
       {
         "advance_salary_id":this.id,
         "amount": this.amount,
@@ -70,6 +70,7 @@ export class UpdateAdvanceComponent {
       alert(errorMessage);
     });
   }
+
 
 
 

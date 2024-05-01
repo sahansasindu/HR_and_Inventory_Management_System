@@ -106,6 +106,12 @@ export class EmployeeAttendanceComponent {
       }
       alert(errorMessage);
     });
+    this.eid="";
+    this.date="";
+    this.intime="";
+    this.outtime="";
+    this.astate="";
+
   }
 
   filterByEmployeeId() {

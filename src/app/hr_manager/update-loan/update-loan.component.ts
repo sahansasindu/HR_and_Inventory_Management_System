@@ -37,6 +37,8 @@ export class UpdateLoanComponent {
       .catch(error => {
         console.error('Error fetching data:', error);
       });
+
+
   }
 
   handleFormSubmit(formData: any) {
@@ -45,20 +47,24 @@ export class UpdateLoanComponent {
       emp_id: this.id
     };
 
-    this.axiosService.request("PUT", "/updateLone", updatedFormData,{}) // Changed from "/updateDeduction" to "/updateAllowance"
+    console.log('Updated Form Data:', updatedFormData); // Log updated form data
+
+    this.axiosService.request("PUT", "/updateLone", updatedFormData, {})
       .then(response => {
         console.log("Response from server:", response);
-        alert("loan details update successfully!");
-      }).catch(error => {
-      console.error("Error updating loan details:", error);
-      let errorMessage = "An error occurred while updating loan details. Please try again later.";
-      if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
-      }
-      alert(errorMessage);
-    });
-
+        alert("Loan details updated successfully!");
+        // Optionally, you can navigate to another page or perform any additional actions upon successful update
+      })
+      .catch(error => {
+        console.error("Error updating loan details:", error);
+        let errorMessage = "An error occurred while updating loan details. Please try again later.";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+        alert(errorMessage);
+      });
   }
+
 
   onBack() {
     this.router.navigate(['/loan']);
