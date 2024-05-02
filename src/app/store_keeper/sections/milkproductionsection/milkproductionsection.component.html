@@ -20,43 +20,36 @@
 
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
-          <!-- Empty Unit ID Column -->
           <ng-container matColumnDef="finished_id">
             <mat-header-cell *matHeaderCellDef> Finished ID </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.finished_id }} </mat-cell>
           </ng-container>
 
-          <!-- Empty Bottles Column -->
           <ng-container matColumnDef="amount">
             <mat-header-cell *matHeaderCellDef> Amount </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.amount }} </mat-cell>
           </ng-container>
 
-          <!-- Damage Bottles Column -->
           <ng-container matColumnDef="batch_code">
             <mat-header-cell *matHeaderCellDef> Batch Code </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.batch_code }} </mat-cell>
           </ng-container>
 
-          <!-- For Washing Column -->
           <ng-container matColumnDef="finished_status">
             <mat-header-cell *matHeaderCellDef> Finished Status </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.finished_status }} </mat-cell>
           </ng-container>
 
-          <!-- Submit Date Column -->
           <ng-container matColumnDef="submit_date">
             <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
           </ng-container>
 
-          <!-- Submit Time Column -->
           <ng-container matColumnDef="submit_time">
             <mat-header-cell *matHeaderCellDef> Submit Time </mat-header-cell>
             <mat-cell *matCellDef="let element"> {{ element.submit_time }} </mat-cell>
           </ng-container>
 
-          <!-- Row Definitions -->
           <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
           <mat-row *matRowDef="let row; columns: displayedColumns;"
                    [class.highlighted]="row === selectedRow"
@@ -146,27 +139,32 @@
           <mat-table [dataSource]="dataSource2" class="mat-elevation-z8">
 
             <!-- Issue ID -->
-            <ng-container matColumnDef="DailyIssueID">
+            <ng-container matColumnDef="daily_issue_id">
               <mat-header-cell *matHeaderCellDef> Daily Issue ID </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element.DailyIssueID }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{ element.daily_issue_id }} </mat-cell>
             </ng-container>
 
             <!-- Number Odf Damage Issue -->
-            <ng-container matColumnDef="damage_Amount_Issue">
+            <ng-container matColumnDef="damage_amount">
               <mat-header-cell *matHeaderCellDef> Damage Amount </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element.damage_Amount_Issue }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{ element.damage_amount }} </mat-cell>
             </ng-container>
 
             <!-- Issue Name -->
-            <ng-container matColumnDef="issue_Name">
+            <ng-container matColumnDef="issue_name">
               <mat-header-cell *matHeaderCellDef> Issue Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element.issue_Name }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{ element.issue_name }} </mat-cell>
             </ng-container>
 
             <!-- Employee ID -->
-            <ng-container matColumnDef="IssueEmployeeID">
+            <ng-container matColumnDef="emp_id">
               <mat-header-cell *matHeaderCellDef> Employee ID </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element.IssueEmployeeID }} </mat-cell>
+              <mat-cell *matCellDef="let element"> {{ element.emp_id }} </mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="submit_date">
+              <mat-header-cell *matHeaderCellDef> Submit Date </mat-header-cell>
+              <mat-cell *matCellDef="let element"> {{ element.submit_date | date }} </mat-cell>
             </ng-container>
 
             <!-- Row Definitions -->

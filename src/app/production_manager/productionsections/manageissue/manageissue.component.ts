@@ -32,14 +32,6 @@ export class ManageissueComponent implements data,OnInit{
 
   ];
 
-  selectedRow: ProductionIssue | null = null;
-
-
-  selectRow(row: ProductionIssue): void {
-    this.selectedRow = row;
-    console.log(this.selectedRow);
-
-  }
 
   manageIssue() {
 
@@ -94,12 +86,45 @@ export class ManageissueComponent implements data,OnInit{
 
   }
 
-  updateIssue(element:any) {
-
+  async toggleEditMode(element: any) {
+    if (element.editing) {
+      await this.updateIssue(element);
+    } else {
+      element.editing = !element.editing;
+    }
   }
 
-  deleteIssue(element:any) {
 
+  async updateIssue(element: any) {
+    try {
+      const updatedIssueData = {
+        issue_id: element.issue_id,
+        issue_name: element.issue_name
+      };
+
+      console.log(updatedIssueData)
+      await this.axiosService.request("PUT", "/updateIssue", updatedIssueData, {})
+        .then(response => {
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Issue updated successfully");
+            this.getIssueDetails();
+          }
+        })
+        .catch(error => {
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+            alert("Failed to update issue");
+          }
+        });
+    } catch (error) {
+      alert("Error updating issue");
+      console.error('Error updating issue', error);
+    } finally {
+      element.editing = false;
+    }
   }
 
   visitorsChartDrilldownHandler = (e: any) => {

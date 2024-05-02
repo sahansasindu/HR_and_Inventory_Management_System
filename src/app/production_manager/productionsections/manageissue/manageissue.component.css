@@ -160,3 +160,12 @@ body {
   justify-content: flex-start;
   gap: 8px;
 }
+.update-issue{
+
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #b3d7ff; /* Input border color similar to the image */
+  border-radius: 5px;
+
+}

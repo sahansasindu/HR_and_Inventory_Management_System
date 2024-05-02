@@ -29,49 +29,48 @@ export class MilkproductionsectionComponent implements OnInit{
   dataSource = new MatTableDataSource<TableElement>([]);
   selectedRow: TableElement | null = null;
 
-  // this TableElemet for Daily Finish goods table
+  // this TableElement for Daily Finish goods table
   ELEMENT_DATA: TableElement[] = [
 
   ];
 
 
 //this dataSource2 for production issue tables
-  displayedColumns2: string[] = ['DailyIssueID', 'damage_Amount_Issue','issue_Name', 'IssueEmployeeID'];
+  displayedColumns2: string[] = ['daily_issue_id', 'damage_amount','issue_name', 'emp_id','submit_date'];
   dataSource2 = new MatTableDataSource<TableElement2>([]);
-  selectedRow2: Element | null = null;
-
+  selectedRow2: TableElement2 | null = null;
   ELEMENT_DATA2:TableElement2[]=[
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+
   ];
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.fetchfinishedMilkBottleDetails().then(r => {});
+    await this.fetchfinishedMilkBottleDetails();
     this.dataSource2.data = this.ELEMENT_DATA2;
-    this.fetchStatusOptions();
+    await this.fetchStatusOptions();
   }
 
   // Initially, the options array is empty
   statusOptions: StatusOption[] = [];
-  fetchStatusOptions(): void {
-    this.statusOptions = [
-      { value: '1', text: 'Issue1' },
-      { value: '2', text: 'Issue2' },
-      { value: '3', text: 'Issue3' },
-      { value: '4', text: 'Issue4' },
-      { value: '5', text: 'Issue5' },
-      { value: '6', text: 'Issue6' },
-      // Add more options as needed
-    ];
+  async fetchStatusOptions(): Promise<void> {
+    try {
+
+      const response = await this.axiosService.request('GET', '/getIssueDetails', {}, {});
+
+      this.statusOptions = response.data.map((item: any) => ({
+        value: item.issue_id,
+        text: item.issue_name
+      }));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   selectRow(row: TableElement): void {
     this.selectedRow = row;
   }
 
-  selectRow2(row2: Element): void {
+  selectRow2(row2: TableElement2): void {
     this.selectedRow2 = row2;
   }
 
@@ -198,7 +197,7 @@ export class MilkproductionsectionComponent implements OnInit{
     });
 
     try {
-      const response = await this.axiosService.request("POST", "/adddailyfinishedmilk", formElement, headers)
+      await this.axiosService.request("POST", "/adddailyfinishedmilk", formElement, headers)
         .then(response => {
 
           if (response.data && response.data.message) {
@@ -277,12 +276,17 @@ export class TableElement {
 
 }
 
-export interface TableElement2 {
+export class TableElement2 {
 
-  DailyIssueID: number;
-  damage_Amount_Issue: number;
-  issue_Name: String;
-  IssueEmployeeID: String;
+  daily_issue_id: number=0;
+  damage_amount: number=0;
+  issue_name: string='';
+  emp_id: string='';
+  submit_date:string='';
+
+  constructor(init?: Partial<TableElement2>) {
+    Object.assign(this, init);
+  }
 }
 interface StatusOption {
   value: string;
