@@ -1,35 +1,57 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {EmployeeMedical} from "../../model/employeeMedical";
+import {AxiosService} from "../../axios.service";
 
 @Component({
   selector: 'app-medical-approve',
   templateUrl: './medical-approve.component.html',
   styleUrl: './medical-approve.component.css'
 })
-export class MedicalApproveComponent {
-  displayedColumns: string[] = ['name', 'id','submittedDate']; // Define columns to display
-  dataSource = [
-    { name: 'John', id: 1,submittedDate: '10.03.2023' },
-    { name: 'Alice', id: 2,submittedDate: '23.05.2023' },
-    // Add more data as needed
-  ];
-  searchTerm: string = ''; // Variable to store the search term entered by the user
+export class MedicalApproveComponent implements OnInit{
 
-  viewMedicals() {
-    console.log('View Medical button clicked');
-    try {
-      const pdfUrl = 'file:///D:/240409160119-ICT%20L%202%20S%20II%20.pdf';
-      window.open(pdfUrl, '_blank');
-      console.log('PDF opened successfully');
-    } catch (error) {
-      console.error('Error opening PDF:', error);
-    }
+  constructor(private employeeMedical:EmployeeMedical,private axios:AxiosService) {
+
   }
 
+  async ngOnInit() {
+    await this.MedicalDetails();
+  }
 
+  displayedColumns: string[] = ['employee_medical_id', 'emp_id','medical_report', 'submit_date', 'medical_status'];
+  dataSource = new MatTableDataSource<EmployeeMedical>([]);
+  selectedRow: EmployeeMedical | null = null;
+  ELEMENT_DATA: EmployeeMedical[] = [
 
-  onSearch(): void {
-    // Perform search operations based on the value of searchTerm
-    console.log('Search term:', this.searchTerm);
+  ];
+
+  selectRowmedicalPDF(row:EmployeeMedical) {
+    this.selectedRow = row;
+  }
+
+  //get Employee medical
+  medicalReportVisible: boolean = false;
+
+  gotoReport() {
+
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+      this.medicalReportVisible=!this.medicalReportVisible;
+  }
+
+   async MedicalDetails():Promise<void> {
+    try {
+      const response = await this.axios.request('GET', '/getMedicalData', {}, {});
+      this.dataSource.data = response.data;
+      this.ELEMENT_DATA = this.dataSource.data;
+      console.log('Medical Details fetched successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching Medical Details:', error);
+    }
+
   }
 
 

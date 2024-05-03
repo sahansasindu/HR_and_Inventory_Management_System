@@ -2,12 +2,25 @@
   <div class="row justify-content-center mt-5">
     <div class="col-md-6">
       <div class="card">
-        <div class="card-header text-center">Reset Password</div>
+        <div class="card-header text-center" *ngIf="!isformEnternewPAssword">Reset Password</div>
         <div class="card-body">
-          <div class="form-group text-center">
-            <img src="../../../assets/images/lock.jpg" alt="New Password Image" class="img-fluid">
-          </div>
-          <form>
+          <form *ngIf="isformenterUSerDetails">
+
+            <div class="form-group">
+              <label>Enter Your User Account Employee ID:</label>
+            <input type="text" id="empId" name="empId" class="form-control" placeholder="Enter Your Employee ID">
+            </div>
+              <div class="form-group">
+              <label>Enter Your User Account Email:</label>
+            <input type="email" id="UserMail" name="UserMail" class="form-control" placeholder="Enter Your Email">
+
+            </div>
+            <div class="center">
+              <button class="btn btn-primary" (click)="enternewpassword()">Send Code</button>
+            </div>
+
+          </form>
+          <form *ngIf="isformEnternewPAssword">
             <div class="form-group">
               <label>New password:</label>
               <input type="password" id="password1" name="password1" class="form-control" placeholder="New password">
@@ -17,7 +30,7 @@
               <input type="password" id="password2" name="password2" class="form-control" placeholder="Enter password">
             </div>
             <div class="center">
-              <button class="btn btn-primary">Confirm</button>
+              <button class="btn btn-primary" (click)="login()">Confirm</button>
             </div>
           </form>
         </div>

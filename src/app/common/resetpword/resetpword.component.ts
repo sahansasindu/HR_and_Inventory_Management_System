@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-resetpword',
@@ -7,4 +8,17 @@ import { Component } from '@angular/core';
 })
 export class ResetpwordComponent {
 
+  constructor( private router: Router) {
+  }
+  isformEnternewPAssword: boolean = false;
+  isformenterUSerDetails: boolean = true;
+
+  enternewpassword() {
+    this.isformEnternewPAssword=!this.isformEnternewPAssword;
+    this.isformenterUSerDetails=!this.isformenterUSerDetails;
+  }
+
+  login() {
+    this.router.navigate(['/login']);
+  }
 }

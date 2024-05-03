@@ -106,6 +106,7 @@ import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-m
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MailBoxComponent } from './common/mail-box/mail-box.component';
 import { ChatBoxComponent } from './common/chat-box/chat-box.component';
+import {EmployeeMedical} from "./model/employeeMedical";
 
 @NgModule({
   declarations: [
@@ -232,6 +233,7 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     User,
+    EmployeeMedical
   ],
 
   bootstrap: [AppComponent]

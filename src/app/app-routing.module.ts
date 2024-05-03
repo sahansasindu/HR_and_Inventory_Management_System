@@ -62,17 +62,20 @@ import {EmpDetailsComponent} from "./hr_manager/emp-details/emp-details.componen
 import {HrmManageProfileComponent} from "./hr_manager/hrm-manage-profile/hrm-manage-profile.component";
 import {MailBoxComponent} from "./common/mail-box/mail-box.component";
 import {ChatBoxComponent} from "./common/chat-box/chat-box.component";
+import {ResetpwordComponent} from "./common/resetpword/resetpword.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
+  {path:'passwordreset',component:ResetpwordComponent},
+
 
   { path: 'container', component: ContainerComponent, children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'addemployee', component:  AddNewEmployeeComponent },
+      { path: 'add-employee', component:  AddNewEmployeeComponent },
       { path: 'viewemployee', component:  ViewEmployeeComponent },
       { path: 'employeemedical', component:  AddMedicalComponent },
       { path: 'addattendance', component:  EmployeeAttendanceComponent },
