@@ -181,27 +181,29 @@
       <div *ngIf="addEmployeeIssueDetailsVisible">
         <button mat-raised-button class="close-button" color="warn" (click)="toggleProdctionIssuAdd()">Close</button>
 
-        <!-- Add Finished bottle details -->
         <form class="details-form">
           <h2>Add Daily Issues By Employees</h2>
 
-          <label for="inputIssedamage">Number Of Total Damage Milk Bottles:</label>
+          <label for="inputIssedamage">Number Of Total Issue Milk Bottles:</label>
           <input type="number" id="inputIssedamage" name="inputIssedamage" required>
 
 
           <label for="inputIssuename">Select Issue Type:</label>
-          <select id="inputIssuename" name="inputIssuename" required>
+          <select id="inputIssuename" name="inputIssuename" required (change)="updateSelectedIssueTypeText($event)">
 
-            <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.text }}</option>
+            <option *ngFor="let option of statusOptions" [value]="option.text">{{ option.text }}</option>
 
           </select>
 
           <label for="inputEmpID">Employee ID:</label>
           <input type="text" id="inputEmpID" name="inputEmpID" required>
 
+          <label for="issue_submit_date">Date:</label>
+          <input type="date" id="issue_submit_date" name="issue_submit_date" required>
+
           <div class="form-buttons">
             <button mat-raised-button color="accent">Clear</button>
-            <button mat-raised-button color="primary" type="submit">Submit</button>
+            <button mat-raised-button color="primary" type="submit" (click)="submitDailyIssueByEmployee()">Submit</button>
           </div>
         </form>
       </div>
@@ -210,23 +212,28 @@
       <div *ngIf="updatechangeIsuesVisible">
         <button mat-raised-button class="close-button" color="warn" (click)="toggleProdctionChnages()">Close</button>
 
-        <!-- Add Finished bottle details -->
         <form class="details-form">
           <h2>Update Changes Daily Issues</h2>
 
-          <label for="updateIssedamage">Number Of Total Damage Milk Bottles:</label>
+          <label for="updateIsseID">Issue ID:</label>
+          <input type="number" id="updateIsseID" name="updateIsseID" required>
+
+          <label for="updateIssedamage">Number Of Total Issue Milk Bottles:</label>
           <input type="number" id="updateIssedamage" name="updateIssedamage" required>
 
 
           <label for="updateIssuename">Select Issue Type:</label>
           <select id="updateIssuename" name="updateIssuename" required>
 
-            <option *ngFor="let option of statusOptions" [value]="option.value">{{ option.text }}</option>
+            <option *ngFor="let option of statusOptions" [value]="option.text">{{ option.text }}</option>
 
           </select>
 
           <label for="UpdateEmpID">Employee ID:</label>
           <input type="text" id="UpdateEmpID" name="UpdateEmpID" required>
+
+          <label for="UpdateDate">Date:</label>
+          <input type="date" id="UpdateDate" name="UpdateDate" required>
 
           <div class="form-buttons">
             <button mat-raised-button color="accent">Clear</button>

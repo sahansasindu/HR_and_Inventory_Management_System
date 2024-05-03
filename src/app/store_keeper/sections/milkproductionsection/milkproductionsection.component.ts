@@ -14,6 +14,7 @@ export class MilkproductionsectionComponent implements OnInit{
 
   updateForm: FormGroup;
 
+  selectedIssueTypeText: string = "";
 
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
@@ -46,8 +47,8 @@ export class MilkproductionsectionComponent implements OnInit{
   async ngOnInit() {
 
     await this.fetchfinishedMilkBottleDetails();
-    this.dataSource2.data = this.ELEMENT_DATA2;
     await this.fetchStatusOptions();
+    await this.gettAllIssueByEmployee();
   }
 
   // Initially, the options array is empty
@@ -58,7 +59,6 @@ export class MilkproductionsectionComponent implements OnInit{
       const response = await this.axiosService.request('GET', '/getIssueDetails', {}, {});
 
       this.statusOptions = response.data.map((item: any) => ({
-        value: item.issue_id,
         text: item.issue_name
       }));
     } catch (error) {
@@ -90,6 +90,12 @@ export class MilkproductionsectionComponent implements OnInit{
   }
 
   toggleProdctionChnages(): void {
+
+    if (!this.selectedRow2) {
+      alert("No row selected")
+      return;
+    }
+
     this.updatechangeIsuesVisible = !this.updatechangeIsuesVisible;
 
     // Ensure update div is closed when opening add details
@@ -232,7 +238,7 @@ export class MilkproductionsectionComponent implements OnInit{
 
     console.log(formData)
     try {
-      const response = await this.axiosService.request('PUT', '/updatefinishedMilk', formData, headers)
+      await this.axiosService.request('PUT', '/updatefinishedMilk', formData, headers)
         .then(response => {
 
           if (response.data && response.data.message) {
@@ -254,6 +260,80 @@ export class MilkproductionsectionComponent implements OnInit{
     } catch (error) {
       alert("Error updating details")
       console.error('Error updating details', error);
+    }
+
+  }
+
+  updateSelectedIssueTypeText(event: any): void {
+    const value = event.target.value;
+    const selectedOption = this.statusOptions.find(option => option.text === value);
+    this.selectedIssueTypeText = selectedOption?.text || "";
+  }
+
+  //add daily Issue by Employee
+  async submitDailyIssueByEmployee():Promise<void> {
+
+
+    const inputIssedamage = (document.getElementById('inputIssedamage') as HTMLInputElement).value;
+    const inputIssuename = this.selectedIssueTypeText;
+    const inputEmpID = (document.getElementById('inputEmpID') as HTMLInputElement).value;
+    const issue_submit_date = (document.getElementById('issue_submit_date') as HTMLInputElement).value;
+
+    console.log(inputIssuename)
+    const IssueBottles = parseInt(inputIssedamage);
+
+    if (isNaN(IssueBottles) || inputIssuename === "" || inputEmpID==="" || issue_submit_date==="") {
+      alert("Please Fill All Details");
+      return;
+    }
+
+    const formDate = new Date((document.getElementById('issue_submit_date') as HTMLInputElement).value);
+    const formattedDate = formDate.toISOString().split('T')[0]; // Gets 'YYYY-MM-DD'
+
+    const formElement = new TableElement2({
+      damage_amount:IssueBottles,
+      issue_name: inputIssuename,
+      emp_id: inputEmpID,
+      submit_date: formattedDate,
+    });
+
+    try {
+      console.log(formElement)
+      await this.axiosService.request("POST", "/addDailyIssuesemployee", formElement, {})
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Submission successful");
+            this.gettAllIssueByEmployee();
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+    } catch (error) {
+
+      alert("Error submitting form");
+      console.error('Error submitting form', error);
+    }
+
+  }
+
+  async gettAllIssueByEmployee():Promise<void>{
+
+    try {
+      const response = await this.axiosService.request('GET', '/gettAllIssueByEmployee', {}, {});
+      this.dataSource2.data = response.data;
+      this.ELEMENT_DATA2=this.dataSource2.data;
+      console.log(response)
+    } catch (error) {
+      console.log(error)
     }
 
   }
@@ -289,6 +369,5 @@ export class TableElement2 {
   }
 }
 interface StatusOption {
-  value: string;
   text: string;
 }
