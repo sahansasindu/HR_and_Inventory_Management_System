@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import {HrmLeaveAndMedicalComponent} from "../hrm-leave-and-medical/hrm-leave-and-medical.component";
+
 @Component({
   selector: 'app-hrm-sidenav',
   templateUrl: './hrm-sidenav.component.html',

@@ -28,6 +28,13 @@ import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
 import { HrmHeaderComponent } from './hr_manager/hrm-header/hrm-header.component';
 import { HrmSidenavComponent } from './hr_manager/hrm-sidenav/hrm-sidenav.component';
+import {ScrollingModule} from '@angular/cdk/scrolling';
+import { HrmLeaveAndMedicalComponent } from './hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component';
+import { HrmAttendanceComponent } from './hr_manager/hrm-attendance/hrm-attendance.component';
+import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
+import {MatPaginator} from "@angular/material/paginator";
+import { DepartmentChartComponent } from './common/department-chart/department-chart.component';
+import { EmployeeChartComponent } from './common/employee-chart/employee-chart.component';
 import { EmployeeSalaryComponent } from './hr_manager/employee-salary/employee-salary.component';
 import { AddBasicSalary } from './hr_manager/add-basic-salary/add-basic-salary';
 
@@ -56,7 +63,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepicker, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { Notificationbar } from './hr_officer/notificationbar/notificationbar';
 import { NotificationComponent } from './hr_officer/notification/notification.component';
 import { GeneratesalaryComponent } from './hr_officer/generatesalary/generatesalary.component';
@@ -89,7 +96,6 @@ import {User} from "./model/usermodel";
 import { ManageuserprofileComponent } from './common/manageuserprofile/manageuserprofile.component';
 import { ProductionmanageruserprofileComponent } from './production_manager/productionsections/productionmanageruserprofile/productionmanageruserprofile.component';
 import { StorekeeperuserprfileComponent } from './store_keeper/sections/storekeeperuserprfile/storekeeperuserprfile.component';
-import {NgxSpinnerModule} from "ngx-spinner";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import { DailyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/daily-report/daily-production-report.component';
 import { WeeklyProductionReportComponent } from './production_manager/productionsections/manageproductionreports/weekly-report/weekly-production-report.component';
@@ -124,6 +130,11 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     HrmDashboardComponent,
     HrmHeaderComponent,
     HrmSidenavComponent,
+    HrmLeaveAndMedicalComponent,
+    HrmAttendanceComponent,
+    HrmUpdateEmployeeDetailsComponent,
+    DepartmentChartComponent,
+    EmployeeChartComponent,
     EmployeeSalaryComponent,
     AddBasicSalary,
     ModelDeductionformComponent,
@@ -188,7 +199,6 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     MailBoxComponent,
     ChatBoxComponent,
 
-
   ],
   imports: [
     BrowserModule,
@@ -204,6 +214,14 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     MatButtonModule,
     MatBadgeModule,
     MatCardModule,
+    ScrollingModule,
+    MatTableModule,
+    CanvasJSAngularStockChartsModule,
+    MatPaginator,
+    MatTabGroup,
+    MatTab,
+    MatFormFieldModule,
+    MatInputModule,
     MatCardModule,
     MatFormField,
     MatSelect,
@@ -216,14 +234,13 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
     HttpClientModule,
     MatTableModule,
     ReactiveFormsModule,
-    NgxSpinnerModule,
     MatTab,
     MatTabGroup,
     FormsModule,
+    MatDialogModule,
+    MatDatepickerInput,
     CanvasJSAngularStockChartsModule,
     MatDialogModule,
-
-
   ],
 
 
@@ -237,3 +254,5 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

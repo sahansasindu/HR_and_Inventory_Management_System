@@ -1,0 +1,169 @@
+
+<div class="d-flex page__box p-1 mt-0">
+
+  <div class="parallel-div col-9">
+
+    <h2>Update Employee Details</h2><br>
+
+    <div class="update" *ngIf="!isUpdateForm">
+
+      <mat-form-field appearance="fill">
+        <mat-label>Search</mat-label>
+        <input matInput placeholder="Search...">
+        <button mat-icon-button matSuffix>
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+
+    <div class="container">
+
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8"><br><br>
+
+        <ng-container matColumnDef="employeeId">
+          <th mat-header-cell *matHeaderCellDef> Employee ID </th>
+          <td mat-cell *matCellDef="let element"> {{element.employeeId}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="employeeName">
+          <th mat-header-cell *matHeaderCellDef> Employee Name </th>
+          <td mat-cell *matCellDef="let element"> {{element.employeeName}} </td>
+        </ng-container>
+
+<!--        <ng-container matColumnDef="age">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Age </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.age}} </td>-->
+<!--        </ng-container>-->
+
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef> Address </th>
+          <td mat-cell *matCellDef="let element"> {{element.address}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="dateofbirth">
+          <th mat-header-cell *matHeaderCellDef> Date Of Birth </th>
+          <td mat-cell *matCellDef="let element"> {{element.dateofbirth}} </td>
+        </ng-container>
+
+<!--        <ng-container matColumnDef="gender">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Gender </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.gender}} </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="contactno">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Contact No </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.contactno}} </td>-->
+<!--        </ng-container>-->
+
+<!--        <ng-container matColumnDef="marriedOrunmarried">-->
+<!--          <th mat-header-cell *matHeaderCellDef> Married Or Unmarried </th>-->
+<!--          <td mat-cell *matCellDef="let element"> {{element.marriedOrunmarried}} </td>-->
+<!--        </ng-container>-->
+
+        <ng-container matColumnDef="department">
+          <th mat-header-cell *matHeaderCellDef> Department </th>
+          <td mat-cell *matCellDef="let element"> {{element.department}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="section">
+          <th mat-header-cell *matHeaderCellDef> Section </th>
+          <td mat-cell *matCellDef="let element"> {{element.section}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="occupation">
+          <th mat-header-cell *matHeaderCellDef> Occupation </th>
+          <td mat-cell *matCellDef="let element"> {{element.occupation}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element"> <button (click)="swaptoUpdateForm()" class="updateSwitch" >Update</button> </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </mat-table>
+      <br>
+
+    </div>
+
+<!--        <mat-paginator [pageSizeOptions]="[5, 10, 20]"-->
+<!--                       showFirstLastButtons-->
+<!--                       aria-label="Select page of periodic elements">-->
+<!--        </mat-paginator>-->
+
+<!--    <mat-divider></mat-divider>-->
+  </div>
+
+    <div class="update-employee" *ngIf="isUpdateForm" >
+      <form>
+
+        <div class="form-field">
+          <label>Employee Name</label>
+          <input type="text" [(ngModel)]="employee.employeeName" name="employeeName">
+        </div>
+
+        <div class="form-field">
+          <label>Employee ID</label>
+          <input type="text" [(ngModel)]="employee.employeeId" name="employeeId">
+        </div>
+
+        <div class="form-field">
+          <label>Age</label>
+          <input type="text" [(ngModel)]="employee.age" name="age">
+        </div>
+
+        <div class="form-field">
+          <label>Address</label>
+          <input type="text" [(ngModel)]="employee.address" name="address">
+        </div>
+
+        <div class="form-field">
+          <label>Date Of Birth</label>
+          <input type="text" [(ngModel)]="employee.dateOfBirth" name="dateOfBirth">
+        </div>
+
+        <div class="form-field">
+          <label>Gender</label>
+          <input type="text" [(ngModel)]="employee.gender" name="gender">
+        </div>
+
+        <div class="form-field">
+          <label>Contact Number</label>
+          <input type="text" [(ngModel)]="employee.contactNumber" name="contactNumber">
+        </div>
+
+        <div class="form-field">
+          <label>Married or Unmarried</label>
+          <input type="text" [(ngModel)]="employee.maritalStatus" name="maritalStatus">
+        </div>
+
+        <div class="form-field">
+          <label>Department</label>
+          <input type="text" [(ngModel)]="employee.department" name="department">
+        </div>
+
+        <div class="form-field">
+          <label>Section</label>
+          <input type="text" [(ngModel)]="employee.section" name="section">
+        </div>
+
+        <div class="form-field">
+          <label>Occupation</label>
+          <input type="text" [(ngModel)]="employee.occupation" name="occupation">
+        </div>
+
+        <div class="form-actions">
+          <button class="backbtn" (click)="swaptoUpdateForm()"><b> Back </b> </button>
+          <button type="submit" (click)="swaptoUpdateForm()">Update</button>
+        </div>
+      </form>
+    </div>
+
+
+
+  </div>
+  <div class="left-div col-3 text-right" id="div3">
+    <app-notificationcom></app-notificationcom>
+  </div>
+</div>
+

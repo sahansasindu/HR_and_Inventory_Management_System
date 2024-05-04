@@ -2,8 +2,12 @@ mat-toolbar {
   position: sticky;
   top: 0;
   z-index: 100;
+}
 
-
+.text1{
+  /*font-family: 'Source Serif Pro', serif;*/
+  font-size: 30px;
+  font-weight: bold;
 }
 
 ul {
@@ -22,11 +26,12 @@ button {
 mat-toolbar {
   background: #51b9c0;
 }
+
 .user-image {
   border-radius: 50%;
   width: 50px;
   height: 50px;
-  margin: 65px 30px 75px 100px;
+  margin: 65px 30px 75px 80px;
 
 }
 
@@ -43,5 +48,3 @@ mat-toolbar {
     width: 165vw;
   }
 }
-
-

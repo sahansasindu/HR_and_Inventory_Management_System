@@ -3,19 +3,25 @@
   <div class="logo py-0">
     <img src="../../../assets/images/logo.png" alt="Company Logo" />
   </div>
-  <mat-divider></mat-divider>
+<mat-divider></mat-divider>
   <h2 class="mt-2">HR Manager</h2>
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmdashboard']">
-    <mat-icon>dashboard</mat-icon> Dashboard
+
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmdashboard']"> <div class="mat-icon-name">
+    <mat-icon>dashboard</mat-icon> Dashboard </div>
   </a>
-
-  <a mat-list-item routerLinkActive="list-item-active" >
-    <mat-icon>person_add</mat-icon> Update Employee
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmupdateemployeedetails']"> <div class="mat-icon-name">
+    <mat-icon>person_add</mat-icon>  Update Employee </div>
   </a>
-
-  <a mat-list-item routerLinkActive="list-item-active" >
-    <mat-icon>format_list_bulleted</mat-icon>  Leave & Medical  </a>
-
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmattendance']"> <div class="mat-icon-name">
+    <mat-icon>fact_check</mat-icon> Employee Attendance </div>
+  </a>
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./hrmleaveandmedical']"> <div class="mat-icon-name">
+    <mat-icon>format_list_bulleted</mat-icon> Leave & Medical Details </div>
+  </a>
+    <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./esc']"> <div class="mat-icon-name">
+    <mat-icon>currency_exchange</mat-icon> Employee Salary </div>
+  </a>
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-details']">
     <mat-icon>summarize</mat-icon> Employee Details
@@ -25,12 +31,6 @@
     <mat-icon>note_add</mat-icon> Medical Approval
   </a>
 
-
-  <a mat-list-item routerLinkActive="list-item-active" >
-    <mat-icon>fact_check</mat-icon> Employee Attendance
-  </a>
-
-
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./manage-user']">
     <mat-icon>transfer_within_a_station</mat-icon> Manage Users
   </a>
@@ -38,11 +38,6 @@
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./leave-approve']">
     <mat-icon>task</mat-icon> Leave Approval
-  </a>
-
-
-  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./esc']">
-    <mat-icon>currency_exchange</mat-icon> Employee Salary
   </a>
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./mailboxNavigate']">

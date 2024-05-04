@@ -6,6 +6,9 @@ import {LoginComponent} from "./common/login/login.component";
 import {SignupComponent}from "./common/signup/signup.component";
 import { HrmContainerComponent } from './hr_manager/hrm-container/hrm-container.component';
 import { HrmDashboardComponent } from './hr_manager/hrm-dashboard/hrm-dashboard.component';
+import {HrmLeaveAndMedicalComponent} from "./hr_manager/hrm-leave-and-medical/hrm-leave-and-medical.component";
+import {HrmAttendanceComponent} from "./hr_manager/hrm-attendance/hrm-attendance.component";
+import { HrmUpdateEmployeeDetailsComponent } from './hr_manager/hrm-update-employee-details/hrm-update-employee-details.component';
 import { EmployeeSalaryComponent  } from './hr_manager/employee-salary/employee-salary.component';
 import { AddBasicSalary } from './hr_manager/add-basic-salary/add-basic-salary';
 import { AllowancesComponent }from './hr_manager/allowances/allowances.component';
@@ -68,10 +71,12 @@ const routes: Routes = [
   {path:'login',component:LoginComponent},
   {path:'signup',component:SignupComponent},
 
+
   { path: 'container', component: ContainerComponent, children: [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
 
       { path: 'dashboard', component: DashboardComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'addemployee', component:  AddNewEmployeeComponent },
       { path: 'viewemployee', component:  ViewEmployeeComponent },
       { path: 'employeemedical', component:  AddMedicalComponent },
@@ -86,10 +91,13 @@ const routes: Routes = [
 
     ]},
 
+
   { path: 'hrmcontainer', component: HrmContainerComponent, children: [
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
-
       { path: 'hrmdashboard', component: HrmDashboardComponent },
+      { path: 'hrmupdateemployeedetails', component: HrmUpdateEmployeeDetailsComponent },
+      { path: 'hrmattendance', component: HrmAttendanceComponent },
+      { path: 'hrmleaveandmedical', component: HrmLeaveAndMedicalComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
       { path: 'hrm-dashboard', component: HrmDashboardComponent },
       {path:'emp-details',component: EmpDetailsComponent},
@@ -101,6 +109,11 @@ const routes: Routes = [
       { path: 'chatboxNavigate', component: ChatBoxComponent},
 
     ]},
+
+
+
+
+
     {path:'storekeeper',component:ContainerstoreComponent,children:[
       { path: '', redirectTo: 'dashboardstore', pathMatch: 'full' },
 
