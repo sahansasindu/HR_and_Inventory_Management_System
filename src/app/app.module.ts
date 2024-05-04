@@ -107,6 +107,9 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MailBoxComponent } from './common/mail-box/mail-box.component';
 import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 import {EmployeeMedical} from "./model/employeeMedical";
+import {EmployeeLeave} from "./model/employeeLeave";
+
+
 
 @NgModule({
   declarations: [
@@ -233,7 +236,8 @@ import {EmployeeMedical} from "./model/employeeMedical";
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     User,
-    EmployeeMedical
+    EmployeeMedical,
+    EmployeeLeave
   ],
 
   bootstrap: [AppComponent]

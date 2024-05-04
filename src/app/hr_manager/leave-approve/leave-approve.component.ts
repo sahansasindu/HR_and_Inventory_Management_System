@@ -1,27 +1,49 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {EmployeeLeave} from "../../model/employeeLeave";
+import {AxiosService} from "../../axios.service";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-leave-approve',
   templateUrl: './leave-approve.component.html',
   styleUrl: './leave-approve.component.css'
 })
-export class LeaveApproveComponent {
-  displayedColumns: string[] = ['name', 'id']; // Define columns to display
-  dataSource = [
-    { name: 'John', id: 1 },
-    { name: 'Alice', id: 2},
-    // Add more data as needed
-  ];
-  searchTerm: string = ''; // Variable to store the search term entered by the user
+export class LeaveApproveComponent implements OnInit{
+  constructor(private employeeLeave:EmployeeLeave,private axios:AxiosService) {
 
-  onSearch(): void {
-    // Perform search operations based on the value of searchTerm
-    console.log('Search term:', this.searchTerm);
   }
+  async ngOnInit() {
+    await this.LeaveDetails();
+  }
+  displayedColumns: string[] = ['employee_leave_id', 'emp_id','leave_type', 'reson', 'start_time','end_time','status'];
+  dataSource = new MatTableDataSource<EmployeeLeave>([]);
+  selectedRow: EmployeeLeave | null = null;
+  ELEMENT_DATA: EmployeeLeave[] = [
+  ];
 
+  selectRowleavePDF(row:EmployeeLeave) {
+    this.selectedRow = row;
+  }
+  leaveReportVisible: boolean = false;
 
-  async onViewPdf() {
+  gotoReport() {
 
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+    this.leaveReportVisible=!this.leaveReportVisible;
+  }
+  async LeaveDetails():Promise<void> {
+    try {
+      const response = await this.axios.request('GET', '/getLeaveData', {}, {});
+      this.dataSource.data = response.data;
+      this.ELEMENT_DATA = this.dataSource.data;
+      console.log('Leave Details fetched successfully:', response.data);
+    } catch (error) {
+      console.error('Error fetching Leave Details:', error);
+    }
 
   }
 }
