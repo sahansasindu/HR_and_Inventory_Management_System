@@ -6,7 +6,7 @@
 }
 
 body {
-  background-color: #f5f5f5;
+  background-color: #ffffff;
   font-family: Arial, sans-serif;
 }
 
@@ -99,7 +99,7 @@ h2{
   height: 800px;
   border-radius: 1px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  color: #495057;
+  /*color: #495057;*/
 }
 
 .parallel-div {
@@ -173,11 +173,11 @@ h2{
 }
 
 
-#div3 {
-  margin-left: 3px;
-  background-color: #cfcdcd;
-  border-radius: 2%;
-}
+/*#div3 {*/
+/*  margin-left: 3px;*/
+/*  background-color: #cfcdcd;*/
+/*  border-radius: 2%;*/
+/*}*/
 
 /* Media queries */
 

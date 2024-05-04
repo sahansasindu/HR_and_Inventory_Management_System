@@ -31,10 +31,8 @@ import {
   ɵɵdefineInjector,
   ɵɵdefineNgModule,
   ɵɵinject
-
-} from "./chunk-5AAT3ZA6.js";
-import "./chunk-SJDNSO6V.js";
-import "./chunk-AOF462FV.js";
+} from "./chunk-NFGITW35.js";
+import "./chunk-WSA2QMXP.js";
 import "./chunk-SFFCLR5V.js";
 
 // node_modules/@angular/platform-browser/fesm2022/animations.mjs

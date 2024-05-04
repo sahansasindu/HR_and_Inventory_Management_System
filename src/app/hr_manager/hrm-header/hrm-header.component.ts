@@ -16,6 +16,8 @@ export class HrmHeaderComponent implements OnInit{
 
   }
 
+ngOnInit() {
+}
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();
