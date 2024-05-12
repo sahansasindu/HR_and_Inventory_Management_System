@@ -12,25 +12,6 @@ export class ManagebottlestockComponent {
   constructor(private axiosService:AxiosService) {
   }
 
-  width = "80%";
-  chartOptions = {
-    title:{
-      text: "Total Bottle Stock"
-    },
-    animationEnabled: true,
-    axisY: {
-      includeZero: true,
-    },
-    data: [{
-      type: "bar",
-      indexLabel: "{y}",
-      dataPoints: [
-        { label: "Total", y: 15600,color: "#00ffeb" },
-
-      ]
-    }]
-  }
-
   isFormVisible :boolean=false;
 
   toggleFormVisibility() {
