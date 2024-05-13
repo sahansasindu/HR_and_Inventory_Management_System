@@ -1,5 +1,47 @@
 <div class="d-flex page__box p-1 mt-0">
   <div class="parallel-div col-9">
+    <!-- left-card.component.html -->
+
+    <mat-card class="left">
+      <mat-card-header>
+        <mat-card-title>
+          Messages
+          <mat-form-field style="margin-top: 20px; border-radius: 20px; " appearance="fill">
+            <mat-label>Search a user</mat-label>
+            <input matInput placeholder="Search">
+            <button mat-icon-button matSuffix>
+              <mat-icon>search</mat-icon>
+            </button>
+          </mat-form-field>
+        </mat-card-title>
+      </mat-card-header>
+      <hr style="border: 2px solid black; font-weight: bold;">
+      <mat-card-content>
+
+      </mat-card-content>
+    </mat-card>
+
+    <!-- right-card.component.html -->'
+    <mat-card class="right">
+      <mat-card-header>
+        <mat-card-title>
+
+        </mat-card-title>
+      </mat-card-header>
+
+      <mat-card-content>
+        <div>
+        <hr class="hr-2" style="border: 2px solid black; font-weight: bold;" >
+      </div>
+        <div>
+        <mat-form-field class="text-box">
+          <mat-label>Type here...</mat-label>
+          <textarea matInput placeholder="Hi..."></textarea>
+        </mat-form-field>
+        <button class="btn-1" mat-flat-button color="primary">Send</button>
+        </div>
+      </mat-card-content>
+    </mat-card>
 
   </div>
   <div class="left-div col-3 text-right" id="div3">

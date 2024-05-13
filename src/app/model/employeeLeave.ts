@@ -59,7 +59,7 @@ export class EmployeeLeave {
   private _emp_id:string='';
   private _leave_type:string='';
   private _reson:string='';
-  private _status:string='';
   private _start_time:string='';
   private _end_time:string='';
+  private _status:string='';
 }

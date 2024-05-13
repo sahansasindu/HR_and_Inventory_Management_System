@@ -5,6 +5,10 @@ import {User} from "../../model/usermodel";
 import {MailServiceService} from "../../service/services/mail-service.service";
 import {Agent} from "../../model/agentmodel";
 import {isPlatformBrowser} from "@angular/common";
+import _default from "chart.js/dist/plugins/plugin.title";
+import {UserService} from "../../service/services/user.service";
+
+
 
 @Component({
   selector: 'app-manage-user',
@@ -13,8 +17,8 @@ import {isPlatformBrowser} from "@angular/common";
 })
 export class ManageUserComponent implements OnInit{
 
-
-  constructor(private axservice:AxiosService,private sendMail: MailServiceService) { }
+  id:number = 0;
+  constructor(private userService: UserService , private axservice:AxiosService,private sendMail: MailServiceService) { }
 
   displayedColumns: string[] = ['id', 'username', 'email', 'contact', 'roles', 'employee'];
   dataSourceUser = new MatTableDataSource<User>([]);
@@ -124,4 +128,17 @@ export class ManageUserComponent implements OnInit{
     }
 
   }
+  async deleteUser(id: number): Promise<void>{
+    if (confirm(`Are you sure you want to delete user with ID ${id}?`)) {
+      try {
+        await this.userService.deleteUser(id).toPromise();
+        alert(`User with ID ${id} deleted successfully.`);
+        await this.getAllUsers(); // Refresh the user list after deletion
+      } catch (error) {
+        console.error(`Error deleting user: ${error}`);
+        alert(`An error occurred while deleting the user.`);
+      }
+    }
+  }
+
 }
