@@ -75,12 +75,32 @@ export class ManageuserprofileComponent implements OnInit {
     }
   }
 
+
+  isValidEmail(email:string): boolean {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}$/;
+    return emailRegex.test(email);
+  }
+
+
   saveFormState() {
     if (isPlatformBrowser(this.platformId)) {
       const formValue = this.userProfileForm.value;
       const id = this.user.id;
 
+
+
+
       if (id) {
+        const isEmptyField = Object.values(formValue).some(value => !value);
+        if (isEmptyField) {
+          alert("Please fill out all fields");
+          return;
+        }
+
+        if(!this.isValidEmail(formValue.email)){
+          alert("Please enter valid email");
+          return;
+        }
         this.ax.request(
           "PUT",
           "/updateUserProfile",
@@ -94,9 +114,9 @@ export class ManageuserprofileComponent implements OnInit {
         ).then(response => {
           // Handle successful response
           alert('Profile updated successfully');
-          this.userService.setUser(response.data);  // Assuming setUser is a method that updates the current user details
+          this.userService.setUser(response.data);
           this.updateForm(response.data);
-          this.loadFormState();  // Refresh local storage or whatever necessary
+          this.loadFormState();
         }).catch(error => {
           // Handle errors specifically
           if (error.response && error.response.data) {
@@ -111,6 +131,7 @@ export class ManageuserprofileComponent implements OnInit {
       }
     }
   }
+
   loadFormState() {
     if (isPlatformBrowser(this.platformId)) {
       const data = localStorage.getItem('currentUser');
