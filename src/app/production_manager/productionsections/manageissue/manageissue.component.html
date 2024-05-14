@@ -8,9 +8,27 @@
         <button mat-flat-button color="primary" (click)="manageIssue()">Manage Issues</button>
       </div>
 
+      <div class="selectMonth">
+        <div class="input-container">
+          <p>Select Month</p>
+          <select [(ngModel)]="selectedMonth">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <p>Select Year</p>
+          <select [(ngModel)]="selectedYear">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+
+        <button mat-raised-button class="search-button" color="primary" (click)="getMonthlyIssue()">Search</button>
+
+      </div>
+
       <div class="issue-chart">
         <canvasjs-chart (chartInstance)="getChartInstance($event)"></canvasjs-chart>
-        <button mat-raised-button class="close-button" color="warn" *ngIf="this.isButtonVisible" (click)="handleClick($event)"> < Back</button>
       </div>
 
     </div>

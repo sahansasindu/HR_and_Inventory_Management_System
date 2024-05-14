@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
-import {Agent} from "../../../model/agentmodel";
 import {ProductionIssue} from "../../../model/issuemodel";
 import {AxiosService} from "../../../axios.service";
 
@@ -13,14 +12,19 @@ import {AxiosService} from "../../../axios.service";
 export class ManageissueComponent implements data,OnInit{
 
   chart: any;
-  isButtonVisible = false;
   isManageProductionIssues: boolean=false;
 
   constructor(private axiosService:AxiosService ) {
   }
 
   async ngOnInit() {
+
     await this.getIssueDetails();
+
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+      this.years.push(year);
+    }
   }
 
   displayedColumns: string[] = ['issue_id', 'issue_name', 'actions'];
@@ -127,124 +131,89 @@ export class ManageissueComponent implements data,OnInit{
     }
   }
 
-  visitorsChartDrilldownHandler = (e: any) => {
-    this.chart.options = this.visitorsDrilldownedChartOptions;
-    this.chart.options.data = this.options[e.dataPoint.name];
-    this.chart.options.title = { text: e.dataPoint.name }
-    this.chart.render();
-    this.isButtonVisible = true;
-  }
-
-  visitorsDrilldownedChartOptions = {
-    animationEnabled: true,
-    exportEnabled: true,
-    theme: "light2",
-    axisY: {
-      gridThickness: 0,
-      lineThickness: 1
-    },
-    data: []
-  };
-
   newVSReturningVisitorsOptions = {
     animationEnabled: true,
     exportEnabled: true,
     theme: "light2",
     title: {
-      text: "Weekly Milk Production Issues"
-    },
-    subtitles: [{
-      text: "Click on Any Segment to Drilldown",
-      backgroundColor: "#2eacd1",
-      fontSize: 16,
-      fontColor: "white",
-      padding: 5
-    }],
-    data: []
+      text: "Monthly Milk Production Issues"
+    }
   };
 
   options: data = {
-    "Weekly Milk Production Issues": [{
+    "Monthly Milk Production Issues": [{
       type: "pie",
-      name: "Weekly Milk Production Issues",
+      name: "Monthly Milk Production Issues",
       startAngle: 90,
       cursor: "pointer",
       explodeOnClick: false,
       showInLegend: true,
       legendMarkerType: "square",
-      click: this.visitorsChartDrilldownHandler,
       indexLabelPlacement: "inside",
       indexLabelFontColor: "white",
-      dataPoints: [
-        { y: 551160, name: "Issue One", color: "#058dc7", indexLabel: "40%" },
-        { y: 329840, name: "Issue Two", color: "#50b432", indexLabel: "10%" },
-        { y: 329840, name: "Issue Three", color: "#f5b633", indexLabel: "30%" },
-        { y: 329840, name: "Issue Four", color: "#c22cff", indexLabel: "20%" }
-      ]
-    }],
-    "Issue One": [{
-      color: "#058dc7",
-      name: "Issue One",
-      type: "column",
-      dataPoints: [
-        { label: "first week Jan", y: 42600 },
-        { label: "second week Jan", y: 44960 },
-        { label: "third week Jan", y: 46160 },
-        { label: "fourth week Jan", y: 48240 },
-      ]
-    }],
-    "Issue Two": [{
-      color: "#50b432",
-      name: "Issue Two",
-      type: "column",
-      dataPoints: [
-        { label: "first week Jan", y: 42600 },
-        { label: "second week Jan", y: 44960 },
-        { label: "third week Jan", y: 46160 },
-        { label: "fourth week Jan", y: 48240 },
-      ]
-    }],
-    "Issue Three": [{
-      color: "#f5b633",
-      name: "Issue Three",
-      type: "column",
-      dataPoints: [
-        { label: "first week Jan", y: 42600 },
-        { label: "second week Jan", y: 44960 },
-        { label: "third week Jan", y: 46160 },
-        { label: "fourth week Jan", y: 48240 },
-      ]
-    }],
-    "Issue Four": [{
-      color: "#c22cff",
-      name: "Issue Four",
-      type: "column",
-      dataPoints: [
-        { label: "first week Jan", y: 42600 },
-        { label: "second week Jan", y: 44960 },
-        { label: "third week Jan", y: 46160 },
-        { label: "fourth week Jan", y: 48240 },
-      ]
+      dataPoints: []
     }]
   };
 
 
-
-
-  handleClick(event: Event) {
-    this.chart.options = this.newVSReturningVisitorsOptions;
-    this.chart.options.data = this.options["Weekly Milk Production Issues"];
-    this.chart.render();
-    this.isButtonVisible = false;
-  }
-
   getChartInstance(chart: object) {
     this.chart = chart;
     this.chart.options = this.newVSReturningVisitorsOptions;
-    this.chart.options.data = this.options["Weekly Milk Production Issues"];
+    this.chart.options.data = this.options["Monthly Milk Production Issues"];
     this.chart.render();
   }
 
+  months = [
+    { value: 1, name: 'January' },
+    { value: 2, name: 'February' },
+    { value: 3, name: 'March' },
+    { value: 4, name: 'April' },
+    { value: 5, name: 'May' },
+    { value: 6, name: 'June' },
+    { value: 7, name: 'July' },
+    { value: 8, name: 'August' },
+    { value: 9, name: 'September' },
+    { value: 10, name: 'October' },
+    { value: 11, name: 'November' },
+    { value: 12, name: 'December' }
+  ];
+
+  years: number[] = [];
+  selectedMonth: number | null = null;
+  selectedYear: number | null = null;
+
+  //get monthly issues oder by seperate issues
+  async getMonthlyIssue() {
+
+    if (!this.selectedMonth || !this.selectedYear) {
+      alert('Please select both month and year.');
+    } else {
+
+      console.log(`Selected Month: ${this.selectedMonth}, Selected Year: ${this.selectedYear}`);
+      const url = `/getMonthlyIssues?month=${this.selectedMonth}&year=${this.selectedYear}`;
+
+      try {
+        const response = await this.axiosService.request('GET', url, {}, {});
+        console.log('Response data:', response);
+
+        const dataPoints = response.data.map((issue: any) => ({
+          y: issue.total_damage_amount,
+          name: issue.issue_name
+        }));
+
+        this.updateChart(dataPoints);
+
+      } catch (error) {
+        console.error('Error fetching purchase details:', error);
+        alert('Failed to fetch purchase details');
+      }
+    }
+  }
+
+  updateChart(dataPoints: any) {
+    this.chart.options.data[0].dataPoints = dataPoints;
+    this.chart.render();
+  }
 }
 
 export interface data {
