@@ -29,8 +29,8 @@ export class EmptysectionComponent implements OnInit{
 
   ];
 
-  ngOnInit() {
-    this.fetchEmptyBottleDetails().then(r =>{} );
+  async ngOnInit() {
+    await this.fetchEmptyBottleDetails();
   }
 
   selectRow(row: TableElement): void {

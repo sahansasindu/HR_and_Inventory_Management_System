@@ -113,6 +113,7 @@ export class WashingsectionComponent implements OnInit{
             alert(response.data.message);
           } else {
             alert("Submission successful");
+
             //console.log('Submission successful', response);
           }
         })
@@ -129,6 +130,7 @@ export class WashingsectionComponent implements OnInit{
       alert("Error submitting form");
       console.error('Error submitting form', error);
     }
+    await this.fetchdamageBottleDetails();
   }
 
   async damageupdateChanges() {

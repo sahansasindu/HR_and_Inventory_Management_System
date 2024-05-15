@@ -14,6 +14,8 @@ export class MilkproductionsectionComponent implements OnInit{
 
   updateForm: FormGroup;
 
+  updateForm2: FormGroup;
+
   selectedIssueTypeText: string = "";
 
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
@@ -23,6 +25,13 @@ export class MilkproductionsectionComponent implements OnInit{
       amount: new FormControl(''),
       batch_code: new FormControl(''),
       finished_status: new FormControl('')
+    });
+
+    this.updateForm2 = new FormGroup({
+      daily_issue_id: new FormControl({value: '', disabled: true},Validators.required),
+      damage_amount: new FormControl(''),
+      issue_name: new FormControl(''),
+      emp_id: new FormControl(''),
     });
   }
 
@@ -80,6 +89,7 @@ export class MilkproductionsectionComponent implements OnInit{
 
   addEmployeeIssueDetailsVisible:boolean=false;
   updatechangeIsuesVisible:boolean=false;
+
   toggleProdctionIssuAdd(): void {
     this.addEmployeeIssueDetailsVisible = !this.addEmployeeIssueDetailsVisible;
 
@@ -95,6 +105,15 @@ export class MilkproductionsectionComponent implements OnInit{
       alert("No row selected")
       return;
     }
+
+    this.updateForm2.setValue({
+
+      daily_issue_id:this.selectedRow2.daily_issue_id,
+      damage_amount: this.selectedRow2.damage_amount,
+      issue_name: this.selectedRow2.issue_name,
+      emp_id: this.selectedRow2.emp_id
+    });
+
 
     this.updatechangeIsuesVisible = !this.updatechangeIsuesVisible;
 
@@ -265,9 +284,11 @@ export class MilkproductionsectionComponent implements OnInit{
   }
 
   updateSelectedIssueTypeText(event: any): void {
+
     const value = event.target.value;
     const selectedOption = this.statusOptions.find(option => option.text === value);
     this.selectedIssueTypeText = selectedOption?.text || "";
+
   }
 
   //add daily Issue by Employee
@@ -334,6 +355,39 @@ export class MilkproductionsectionComponent implements OnInit{
       console.log(response)
     } catch (error) {
       console.log(error)
+    }
+
+  }
+
+  async issueUpdateChanges() {
+
+    const formData = this.updateForm2.getRawValue();
+
+    console.log(formData)
+
+    try {
+      await this.axiosService.request('PUT', '/updateIssueChanges', formData, {})
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Update successful")
+            console.log('Update successful', response);
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+      await this.gettAllIssueByEmployee();
+    } catch (error) {
+      alert("Error updating details")
+      console.error('Error updating details', error);
     }
 
   }
