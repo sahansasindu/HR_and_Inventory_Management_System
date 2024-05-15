@@ -319,7 +319,6 @@ export class MilkproductionsectionComponent implements OnInit{
     });
 
     try {
-      console.log(formElement)
       await this.axiosService.request("POST", "/addDailyIssuesemployee", formElement, {})
         .then(response => {
 
@@ -363,7 +362,6 @@ export class MilkproductionsectionComponent implements OnInit{
 
     const formData = this.updateForm2.getRawValue();
 
-    console.log(formData)
 
     try {
       await this.axiosService.request('PUT', '/updateIssueChanges', formData, {})
