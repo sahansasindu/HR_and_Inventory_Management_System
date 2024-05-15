@@ -40,3 +40,4 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+.angular/cache/17.2.1/HR_and_Inventory_Management_System/.tsbuildinfo
