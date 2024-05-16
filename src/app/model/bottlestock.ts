@@ -45,4 +45,6 @@ export class BottleStockForm {
     this._totalBottle = value;
   }
 
+
+
 }
