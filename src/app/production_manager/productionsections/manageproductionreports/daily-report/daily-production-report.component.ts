@@ -7,21 +7,53 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrl: './daily-production-report.component.css'
 })
 export class DailyProductionReportComponent {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource<Element>(ELEMENT_DATA);
+  selectedDate: string='';
+
+  milkProductions: any[] = [];
+  milkIssues: any[] = [];
+  totalGoodMilkProductions: number = 0;
+  totalBadMilkProductions: number = 0;
+  totalIssues: number = 0;
+
+
+  constructor() { }
+
+  search() {
+    if (!this.selectedDate) {
+      alert("Please select a date");
+      return;
+
+    }
+      this.fetchMilkProductions(this.selectedDate);
+      this.fetchMilkIssues(this.selectedDate);
+    }
+
+    fetchMilkProductions(fromDate: string) {
+
+      this.milkProductions = [
+        { amount: 100, batchCode: 'A001', finishedState: 'Good' },
+        { amount: 50, batchCode: 'A002', finishedState: 'Bad' }
+      ];
+
+      this.totalGoodMilkProductions = this.milkProductions
+        .filter(p => p.finishedState === 'Good')
+        .reduce((total, p) => total + p.amount, 0);
+
+      this.totalBadMilkProductions = this.milkProductions
+        .filter(p => p.finishedState === 'Bad')
+        .reduce((total, p) => total + p.amount, 0);
+    }
+
+    fetchMilkIssues(fromDate: string) {
+
+      this.milkIssues = [
+        { numberOfBottles: 20, issueType: 'Leakage' },
+        { numberOfBottles: 10, issueType: 'Spoilage' }
+      ];
+
+      this.totalIssues = this.milkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+    }
 }
 
-export interface Element {
-  position: number;
-  name: string;
-  weight: number;
-  symbol: string;
-}
 
-const ELEMENT_DATA: Element[] = [
-  { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
-  { position: 2, name: 'Helium', weight: 4.0026, symbol: 'He' },
-  { position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li' },
-  { position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be' },
-  { position: 5, name: 'Boron', weight: 10.811, symbol: 'B' },
-];
+

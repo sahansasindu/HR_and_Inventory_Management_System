@@ -7,4 +7,32 @@ import { Component } from '@angular/core';
 })
 export class AgentMonthlyReportComponent {
 
+  fromMonth: string = '';
+  dailyReports: any[] = [];
+  totalAmount: number = 0;
+
+  constructor() { }
+
+  search() {
+    if (!this.fromMonth) {
+      alert("Please select month");
+      return;
+    }
+
+    const fromFormattedDate = this.fromMonth;
+    console.log('Searching from:', fromFormattedDate);
+
+    // Replace this with your actual backend call
+    this.fetchDailyReports(fromFormattedDate);
+  }
+
+  fetchDailyReports(fromDate: string) {
+
+    this.dailyReports = [
+      { agentName: 'Agent 1', agencyName: 'Agency 1', amountOfPurchase: 10 },
+      { agentName: 'Agent 2', agencyName: 'Agency 2', amountOfPurchase: 20 }
+    ];
+
+    this.totalAmount = this.dailyReports.reduce((total, report) => total + report.amountOfPurchase, 0);
+  }
 }
