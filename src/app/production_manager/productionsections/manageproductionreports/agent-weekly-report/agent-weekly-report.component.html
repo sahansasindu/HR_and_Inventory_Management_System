@@ -17,12 +17,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let report of dailyReports">
+    <tr *ngFor="let report of weeklyReports">
       <td>{{ report.agentName }}</td>
       <td>{{ report.agencyName }}</td>
-      <td>{{ report.amountOfPurchase }}</td>
+      <td>{{ report.totalAmount }}</td>
     </tr>
-    <tr *ngIf="dailyReports.length === 0">
+    <tr *ngIf="weeklyReports.length === 0">
       <td colspan="3" class="no-data">No data available for the selected date range.</td>
     </tr>
     </tbody>

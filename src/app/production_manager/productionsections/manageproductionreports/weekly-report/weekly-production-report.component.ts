@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "../../../../axios.service";
 
 @Component({
   selector: 'app-weekly-production-report',
@@ -9,15 +10,15 @@ export class WeeklyProductionReportComponent {
 
   fromDate: string = '';
   toDate: string = '';
-  milkProductions: any[] = [];
-  milkIssues: any[] = [];
+  weeklymilkProductions: any[] = [];
+  weeklymilkIssues: any[] = [];
   totalGoodMilkProductions: number = 0;
   totalBadMilkProductions: number = 0;
   totalIssues: number = 0;
 
-  constructor() { }
+  constructor(private ax: AxiosService) { }
 
-  search() {
+  async search() {
     if (!this.fromDate || !this.toDate) {
       alert("Please select both from and to dates");
       return;
@@ -27,34 +28,39 @@ export class WeeklyProductionReportComponent {
     const toFormattedDate = new Date(this.toDate).toISOString().split('T')[0];
     console.log('Searching from:', fromFormattedDate, 'to:', toFormattedDate);
 
-
-    this.fetchMilkProductions(fromFormattedDate, toFormattedDate);
-    this.fetchMilkIssues(fromFormattedDate, toFormattedDate);
+    await this.fetchMilkProductions(fromFormattedDate, toFormattedDate);
+    await this.fetchMilkIssues(fromFormattedDate, toFormattedDate);
   }
 
-  fetchMilkProductions(fromDate: string, toDate: string) {
+  async fetchMilkProductions(fromDate: string, toDate: string) {
+    try {
+      const response = await this.ax.request('GET', `/getProductionsByDateRange?fromDate=${fromDate}&toDate=${toDate}`, {}, {});
+      this.weeklymilkProductions = response.data;
+      console.log(this.weeklymilkProductions);
 
-    this.milkProductions = [
-      { amount: 100, batchCode: 'A001', finishedState: 'Good' },
-      { amount: 50, batchCode: 'A002', finishedState: 'Bad' }
-    ];
+      this.totalGoodMilkProductions = this.weeklymilkProductions
+        .filter(p => p.finishedState === 'Good')
+        .reduce((total, p) => total + p.amount, 0);
 
-    this.totalGoodMilkProductions = this.milkProductions
-      .filter(p => p.finishedState === 'Good')
-      .reduce((total, p) => total + p.amount, 0);
-
-    this.totalBadMilkProductions = this.milkProductions
-      .filter(p => p.finishedState === 'Bad')
-      .reduce((total, p) => total + p.amount, 0);
+      this.totalBadMilkProductions = this.weeklymilkProductions
+        .filter(p => p.finishedState === 'Bad')
+        .reduce((total, p) => total + p.amount, 0);
+    } catch (error) {
+      console.error('Error fetching weekly productions:', error);
+      alert('Failed to fetch weekly productions');
+    }
   }
 
-  fetchMilkIssues(fromDate: string, toDate: string) {
+  async fetchMilkIssues(fromDate: string, toDate: string) {
+    try {
+      const response = await this.ax.request('GET', `/getIssuesByDateRange?fromDate=${fromDate}&toDate=${toDate}`, {}, {});
+      this.weeklymilkIssues = response.data;
+      console.log(this.weeklymilkIssues);
 
-    this.milkIssues = [
-      { numberOfBottles: 20, issueType: 'Leakage' },
-      { numberOfBottles: 10, issueType: 'Spoilage' }
-    ];
-
-    this.totalIssues = this.milkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+      this.totalIssues = this.weeklymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+    } catch (error) {
+      console.error('Error fetching weekly issues:', error);
+      alert('Failed to fetch weekly issues');
+    }
   }
 }

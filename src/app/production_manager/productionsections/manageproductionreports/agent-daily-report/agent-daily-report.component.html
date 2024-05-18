@@ -19,7 +19,7 @@
     <tr *ngFor="let report of dailyReports">
       <td>{{ report.agentName }}</td>
       <td>{{ report.agencyName }}</td>
-      <td>{{ report.amountOfPurchase }}</td>
+      <td>{{ report.totalAmount }}</td>
     </tr>
     <tr *ngIf="dailyReports.length === 0">
       <td colspan="3" class="no-data">No data available for the selected date.</td>

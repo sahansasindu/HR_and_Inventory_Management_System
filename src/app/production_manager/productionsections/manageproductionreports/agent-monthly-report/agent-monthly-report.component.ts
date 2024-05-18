@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "../../../../axios.service";
 
 @Component({
   selector: 'app-agent-monthly-report',
@@ -8,31 +9,32 @@ import { Component } from '@angular/core';
 export class AgentMonthlyReportComponent {
 
   fromMonth: string = '';
-  dailyReports: any[] = [];
+  MonthlyReports: any[] = [];
   totalAmount: number = 0;
 
-  constructor() { }
+  constructor(private ax: AxiosService) { }
 
-  search() {
+  async search() {
     if (!this.fromMonth) {
       alert("Please select month");
       return;
     }
 
-    const fromFormattedDate = this.fromMonth;
-    console.log('Searching from:', fromFormattedDate);
+    const [year, month] = this.fromMonth.split('-').map(Number);
 
-    // Replace this with your actual backend call
-    this.fetchDailyReports(fromFormattedDate);
+    await this.fetchMonthlyReports(month, year);
   }
 
-  fetchDailyReports(fromDate: string) {
+  async fetchMonthlyReports(month: number, year: number) {
+    try {
+      const response = await this.ax.request('GET', `getMonthlyReportagent?month=${month}&year=${year}`, {}, {});
+      this.MonthlyReports = response.data;
 
-    this.dailyReports = [
-      { agentName: 'Agent 1', agencyName: 'Agency 1', amountOfPurchase: 10 },
-      { agentName: 'Agent 2', agencyName: 'Agency 2', amountOfPurchase: 20 }
-    ];
-
-    this.totalAmount = this.dailyReports.reduce((total, report) => total + report.amountOfPurchase, 0);
+      console.log(this.MonthlyReports);
+      this.totalAmount = this.MonthlyReports.reduce((total, report) => total + report.totalAmount, 0);
+    } catch (error) {
+      console.error('Error fetching monthly reports:', error);
+      alert('Failed to fetch monthly reports');
+    }
   }
 }

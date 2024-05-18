@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "../../../../axios.service";
 
 @Component({
   selector: 'app-agent-weekly-report',
@@ -9,33 +10,36 @@ export class AgentWeeklyReportComponent {
 
   fromDate: string = '';
   toDate: string = '';
-  dailyReports: any[] = [];
+  weeklyReports: any[] = [];
   totalAmount: number = 0;
 
 
-  constructor() {
+  constructor(private ax: AxiosService) {
   }
 
-  search() {
+  async search() {
     if (!this.fromDate || !this.toDate) {
       alert("Please select both from and to dates");
       return;
     }
     const fromFormattedDate = new Date(this.fromDate).toISOString().split('T')[0];
     const toFormattedDate = new Date(this.toDate).toISOString().split('T')[0];
-    console.log('Searching from:', fromFormattedDate, 'to:', toFormattedDate);
 
 
-    this.fetchDailyReports(fromFormattedDate, toFormattedDate);
+    await this.fetchDailyReports(fromFormattedDate, toFormattedDate);
   }
 
-  fetchDailyReports(fromDate: string, toDate: string) {
+  async fetchDailyReports(fromDate: string, toDate: string) {
 
-    this.dailyReports = [
-      { agentName: 'Agent 1', agencyName: 'Agency 1', amountOfPurchase: 10 },
-      { agentName: 'Agent 2', agencyName: 'Agency 2', amountOfPurchase: 20 }
-    ];
+    try {
+      const response = await this.ax.request('GET', `/getWeeklyReportagent?fromDate=${fromDate}&toDate=${toDate}`, {}, {});
+      this.weeklyReports = response.data;
 
-    this.totalAmount = this.dailyReports.reduce((total, report) => total + report.amountOfPurchase, 0);
+      console.log(this.weeklyReports);
+      this.totalAmount = this.weeklyReports.reduce((total, report) => total + report.totalAmount, 0);
+    } catch (error) {
+      console.error('Error fetching weekly reports:', error);
+      alert('Failed to fetch weekly reports');
+    }
   }
 }

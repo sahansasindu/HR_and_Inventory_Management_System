@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {MatTableDataSource} from "@angular/material/table";
+import {AxiosService} from "../../../../axios.service";
 
 @Component({
   selector: 'app-daily-production-report',
@@ -7,53 +7,58 @@ import {MatTableDataSource} from "@angular/material/table";
   styleUrl: './daily-production-report.component.css'
 })
 export class DailyProductionReportComponent {
-  selectedDate: string='';
 
-  milkProductions: any[] = [];
-  milkIssues: any[] = [];
+  selectedDate: string = '';
+
+  dailymilkProductions: any[] = [];
+  dailymilkIssues: any[] = [];
   totalGoodMilkProductions: number = 0;
   totalBadMilkProductions: number = 0;
   totalIssues: number = 0;
 
+  constructor(private ax: AxiosService) { }
 
-  constructor() { }
-
-  search() {
+  async search() {
     if (!this.selectedDate) {
       alert("Please select a date");
       return;
-
-    }
-      this.fetchMilkProductions(this.selectedDate);
-      this.fetchMilkIssues(this.selectedDate);
     }
 
-    fetchMilkProductions(fromDate: string) {
+    const formattedDate = new Date(this.selectedDate).toISOString().split('T')[0];
+    console.log('Searching for:', formattedDate);
 
-      this.milkProductions = [
-        { amount: 100, batchCode: 'A001', finishedState: 'Good' },
-        { amount: 50, batchCode: 'A002', finishedState: 'Bad' }
-      ];
+    await this.fetchMilkProductions(formattedDate);
+    await this.fetchMilkIssues(formattedDate);
+  }
 
-      this.totalGoodMilkProductions = this.milkProductions
+  async fetchMilkProductions(date: string) {
+    try {
+      const response = await this.ax.request('GET', `/getDailyProductions?date=${date}`, {}, {});
+      this.dailymilkProductions = response.data;
+      console.log(this.dailymilkProductions)
+
+      this.totalGoodMilkProductions = this.dailymilkProductions
         .filter(p => p.finishedState === 'Good')
         .reduce((total, p) => total + p.amount, 0);
 
-      this.totalBadMilkProductions = this.milkProductions
+      this.totalBadMilkProductions = this.dailymilkProductions
         .filter(p => p.finishedState === 'Bad')
         .reduce((total, p) => total + p.amount, 0);
+    } catch (error) {
+      console.error('Error fetching daily productions:', error);
+      alert('Failed to fetch daily productions');
     }
+  }
 
-    fetchMilkIssues(fromDate: string) {
-
-      this.milkIssues = [
-        { numberOfBottles: 20, issueType: 'Leakage' },
-        { numberOfBottles: 10, issueType: 'Spoilage' }
-      ];
-
-      this.totalIssues = this.milkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+  async fetchMilkIssues(date: string) {
+    try {
+      const response = await this.ax.request('GET', `/getDailyIssues?date=${date}`, {}, {});
+      this.dailymilkIssues = response.data;
+      console.log(this.dailymilkIssues)
+      this.totalIssues = this.dailymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+    } catch (error) {
+      console.error('Error fetching daily issues:', error);
+      alert('Failed to fetch daily issues');
     }
+  }
 }
-
-
-

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {AxiosService} from "../../../../axios.service";
 
 @Component({
   selector: 'app-monthly-production-report',
@@ -7,49 +8,57 @@ import { Component } from '@angular/core';
 })
 export class MonthlyProductionReportComponent {
 
-
   fromMonth: string = '';
-  milkProductions: any[] = [];
-  milkIssues: any[] = [];
+  monthlymilkProductions: any[] = [];
+  monthlymilkIssues: any[] = [];
   totalGoodMilkProductions: number = 0;
   totalBadMilkProductions: number = 0;
   totalIssues: number = 0;
 
-  constructor() { }
+  constructor(private ax: AxiosService) { }
 
-  search() {
+  async search() {
     if (!this.fromMonth) {
       alert("Please select Month");
       return;
     }
 
-    this.fetchMilkProductions(this.fromMonth);
-    this.fetchMilkIssues(this.fromMonth);
+    const [year, month] = this.fromMonth.split('-').map(Number);
+    console.log('Searching for:', month, year);
+
+    await this.fetchMilkProductions(month, year);
+    await this.fetchMilkIssues(month, year);
   }
 
-  fetchMilkProductions(fromDate: string) {
+  async fetchMilkProductions(month: number, year: number) {
+    try {
+      const response = await this.ax.request('GET', `/getProductionsByMonth?month=${month}&year=${year}`, {}, {});
+      this.monthlymilkProductions = response.data;
+      console.log(this.monthlymilkProductions);
 
-    this.milkProductions = [
-      { amount: 100, batchCode: 'A001', finishedState: 'Good' },
-      { amount: 50, batchCode: 'A002', finishedState: 'Bad' }
-    ];
+      this.totalGoodMilkProductions = this.monthlymilkProductions
+        .filter(p => p.finishedState === 'Good')
+        .reduce((total, p) => total + p.amount, 0);
 
-    this.totalGoodMilkProductions = this.milkProductions
-      .filter(p => p.finishedState === 'Good')
-      .reduce((total, p) => total + p.amount, 0);
-
-    this.totalBadMilkProductions = this.milkProductions
-      .filter(p => p.finishedState === 'Bad')
-      .reduce((total, p) => total + p.amount, 0);
+      this.totalBadMilkProductions = this.monthlymilkProductions
+        .filter(p => p.finishedState === 'Bad')
+        .reduce((total, p) => total + p.amount, 0);
+    } catch (error) {
+      console.error('Error fetching monthly productions:', error);
+      alert('Failed to fetch monthly productions');
+    }
   }
 
-  fetchMilkIssues(fromDate: string) {
+  async fetchMilkIssues(month: number, year: number) {
+    try {
+      const response = await this.ax.request('GET', `/getIssuesByMonth?month=${month}&year=${year}`, {}, {});
+      this.monthlymilkIssues = response.data;
+      console.log(this.monthlymilkIssues);
 
-    this.milkIssues = [
-      { numberOfBottles: 20, issueType: 'Leakage' },
-      { numberOfBottles: 10, issueType: 'Spoilage' }
-    ];
-
-    this.totalIssues = this.milkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+      this.totalIssues = this.monthlymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
+    } catch (error) {
+      console.error('Error fetching monthly issues:', error);
+      alert('Failed to fetch monthly issues');
+    }
   }
 }

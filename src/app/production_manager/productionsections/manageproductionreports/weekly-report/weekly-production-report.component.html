@@ -19,12 +19,12 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let production of milkProductions">
+    <tr *ngFor="let production of weeklymilkProductions">
       <td>{{ production.amount }}</td>
       <td>{{ production.batchCode }}</td>
       <td>{{ production.finishedState }}</td>
     </tr>
-    <tr *ngIf="milkProductions.length === 0">
+    <tr *ngIf="weeklymilkProductions.length === 0">
       <td colspan="3" class="no-data">No data available for the selected date range.</td>
     </tr>
     </tbody>
@@ -45,11 +45,11 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let issue of milkIssues">
+    <tr *ngFor="let issue of weeklymilkIssues">
       <td>{{ issue.numberOfBottles }}</td>
       <td>{{ issue.issueType }}</td>
     </tr>
-    <tr *ngIf="milkIssues.length === 0">
+    <tr *ngIf="weeklymilkIssues.length === 0">
       <td colspan="2" class="no-data">No data available for the selected date range.</td>
     </tr>
     </tbody>
