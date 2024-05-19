@@ -10,6 +10,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class EmptysectionComponent implements OnInit{
 
+  searchControl: FormControl;
   updateForm: FormGroup;
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
@@ -18,6 +19,8 @@ export class EmptysectionComponent implements OnInit{
       empty_bottles: new FormControl(''),
       damage_bottles: new FormControl('')
     });
+
+    this.searchControl = new FormControl('');
   }
 
 
@@ -30,12 +33,36 @@ export class EmptysectionComponent implements OnInit{
   ];
 
   async ngOnInit() {
+
+    this.dataSource.filterPredicate = (data: TableElement, filter: string) => {
+      const formattedDate = new Date(data.submit_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return formattedDate.includes(transformedFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
     await this.fetchEmptyBottleDetails();
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+
   selectRow(row: TableElement): void {
-    this.selectedRow = row;
-    console.log(this.selectedRow);
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
 
   }
 
@@ -52,7 +79,7 @@ export class EmptysectionComponent implements OnInit{
 
   toggleUpdate(): void {
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -67,6 +94,9 @@ export class EmptysectionComponent implements OnInit{
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
 
+    }
+    if(!this.isUpdateVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -168,6 +198,10 @@ export class EmptysectionComponent implements OnInit{
     }
   }
 
+  clearupdate() {
+    (document.getElementById('empty_bottles') as HTMLInputElement).value = '';
+    (document.getElementById('damage_bottles') as HTMLInputElement).value = '';
+  }
 }
 
 export class TableElement {

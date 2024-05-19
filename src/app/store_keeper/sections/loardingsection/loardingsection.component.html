@@ -5,7 +5,7 @@
     <div class="loardingsection-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible">
       <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <input matInput placeholder="Search by Agent ID or Submit Date" [formControl]="searchControl">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
@@ -91,7 +91,7 @@
         <input type="number" id="agentID" name="agentID" required>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearLordingDetails()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="submitLordingDetails()">Submit</button>
         </div>
       </form>
@@ -125,7 +125,7 @@
         <input type="number" id="agentIDupdate" formControlName="agentIDupdate" required>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearUpdateLording()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="updateLordingChanges()">Update</button>
         </div>
       </form>

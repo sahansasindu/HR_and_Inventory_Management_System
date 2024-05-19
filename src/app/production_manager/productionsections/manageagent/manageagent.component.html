@@ -22,9 +22,9 @@
 
       <div class="button-container">
         <button mat-flat-button color="primary" (click)="registerNewAnget()">Register New Agent</button>
-        <button mat-flat-button color="primary" (click)="updateAnget()">Update</button>
-        <button mat-flat-button color="primary" (click)="deleteAnget()">Remove</button>
-        <button mat-flat-button color="primary" (click)="viweagentboughtMilk()">View Agent Details</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="updateAnget()">Update</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="deleteAnget()">Remove</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="viweagentboughtMilk()">View Agent Details</button>
       </div>
 
 
@@ -99,7 +99,7 @@
         <input type="text" required id="addAgentEmail" name="addAgentEmail">
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearAgentDetails()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="addNewAgent()">Submit</button>
         </div>
       </form>
@@ -132,7 +132,7 @@
         <input type="text" required id="updateAgentEmail" formControlName="updateAgentEmail">
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearUpdateDetails()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="updateAgentDetails()" >Submit</button>
         </div>
       </form>

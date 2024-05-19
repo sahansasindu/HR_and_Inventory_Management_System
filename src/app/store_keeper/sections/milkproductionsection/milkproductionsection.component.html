@@ -5,7 +5,7 @@
     <div class="milkproduction-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible && !isProductionVisible">
       <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <input matInput [formControl]="searchControl" placeholder="Search by Submit Date">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
@@ -13,7 +13,7 @@
 
       <div class="button-container">
         <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Daily Finished</button>
-        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Changes</button>
+        <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="toggleUpdate()">Update Changes</button>
         <button mat-raised-button color="primary" (click)="toggleProdction()">Daily Production Issues</button>
       </div>
       <div class="mat-table-container">
@@ -85,7 +85,7 @@
         <input type="date" id="add_date" name="add_date" required>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="cleardailyfinishedform()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="submitDailyFinished()">Submit</button>
         </div>
       </form>
@@ -117,7 +117,7 @@
         </select>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearfinishedupdate()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="finishedupdateChanges()">Submit</button>
         </div>
       </form>
@@ -131,7 +131,7 @@
         <button mat-raised-button class="close-button" color="warn" (click)="toggleProdction()"> <mat-icon>arrow_back</mat-icon> </button>
         <div class="button-container">
           <button mat-raised-button color="primary" (click)="toggleProdctionIssuAdd()">Add Daily Issues</button>
-          <button mat-raised-button color="primary" (click)="toggleProdctionChnages()">Update Changes</button>
+          <button mat-raised-button [color]="selectedRow2 ? 'accent' : 'primary'" (click)="toggleProdctionChnages()">Update Changes</button>
         </div>
 
         <div class="mat-table-container-producton">
@@ -202,7 +202,7 @@
           <input type="date" id="issue_submit_date" name="issue_submit_date" required>
 
           <div class="form-buttons">
-            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="accent" (click)="clearIssueDetails()">Clear</button>
             <button mat-raised-button color="primary" type="submit" (click)="submitDailyIssueByEmployee()">Submit</button>
           </div>
         </form>
@@ -234,7 +234,7 @@
 
 
           <div class="form-buttons">
-            <button mat-raised-button color="accent">Clear</button>
+            <button mat-raised-button color="accent" (click)="clearIssueUpdate()">Clear</button>
             <button mat-raised-button color="primary" type="submit" (click)="issueUpdateChanges()">Submit</button>
           </div>
         </form>

@@ -50,8 +50,11 @@ export class ManageagentComponent implements OnInit{
 
 
   selectRow(row: Agent): void {
-    this.selectedRow = row;
-    console.log(this.selectedRow);
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
 
   }
 
@@ -87,7 +90,7 @@ export class ManageagentComponent implements OnInit{
   updateAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -106,12 +109,16 @@ export class ManageagentComponent implements OnInit{
       this.isRemoveAgentVisible=false;
       this.isviweAgentVisible=false;
     }
+
+    if(!this.isUpdateAgentVisible){
+      this.selectedRow=null;
+    }
   }
 
   deleteAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -130,6 +137,10 @@ export class ManageagentComponent implements OnInit{
       this.isUpdateAgentVisible=false;
       this.isAddAgentVisible=false;
       this.isviweAgentVisible=false;
+    }
+
+    if(!this.isRemoveAgentVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -157,7 +168,7 @@ export class ManageagentComponent implements OnInit{
   viweagentboughtMilk() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -166,6 +177,10 @@ export class ManageagentComponent implements OnInit{
       this.isUpdateAgentVisible = false;
       this.isRemoveAgentVisible = false;
       this.isAddAgentVisible = false;
+    }
+
+    if(!this.isviweAgentVisible){
+      this.selectedRow=null;
     }
 
     this.agentDetailsChart()
@@ -400,5 +415,27 @@ export class ManageagentComponent implements OnInit{
       this.showUndoOption = false;
       this.currentAgentIdForDeletion = null;
     }
+  }
+
+  clearAgentDetails() {
+
+    (document.getElementById('addAgentName') as HTMLInputElement).value='';
+    (document.getElementById('addAgentAddress') as HTMLInputElement).value='';
+    (document.getElementById('addAgencyName') as HTMLInputElement).value='';
+    (document.getElementById('addContact') as HTMLInputElement).value='';
+    (document.getElementById('addAgentEmail') as HTMLInputElement).value='';
+
+
+  }
+
+  clearUpdateDetails() {
+
+    (document.getElementById('updateAgentName') as HTMLInputElement).value='';
+    (document.getElementById('updateAgentAddress') as HTMLInputElement).value='';
+    (document.getElementById('updateAgencyName') as HTMLInputElement).value='';
+    (document.getElementById('updateContact') as HTMLInputElement).value='';
+    (document.getElementById('updateAgentEmail') as HTMLInputElement).value='';
+
+
   }
 }

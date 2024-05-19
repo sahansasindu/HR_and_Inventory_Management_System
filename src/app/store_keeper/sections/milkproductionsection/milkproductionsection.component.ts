@@ -16,6 +16,9 @@ export class MilkproductionsectionComponent implements OnInit{
 
   updateForm2: FormGroup;
 
+
+  searchControl: FormControl;
+
   selectedIssueTypeText: string = "";
 
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
@@ -33,6 +36,8 @@ export class MilkproductionsectionComponent implements OnInit{
       issue_name: new FormControl(''),
       emp_id: new FormControl(''),
     });
+
+    this.searchControl = new FormControl('');
   }
 
   displayedColumns: string[] = ['finished_id', 'amount','batch_code', 'finished_status', 'submit_date', 'submit_time'];
@@ -55,9 +60,28 @@ export class MilkproductionsectionComponent implements OnInit{
 
   async ngOnInit() {
 
+    this.dataSource.filterPredicate = (data: TableElement, filter: string) => {
+      const formattedDate = new Date(data.submit_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return formattedDate.includes(transformedFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
     await this.fetchfinishedMilkBottleDetails();
     await this.fetchStatusOptions();
     await this.gettAllIssueByEmployee();
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   // Initially, the options array is empty
@@ -76,11 +100,19 @@ export class MilkproductionsectionComponent implements OnInit{
   }
 
   selectRow(row: TableElement): void {
-    this.selectedRow = row;
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
   }
 
   selectRow2(row2: TableElement2): void {
-    this.selectedRow2 = row2;
+    if (this.selectedRow2 === row2) {
+      this.selectedRow2 = null;
+    } else {
+      this.selectedRow2 = row2;
+    }
   }
 
   isAddDetailsVisible: boolean = false; // Used to toggle the add details view
@@ -102,7 +134,7 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleProdctionChnages(): void {
 
     if (!this.selectedRow2) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -120,6 +152,10 @@ export class MilkproductionsectionComponent implements OnInit{
     // Ensure update div is closed when opening add details
     if (this.updatechangeIsuesVisible) {
       this.addEmployeeIssueDetailsVisible = false;
+    }
+
+    if(!this.updatechangeIsuesVisible){
+      this.selectedRow2=null;
     }
   }
 
@@ -144,7 +180,7 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleUpdate(): void {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -160,6 +196,10 @@ export class MilkproductionsectionComponent implements OnInit{
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
       this.isProductionVisible=false;
+    }
+
+    if(!this.isUpdateVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -388,6 +428,37 @@ export class MilkproductionsectionComponent implements OnInit{
       console.error('Error updating details', error);
     }
 
+  }
+
+  cleardailyfinishedform() {
+
+    (document.getElementById('add_finishedBottles') as HTMLInputElement).value='';
+    (document.getElementById('add_batch_code') as HTMLInputElement).value='';
+    (document.getElementById('add_status') as HTMLInputElement).value='';
+    (document.getElementById('add_date') as HTMLInputElement).value='';
+
+  }
+
+  clearfinishedupdate() {
+
+    (document.getElementById('amount') as HTMLInputElement).value='';
+    (document.getElementById('batch_code') as HTMLInputElement).value='';
+    (document.getElementById('finished_status') as HTMLInputElement).value='';
+
+
+  }
+
+  clearIssueDetails() {
+    (document.getElementById('inputIssedamage') as HTMLInputElement).value='';
+    (document.getElementById('inputIssuename') as HTMLInputElement).value='';
+    (document.getElementById('inputEmpID') as HTMLInputElement).value='';
+    (document.getElementById('issue_submit_date') as HTMLInputElement).value='';
+  }
+
+  clearIssueUpdate() {
+    (document.getElementById('damage_amount') as HTMLInputElement).value='';
+    (document.getElementById('issue_name') as HTMLInputElement).value='';
+    (document.getElementById('emp_id') as HTMLInputElement).value='';
   }
 }
 
