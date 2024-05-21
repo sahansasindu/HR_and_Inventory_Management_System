@@ -44,7 +44,7 @@ export class UpdateLoanComponent {
   handleFormSubmit(formData: any) {
     const updatedFormData = {
       ...formData,
-      emp_id: this.id
+      loan_id: this.id
     };
 
     console.log('Updated Form Data:', updatedFormData); // Log updated form data
@@ -64,8 +64,36 @@ export class UpdateLoanComponent {
         alert(errorMessage);
       });
   }
+/*
+
+  handleFormSubmit() {
+    const token = localStorage.getItem('currentUser');
+    const headers = {
+      Authorization: `Bearer ${token}`
+    };
+    const formData = new FormData(); // Create FormData object to send form data including file
+
+    // Append form data to FormData object
+    formData.append('loan_id', this.id);
+    formData.append('emp_id', this.loandata.emp_id);
+    formData.append('loan_amount',this.loandata.loan_amount);
+    formData.append('interest_amount', this.loandata.interest_amount);
+    formData.append('loan_details',this.loandata.loan_details);
 
 
+    // Send POST request with FormData
+    this.axiosService.request("PUT", "/updateLone", formData,headers)
+      .then(response => {
+        console.log("Response from server:", response);
+        alert("User details updated successfully!");
+      })
+      .catch(error => {
+        console.error("Error updating user details:", error);
+        alert("Error updating user details. Please try again.");
+      });
+  }
+
+*/
   onBack() {
     this.router.navigate(['/loan']);
   }

@@ -134,6 +134,7 @@ export class EmployeeAttendanceComponent {
       const formattedDate = `${year}-${month < 10 ? '0' + month : month}`;
 
       this.filterByDate(formattedDate);
+      console.log(formattedDate);
     }
   }
 
@@ -145,6 +146,10 @@ export class EmployeeAttendanceComponent {
       const itemFormattedDate = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
       return itemFormattedDate === yearMonth;
     });
+  }
+
+  getCountOfLoadData() {
+    return this.loarddata.length;
   }
 }
 
