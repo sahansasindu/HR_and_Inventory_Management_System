@@ -15,6 +15,7 @@ export class LoardingsectionComponent implements OnInit{
 
   updateForm: FormGroup;
 
+  searchControl: FormControl;
 
   isAddDetailsVisible: boolean = false; // Used to toggle the add details view
   isUpdateVisible: boolean = false; // Used to toggle the update view
@@ -27,6 +28,8 @@ export class LoardingsectionComponent implements OnInit{
       dateUpdate: new FormControl(''),
       agentIDupdate: new FormControl('')
     });
+
+    this.searchControl = new FormControl('');
   }
 
   displayedColumns: string[] = ['loading_id', 'amount','batch_code', 'submit_date', 'submit_time','ag_id',];
@@ -47,11 +50,35 @@ export class LoardingsectionComponent implements OnInit{
 
   async ngOnInit() {
 
+    this.dataSource1.filterPredicate = (data: TableElement, filter: string) => {
+      const transformedFilter = filter.trim().toLowerCase().split(' ');
+      const agentIdFilter = transformedFilter[0] || '';
+      const dateFilter = transformedFilter[1] || '';
+
+      const dateStr = new Date(data.submit_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      }).toLowerCase();
+      const agentIdStr = data.ag_id.toString().toLowerCase();
+
+      return agentIdStr.includes(agentIdFilter) && dateStr.includes(dateFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
     this.dataSource1.data = this.ELEMENT_DATA;
     this.ELEMENT_DATA_AGENT=await this.agentService.getAllAgents();
     this.dataSource2.data=this.ELEMENT_DATA_AGENT;
     await this.fetchLoridingDetails();
 
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource1.filter = filterValue;
   }
 
   selectRow(row: TableElement): void {
@@ -100,7 +127,7 @@ export class LoardingsectionComponent implements OnInit{
 
   toggleUpdate(): void {
     if (!this.selectedRow) {
-      alert("No row selected Please Seclet Row in Table")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -263,6 +290,19 @@ export class LoardingsectionComponent implements OnInit{
   }
 
 
+  clearLordingDetails() {
+    (document.getElementById('milkBottlesAmount') as HTMLInputElement).value='';
+    (document.getElementById('batchCode') as HTMLInputElement).value='';
+    (document.getElementById('date') as HTMLInputElement).value='';
+    (document.getElementById('agentID') as HTMLInputElement).value='';
+  }
+
+  clearUpdateLording() {
+    (document.getElementById('updateAmount') as HTMLInputElement).value='';
+    (document.getElementById('batchCodeupdate') as HTMLInputElement).value='';
+    (document.getElementById('dateUpdate') as HTMLInputElement).value='';
+    (document.getElementById('agentIDupdate') as HTMLInputElement).value='';
+  }
 }
 
 export class TableElement {

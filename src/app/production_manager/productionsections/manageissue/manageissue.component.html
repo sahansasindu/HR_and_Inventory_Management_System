@@ -8,9 +8,27 @@
         <button mat-flat-button color="primary" (click)="manageIssue()">Manage Issues</button>
       </div>
 
+      <div class="selectMonth">
+        <div class="input-container">
+          <p>Select Month</p>
+          <select [(ngModel)]="selectedMonth">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
+        </div>
+
+        <div class="input-container">
+          <p>Select Year</p>
+          <select [(ngModel)]="selectedYear">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+
+        <button mat-raised-button class="search-button" color="primary" (click)="getMonthlyIssue()">Search</button>
+
+      </div>
+
       <div class="issue-chart">
         <canvasjs-chart (chartInstance)="getChartInstance($event)"></canvasjs-chart>
-        <button mat-raised-button class="close-button" color="warn" *ngIf="this.isButtonVisible" (click)="handleClick($event)"> < Back</button>
       </div>
 
     </div>
@@ -37,22 +55,30 @@
 
 
             <ng-container matColumnDef="issue_name">
-              <mat-header-cell *matHeaderCellDef>  Issue Name </mat-header-cell>
-              <mat-cell *matCellDef="let element"> {{ element.issue_name }} </mat-cell>
+              <mat-header-cell *matHeaderCellDef> Issue Name </mat-header-cell>
+              <mat-cell *matCellDef="let element">
+                <ng-container *ngIf="element.editing; else displayIssueName">
+                  <input type="text" [(ngModel)]="element.issue_name" (blur)="element.editing = false" class="update-issue">
+                </ng-container>
+                <ng-template #displayIssueName>
+                  {{ element.issue_name }}
+                </ng-template>
+              </mat-cell>
             </ng-container>
 
             <ng-container matColumnDef="actions">
               <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
               <mat-cell *matCellDef="let element">
                 <div class="button-container-action">
-                <button mat-raised-button color="primary" (click)="updateIssue(element)">Update</button>
-                <button mat-raised-button color="accent" (click)="deleteIssue(element)">Delete</button>
+                  <button mat-raised-button color="primary" (click)="toggleEditMode(element)">
+                    {{ element.editing ? 'Save' : 'Update' }}
+                  </button>
                 </div>
               </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlighted]="row === selectedRow" (click)="selectRow(row)"></mat-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
 
           </mat-table>
         </div>

@@ -1,8 +1,9 @@
 
 <div class="chart-container-position">
 
-  <div class="chart-container">
+  <button mat-raised-button color="primary" (click)="refreshChart()" class="refreshbutton">Refresh<mat-icon>refresh</mat-icon></button>
 
+  <div class="chart-container">
     <div class="chart-dalily">
       <canvasjs-chart [options]="chartOptions" [styles]="{width: width, height:'360px'}" (chartInstance)="getChartInstance($event)" ></canvasjs-chart>
 

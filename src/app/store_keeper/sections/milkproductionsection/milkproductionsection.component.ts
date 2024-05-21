@@ -14,6 +14,12 @@ export class MilkproductionsectionComponent implements OnInit{
 
   updateForm: FormGroup;
 
+  updateForm2: FormGroup;
+
+
+  searchControl: FormControl;
+
+  selectedIssueTypeText: string = "";
 
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
@@ -23,56 +29,90 @@ export class MilkproductionsectionComponent implements OnInit{
       batch_code: new FormControl(''),
       finished_status: new FormControl('')
     });
+
+    this.updateForm2 = new FormGroup({
+      daily_issue_id: new FormControl({value: '', disabled: true},Validators.required),
+      damage_amount: new FormControl(''),
+      issue_name: new FormControl(''),
+      emp_id: new FormControl(''),
+    });
+
+    this.searchControl = new FormControl('');
   }
 
   displayedColumns: string[] = ['finished_id', 'amount','batch_code', 'finished_status', 'submit_date', 'submit_time'];
   dataSource = new MatTableDataSource<TableElement>([]);
   selectedRow: TableElement | null = null;
 
-  // this TableElemet for Daily Finish goods table
+  // this TableElement for Daily Finish goods table
   ELEMENT_DATA: TableElement[] = [
 
   ];
 
 
 //this dataSource2 for production issue tables
-  displayedColumns2: string[] = ['DailyIssueID', 'damage_Amount_Issue','issue_Name', 'IssueEmployeeID'];
+  displayedColumns2: string[] = ['daily_issue_id', 'damage_amount','issue_name', 'emp_id','submit_date'];
   dataSource2 = new MatTableDataSource<TableElement2>([]);
-  selectedRow2: Element | null = null;
-
+  selectedRow2: TableElement2 | null = null;
   ELEMENT_DATA2:TableElement2[]=[
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
-    { DailyIssueID: 1, damage_Amount_Issue: 10,issue_Name: "B001", IssueEmployeeID: "1111" },
+
   ];
 
-  ngOnInit() {
+  async ngOnInit() {
 
-    this.fetchfinishedMilkBottleDetails().then(r => {});
-    this.dataSource2.data = this.ELEMENT_DATA2;
-    this.fetchStatusOptions();
+    this.dataSource.filterPredicate = (data: TableElement, filter: string) => {
+      const formattedDate = new Date(data.submit_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return formattedDate.includes(transformedFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
+    await this.fetchfinishedMilkBottleDetails();
+    await this.fetchStatusOptions();
+    await this.gettAllIssueByEmployee();
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
   }
 
   // Initially, the options array is empty
   statusOptions: StatusOption[] = [];
-  fetchStatusOptions(): void {
-    this.statusOptions = [
-      { value: '1', text: 'Issue1' },
-      { value: '2', text: 'Issue2' },
-      { value: '3', text: 'Issue3' },
-      { value: '4', text: 'Issue4' },
-      { value: '5', text: 'Issue5' },
-      { value: '6', text: 'Issue6' },
-      // Add more options as needed
-    ];
+  async fetchStatusOptions(): Promise<void> {
+    try {
+
+      const response = await this.axiosService.request('GET', '/getIssueDetails', {}, {});
+
+      this.statusOptions = response.data.map((item: any) => ({
+        text: item.issue_name
+      }));
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   selectRow(row: TableElement): void {
-    this.selectedRow = row;
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
   }
 
-  selectRow2(row2: Element): void {
-    this.selectedRow2 = row2;
+  selectRow2(row2: TableElement2): void {
+    if (this.selectedRow2 === row2) {
+      this.selectedRow2 = null;
+    } else {
+      this.selectedRow2 = row2;
+    }
   }
 
   isAddDetailsVisible: boolean = false; // Used to toggle the add details view
@@ -81,6 +121,7 @@ export class MilkproductionsectionComponent implements OnInit{
 
   addEmployeeIssueDetailsVisible:boolean=false;
   updatechangeIsuesVisible:boolean=false;
+
   toggleProdctionIssuAdd(): void {
     this.addEmployeeIssueDetailsVisible = !this.addEmployeeIssueDetailsVisible;
 
@@ -91,11 +132,30 @@ export class MilkproductionsectionComponent implements OnInit{
   }
 
   toggleProdctionChnages(): void {
+
+    if (!this.selectedRow2) {
+      alert("No row selected Please Select Row in Table")
+      return;
+    }
+
+    this.updateForm2.setValue({
+
+      daily_issue_id:this.selectedRow2.daily_issue_id,
+      damage_amount: this.selectedRow2.damage_amount,
+      issue_name: this.selectedRow2.issue_name,
+      emp_id: this.selectedRow2.emp_id
+    });
+
+
     this.updatechangeIsuesVisible = !this.updatechangeIsuesVisible;
 
     // Ensure update div is closed when opening add details
     if (this.updatechangeIsuesVisible) {
       this.addEmployeeIssueDetailsVisible = false;
+    }
+
+    if(!this.updatechangeIsuesVisible){
+      this.selectedRow2=null;
     }
   }
 
@@ -120,7 +180,7 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleUpdate(): void {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -136,6 +196,10 @@ export class MilkproductionsectionComponent implements OnInit{
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
       this.isProductionVisible=false;
+    }
+
+    if(!this.isUpdateVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -198,7 +262,7 @@ export class MilkproductionsectionComponent implements OnInit{
     });
 
     try {
-      const response = await this.axiosService.request("POST", "/adddailyfinishedmilk", formElement, headers)
+      await this.axiosService.request("POST", "/adddailyfinishedmilk", formElement, headers)
         .then(response => {
 
           if (response.data && response.data.message) {
@@ -233,7 +297,7 @@ export class MilkproductionsectionComponent implements OnInit{
 
     console.log(formData)
     try {
-      const response = await this.axiosService.request('PUT', '/updatefinishedMilk', formData, headers)
+      await this.axiosService.request('PUT', '/updatefinishedMilk', formData, headers)
         .then(response => {
 
           if (response.data && response.data.message) {
@@ -258,6 +322,144 @@ export class MilkproductionsectionComponent implements OnInit{
     }
 
   }
+
+  updateSelectedIssueTypeText(event: any): void {
+
+    const value = event.target.value;
+    const selectedOption = this.statusOptions.find(option => option.text === value);
+    this.selectedIssueTypeText = selectedOption?.text || "";
+
+  }
+
+  //add daily Issue by Employee
+  async submitDailyIssueByEmployee():Promise<void> {
+
+
+    const inputIssedamage = (document.getElementById('inputIssedamage') as HTMLInputElement).value;
+    const inputIssuename = this.selectedIssueTypeText;
+    const inputEmpID = (document.getElementById('inputEmpID') as HTMLInputElement).value;
+    const issue_submit_date = (document.getElementById('issue_submit_date') as HTMLInputElement).value;
+
+    console.log(inputIssuename)
+    const IssueBottles = parseInt(inputIssedamage);
+
+    if (isNaN(IssueBottles) || inputIssuename === "" || inputEmpID==="" || issue_submit_date==="") {
+      alert("Please Fill All Details");
+      return;
+    }
+
+    const formDate = new Date((document.getElementById('issue_submit_date') as HTMLInputElement).value);
+    const formattedDate = formDate.toISOString().split('T')[0]; // Gets 'YYYY-MM-DD'
+
+    const formElement = new TableElement2({
+      damage_amount:IssueBottles,
+      issue_name: inputIssuename,
+      emp_id: inputEmpID,
+      submit_date: formattedDate,
+    });
+
+    try {
+      await this.axiosService.request("POST", "/addDailyIssuesemployee", formElement, {})
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Submission successful");
+            this.gettAllIssueByEmployee();
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+    } catch (error) {
+
+      alert("Error submitting form");
+      console.error('Error submitting form', error);
+    }
+
+  }
+
+  async gettAllIssueByEmployee():Promise<void>{
+
+    try {
+      const response = await this.axiosService.request('GET', '/gettAllIssueByEmployee', {}, {});
+      this.dataSource2.data = response.data;
+      this.ELEMENT_DATA2=this.dataSource2.data;
+      console.log(response)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+
+  async issueUpdateChanges() {
+
+    const formData = this.updateForm2.getRawValue();
+
+
+    try {
+      await this.axiosService.request('PUT', '/updateIssueChanges', formData, {})
+        .then(response => {
+
+          if (response.data && response.data.message) {
+            alert(response.data.message);
+          } else {
+            alert("Update successful")
+            console.log('Update successful', response);
+          }
+        })
+        .catch(error => {
+
+          if (error.response && error.response.data && error.response.data.message) {
+            alert(error.response.data.message);
+          } else {
+
+          }
+        });
+      await this.gettAllIssueByEmployee();
+    } catch (error) {
+      alert("Error updating details")
+      console.error('Error updating details', error);
+    }
+
+  }
+
+  cleardailyfinishedform() {
+
+    (document.getElementById('add_finishedBottles') as HTMLInputElement).value='';
+    (document.getElementById('add_batch_code') as HTMLInputElement).value='';
+    (document.getElementById('add_status') as HTMLInputElement).value='';
+    (document.getElementById('add_date') as HTMLInputElement).value='';
+
+  }
+
+  clearfinishedupdate() {
+
+    (document.getElementById('amount') as HTMLInputElement).value='';
+    (document.getElementById('batch_code') as HTMLInputElement).value='';
+    (document.getElementById('finished_status') as HTMLInputElement).value='';
+
+
+  }
+
+  clearIssueDetails() {
+    (document.getElementById('inputIssedamage') as HTMLInputElement).value='';
+    (document.getElementById('inputIssuename') as HTMLInputElement).value='';
+    (document.getElementById('inputEmpID') as HTMLInputElement).value='';
+    (document.getElementById('issue_submit_date') as HTMLInputElement).value='';
+  }
+
+  clearIssueUpdate() {
+    (document.getElementById('damage_amount') as HTMLInputElement).value='';
+    (document.getElementById('issue_name') as HTMLInputElement).value='';
+    (document.getElementById('emp_id') as HTMLInputElement).value='';
+  }
 }
 
 export class TableElement {
@@ -277,14 +479,18 @@ export class TableElement {
 
 }
 
-export interface TableElement2 {
+export class TableElement2 {
 
-  DailyIssueID: number;
-  damage_Amount_Issue: number;
-  issue_Name: String;
-  IssueEmployeeID: String;
+  daily_issue_id: number=0;
+  damage_amount: number=0;
+  issue_name: string='';
+  emp_id: string='';
+  submit_date:string='';
+
+  constructor(init?: Partial<TableElement2>) {
+    Object.assign(this, init);
+  }
 }
 interface StatusOption {
-  value: string;
   text: string;
 }

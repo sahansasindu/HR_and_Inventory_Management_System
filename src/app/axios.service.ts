@@ -11,8 +11,9 @@ export class AxiosService {
   }
 
 
-  
+
   request(method:string,url:string,data:any,headers: any = {}):Promise<any>{
+
     return axios({
       method:method,
       url:url,

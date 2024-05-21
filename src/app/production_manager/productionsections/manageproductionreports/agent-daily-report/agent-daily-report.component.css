@@ -1,0 +1,43 @@
+.date-search-container {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.date-input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 8px;
+}
+
+.search-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+.date-search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.date-input {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.search-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+

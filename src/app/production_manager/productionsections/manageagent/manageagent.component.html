@@ -22,9 +22,9 @@
 
       <div class="button-container">
         <button mat-flat-button color="primary" (click)="registerNewAnget()">Register New Agent</button>
-        <button mat-flat-button color="primary" (click)="updateAnget()">Update</button>
-        <button mat-flat-button color="primary" (click)="deleteAnget()">Remove</button>
-        <button mat-flat-button color="primary" (click)="viweagentboughtMilk()">View Agent Details</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="updateAnget()">Update</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="deleteAnget()">Remove</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="viweagentboughtMilk()">View Agent Details</button>
       </div>
 
 
@@ -99,7 +99,7 @@
         <input type="text" required id="addAgentEmail" name="addAgentEmail">
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearAgentDetails()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="addNewAgent()">Submit</button>
         </div>
       </form>
@@ -132,7 +132,7 @@
         <input type="text" required id="updateAgentEmail" formControlName="updateAgentEmail">
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearUpdateDetails()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="updateAgentDetails()" >Submit</button>
         </div>
       </form>
@@ -195,23 +195,46 @@
       <div class="agentDetails-view" style="margin-top: 55px;margin-left: 50px">
         <table>
           <tr>
-            <td><strong>Agent Name :</strong></td>
-            <td>Danidu</td>
+            <td><strong>Agent ID:</strong></td>
+            <td><p #agentIdChart id="getAgentIdChart">{{ selectedRow?.agent_id }}</p></td>
           </tr>
           <tr>
-            <td><strong>Agency Name :</strong></td>
-            <td>Danidu</td>
+            <td><strong>Agent Name:</strong></td>
+            <td><p #agentNameChart id="getAgentNameChart">{{ selectedRow?.agent_name }}</p></td>
           </tr>
           <tr>
-            <td><strong>Address :</strong></td>
-            <td>Danidu</td>
+            <td><strong>Agency Name:</strong></td>
+            <td><p #agencyNameChart id="getAgencyNameChart">{{ selectedRow?.agency_name }}</p></td>
+          </tr>
+          <tr>
+            <td><strong>Address:</strong></td>
+            <td><p #addressChart id="getAddressNameChart">{{ selectedRow?.address }}</p></td>
           </tr>
         </table>
       </div>
 
-        <div class="chartAgent">
-          <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+      <div class="selectMonth">
+        <div class="input-container">
+          <p>Select Month</p>
+          <select [(ngModel)]="selectedMonth">
+            <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+          </select>
         </div>
+
+        <div class="input-container">
+          <p>Select Year</p>
+          <select [(ngModel)]="selectedYear">
+            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+          </select>
+        </div>
+
+        <button mat-raised-button class="search-button" color="primary" (click)="searchPurchaseDetails()">Search</button>
+
+      </div>
+
+
+      <div id="chartContainer" style="height: 360px; width: 90%;margin-top: 80px"></div>
+
 
     </div>
 
