@@ -19,14 +19,16 @@ export class PiechartComponent implements OnInit {
  // salaryheader: any[] = [];
   //salaryheader2: any[] = [];
  // selectedDepartment: string = "";
-  isLoading: boolean = false;
-  loandata: any[] = [];
+  //isLoading: boolean = false;
+  loarddata: any[] = [];
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.createChart();
     this.fetchDeductionData();
+    this.createChart();
+
+    console.log('kk ',this.loarddata);
 
   }
 
@@ -40,7 +42,7 @@ export class PiechartComponent implements OnInit {
         datasets: [
           {
             label: "Employees",
-            data: this.loandata.map(item => item[1]), // Use the length of each array as data
+            data: this.loarddata.map(item => item[1]), // Use the length of each array as data
             backgroundColor: ['blue', 'red', 'green', 'orange', 'purple', 'pink', 'brown', 'yellow'] // Assign colors to each data point
           }
         ]
@@ -54,19 +56,20 @@ export class PiechartComponent implements OnInit {
   }
 
   fetchDeductionData() {
-    this.isLoading = true;
+    //this.isLoading = true;
     this.axiosService.request('GET', 'employeeCountByDepartment', null,{})
       .then(response => {
         console.log('Fetched data:', response.data); // Log the fetched data
         //this.salaryheader2 = response.data;
-        this.loandata = response.data;
-        this.isLoading = false;
+        this.loarddata = response.data;
+
+        console.log('loan ddata ',this.loarddata);
         // Update Invoiceheader with the fetched data
-        console.log(this.loandata); // Corrected logging statement
+        console.log(this.loarddata); // Corrected logging statement
 
         // Update the chart after fetching data
         if (this.chart) {
-          this.chart.data.datasets[0].data = this.loandata.map(item => item[1]);
+          this.chart.data.datasets[0].data = this.loarddata.map(item => item[1]);
           this.chart.update();
         }
       })

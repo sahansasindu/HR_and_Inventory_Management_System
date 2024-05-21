@@ -1,105 +1,13 @@
-
-*{
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 body {
-  background-color: #ffffff;
   font-family: Arial, sans-serif;
 }
-
-h2{
-  /*text-align: center;*/
-  color: #5E4BD7;
-  margin-top: 5px;
-  margin-left: 10px;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-}
-
-.card-content {
-  padding: 15px;
-}
-
-.card-content h5 {
-  font-family: 'Source Serif Pro', serif;
-  font-size: 18px;
-  font-weight: bold;
-  text-align: center;
-  /*margin-bottom: 10px;*/
-  color: #5E4BD7;
-}
-
-.card-content p {
-  text-align: center;
-  color: #000000;
-  font-weight: bold;
-  padding-top: 13px;
-  font-size: 20px;
-}
-
-.logo {
-  text-align: center;
-  padding: 2.6rem 1rem;
-  img {
-    width: 50px;
-  }
-}
-
-.card {
-  width: 240px;
-  height: 100px;
-  margin: 15px;
-  border-radius: 10px;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  background-color: #66DCF6;
-  border: 2px solid #000000;
-}
-
-@media screen and (max-width: 768px) {
-  .card {
-    width: 70%;
-    height: 40%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  .card {
-    width: 200px;
-    height: 100px;
-  }
-}
-/* Path: src/app/hr_manager/hrm-notification/hrm-notification.component.html */
-
-
-.btn-1{
-  background: none;
-  border: none;
-  width: 250px;
-  height: 150px;
-  margin-bottom: 15px;
-}
-
 
 .page__box {
   background-color: #ffffff;
   height: 800px;
   border-radius: 1px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  /*color: #495057;*/
+  color: #495057;
 }
 
 .parallel-div {
@@ -115,69 +23,15 @@ h2{
 }
 
 #div1 {
-  height: 300px;
-  background-color: #ffffff;
-}
-
-#div2 {
-  height: 488px;
-  background-color: #ffffff;
+  height: 790px;
+  background-color: #e8e0e0;
 }
 
 #div3 {
-  background-color: #b5abab;
-  border-radius: 10px;
-  height: 650px;
-  margin-top: 30px;
-  margin-left: 10px;
+  margin-left: 3px;
+  background-color: #cfcdcd;
+  border-radius: 2%;
 }
-
-.link-btn_1{
-  background-color: #D9D9D9;
-  color: #000000;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 18px;
-  padding: 0.5rem 2rem;
-  margin-left: 10rem;
-}
-
-.link-btn_1:hover{
-  background-color: #8de4f8;
-  color: #ffffff;
-}
-
-.link-btn_2{
-  background-color: #D9D9D9;
-  color: #000000;
-  font-weight: bold;
-  text-align: center;
-  border-radius: 10px;
-  font-size: 18px;
-  padding: 0.5rem 3rem;
-  margin-left: 8rem;
-}
-
-.link-btn_2:hover{
-  background-color: #8de4f8;
-  color: #ffffff;
-}
-
-.mat-divider {
-  border-top-width: 2px;
-  border-color: #000000;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  margin-left: 10px;
-}
-
-
-/*#div3 {*/
-/*  margin-left: 3px;*/
-/*  background-color: #cfcdcd;*/
-/*  border-radius: 2%;*/
-/*}*/
 
 /* Media queries */
 
@@ -218,60 +72,3 @@ h2{
 
   }
 }
-
-.mat-elevation-z8 {
-  width: 100%;
-  align-items: center;
-  background-color: #afe7f8;
-  margin-left: 5px;
-  margin-bottom: 50px;
-}
-
-.mat-mdc-row .mat-mdc-cell {
-  border-bottom: 1px solid transparent;
-  border-top: 1px solid transparent;
-  cursor: pointer;
-  padding: 16px;
-  align-items: center;
-  /*display: flex;*/
-  justify-content: space-around;
-}
-
-.mat-mdc-row:hover .mat-mdc-cell {
-  border-color: currentColor;
-}
-
-.demo-row-is-clicked {
-  font-weight: bold;
-}
-
-.backbtn{
-  background-color: #5E4BD7;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
-  margin-top: 10px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-/*mat-paginator {*/
-/*  background-color: rgba(0, 230, 244, 0.76);*/
-/*  color: #ffffff;*/
-/*  width: 100%;*/
-/*  margin-left: 5px;*/
-/*  border-radius: 5px;*/
-/*  font-size: 15px;*/
-/*}*/
-
-mat-form-field {
-  width: 98%;
-  margin-bottom: 10px;
-  margin-left: 10px;
-}
-
-th{
-  font-weight: bold;
-}
-

@@ -1,4 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Output} from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 
@@ -8,7 +8,7 @@ import {MatDialog, MatDialogRef} from '@angular/material/dialog';
   templateUrl: './hrm-header.component.html',
   styleUrl: './hrm-header.component.css'
 })
-export class HrmHeaderComponent implements OnInit{
+export class HrmHeaderComponent {
 
   @Output() toggleSidebarForMe = new EventEmitter<unknown>();
 
@@ -16,8 +16,6 @@ export class HrmHeaderComponent implements OnInit{
 
   }
 
-ngOnInit() {
-}
 
   toggleSidebar() {
     this.toggleSidebarForMe.emit();

@@ -8,42 +8,27 @@ import {Router} from "@angular/router";
   styleUrl: './salary-advance.component.css'
 })
 export class SalaryAdvanceComponent {
-  advancedata: any[] = [];
+
   id: any;
-
-
-
-  salaryheader: any[] = [];
-  salaryheader2: any[] = [];
-  selectedDepartment: string = "";
+  advancedata: any[] = [];
+  filtereddata: any[] = [];
   isLoading: boolean = false;
   employeeId: any;
+
+
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
 
-  filterByDepartment() {
-    console.log(this.selectedDepartment)
 
-
-    if(this.selectedDepartment=="All"){
-      this.fetchInvoiceData();
-    }else{
-      this.advancedata=this.salaryheader2;
-      this.salaryheader = this.advancedata.filter(item => item.department_name === this.selectedDepartment);
-      this.advancedata=this.salaryheader;
-    }
-
-
-  }
   ngOnInit() {
-    this.fetchInvoiceData();
+    this.fetchAdvance();
   }
 
-  fetchInvoiceData() {
+  fetchAdvance() {
     this.isLoading = true;
     this.axiosService.request('GET', '/getAdvance', null,{})
       .then(response => {
         // console.log('Fetched data:', response.data); // Log the fetched data
-        this.salaryheader2 = response.data;
+        this.filtereddata = response.data;
         this.advancedata = response.data;
         this.isLoading = false;
         // Update Invoiceheader with the fetched data
@@ -81,7 +66,7 @@ export class SalaryAdvanceComponent {
     this.axiosService.request('DELETE', 'deleteAdvance', { advance_salary_id: id },{})
       .then(response => {
 
-        this.fetchInvoiceData();
+        this.fetchAdvance();
         console.log("Response from server:", response);
 
         alert("Advance deleted successfully!");
@@ -98,6 +83,12 @@ export class SalaryAdvanceComponent {
   }
 
   filterByEmployeeId() {
-
+    if (this.employeeId === "") {
+      this.fetchAdvance();
+    } else {
+      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.advancedata = this.filtereddata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+    }
   }
+
 }
