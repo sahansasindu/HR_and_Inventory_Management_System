@@ -217,3 +217,12 @@ ngx-spinner {
 .hide-for-pdf {
   display: none !important;
 }
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  z-index: 1000;
+  margin-left: 450px;
+  margin-top: 200px;
+}

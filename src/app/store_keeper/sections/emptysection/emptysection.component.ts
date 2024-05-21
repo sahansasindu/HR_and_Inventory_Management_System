@@ -12,6 +12,7 @@ export class EmptysectionComponent implements OnInit{
 
   searchControl: FormControl;
   updateForm: FormGroup;
+  isLoading: boolean = false;
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
     this.updateForm = new FormGroup({
@@ -163,7 +164,7 @@ export class EmptysectionComponent implements OnInit{
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-
+    this.isLoading = true;
     const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
@@ -172,10 +173,11 @@ export class EmptysectionComponent implements OnInit{
       this.dataSource.data = response.data;
       //console.log(response.data)
       this.ELEMENT_DATA=this.dataSource.data;
+      this.isLoading = false;
       console.log('Empty bottle details fetched successfully:', response.data);
     } catch (error) {
+      this.isLoading = false;
       console.error('Error fetching empty bottle details:', error);
-      alert('Failed to fetch empty bottle details');
     }
   }
 

@@ -106,6 +106,7 @@ import { HrmManageProfileComponent } from './hr_manager/hrm-manage-profile/hrm-m
 import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import { MailBoxComponent } from './common/mail-box/mail-box.component';
 import { ChatBoxComponent } from './common/chat-box/chat-box.component';
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -190,42 +191,43 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDrawerContainer,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatCardModule,
-    MatCardModule,
-    MatFormField,
-    MatSelect,
-    MatOption,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDatepickerToggle,
-    MatDatepicker,
-    HttpClientModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    NgxSpinnerModule,
-    MatTab,
-    MatTabGroup,
-    FormsModule,
-    CanvasJSAngularStockChartsModule,
-    MatDialogModule,
-    MatDatepickerInput,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDrawerContainer,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatCardModule,
+        MatCardModule,
+        MatFormField,
+        MatSelect,
+        MatOption,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDatepickerToggle,
+        MatDatepicker,
+        HttpClientModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        NgxSpinnerModule,
+        MatTab,
+        MatTabGroup,
+        FormsModule,
+        CanvasJSAngularStockChartsModule,
+        MatDialogModule,
+        MatDatepickerInput,
+        MatProgressSpinner,
 
 
-  ],
+    ],
 
 
   providers: [
