@@ -11,15 +11,17 @@ export class AddMedicalComponent {
   isVisible1: boolean = true;
   isVisible2: boolean = false;
 
-
-
-
-
   loandata: any[] = [];
   salaryheader: any[] = [];
   salaryheader2: any[] = [];
   selectedDepartment: string = '';
   isLoading: boolean = false;
+
+  sdate: string = '';
+  mstate: string = '';
+  report: File | null = null;
+  eid: any;
+  employeeId: any;
 
   constructor(
     private axiosService: AxiosService,
@@ -37,12 +39,6 @@ export class AddMedicalComponent {
     this.isVisible2 = true;
   }
 
-  eid: string = '';
-  sdate: string = '';
-  mstate: string = '';
-  report: File | null = null;
-  employeeId: any;
-
   handleFileInput(event: any) {
     const files: FileList = event.target.files;
     if (files.length > 0) {
@@ -51,51 +47,40 @@ export class AddMedicalComponent {
   }
 
   submitData() {
-
-    const emp_id = (<HTMLInputElement>document.getElementById('empId')).value;
-    const formDate =new Date((<HTMLInputElement>document.getElementById('submitDate')).value) ;
-    const medical_status = (<HTMLSelectElement>document.getElementById('medicalStatus')).value;
-    const medical_report = (<HTMLInputElement>document.getElementById('medicalReport')).files?.[0];
-
-    const submit_date = formDate.toISOString().split('T')[0];
-
-
-
-    if (medical_report) {
-      const formData = new FormData();
-      formData.append('emp_id', emp_id);
-      formData.append('submit_date', submit_date);
-      formData.append('medical_status', medical_status);
-      formData.append('medical_report', medical_report);
-      this.axiosService
-        .request('POST', '/addMedical', formData,{})
-        .then(response => {
-          if (response.data && response.data.message) {
-            alert(response.data.message);
-          } else {
-            alert('Medical record added successfully!');
-          }
-        })
-        .catch(error => {
-          if (error.response && error.response.data && error.response.data.message) {
-            alert(error.response.data.message);
-          } else {
-            alert('An error occurred while adding the medical record.');
-          }
-        });
-    }else {
-      alert('Please select a medical report!')
+    const formData = new FormData();
+    formData.append('emp_id', this.eid);
+    formData.append('submit_date', this.sdate);
+    formData.append('medical_status', this.mstate);
+    if (this.report) {
+      formData.append('medical_report', this.report);
     }
 
+    const headers = {
+      'Authorization': `Bearer ${this.getAuthToken()}` // Assuming you have a method to get the auth token
+    };
+
+    this.axiosService.request('POST', 'addMedical', formData, { headers })
+      .then(response => {
+        // Handle success response
+        console.log('Data submitted successfully', response);
+        this.router.navigate(['/success']); // Navigate to success page or any other desired page
+      })
+      .catch(error => {
+        console.error('Error submitting data:', error);
+      });
   }
 
+  getAuthToken() {
+    // Method to retrieve the auth token
+    return localStorage.getItem('authToken') || ''; // Example: Retrieving token from localStorage
+  }
+
+
   filterByDepartment() {
-    console.log(this.selectedDepartment);
-    if (this.selectedDepartment == 'All') {
+    if (this.selectedDepartment === 'All') {
       this.fetchDeductionData();
     } else {
-      this.loandata = this.salaryheader2;
-      this.salaryheader = this.loandata.filter(
+      this.salaryheader = this.salaryheader2.filter(
         item => item.department_name === this.selectedDepartment
       );
       this.loandata = this.salaryheader;
@@ -108,19 +93,19 @@ export class AddMedicalComponent {
 
   fetchDeductionData() {
     this.isLoading = true;
-    this.axiosService.request('GET', '/getmedical', null,{})
+    this.axiosService.request('GET', '/getmedical', null)
       .then(response => {
         this.salaryheader2 = response.data;
         this.loandata = response.data;
         this.isLoading = false;
-        console.log(this.loandata);
       })
       .catch(error => {
         console.error('Error fetching data:', error);
+        this.isLoading = false;
       });
   }
 
   filterByEmployeeId() {
-
+    // Implementation for filtering by employee ID
   }
 }
