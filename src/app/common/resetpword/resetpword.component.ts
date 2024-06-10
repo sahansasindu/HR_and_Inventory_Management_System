@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AxiosService} from "../../axios.service";
-import {createSecurePair} from "node:tls";
 
 @Component({
   selector: 'app-resetpword',
