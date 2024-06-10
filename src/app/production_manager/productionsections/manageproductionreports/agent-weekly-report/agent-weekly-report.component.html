@@ -1,1 +1,37 @@
-<p>agent-weekly-report works!</p>
+<div class="date-search-container">
+  <input type="date" [(ngModel)]="fromDate" class="date-input" placeholder="From">
+  <input type="date" [(ngModel)]="toDate" class="date-input" placeholder="To">
+  <button (click)="search()" class="search-button">Search</button>
+</div>
+
+<div class="report-container">
+  <h1><b>Weekly milk purchases by Agents</b></h1>
+  <h3 style="text-align: right">Lucky Lanka Milk Processing Company</h3>
+  <hr style="border: 3px solid #000000;"/>
+  <table class="report-table">
+    <thead>
+    <tr>
+      <th>Agent Name</th>
+      <th>Agency Name</th>
+      <th>Amount Of Purchase (Bottles)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of weeklyReports">
+      <td>{{ report.agentName }}</td>
+      <td>{{ report.agencyName }}</td>
+      <td>{{ report.totalAmount }}</td>
+    </tr>
+    <tr *ngIf="weeklyReports.length === 0">
+      <td colspan="3" class="no-data">No data available for the selected date range.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="report-footer">
+    <p><strong>Total:</strong> {{ totalAmount }} Bottles</p>
+    <p><strong>Selected Date Range:</strong> {{ fromDate }} to {{ toDate }}</p>
+  </div>
+
+  <hr style="border: 3px solid #000000;"/>
+</div>

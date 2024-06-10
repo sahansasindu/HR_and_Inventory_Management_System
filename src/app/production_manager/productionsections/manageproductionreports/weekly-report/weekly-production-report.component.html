@@ -1,1 +1,66 @@
-<p>production-weekly-report works!</p>
+<div class="date-search-container">
+  <input type="date" [(ngModel)]="fromDate" class="date-input" placeholder="From">
+  <input type="date" [(ngModel)]="toDate" class="date-input" placeholder="To">
+  <button (click)="search()" class="search-button">Search</button>
+</div>
+
+<div class="report-container">
+  <h1><b>Weekly Milk Production by Company</b></h1>
+  <h3 style="text-align: right">Lucky Lanka Milk Processing Company</h3>
+  <hr style="border: 3px solid #000000;"/>
+
+  <h3><b>Milk Production</b></h3>
+  <table class="report-table">
+    <thead>
+    <tr>
+      <th>Amount Of Produce (Bottles)</th>
+      <th>Batch Code</th>
+      <th>Finished States</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let production of weeklymilkProductions">
+      <td>{{ production.amount }}</td>
+      <td>{{ production.batchCode }}</td>
+      <td>{{ production.finishedState }}</td>
+    </tr>
+    <tr *ngIf="weeklymilkProductions.length === 0">
+      <td colspan="3" class="no-data">No data available for the selected date range.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <p><strong>Total Good Milk Productions:</strong> {{ totalGoodMilkProductions }} Bottles</p>
+    <p><strong>Total Bad Milk Productions:</strong> {{ totalBadMilkProductions }} Bottles</p>
+  </div>
+
+
+  <h3><b>Milk Issues</b></h3>
+  <table class="report-table">
+    <thead>
+    <tr>
+      <th>Number Of Bottles</th>
+      <th>Issue Type</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let issue of weeklymilkIssues">
+      <td>{{ issue.numberOfBottles }}</td>
+      <td>{{ issue.issueType }}</td>
+    </tr>
+    <tr *ngIf="weeklymilkIssues.length === 0">
+      <td colspan="2" class="no-data">No data available for the selected date range.</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="totals">
+    <p><strong>Total:</strong> {{ totalIssues }} Bottles</p>
+  </div>
+
+  <hr style="border: 3px solid #000000;"/>
+  <div class="selected-date">
+    <p><strong>Selected Date:</strong> {{ fromDate }} to {{ toDate }}</p>
+  </div>
+</div>

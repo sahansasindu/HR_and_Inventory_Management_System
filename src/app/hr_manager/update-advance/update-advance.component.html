@@ -3,7 +3,7 @@
     <div class="col-md-6">
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h2 class="text-center"><u>Salary Advance</u></h2>
+          <h2 class="text-center"><u>Update advance State</u></h2>
 
         </div>
 
@@ -22,10 +22,13 @@
               <label for="reason">Reason:</label>
               <textarea class="form-control" id="reason" name="reason" [(ngModel)]="reson" rows="3"></textarea>
             </div>
+
             <div class="form-group">
               <label for="status">Status:</label>
               <select class="form-control" id="status" name="status"  [(ngModel)]="astatus"  style="margin-bottom: 20px;">
                 <option value="pending">Pending</option>
+                <option value="approve">Approve</option>
+                <option value="reject">Reject</option>
               </select>
             </div>
 

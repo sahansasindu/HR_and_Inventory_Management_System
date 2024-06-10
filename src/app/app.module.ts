@@ -56,7 +56,7 @@ import {MatOption, MatSelect} from "@angular/material/select";
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {MatDatepicker, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import { Notificationbar } from './hr_officer/notificationbar/notificationbar';
 import { NotificationComponent } from './hr_officer/notification/notification.component';
 import { GeneratesalaryComponent } from './hr_officer/generatesalary/generatesalary.component';
@@ -108,8 +108,7 @@ import { MailBoxComponent } from './common/mail-box/mail-box.component';
 import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 import {EmployeeMedical} from "./model/employeeMedical";
 import {EmployeeLeave} from "./model/employeeLeave";
-
-
+import {MatProgressSpinner} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
@@ -194,41 +193,43 @@ import {EmployeeLeave} from "./model/employeeLeave";
 
 
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    MatDrawerContainer,
-    BrowserAnimationsModule,
-    MatListModule,
-    MatDividerModule,
-    MatIconModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatButtonModule,
-    MatBadgeModule,
-    MatCardModule,
-    MatCardModule,
-    MatFormField,
-    MatSelect,
-    MatOption,
-    MatFormFieldModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatDatepickerToggle,
-    MatDatepicker,
-    HttpClientModule,
-    MatTableModule,
-    ReactiveFormsModule,
-    NgxSpinnerModule,
-    MatTab,
-    MatTabGroup,
-    FormsModule,
-    CanvasJSAngularStockChartsModule,
-    MatDialogModule,
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        MatDrawerContainer,
+        BrowserAnimationsModule,
+        MatListModule,
+        MatDividerModule,
+        MatIconModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatButtonModule,
+        MatBadgeModule,
+        MatCardModule,
+        MatCardModule,
+        MatFormField,
+        MatSelect,
+        MatOption,
+        MatFormFieldModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatDatepickerToggle,
+        MatDatepicker,
+        HttpClientModule,
+        MatTableModule,
+        ReactiveFormsModule,
+        NgxSpinnerModule,
+        MatTab,
+        MatTabGroup,
+        FormsModule,
+        CanvasJSAngularStockChartsModule,
+        MatDialogModule,
+        MatDatepickerInput,
+        MatProgressSpinner,
 
 
-  ],
+    ],
 
 
   providers: [

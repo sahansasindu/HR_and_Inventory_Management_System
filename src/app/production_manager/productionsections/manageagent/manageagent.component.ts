@@ -1,8 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {Agent} from "../../../model/agentmodel";
 import {AgentService} from "../../../service/services/agent.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AxiosService} from "../../../axios.service";
+import {CanvasJS} from "@canvasjs/angular-stockcharts";
 
 
 @Component({
@@ -20,7 +22,7 @@ export class ManageagentComponent implements OnInit{
 
   currentAgentIdForDeletion: string | null = null;
 
-  constructor(private agentService:AgentService) {
+  constructor(private agentService:AgentService,private axiosService:AxiosService) {
 
     this.updateFormAgent = new FormGroup({
       updateAgentId: new FormControl({value: '', disabled: true},Validators.required),
@@ -48,8 +50,11 @@ export class ManageagentComponent implements OnInit{
 
 
   selectRow(row: Agent): void {
-    this.selectedRow = row;
-    console.log(this.selectedRow);
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
 
   }
 
@@ -60,9 +65,16 @@ export class ManageagentComponent implements OnInit{
 
   chartOptions: any;
 
+  @ViewChild('agentIdChart') agentIdChart!: ElementRef;
+
   async ngOnInit() {
 
     this.dataSourceAgent.data = await this.agentService.getAllAgents();
+
+    const currentYear = new Date().getFullYear();
+    for (let year = currentYear - 10; year <= currentYear + 10; year++) {
+      this.years.push(year);
+    }
     this.agentDetailsChart();
   }
 
@@ -78,7 +90,7 @@ export class ManageagentComponent implements OnInit{
   updateAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -97,12 +109,16 @@ export class ManageagentComponent implements OnInit{
       this.isRemoveAgentVisible=false;
       this.isviweAgentVisible=false;
     }
+
+    if(!this.isUpdateAgentVisible){
+      this.selectedRow=null;
+    }
   }
 
   deleteAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -122,27 +138,108 @@ export class ManageagentComponent implements OnInit{
       this.isAddAgentVisible=false;
       this.isviweAgentVisible=false;
     }
+
+    if(!this.isRemoveAgentVisible){
+      this.selectedRow=null;
+    }
   }
 
+  //view for selected Agent Daily Milk Purchase Details
+  months = [
+    { value: 1, name: 'January' },
+    { value: 2, name: 'February' },
+    { value: 3, name: 'March' },
+    { value: 4, name: 'April' },
+    { value: 5, name: 'May' },
+    { value: 6, name: 'June' },
+    { value: 7, name: 'July' },
+    { value: 8, name: 'August' },
+    { value: 9, name: 'September' },
+    { value: 10, name: 'October' },
+    { value: 11, name: 'November' },
+    { value: 12, name: 'December' }
+  ];
+
+  years: number[] = [];
+  selectedMonth: number | null = null;
+  selectedYear: number | null = null;
+
+
   viweagentboughtMilk() {
+
+    if (!this.selectedRow) {
+      alert("No row selected Please Select Row in Table")
+      return;
+    }
+
     this.isviweAgentVisible = !this.isviweAgentVisible;
     if (this.isviweAgentVisible) {
       this.isUpdateAgentVisible = false;
       this.isRemoveAgentVisible = false;
       this.isAddAgentVisible = false;
     }
+
+    if(!this.isviweAgentVisible){
+      this.selectedRow=null;
+    }
+
+    this.agentDetailsChart()
+
   }
 
-  agentDetailsChart(){
+  @ViewChild('agentNameChart') agentNameChart!: ElementRef;
+  @ViewChild('agencyNameChart') agencyNameChart!: ElementRef;
+  @ViewChild('addressChart') addressChart!: ElementRef;
 
+
+  async searchPurchaseDetails(){
+
+    if (!this.selectedMonth || !this.selectedYear) {
+      alert('Please select both month and year.');
+    } else {
+
+      const agentId = this.agentIdChart.nativeElement.innerText;
+
+      console.log(`Selected Month: ${this.selectedMonth}, Selected Year: ${this.selectedYear}`);
+
+      console.log(`Agent ID: ${agentId}`);
+
+      const url = `/getAgentPurchaseDetails/${agentId}/${this.selectedYear}/${this.selectedMonth}`;
+
+
+      try {
+        const response = await this.axiosService.request('GET', url, {}, {});
+        console.log('Response data:', response);
+
+        const data = response.data;
+
+        if (Array.isArray(data)) {
+          this.chartOptions.data[0].dataPoints = data.map((item: any) => {
+            return { x: new Date(item.submit_date), y: item.amount };
+          });
+          this.renderChart();
+        } else {
+          console.error('Expected an array but got:', data);
+          alert('Unexpected response format. Please try again later.');
+        }
+      } catch (error) {
+        console.error('Error fetching purchase details:', error);
+        alert('Failed to fetch purchase details');
+      }
+
+
+    }
+  }
+
+  agentDetailsChart() {
     this.chartOptions = {
       animationEnabled: true,
       exportEnabled: true,
       theme: "light2",
-      title:{
+      title: {
         text: "Milk Purchase Details"
       },
-      axisX:{
+      axisX: {
         valueFormatString: "DD MMM",
         crosshair: {
           enabled: true,
@@ -155,10 +252,10 @@ export class ManageagentComponent implements OnInit{
           enabled: true
         }
       },
-      toolTip:{
-        shared:true
+      toolTip: {
+        shared: true
       },
-      legend:{
+      legend: {
         cursor: "pointer",
         verticalAlign: "bottom",
         horizontalAlign: "right",
@@ -166,7 +263,7 @@ export class ManageagentComponent implements OnInit{
         itemclick: function(e: any) {
           if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
             e.dataSeries.visible = false;
-          } else{
+          } else {
             e.dataSeries.visible = true;
           }
           e.chart.render();
@@ -179,49 +276,14 @@ export class ManageagentComponent implements OnInit{
         lineDashType: "dash",
         markerType: "square",
         xValueFormatString: "DD MMM, YYYY",
-        dataPoints: [
-          { x: new Date(2022, 0, 3), y: 650 },
-          { x: new Date(2022, 0, 4), y: 700 },
-          { x: new Date(2022, 0, 5), y: 710 },
-          { x: new Date(2022, 0, 6), y: 658 },
-          { x: new Date(2022, 0, 7), y: 734 },
-          { x: new Date(2022, 0, 8), y: 963 },
-          { x: new Date(2022, 0, 9), y: 847 },
-          { x: new Date(2022, 0, 10), y: 853 },
-          { x: new Date(2022, 0, 11), y: 869 },
-          { x: new Date(2022, 0, 12), y: 943 },
-          { x: new Date(2022, 0, 13), y: 970 },
-          { x: new Date(2022, 0, 14), y: 869 },
-          { x: new Date(2022, 0, 15), y: 890 },
-          { x: new Date(2022, 0, 16), y: 930 }
-        ]
-      },
-        {
-          type: "line",
-          showInLegend: true,
-          name: "Empty",
-          lineDashType: "dot",
-          dataPoints: [
-            { x: new Date(2022, 0, 3), y: 650 },
-            { x: new Date(2022, 0, 4), y: 700 },
-            { x: new Date(2022, 0, 5), y: 710 },
-            { x: new Date(2022, 0, 6), y: 658 },
-            { x: new Date(2022, 0, 7), y: 734 },
-            { x: new Date(2022, 0, 8), y: 963 },
-            { x: new Date(2022, 0, 9), y: 847 },
-            { x: new Date(2022, 0, 10), y: 853 },
-            { x: new Date(2022, 0, 11), y: 700 },
-            { x: new Date(2022, 0, 12), y: 943 },
-            { x: new Date(2022, 0, 13), y: 970 },
-            { x: new Date(2022, 0, 14), y: 869 },
-            { x: new Date(2022, 0, 15), y: 890 },
-            { x: new Date(2022, 0, 16), y: 800 }
-          ]
-        }]
-    }
+        dataPoints: []
+      }]
+    };
   }
-
-
+  renderChart() {
+    const chart = new CanvasJS.Chart("chartContainer", this.chartOptions);
+    chart.render();
+  }
   //this method for add new agent to system
   async addNewAgent() {
 
@@ -301,6 +363,7 @@ export class ManageagentComponent implements OnInit{
   }
 
   //this method implement for get agent details within undo opting to delete agent in the system
+
   async deleteAgentDetails() {
 
 
@@ -352,5 +415,27 @@ export class ManageagentComponent implements OnInit{
       this.showUndoOption = false;
       this.currentAgentIdForDeletion = null;
     }
+  }
+
+  clearAgentDetails() {
+
+    (document.getElementById('addAgentName') as HTMLInputElement).value='';
+    (document.getElementById('addAgentAddress') as HTMLInputElement).value='';
+    (document.getElementById('addAgencyName') as HTMLInputElement).value='';
+    (document.getElementById('addContact') as HTMLInputElement).value='';
+    (document.getElementById('addAgentEmail') as HTMLInputElement).value='';
+
+
+  }
+
+  clearUpdateDetails() {
+
+    (document.getElementById('updateAgentName') as HTMLInputElement).value='';
+    (document.getElementById('updateAgentAddress') as HTMLInputElement).value='';
+    (document.getElementById('updateAgencyName') as HTMLInputElement).value='';
+    (document.getElementById('updateContact') as HTMLInputElement).value='';
+    (document.getElementById('updateAgentEmail') as HTMLInputElement).value='';
+
+
   }
 }

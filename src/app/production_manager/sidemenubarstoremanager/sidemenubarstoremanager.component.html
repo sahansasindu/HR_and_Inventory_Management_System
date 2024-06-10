@@ -17,9 +17,11 @@
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./managebottlestock']">
     <mat-icon>inventory</mat-icon>  Milk Bottles  Stock
   </a>
+  <!--
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./managebottledamage']">
     <mat-icon>broken_image</mat-icon>  Bottle Damages
   </a>
+  -->
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./managereportsproduction']">
     <mat-icon>description</mat-icon> Production Reports
   </a>
@@ -33,6 +35,6 @@
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./chatboxNavigate']">
     <mat-icon>chat</mat-icon>Message</a>
 
-  <button md-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+  <button mat-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
 </mat-nav-list>
 

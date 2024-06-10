@@ -160,3 +160,60 @@ body {
   justify-content: flex-start;
   gap: 8px;
 }
+.update-issue{
+
+  padding: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #b3d7ff;
+  border-radius: 5px;
+
+}
+.selectMonth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: 0;
+  margin-left: 450px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selectMonth p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.selectMonth select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.selectMonth select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgb(255, 255, 255);
+}
+
+.selectMonth option {
+  padding: 10px;
+}
+
+.search-button {
+  height: 45px;
+  align-self: flex-end;
+}

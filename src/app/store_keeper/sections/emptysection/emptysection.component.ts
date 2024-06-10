@@ -10,7 +10,9 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 })
 export class EmptysectionComponent implements OnInit{
 
+  searchControl: FormControl;
   updateForm: FormGroup;
+  isLoading: boolean = false;
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
     this.updateForm = new FormGroup({
@@ -18,6 +20,8 @@ export class EmptysectionComponent implements OnInit{
       empty_bottles: new FormControl(''),
       damage_bottles: new FormControl('')
     });
+
+    this.searchControl = new FormControl('');
   }
 
 
@@ -29,13 +33,37 @@ export class EmptysectionComponent implements OnInit{
 
   ];
 
-  ngOnInit() {
-    this.fetchEmptyBottleDetails().then(r =>{} );
+  async ngOnInit() {
+
+    this.dataSource.filterPredicate = (data: TableElement, filter: string) => {
+      const formattedDate = new Date(data.submit_date).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      }).toLowerCase();
+      const transformedFilter = filter.trim().toLowerCase();
+      return formattedDate.includes(transformedFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
+    await this.fetchEmptyBottleDetails();
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
+
   selectRow(row: TableElement): void {
-    this.selectedRow = row;
-    console.log(this.selectedRow);
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
 
   }
 
@@ -52,7 +80,7 @@ export class EmptysectionComponent implements OnInit{
 
   toggleUpdate(): void {
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -67,6 +95,9 @@ export class EmptysectionComponent implements OnInit{
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
 
+    }
+    if(!this.isUpdateVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -133,7 +164,7 @@ export class EmptysectionComponent implements OnInit{
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
-
+    this.isLoading = true;
     const token = localStorage.getItem('currentUser');
     const headers = token ? { Authorization: `Bearer ${token}` } : {};
 
@@ -142,10 +173,11 @@ export class EmptysectionComponent implements OnInit{
       this.dataSource.data = response.data;
       //console.log(response.data)
       this.ELEMENT_DATA=this.dataSource.data;
+      this.isLoading = false;
       console.log('Empty bottle details fetched successfully:', response.data);
     } catch (error) {
+      this.isLoading = false;
       console.error('Error fetching empty bottle details:', error);
-      alert('Failed to fetch empty bottle details');
     }
   }
 
@@ -168,6 +200,10 @@ export class EmptysectionComponent implements OnInit{
     }
   }
 
+  clearupdate() {
+    (document.getElementById('empty_bottles') as HTMLInputElement).value = '';
+    (document.getElementById('damage_bottles') as HTMLInputElement).value = '';
+  }
 }
 
 export class TableElement {

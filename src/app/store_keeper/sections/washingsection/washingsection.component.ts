@@ -13,6 +13,8 @@ export class WashingsectionComponent implements OnInit{
 
   updateForm: FormGroup;
 
+  searchControl: FormControl;
+
   constructor(private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
 
     this.updateForm = new FormGroup({
@@ -20,6 +22,8 @@ export class WashingsectionComponent implements OnInit{
       employee_id: new FormControl(''),
       damage_amount: new FormControl('')
     });
+
+    this.searchControl = new FormControl('');
   }
 
   displayedColumns: string[] = ['daily_damage_id', 'damage_amount','employee_id','date'];
@@ -32,12 +36,30 @@ export class WashingsectionComponent implements OnInit{
 
   ngOnInit() {
 
+    this.dataSource.filterPredicate = (data: TableElement, filter: string) => {
+      const transformedFilter = filter.trim().toLowerCase();
+      return data.employee_id.toLowerCase().includes(transformedFilter);
+    };
+
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
     this.fetchdamageBottleDetails().then(r => {});
 
   }
 
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue;
+  }
+
   selectRow(row: TableElement): void {
-    this.selectedRow = row;
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
   }
 
   isAddDetailsVisible: boolean = false;
@@ -55,7 +77,7 @@ export class WashingsectionComponent implements OnInit{
   toggleUpdate(): void {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
@@ -69,6 +91,10 @@ export class WashingsectionComponent implements OnInit{
 
     if (this.isUpdateVisible) {
       this.isAddDetailsVisible = false;
+    }
+
+    if(!this.isUpdateVisible){
+      this.selectedRow=null;
     }
   }
 
@@ -113,6 +139,7 @@ export class WashingsectionComponent implements OnInit{
             alert(response.data.message);
           } else {
             alert("Submission successful");
+
             //console.log('Submission successful', response);
           }
         })
@@ -129,6 +156,7 @@ export class WashingsectionComponent implements OnInit{
       alert("Error submitting form");
       console.error('Error submitting form', error);
     }
+    await this.fetchdamageBottleDetails();
   }
 
   async damageupdateChanges() {
@@ -183,6 +211,17 @@ export class WashingsectionComponent implements OnInit{
       //alert('Failed to fetch wash bottle details');
     }
 
+  }
+
+  clearsumbit() {
+    (document.getElementById('add_employee_id') as HTMLInputElement).value='';
+    (document.getElementById('add_damage_amount') as HTMLInputElement).value='';
+    (document.getElementById('add_date') as HTMLInputElement).value='';
+  }
+
+  clearupdate() {
+    (document.getElementById('employee_id') as HTMLInputElement).value='';
+    (document.getElementById('damage_amount') as HTMLInputElement).value='';
   }
 }
 

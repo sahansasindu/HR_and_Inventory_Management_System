@@ -4,7 +4,7 @@
     <div class="emptysection-container" *ngIf="!isAddDetailsVisible && !isUpdateVisible">
       <mat-form-field appearance="fill">
         <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <input matInput [formControl]="searchControl" placeholder="Search by Submit Date">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
@@ -12,10 +12,12 @@
 
       <div class="button-container">
         <button mat-raised-button color="primary" (click)="toggleAddDetails()">Add Details</button>
-        <button mat-raised-button color="primary" (click)="toggleUpdate()">Update Changes</button>
+        <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="toggleUpdate()">Update Changes</button>
       </div>
       <div class="mat-table-container">
-
+        <div class="spinner-container" *ngIf="isLoading">
+          <mat-spinner [diameter]="30" [color]="'primary'"></mat-spinner>
+        </div>
         <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
           <!-- Empty Unit ID Column -->
@@ -105,7 +107,7 @@
         <input type="number" id="damage_bottles" formControlName="damage_bottles" required>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent">Clear</button>
+          <button mat-raised-button color="accent" (click)="clearupdate()">Clear</button>
           <button mat-raised-button color="primary" type="submit" (click)="updateChanges()">Submit</button>
         </div>
       </form>

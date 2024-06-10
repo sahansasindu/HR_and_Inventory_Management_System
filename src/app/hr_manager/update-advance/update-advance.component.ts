@@ -49,21 +49,23 @@ export class UpdateAdvanceComponent {
     console.log(this.id);
     this.axiosService.request(
       "PUT",
-      "/hrandproduction/updateAdvance",
+      "/updateAdvance",
       {
         "advance_salary_id":this.id,
         "amount": this.amount,
         "reson": this.reson,
         "status": this.astatus,
-        "emp_id":this.empid,
+        "emp_id":this.empid
+
+
       },
       {}
     ).then(response => {
       console.log("Response from server:", response);
-      alert("User details updated successfully!");
+      alert("Advance details updated successfully!");
     }).catch(error => {
-      console.error("Error updating user details:", error);
-      let errorMessage = "An error occurred while updating user details. Please try again later.";
+      console.error("Error updating Advance details:", error);
+      let errorMessage = "An error occurred while updating Advance details. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       }

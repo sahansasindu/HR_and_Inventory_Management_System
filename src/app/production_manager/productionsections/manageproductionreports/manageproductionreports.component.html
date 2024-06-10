@@ -9,7 +9,7 @@
       </button>
 
       <mat-card-actions>
-        <button mat-button>Download as PDF</button>
+        <button mat-button  (click)="downloadAsPDF()">Download as PDF</button>
       </mat-card-actions>
     </div>
 
@@ -21,21 +21,21 @@
           <mat-card-title>Production Reports</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-tab-group>
+          <mat-tab-group (selectedIndexChange)="onTabChange($event)">
             <mat-tab label="Daily">
-
+              <div #dailyReportContent>
                 <app-daily-production-report></app-daily-production-report>
-
+              </div>
             </mat-tab>
             <mat-tab label="Weekly">
-
+              <div #weeklyReportContent>
               <app-weekly-production-report></app-weekly-production-report>
-
+              </div>
             </mat-tab>
             <mat-tab label="Monthly">
-
+              <div #monthlyReportContent>
               <app-monthly-production-report></app-monthly-production-report>
-
+              </div>
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>
@@ -49,21 +49,21 @@
           <mat-card-title>Agent Reports</mat-card-title>
         </mat-card-header>
         <mat-card-content>
-          <mat-tab-group>
+          <mat-tab-group (selectedIndexChange)="onTabChange($event)">
             <mat-tab label="Daily">
-
+              <div #agentDailyReportContent>
               <app-agent-daily-report></app-agent-daily-report>
-
+              </div>
             </mat-tab>
             <mat-tab label="Weekly">
-
+              <div #agentWeeklyReportContent>
               <app-agent-weekly-report></app-agent-weekly-report>
-
+              </div>
             </mat-tab>
             <mat-tab label="Monthly">
-
+              <div #agentMonthlyReportContent>
             <app-agent-monthly-report></app-agent-monthly-report>
-
+            </div>
             </mat-tab>
           </mat-tab-group>
         </mat-card-content>

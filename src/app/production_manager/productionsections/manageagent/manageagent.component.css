@@ -32,16 +32,10 @@ body {
 }
 
 
-
-
-
-/* Media queries */
-
 @media (max-width: 992px) {
   .parallel-div {
     flex-direction: column;
   }
-
   .custom-div,
   .left-div {
     width: 100%;
@@ -76,15 +70,14 @@ body {
 }
 
 
-/* General styles */
+
 body {
   font-family: Arial, sans-serif;
-  background-color: #f4f4f4; /* Assuming a light gray background */
+  background-color: #f4f4f4;
   margin: 0;
-  padding: 8px; /* Add padding to ensure content isn't flush to the edges */
+  padding: 8px;
 }
 
-/* Container for the management interface */
 .agent-management-container {
   display: flex;
   flex-direction: column;
@@ -106,18 +99,18 @@ mat-toolbar {
 }
 
 .mat-icon-button {
-  margin-left: -48px; /* Align search icon inside the input */
+  margin-left: -48px;
 }
 
 /* Button styles */
 button {
   margin: 0 8px;
-  border-radius: 4px; /* Round the button corners to match the design */
+  border-radius: 4px;
 }
 
 .mat-table-container {
 
-  max-height: 450px; /* Adjust this value to the desired table body height */
+  max-height: 450px;
   overflow-y: scroll;
 
 }
@@ -127,7 +120,7 @@ button {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #51b9c0; /* Or whatever your table header background color is */
+  background: #51b9c0;
   font-weight: bold;
 }
 
@@ -139,15 +132,14 @@ button {
 .mat-cell,
 .mat-header-cell {
   padding: 8px;
-  min-width: 120px; /* Or your preferred min-width */
+  min-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-/* Make sure to set a min-width for the table container equal to the total width of all columns */
 .mat-table-container {
-  min-width: 450px; /* This is just an example; calculate the total width of your columns */
+  min-width: 450px;
 }
 
 /* Responsive design adjustments */
@@ -180,40 +172,39 @@ button {
   }
 }
 
-/* Additional customizations may be required depending on exact Angular Material versions and custom components */
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start of the container */
+  justify-content: flex-start;
   margin: 16px 0;
-  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  gap: 8px;
   width: 700px;
 }
 
 .search-container{
   flex-direction: column;
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start of the container */
+  justify-content: flex-start;
   margin: 16px 0;
-  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  gap: 8px;
   width:100%;
 }
-.chartAgent{
-  margin-top: 10px;
+.chartContainer{
+  margin-top: 120px;
 }
 
 .agentDetails-view table {
   width: 100%;
-  border-collapse: collapse; /* Remove spacing between table cells */
+  border-collapse: collapse;
 }
 
 .agentDetails-view td {
-  padding: 5px; /* Add padding to table cells */
-  border: none /* Add border to table cells */
+  padding: 5px;
+  border: none
 }
 
 .agentDetails-view td:first-child {
-  width: 150px; /* Set width for the first column */
-  font-weight: bold; /* Make the text bold in the first column */
+  width: 150px;
+  font-weight: bold;
 }
 
 .details-form {
@@ -226,12 +217,12 @@ button {
 .form-row {
   display: flex;
   align-items: center;
-  margin-bottom: 10px; /* Adjust spacing between rows */
+  margin-bottom: 10px;
 }
 
 .form-row label {
-  flex-basis: 150px; /* Adjust label width */
-  margin-right: 10px; /* Adjust spacing between label and input */
+  flex-basis: 150px;
+  margin-right: 10px;
   text-align: left;
 }
 
@@ -241,7 +232,7 @@ button {
 }
 
 .form-buttons {
-  margin-top: 20px; /* Adjust spacing between form and buttons */
+  margin-top: 20px;
   text-align: center;
 }
 
@@ -249,3 +240,51 @@ button {
   background-color: #ccdff5;
 }
 
+.selectMonth {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  margin-top: -150px;
+  margin-left: 450px;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.selectMonth p {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.selectMonth select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.selectMonth select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgb(255, 255, 255);
+}
+
+.selectMonth option {
+  padding: 10px;
+}
+
+.search-button {
+  height: 45px;
+  align-self: flex-end;
+}

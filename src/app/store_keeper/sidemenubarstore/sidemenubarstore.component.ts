@@ -9,12 +9,15 @@ import {UserService} from "../../service/services/user.service";
   styleUrl: './sidemenubarstore.component.css'
 })
 export class SidemenubarstoreComponent {
-  constructor(private router: Router,private authService:AuthService,private userService:UserService) {} // Inject Router
+  constructor(private router: Router,private authService:AuthService,private userService:UserService) {}
+
   logout() {
 
-    this.authService.logout();
-    this.userService.clearUser();
-    this.router.navigate(['/login']);
-
+    const confirmed = window.confirm('Are you sure you want to logout?');
+    if (confirmed) {
+      this.authService.logout();
+      this.userService.clearUser();
+      this.router.navigate(['/login']);
+    }
   }
 }
