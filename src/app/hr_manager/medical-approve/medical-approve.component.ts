@@ -1,36 +1,85 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {EmployeeMedical} from "../../model/employeeMedical";
+import {AxiosService} from "../../axios.service";
 
 @Component({
   selector: 'app-medical-approve',
   templateUrl: './medical-approve.component.html',
   styleUrl: './medical-approve.component.css'
 })
-export class MedicalApproveComponent {
-  displayedColumns: string[] = ['name', 'id','submittedDate']; // Define columns to display
-  dataSource = [
-    { name: 'John', id: 1,submittedDate: '10.03.2023' },
-    { name: 'Alice', id: 2,submittedDate: '23.05.2023' },
-    // Add more data as needed
-  ];
-  searchTerm: string = ''; // Variable to store the search term entered by the user
+export class MedicalApproveComponent implements OnInit{
 
-  viewMedicals() {
-    console.log('View Medical button clicked');
+  loarddata: any[] = [];
+  loarddata1: any[] = [];
+
+  employeeId: any;
+  private axiosService: any;
+
+  constructor(private employeeMedical:EmployeeMedical,private axios:AxiosService) {
+
+  }
+
+  async ngOnInit() {
+    await this.MedicalDetails();
+    this.fetchEmployeeData();
+  }
+
+  displayedColumns: string[] = ['employee_medical_id', 'emp_id','medical_report', 'submit_date', 'medical_status'];
+  dataSource = new MatTableDataSource<EmployeeMedical>([]);
+  selectedRow: EmployeeMedical | null = null;
+  ELEMENT_DATA: EmployeeMedical[] = [
+
+  ];
+
+  selectRowmedicalPDF(row:EmployeeMedical) {
+    this.selectedRow = row;
+  }
+
+  //get Employee medical
+  medicalReportVisible: boolean = false;
+
+  gotoReport() {
+
+    if (!this.selectedRow) {
+      alert("No row selected")
+      return;
+    }
+
+      this.medicalReportVisible=!this.medicalReportVisible;
+  }
+
+   async MedicalDetails():Promise<void> {
     try {
-      const pdfUrl = 'file:///D:/240409160119-ICT%20L%202%20S%20II%20.pdf';
-      window.open(pdfUrl, '_blank');
-      console.log('PDF opened successfully');
+      const response = await this.axios.request('GET', '/getMedicalData', {}, {});
+      this.dataSource.data = response.data;
+      this.ELEMENT_DATA = this.dataSource.data;
+      console.log('Medical Details fetched successfully:', response.data);
     } catch (error) {
-      console.error('Error opening PDF:', error);
+      console.error('Error fetching Medical Details:', error);
+    }
+
+  }
+  fetchEmployeeData() {
+
+    this.axiosService.request('GET', '/getEmployee', {}, {})
+      .then((response: { data: any[]; }) => {
+        this.loarddata1 = response.data;
+        this.loarddata = response.data;
+
+        console.log(this.loarddata); // Corrected logging statement
+      })
+      .catch((error: any) => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+  filterByEmpId() {
+    if (this.employeeId === "") {
+      this.fetchEmployeeData()
+    } else {
+      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
+      this.loarddata = this.loarddata1.filter(item => item.employeeid.toString().toLowerCase() === lowerCaseEmpId);
     }
   }
-
-
-
-  onSearch(): void {
-    // Perform search operations based on the value of searchTerm
-    console.log('Search term:', this.searchTerm);
-  }
-
-
 }

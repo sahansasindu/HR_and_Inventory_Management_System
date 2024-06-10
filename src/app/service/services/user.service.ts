@@ -2,6 +2,8 @@ import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../../model/usermodel';
 import { isPlatformBrowser } from '@angular/common';
+import {HttpClient} from "@angular/common/http";
+import {AxiosService} from "../../axios.service";
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +11,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class UserService {
   private userSubject = new BehaviorSubject<User | null>(null);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(private http: HttpClient,private axiosService: AxiosService,@Inject(PLATFORM_ID) private platformId: Object) {
     if (isPlatformBrowser(this.platformId)) {
       this.initUser();
     }
@@ -47,4 +49,8 @@ export class UserService {
       this.userSubject.next(null);
     }
   }
+  deleteUser(userId: number): Observable<any> {
+    return this.http.delete(`/api/users/${userId}`);
+  }
+
 }

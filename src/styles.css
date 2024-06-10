@@ -175,6 +175,15 @@ ngx-spinner {
 .form-buttons button {
   flex: 1;
 }
+.medi-container{
+  background-color: #e6f7ff; /* Color similar to the image background */
+  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px; /* Maximum width of the form */
+  margin: auto; /* Center the form */
+  position: relative;
+}
 .report-container {
   width: 90%;
   margin: auto;
@@ -225,4 +234,5 @@ ngx-spinner {
   z-index: 1000;
   margin-left: 450px;
   margin-top: 200px;
+
 }
