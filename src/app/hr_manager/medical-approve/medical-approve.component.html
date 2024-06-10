@@ -5,8 +5,7 @@
 
   <div class="medical-container" *ngIf="!medicalReportVisible">
         <mat-form-field appearance="fill">
-          <mat-label>Search</mat-label>
-          <input matInput placeholder="Search">
+          <input matInput placeholder="Enter Employee Id " required (input)="filterByEmpId()">
           <button mat-icon-button matSuffix>
             <mat-icon>search</mat-icon>
           </button>
