@@ -20,6 +20,11 @@
 
       </div>
 
+      <!--
+      User Will Goto Select Row and Their Task
+      after Selecting Row Button Colour Dynamically Change for What The Action When User Currently doing
+      (Update Agent,Delete Agent,view Agent Purchase Bottles )
+      -->
       <div class="button-container">
         <button mat-flat-button color="primary" (click)="registerNewAnget()">Register New Agent</button>
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="updateAnget()">Update</button>
@@ -231,6 +236,11 @@
         <button mat-raised-button class="search-button" color="primary" (click)="searchPurchaseDetails()">Search</button>
 
       </div>
+
+      <div class="total-purchase-wrapper" *ngIf="totalPurchase > 0">
+        <p>Total Purchased Bottles in {{ selectedMonth }} {{ selectedYear }}: {{ totalPurchase }}</p>
+      </div>
+
 
 
       <div id="chartContainer" style="height: 360px; width: 90%;margin-top: 80px"></div>

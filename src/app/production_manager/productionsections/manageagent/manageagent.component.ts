@@ -20,6 +20,8 @@ export class ManageagentComponent implements OnInit{
   undoRequested: boolean = false;
   undoTimeout: any;
 
+  totalPurchase: number = 0;
+
   currentAgentIdForDeletion: string | null = null;
 
   constructor(private agentService:AgentService,private axiosService:AxiosService) {
@@ -214,6 +216,8 @@ export class ManageagentComponent implements OnInit{
         const data = response.data;
 
         if (Array.isArray(data)) {
+
+          this.totalPurchase = data.reduce((sum, item) => sum + item.amount, 0);
           this.chartOptions.data[0].dataPoints = data.map((item: any) => {
             return { x: new Date(item.submit_date), y: item.amount };
           });

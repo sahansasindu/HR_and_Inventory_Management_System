@@ -288,3 +288,9 @@ button {
   height: 45px;
   align-self: flex-end;
 }
+.total-purchase-wrapper {
+ margin-left: 500px;
+  margin-top: 10px;
+  font-weight: bold;
+  font-size: 14px;
+}

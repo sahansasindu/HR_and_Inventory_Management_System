@@ -12,52 +12,54 @@
 
       <div class="button-container">
         <button mat-raised-button color="primary" (click)="swaptoCreateUser()">Create New User</button>
-        <button mat-raised-button color="primary" (click)="swaptoDeleteUser()">Delete User</button>
+        <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="swaptoDeleteUser()">Delete User</button>
       </div>
 
       <div class="table-container mat-elevation-z8">
 
-        <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z8">
+        <mat-table [dataSource]="dataSourceUser" class="mat-elevation-z8">
 
           <!-- ID Column -->
           <ng-container matColumnDef="id">
-            <th mat-header-cell *matHeaderCellDef> ID </th>
-            <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+            <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.id}} </mat-cell>
           </ng-container>
 
           <!-- Username Column -->
           <ng-container matColumnDef="username">
-            <th mat-header-cell *matHeaderCellDef> Username </th>
-            <td mat-cell *matCellDef="let user"> {{user.username}} </td>
+            <mat-header-cell *matHeaderCellDef> Username </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.username}} </mat-cell>
           </ng-container>
 
           <!-- Email Column -->
           <ng-container matColumnDef="email">
-            <th mat-header-cell *matHeaderCellDef> Email </th>
-            <td mat-cell *matCellDef="let user"> {{user.email}} </td>
+            <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
           </ng-container>
 
           <!-- Contact Column -->
           <ng-container matColumnDef="contact">
-            <th mat-header-cell *matHeaderCellDef> Contact </th>
-            <td mat-cell *matCellDef="let user"> {{user.contact}} </td>
+            <mat-header-cell *matHeaderCellDef> Contact </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.contact}} </mat-cell>
           </ng-container>
 
           <!-- Roles Column -->
           <ng-container matColumnDef="roles">
-            <th mat-header-cell *matHeaderCellDef> Roles </th>
-            <td mat-cell *matCellDef="let user"> {{user.roles}} </td>
+            <mat-header-cell *matHeaderCellDef> Roles </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.roles}} </mat-cell>
           </ng-container>
 
           <!-- Employee Column -->
           <ng-container matColumnDef="employee">
-            <th mat-header-cell *matHeaderCellDef> Employee </th>
-            <td mat-cell *matCellDef="let user"> {{user.employee}} </td>
+            <mat-header-cell *matHeaderCellDef> Employee </mat-header-cell>
+            <mat-cell *matCellDef="let user"> {{user.employee}} </mat-cell>
           </ng-container>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;"
+                   [class.highlighted]="row === selectedRow"
+                   (click)="selectRow(row)"></mat-row>
+        </mat-table>
       </div>
     </div>
 
@@ -98,24 +100,35 @@
 
     <div *ngIf="isDeleteUser"  class="details-container">
       <button mat-raised-button color="warn" (click)="swaptoDeleteUser()">Close</button>
-      <form class="details-form" name="deleteUser">
+      <form class="details-form" [formGroup]="deleteUserGroup">
         <h2>Delete User Details</h2>
 
-        <label for="id">User ID:</label>
-        <input type="text" id="id" name="id" required>
+        <label for="user_id">User ID:</label>
+        <input type="number" id="user_id" formControlName="user_id" required>
 
-        <label for="username">Username:</label>
-        <input type="text" id="user_name" name="username" required>
+        <label for="user_name">Username:</label>
+        <input type="text" id="user_name" formControlName="user_name" required>
 
-        <label for="employee">Employee:</label>
-        <input type="text" id="emp" name="employee" required>
+        <label for="empID">Employee ID:</label>
+        <input type="text"  id="empID" formControlName="empID" required>
 
-        <label for="email">Email:</label>
-        <input type="email" id="emil" name="email" required>
+        <label for="user_email">Email:</label>
+        <input type="text" id="user_email" formControlName="user_email" required>
+
+        <label for="role">User Role:</label>
+        <input type="text" id="role" formControlName="role" required>
+
+        <label for="contactNum">Contact number:</label>
+        <input type="text" id="contactNum" formControlName="contactNum" required>
+
+        <div class="form-row">
+          <label for="reason_status">Reason:</label>
+          <textarea id="reason_status" formControlName="reason_status" rows="3" cols="50" required></textarea>
+        </div>
 
         <div class="form-buttons">
-          <button mat-raised-button color="accent" >Clear</button>
-          <button mat-raised-button color="primary" type="submit" (click)="deleteUser(id)">Delete</button>
+          <button mat-raised-button color="accent" (click)="clearData()">Clear</button>
+          <button mat-raised-button color="primary" type="submit" (click)="deleteUser()">Delete</button>
         </div>
       </form>
     </div>

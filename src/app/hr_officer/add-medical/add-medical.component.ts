@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { Router } from '@angular/router';
 
@@ -23,11 +23,29 @@ export class AddMedicalComponent {
   eid: any;
   employeeId: any;
 
+
+  medicalData = {
+    empId: '',
+    submitDate: '',
+    medicalStatus: '',
+    medicalReport: null
+  };
+
+  @ViewChild('fileInput') fileInput!: ElementRef;
+
+
   constructor(
     private axiosService: AxiosService,
     private router: Router,
     private cdr: ChangeDetectorRef
   ) {}
+
+  handleFileInput(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      this.medicalData.medicalReport = file;
+    }
+  }
 
   show() {
     this.isVisible1 = true;
@@ -39,35 +57,32 @@ export class AddMedicalComponent {
     this.isVisible2 = true;
   }
 
-  handleFileInput(event: any) {
-    const files: FileList = event.target.files;
-    if (files.length > 0) {
-      this.report = files[0];
-    }
-  }
 
-  submitData() {
-    const formData = new FormData();
-    formData.append('emp_id', this.eid);
-    formData.append('submit_date', this.sdate);
-    formData.append('medical_status', this.mstate);
-    if (this.report) {
-      formData.append('medical_report', this.report);
-    }
-
+  async submitData() {
     const headers = {
-      'Authorization': `Bearer ${this.getAuthToken()}` // Assuming you have a method to get the auth token
+      'Authorization': `Bearer ${this.getAuthToken()}` // Adjust to your token retrieval method
     };
 
-    this.axiosService.request('POST', 'addMedical', formData, { headers })
-      .then(response => {
-        // Handle success response
-        console.log('Data submitted successfully', response);
-        this.router.navigate(['/success']); // Navigate to success page or any other desired page
-      })
-      .catch(error => {
-        console.error('Error submitting data:', error);
-      });
+
+    const formData = new FormData();
+    formData.append('emp_id', this.medicalData.empId);
+    formData.append('submit_date', this.medicalData.submitDate);
+    formData.append('medical_status', this.medicalData.medicalStatus);
+    if (this.medicalData.medicalReport) {
+      formData.append('medical_report', this.medicalData.medicalReport);
+    }
+
+    if(formData){
+      alert("Please Fill All The Fields....")
+    }
+
+    try {
+      const response = await this.axiosService.request('POST', 'addMedical', formData, { headers });
+      console.log('Data submitted successfully', response);
+      await this.router.navigate(['/success']);
+    } catch (error) {
+      console.error('Error submitting data:', error);
+    }
   }
 
   getAuthToken() {
