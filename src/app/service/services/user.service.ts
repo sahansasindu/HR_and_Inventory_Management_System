@@ -49,8 +49,5 @@ export class UserService {
       this.userSubject.next(null);
     }
   }
-  deleteUser(userId: number): Observable<any> {
-    return this.http.delete(`/api/users/${userId}`);
-  }
 
 }

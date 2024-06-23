@@ -153,6 +153,17 @@ body {
   }
 }
 
+.mat-header-row {
+  background-color: #3a9bff;
+}
 
+.highlighted {
+  background-color: #9ecbfa;
+}
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
 
 
