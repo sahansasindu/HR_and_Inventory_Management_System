@@ -5,49 +5,71 @@
   <div class="notifications">
     <hr style="border: 2px solid black; font-weight: bold;">
     <div class="notices">
-      <h1>danidu</h1>
-      <h1>danidu</h1>
-      <h1>danidu</h1>
+
     </div>
-    <hr style="border: 2px solid black; font-weight: bold;">
+
   </div>
 
+  <hr style="border: 2px solid black; font-weight: bold;">
 
   <button class="clear-btn" (click)="clearNotifications()">Clear Notification</button>
 
 
 
   <div class="birthday-notifications">
-
-    <hr style="border: 2px solid black; font-weight: bold;">
-    <div class="notices">
-      <h1>danidu</h1>
-      <h1>danidu</h1>
-      <h1>danidu</h1>
-
-    </div>
-    <hr style="border: 2px solid black; font-weight: bold;">
-
     <button class="birthday-btn" (click)="showBirthdayList()">Today's Birthdays</button>
-    <button class="birthday-btn">Upcoming Birthdays</button>
+    <button class="birthday-btn" (click)="showUpcomingBirthdayList()">Upcoming Birthdays</button>
   </div>
 </div>
 
 <div class="popup" *ngIf="isBirthdayListVisible">
   <div class="popup-content">
     <span class="close-btn" (click)="hideBirthdayList()">&times;</span>
-    <h2 style="text-align: center;">Today's Birthdays</h2>
+    <h1 style="text-align: center;"><b>Today's Birthdays</b></h1>
     <div class="employee-cards">
       <div class="employee-card" *ngFor="let employee of employees">
         <img [src]="employee.gender === 'male' ? imageUrlMale : imageUrlFemale">
-        <h3>Employee ID : {{employee.employee_id}}</h3>
-        <h3>Name : {{ employee.employee_name }}</h3>
-        <p>Department : {{ employee.dep_id }}</p>
-        <p>Section : {{ employee.sec_id }}</p>
-        <p>Job Position: {{ employee.job_role }}</p>
+        <h3><b>Employee ID :</b> {{employee.employee_id}}</h3>
+        <h3><b>Name :</b> {{ employee.employee_name }}</h3>
+        <p><b>Department :</b> {{ employee.dep_id }}</p>
+        <p><b>Section :</b> {{ employee.sec_id }}</p>
+        <p><b>Job Position:</b> {{ employee.job_role }}</p>
       </div>
     </div>
   </div>
 </div>
 
 
+<div class="popup" *ngIf="isBirthdayListVisible2">
+  <div class="popup-content">
+    <span class="close-btn" (click)="hideBirthdayList2()">&times;</span>
+    <h1 style="text-align: center;"><b>Upcoming Birthdays</b></h1>
+    <div class="employee-table">
+      <table>
+        <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Date of Birth</th>
+          <th>Department</th>
+          <th>Section</th>
+          <th>Job Position</th>
+          <th>Birth Day</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let employee of upcomingBirthdays">
+          <td>{{ employee.employee_id }}</td>
+          <td>{{ employee.employee_name }}</td>
+          <td>{{ employee.dob | date: 'mediumDate' }}</td>
+          <td>{{ employee.dep_id }}</td>
+          <td>{{ employee.sec_id }}</td>
+          <td>{{ employee.job_role }}</td>
+          <td [ngClass]="getBirthdayStatusColor(employee.dob)">{{ getBirthdayStatus(employee.dob) }}</td>
+
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
