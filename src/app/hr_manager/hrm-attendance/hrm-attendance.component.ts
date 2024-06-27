@@ -1,4 +1,4 @@
-// import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatInputModule} from '@angular/material/input';
@@ -6,65 +6,34 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {provideNativeDateAdapter} from '@angular/material/core';
 import {MatIcon} from "@angular/material/icon";
 import {MatTable} from "@angular/material/table";
-import { Component, ViewChild } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { HttpClient } from '@angular/common/http';
+import { AxiosService } from '../../axios.service';
 
 @Component({
   selector: 'app-hrm-attendance',
   templateUrl: './hrm-attendance.component.html',
   styleUrl: './hrm-attendance.component.css',
 })
-export class HrmAttendanceComponent {
+export class HrmAttendanceComponent implements OnInit {
   sideBarOpen = true;
-  displayedColumns: string[] = ['date', 'employeeId', 'employeeName', 'inTime', 'outTime', 'attendanceStatus'];
-  // dataSource = ELEMENT_DATA;
-  dataSource: MatTableDataSource<PeriodicElement>;
+  displayedColumns: string[] = ['date', 'emp_id', 'in_time', 'out_time', 'attendance_status'];
+  dataSource: any[] = [];
+
 
   sideBarToggler() {
     this.sideBarOpen = !this.sideBarOpen;
   }
 
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-  @ViewChild(MatSort) sort!: MatSort;
-
-  constructor(private http: HttpClient) {
-    this.dataSource = new MatTableDataSource<PeriodicElement>();
-    this.paginator = new MatPaginator(null!, null!); // Initializing paginator
-    this.sort = new MatSort(); // Initializing sort
-  }
+  constructor(private axiosService: AxiosService) {}
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    this.getAttendanceData();
+    this.loadAttendance();
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-
-  getAttendanceData() {
-    this.http.get<any>('http://localhost:8080/attendance').subscribe(
-      data => {
-        this.dataSource.data = data;
-      },
-      error => {
-        console.log('Error fetching attendance data:', error);
-      }
-    );
+  loadAttendance() {
+    this.axiosService.getAttendance().then((response: { data: any[]; }) => {
+      this.dataSource = response.data;
+    }).catch((error: any) => {
+      console.error('Error fetching attendance data:', error);
+    });
   }
 }
-
-
-export interface PeriodicElement {
-  date: string;
-  employeeId: number;
-  employeeName: string;
-  inTime: string;
-  outTime: string;
-  attendanceStatus: string;
-}
-
