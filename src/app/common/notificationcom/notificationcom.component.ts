@@ -1,4 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {AxiosService} from "../../axios.service";
+
+interface EmployeeBirthdayDTO {
+
+  employee_id: string;
+  job_role: string;
+  employee_name: string;
+  gender: string;
+  contact: string;
+  dep_id: string;
+  sec_id: string;
+}
 
 @Component({
   selector: 'app-notificationcom',
@@ -7,16 +19,37 @@ import {Component, OnInit} from '@angular/core';
 })
 export class NotificationcomComponent implements OnInit{
 
+
+
   currentTime: string='';
   private timeUpdateInterval: any;
+  isBirthdayListVisible: boolean = false;
+  employees: EmployeeBirthdayDTO[] = [];
+  imageUrlMale: string = '/assets/images/male.png'; // Replace with your actual image paths
+  imageUrlFemale: string = '/assets/images/female.png'; // Replace with your actual image paths
 
-  constructor() { }
 
-  ngOnInit(): void {
+
+  constructor(private ax:AxiosService) { }
+
+  async ngOnInit() {
     this.updateTime();
     this.timeUpdateInterval = setInterval(() => {
       this.updateTime();
-    }, 1000); // Update time every second
+    }, 1000);
+
+
+    await this.fetchEmployeesWithBirthdaysToday();
+  }
+
+  async fetchEmployeesWithBirthdaysToday(): Promise<void> {
+    try {
+      const response = await this.ax.request("GET","/todayBirthdays",{},{});
+      this.employees = response.data;
+      console.log('Employees with birthdays today:', this.employees);
+    } catch (error) {
+      console.error('Error fetching employees with birthdays today:', error);
+    }
   }
 
   ngOnDestroy(): void {
@@ -34,6 +67,14 @@ export class NotificationcomComponent implements OnInit{
 
   clearNotifications(): void {
     // Logic to clear notifications
+  }
+
+  showBirthdayList(): void {
+    this.isBirthdayListVisible = true;
+  }
+
+  hideBirthdayList(): void {
+    this.isBirthdayListVisible = false;
   }
 
 }
