@@ -159,9 +159,9 @@ ngx-spinner {
 
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start of the container */
+  justify-content: flex-start;
   margin: 16px 0;
-  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  gap: 8px;
   width: 700px;
 }
 .form-buttons {
@@ -176,12 +176,12 @@ ngx-spinner {
   flex: 1;
 }
 .medi-container{
-  background-color: #e6f7ff; /* Color similar to the image background */
-  border: 1px solid #b3d7ff; /* Border color similar to the image */
+  background-color: #e6f7ff;
+  border: 1px solid #b3d7ff;
   padding: 20px;
   border-radius: 10px;
-  max-width: 600px; /* Maximum width of the form */
-  margin: auto; /* Center the form */
+  max-width: 600px;
+  margin: auto;
   position: relative;
 }
 .report-container {

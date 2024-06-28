@@ -13,6 +13,7 @@ interface EmployeeBirthdayDTO {
 }
 
 export interface UpcomingBirthdayDTO {
+
   employee_id: string;
   job_role: string;
   employee_name: string;
@@ -43,8 +44,8 @@ export class NotificationcomComponent implements OnInit{
 
   upcomingBirthdays: UpcomingBirthdayDTO[] = [];
 
-  imageUrlMale: string = '/assets/images/male.png'; // Replace with your actual image paths
-  imageUrlFemale: string = '/assets/images/female.png'; // Replace with your actual image paths
+  imageUrlMale: string = '/assets/images/male.png';
+  imageUrlFemale: string = '/assets/images/female.png';
   isBirthdayListVisible2: boolean = false;
 
 

@@ -65,7 +65,7 @@
           <td>{{ employee.dep_id }}</td>
           <td>{{ employee.sec_id }}</td>
           <td>{{ employee.job_role }}</td>
-          <td [ngClass]="getBirthdayStatusColor(employee.dob)">{{ getBirthdayStatus(employee.dob) }}</td>
+          <td [ngClass]="getBirthdayStatusColor(employee.dob)"><b>{{ getBirthdayStatus(employee.dob) }}</b></td>
 
         </tr>
         </tbody>

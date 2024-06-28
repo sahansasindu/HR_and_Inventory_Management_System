@@ -43,7 +43,16 @@ export class ManageUserComponent implements OnInit{
 
 
   async ngOnInit(): Promise<void> {
+
+    this.dataSourceUser.filterPredicate = (data: TableElementUser, filter: string) => {
+      return data.employee.toLowerCase().includes(filter);
+    };
     await this.getAllUsers()
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSourceUser.filter = filterValue.trim().toLowerCase();
   }
 
   selectedRow: TableElementUser | null = null;
@@ -68,13 +77,6 @@ export class ManageUserComponent implements OnInit{
       alert("No row selected Please Select Row in Table")
       return;
     }
-
-    /*console.log("id",this.selectedRow.id)
-    console.log("username",this.selectedRow.username)
-    console.log("employee id",this.selectedRow.empID)
-    console.log("email",this.selectedRow.email)
-    console.log("role",this.selectedRow.role)
-    console.log("contact",this.selectedRow.contact)*/
 
     this.deleteUserGroup.setValue({
       user_id: this.selectedRow.id,

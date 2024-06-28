@@ -10,12 +10,16 @@
   </a>
 
   <a mat-list-item routerLinkActive="list-item-active" >
-    <mat-icon>person_add</mat-icon> Update Employee
+    <mat-icon>person</mat-icon> Manage Promotions
   </a>
 
   <a mat-list-item routerLinkActive="list-item-active" >
     <mat-icon>format_list_bulleted</mat-icon>  Leave & Medical  </a>
 
+
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./add-employee']">
+    <mat-icon>person_add</mat-icon> Add New Employee
+  </a>
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./emp-details']">
     <mat-icon>summarize</mat-icon> Employee Details

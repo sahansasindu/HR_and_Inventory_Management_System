@@ -123,14 +123,14 @@ body {
   display: flex;
   flex-direction: column;
   padding: 16px;
-  background-color: #d1c2c2;
+  background-color: #f8f1f1;
 }
 
 .close-button {
-  position: absolute; /* Absolute position within the parent container */
-  top: 10px; /* Adjust the value as needed */
-  right: 10px; /* Adjust the value as needed */
-  padding: 5px 10px; /* Padding for aesthetics */
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 5px 10px;
 }
 
 .details-container {
