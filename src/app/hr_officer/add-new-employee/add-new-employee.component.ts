@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
+import {Employee} from "../../model/employeemodel";
 
 @Component({
   selector: 'app-add-new-employee',
@@ -9,62 +10,45 @@ import { Router } from "@angular/router";
 })
 export class AddNewEmployeeComponent {
 
-  eid: any;
-  sid: any;
-  Did: any;
-  satype: any;
-  jrole: any;
-  gender: any;
-  empname: any;
-  dob: any;
-  mstate: any;
-  contactno: any;
-  cstatus: any;
-  address: any;
-  fileToUpload: File | null = null;
+  employee: Employee = new Employee('', '', '', '', '', '', '', '', '', '', '', '', null);
+
 
   constructor(private axiosService: AxiosService, private router: Router) {}
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length) {
-      this.fileToUpload = input.files[0];
+      this.employee.cv = input.files[0];
     }
   }
 
-  submitData() {
-    const token = localStorage.getItem('currentUser');
-    const headers = {
-      Authorization: `Bearer ${token}`
-    };
-    const formData = new FormData(); // Create FormData object to send form data including file
+  async submitData() {
+    const formData = new FormData();
 
-    // Append form data to FormData object
-    formData.append('employeeid', this.eid);
-    formData.append('address', this.address);
-    formData.append('company_status', this.cstatus);
-    formData.append('contact', this.contactno);
-    if (this.fileToUpload) {
-      formData.append('cv', this.fileToUpload); // Append file to FormData if it exists
+    formData.append('employeeid', this.employee.employeeid);
+    formData.append('job_role', this.employee.job_role);
+    formData.append('salary_type', this.employee.salary_type);
+    formData.append('employee_name', this.employee.employee_name);
+    formData.append('dob', this.employee.dob);
+    formData.append('address', this.employee.address);
+    formData.append('gender', this.employee.gender);
+    formData.append('ma_uma', this.employee.ma_uma);
+    formData.append('contact', this.employee.contact);
+    formData.append('company_status', this.employee.company_status);
+    formData.append('dep_id', this.employee.dep_id);
+    formData.append('sec_id', this.employee.sec_id);
+
+    if (this.employee.cv) {
+      formData.append('cv', this.employee.cv);
     }
-    formData.append('dob', this.dob);
-    formData.append('employee_name', this.empname);
-    formData.append('gender', this.gender);
-    formData.append('job_role', this.jrole);
-    formData.append('ma_uma', this.mstate);
-    formData.append('salary_type', this.satype);
-    formData.append('dep_id', this.Did);
-    formData.append('sec_id', this.sid);
 
-    // Send POST request with FormData
-    this.axiosService.request("POST", "/addEmployee", formData, headers)
-      .then(response => {
-        console.log("Response from server:", response);
-        alert("User details updated successfully!");
-      })
-      .catch(error => {
-        console.error("Error updating user details:", error);
-        alert("Error updating user details. Please try again.");
-      });
+    try {
+      const response = await this.axiosService.request('POST', '/addEmployee', formData, { 'Content-Type': 'multipart/form-data' });
+      console.log('Response from server:', response);
+      alert('Employee added successfully!');
+    } catch (error) {
+      console.error('Error adding employee:', error);
+    }
   }
+
 }

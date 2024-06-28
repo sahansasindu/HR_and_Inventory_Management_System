@@ -6,63 +6,49 @@
         <form>
           <div class="form-group">
             <label for="employeeId">Employee ID:</label>
-            <input type="text" class="form-control" id="employeeId" name="employeeId" [(ngModel)]="eid">
+            <input type="text" class="form-control" id="employeeId" name="employeeId" [(ngModel)]="employee.employeeid">
           </div>
           <div class="form-group">
             <label for="address">Address:</label>
-            <input type="text" class="form-control" id="address" name="address" [(ngModel)]="address">
+            <input type="text" class="form-control" id="address" name="address" [(ngModel)]="employee.address">
           </div>
           <div class="form-group">
             <label for="companyStatus">Company Status:</label>
-            <select class="form-control" id="companyStatus" name="companyStatus" [(ngModel)]="cstatus">
+            <select class="form-control" id="companyStatus" name="companyStatus" [(ngModel)]="employee.company_status">
               <option value="active">Active</option>
               <option value="inactive">Inactive</option>
             </select>
           </div>
           <div class="form-group">
             <label for="contact">Contact No:</label>
-            <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="contactno">
+            <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="employee.contact">
           </div>
           <div class="form-group">
-            <label for="companyStatus">Married or not:</label>
-            <select class="form-control" id="married" name="companyStatus" [(ngModel)]="mstate">
-              <option value="active">Married</option>
-              <option value="inactive">Unmarried</option>
+            <label for="maUma">Married or Not:</label>
+            <select class="form-control" id="maUma" name="maUma" [(ngModel)]="employee.ma_uma">
+              <option value="married">Married</option>
+              <option value="unmarried">Unmarried</option>
             </select>
           </div>
           <div class="form-group">
             <label for="file">Choose File</label>
-            <input type="file" id="file"  name="file" (change)="onFileSelected($event)" />
-
+            <input type="file" id="file" name="file" (change)="onFileSelected($event)" />
           </div>
-          <!-- PDF Upload Field with Padding -->
-          <!--
-          <div class="form-group">
-            <label for="pdfFile" id="cvlable">Upload PDF:</label>
-
-          </div>
-          -->
-
-
-
-
-
-
         </form>
       </div>
       <div class="col-md-6">
-        <form>
+        <form enctype="multipart/form-data">
           <div class="form-group">
             <label for="dob">Date of Birth:</label>
-            <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="dob">
+            <input type="date" class="form-control" id="dob" name="dob" [(ngModel)]="employee.dob">
           </div>
           <div class="form-group">
             <label for="employeeName">Employee Name:</label>
-            <input type="text" class="form-control" id="employeeName" name="employeeName" [(ngModel)]="empname">
+            <input type="text" class="form-control" id="employeeName" name="employeeName" [(ngModel)]="employee.employee_name">
           </div>
           <div class="form-group">
             <label for="gender">Gender:</label>
-            <select class="form-control" id="gender" name="gender" [(ngModel)]="gender" >
+            <select class="form-control" id="gender" name="gender" [(ngModel)]="employee.gender">
               <option value="male">Male</option>
               <option value="female">Female</option>
               <option value="other">Other</option>
@@ -70,11 +56,11 @@
           </div>
           <div class="form-group">
             <label for="jobRole">Job Role:</label>
-            <input type="text" class="form-control" id="jobRole" name="jobRole" [(ngModel)]="jrole">
+            <input type="text" class="form-control" id="jobRole" name="jobRole" [(ngModel)]="employee.job_role">
           </div>
           <div class="form-group">
             <label for="salaryType">Salary Type:</label>
-            <select class="form-control" id="salaryType" name="salaryType" [(ngModel)]="satype">
+            <select class="form-control" id="salaryType" name="salaryType" [(ngModel)]="employee.salary_type">
               <option value="hourly">Hourly</option>
               <option value="monthly">Monthly</option>
               <option value="annual">Annual</option>
@@ -82,13 +68,13 @@
           </div>
           <div class="form-group">
             <label for="departmentId">Department ID:</label>
-            <input type="text" class="form-control" id="departmentId" name="departmentId" [(ngModel)]="Did">
+            <input type="text" class="form-control" id="departmentId" name="departmentId" [(ngModel)]="employee.dep_id">
           </div>
           <div class="form-group">
             <label for="sectionId">Section ID:</label>
-            <input type="text" class="form-control" id="sectionId" name="sectionId" style="margin-bottom: 20px;" [(ngModel)]="sid">
+            <input type="text" class="form-control" id="sectionId" name="sectionId" [(ngModel)]="employee.sec_id" style="margin-bottom: 20px;">
           </div>
-          <button type="submit"  class="btn btn-primary" (click)="submitData()">Submit</button>
+          <button type="button" class="btn btn-primary" (click)="submitData()">Submit</button>
         </form>
       </div>
     </div>
