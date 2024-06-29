@@ -95,6 +95,7 @@ const routes: Routes = [
       { path: 'hrmdashboard', component: HrmDashboardComponent },
       { path: 'esc', component: EmployeeSalaryComponent},
       { path: 'hrm-dashboard', component: HrmDashboardComponent },
+      { path: 'add-employee', component:  AddNewEmployeeComponent },
       {path:'emp-details',component: EmpDetailsComponent},
       {path:'medical-approve',component: MedicalApproveComponent},
       {path:'manage-user',component: ManageUserComponent},

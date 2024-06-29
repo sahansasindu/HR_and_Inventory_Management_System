@@ -5,14 +5,14 @@
 
     <div class="medical-container" *ngIf="!leaveReportVisible">
       <mat-form-field appearance="fill">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <mat-label>Search by Employee ID</mat-label>
+        <input matInput placeholder="Search by Employee ID" (input)="applyFilter($event)">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
       </mat-form-field>
       <div class="button-container">
-        <button mat-raised-button color="primary" (click)="gotoReport()">View Leave Report Details</button>
+        <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoReport()">View Leave Report Details</button>
         <button mat-raised-button color="primary">Gate Pass Requests</button>
       </div>
       <div class="mat-table-container">
@@ -51,7 +51,10 @@
 
           <ng-container matColumnDef="status">
             <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
-            <mat-cell *matCellDef="let element"> {{ element.status }} </mat-cell>
+            <mat-cell *matCellDef="let element" [ngClass]="{
+        'status-pending': element.status === 'pending',
+        'status-approved': element.status === 'approved',
+        'status-rejected': element.status === 'rejected'}"> <b>{{ element.status }}</b> </mat-cell>
           </ng-container>
 
           <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
@@ -62,17 +65,78 @@
         </mat-table>
       </div>
     </div>
-    <div class="medi-container" *ngIf="leaveReportVisible">
-      <button mat-raised-button class="form-buttons" color="warn" (click)="gotoReport()">Close</button>
 
-      <div class="form-buttons">
-        <button mat-raised-button color="accent">Reject</button>
-        <button mat-raised-button color="primary" type="submit">Approve</button>
+    <div class="popup-container" *ngIf="leaveHistoryVisible">
+      <div class="popup">
+        <button mat-icon-button class="close-button2" (click)="closeLeaveReport()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Leave History Summary</h2>
+        <table class="leave-summary-table">
+          <tr>
+            <td>Employee ID:</td>
+            <td>{{ leaveHistorySummary?.empId }}</td>
+          </tr>
+          <tr>
+            <td>Employee Name:</td>
+            <td>{{ leaveHistorySummary?.employeeName }}</td>
+          </tr>
+          <tr>
+            <td>Job Role:</td>
+            <td>{{ leaveHistorySummary?.jobRole }}</td>
+          </tr>
+          <tr class="approved">
+            <td>Approved Leaves:</td>
+            <td>{{ leaveHistorySummary?.approvedCount }}</td>
+          </tr>
+          <tr class="rejected">
+            <td>Rejected Leaves:</td>
+            <td>{{ leaveHistorySummary?.rejectedCount }}</td>
+          </tr>
+        </table>
       </div>
-
     </div>
 
+    <div class="medi-container" *ngIf="leaveReportVisible">
+      <button mat-raised-button class="form-buttons" color="warn" (click)="gotoReport()">Close</button>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="viewLeaveHistory()">View Employee Leave History</button>
+      </div>
+
+      <form class="details-form">
+
+        <div class="form-group">
+          <label for="emp_id">Employee ID:</label>
+          <input type="text" id="emp_id" [value]="selectedRow?.emp_id" readonly>
+        </div>
+        <div class="form-group">
+          <label for="leave_type">Leave Type:</label>
+          <input type="text" id="leave_type" [value]="selectedRow?.leave_type" readonly>
+        </div>
+        <div class="form-group">
+          <label for="reson">Reason:</label>
+          <input type="text" id="reson" [value]="selectedRow?.reson" readonly>
+        </div>
+        <div class="form-group">
+          <label for="start_time">Start Time:</label>
+          <input type="text" id="start_time" [value]="selectedRow?.start_time" readonly>
+        </div>
+        <div class="form-group">
+          <label for="end_time">End Time:</label>
+          <input type="text" id="end_time" [value]="selectedRow?.end_time" readonly>
+        </div>
+        <div class="form-group">
+          <label for="status">Status:</label>
+          <input type="text" id="status" [value]="selectedRow?.status" readonly>
+        </div>
+        <div class="form-buttons">
+          <button mat-raised-button color="accent" type="button" (click)="updateMedicalStatus('rejected')">Reject</button>
+          <button mat-raised-button color="primary" type="button" (click)="updateMedicalStatus('approved')">Approve</button>
+        </div>
+      </form>
+    </div>
   </div>
+
   <div class="left-div col-3 text-right" id="div3">
     <app-notificationcom></app-notificationcom>
   </div>

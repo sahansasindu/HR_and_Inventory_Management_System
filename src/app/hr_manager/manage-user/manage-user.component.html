@@ -1,9 +1,10 @@
 <div class="d-flex page__box p-1 mt-0">
   <div class="parallel-div col-9">
     <div class="container" *ngIf="!isCreateUser && !isDeleteUser">
+
       <mat-form-field appearance="fill">
-        <mat-label>Search</mat-label>
-        <input matInput placeholder="Search">
+        <mat-label>Search by Employee ID</mat-label>
+        <input matInput placeholder="Search by Employee ID" (input)="applyFilter($event)">
         <button mat-icon-button matSuffix>
           <mat-icon>search</mat-icon>
         </button>
@@ -66,6 +67,7 @@
     <div *ngIf="isCreateUser" class="details-container">
 
       <button mat-raised-button  color="warn" (click)="swaptoCreateUser()">Close</button>
+
       <form class="details-form" >
         <h2>Register New System User Account</h2>
 
