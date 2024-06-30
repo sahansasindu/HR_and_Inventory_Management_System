@@ -8,6 +8,34 @@ import {AxiosService} from "../../axios.service";
 })
 export class HrmDashboardComponent implements OnInit {
 
+
+  chartOptionsDep = {
+    animationEnabled: true,
+    title: {
+      text: "Company Departments"
+    },
+    legend: {
+      verticalAlign: "bottom",
+      horizontalAlign: "center",
+      fontSize: 13,
+      fontFamily: "Helvetica",
+      fontColor: "#000000",
+      cursor: "pointer",
+      itemTextFormatter: function(e: any) {
+        return `${e.dataPoint.name}: ${e.dataPoint.y}`;
+      },
+      itemWrap: true
+    },
+    data: [{
+      type: "pie",
+      startAngle: -90,
+      indexLabel: "{name}: {y}",
+      yValueFormatString: "#,###",
+      showInLegend: true,
+      dataPoints: [] as { y: number, name: string }[]
+    }]
+  };
+
   selectedChart: string = 'departments';
 
   totalEmployees:number=0;
@@ -44,45 +72,21 @@ export class HrmDashboardComponent implements OnInit {
     try {
       const response = await this.ax.request("GET", "/employeeCountsByDepartments", {}, {});
       this.departmentEmployeeCounts = response.data;
-      console.log(this.departmentEmployeeCounts)
       this.updateDepartmentChart();
+
     } catch (error) {
       console.error('Error fetching department employee counts:', error);
     }
   }
 
   updateDepartmentChart() {
-    this.chartOptionsDep.data[0].dataPoints = this.departmentEmployeeCounts.map(department => {
-      return { y: department.employeeCount, name: department.departmentName };
-    });
+    this.chartOptionsDep.data[0].dataPoints = this.departmentEmployeeCounts.map(department => ({
+      y: department.employeeCount,
+      name: department.departmentName,
+
+    }));
   }
 
-  chartOptionsDep = {
-    animationEnabled: true,
-    title: {
-      text: "Company Departments"
-    },
-    legend: {
-      verticalAlign: "bottom",
-      horizontalAlign: "center",
-      fontSize: 13,
-      fontFamily: "Helvetica",
-      fontColor: "#000000",
-      cursor: "pointer",
-      itemTextFormatter: function(e: any) {
-        return `${e.dataPoint.name}: ${e.dataPoint.y}`;
-      },
-      itemWrap: true
-    },
-    data: [{
-      type: "pie",
-      startAngle: -90,
-      indexLabel: "{name}: {y}",
-      yValueFormatString: "#,###",
-      showInLegend: true,
-      dataPoints: [] as { y: number, name: string }[]
-    }]
-  };
 
   chartOptionsEmp = {
     animationEnabled: true,
@@ -118,7 +122,7 @@ export class HrmDashboardComponent implements OnInit {
       name: "Total male Employees",
       legendText: "Male",
       showInLegend: true,
-      color: "#ec4040",
+      color: "#00caba",
       dataPoints:[
         {label: "Finance", y: 262},
         {label: "Human Resource", y: 211},
@@ -133,7 +137,7 @@ export class HrmDashboardComponent implements OnInit {
       legendText: "Female",
       axisYType: "secondary",
       showInLegend: true,
-      color: "#003cff",
+      color: "#ef6f2a",
       dataPoints:[
         {label: "Finance", y: 100},
         {label: "Human Resource", y: 150},
