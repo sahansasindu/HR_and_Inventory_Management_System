@@ -9,6 +9,19 @@
       </div>
     </div>
 
+    <div class="chartButton">
+      <button mat-raised-button color="primary" (click)="showDepartmentsChart()">Departments</button>
+      <button mat-raised-button color="primary" (click)="showEmployeesChart()">Employees</button>
+    </div>
+
+    <div class="chart-container" *ngIf="selectedChart === 'departments'">
+      <canvasjs-chart [options]="chartOptionsDep" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
+    </div>
+
+    <div class="chart-container" *ngIf="selectedChart === 'employees'">
+      <canvasjs-chart [options]="chartOptionsEmp" [styles]="{width: '100%', height:'380px'}"></canvasjs-chart>
+    </div>
+
   </div>
 
   <div class="left-div col-3 text-right" id="div3">
