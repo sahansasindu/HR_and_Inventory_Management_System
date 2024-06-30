@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AxiosService} from "../../axios.service";
 
 @Component({
   selector: 'app-hrm-dashboard',
@@ -9,18 +10,52 @@ export class HrmDashboardComponent implements OnInit {
 
   selectedChart: string = 'departments';
 
+  totalEmployees:number=0;
 
-  constructor() {}
+  departmentEmployeeCounts: DepartmentEmployeeCount[] = [];
 
-  ngOnInit() {
+  constructor(private ax:AxiosService) {}
+
+  async ngOnInit() {
+
+    await this.fetchTotalEmployeeCount();
+    await this.fetchDepartmentEmployeeCounts();
+
   }
 
   cards = [
-    { title: 'Company Total Employees', value: 200 },
+    { title: 'Company Total Employees', value: 0 },
     { title: 'Currently working Employees', value: 183 },
     { title: 'Today Absent Employees', value: 10 },
     { title: 'Currently Gate pass', value: 5 }
   ];
+
+  async fetchTotalEmployeeCount(): Promise<void> {
+    try {
+      const response = await this.ax.request("GET", "/totalCount", {}, {});
+      this.totalEmployees = response.data;
+      this.cards[0].value = this.totalEmployees;
+    } catch (error) {
+      console.error('Error fetching total employee count:', error);
+    }
+  }
+
+  async fetchDepartmentEmployeeCounts(): Promise<void> {
+    try {
+      const response = await this.ax.request("GET", "/employeeCountsByDepartments", {}, {});
+      this.departmentEmployeeCounts = response.data;
+      console.log(this.departmentEmployeeCounts)
+      this.updateDepartmentChart();
+    } catch (error) {
+      console.error('Error fetching department employee counts:', error);
+    }
+  }
+
+  updateDepartmentChart() {
+    this.chartOptionsDep.data[0].dataPoints = this.departmentEmployeeCounts.map(department => {
+      return { y: department.employeeCount, name: department.departmentName };
+    });
+  }
 
   chartOptionsDep = {
     animationEnabled: true,
@@ -45,14 +80,7 @@ export class HrmDashboardComponent implements OnInit {
       indexLabel: "{name}: {y}",
       yValueFormatString: "#,###",
       showInLegend: true,
-      dataPoints: [
-        { y: 34, name: "Finance" },
-        { y: 23, name: "Human Resource" },
-        { y: 75, name: "Marketing" },
-        { y: 240, name: "Production" },
-        { y: 80, name: "Operating" },
-        { y: 35, name: "Sales" }
-      ]
+      dataPoints: [] as { y: number, name: string }[]
     }]
   };
 
@@ -125,4 +153,8 @@ export class HrmDashboardComponent implements OnInit {
     this.selectedChart = 'employees';
   }
 
+}
+interface DepartmentEmployeeCount {
+  departmentName: string;
+  employeeCount: number;
 }
