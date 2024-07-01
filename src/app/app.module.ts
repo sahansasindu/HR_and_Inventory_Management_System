@@ -109,6 +109,7 @@ import { ChatBoxComponent } from './common/chat-box/chat-box.component';
 import {EmployeeMedical} from "./model/employeeMedical";
 import {EmployeeLeave} from "./model/employeeLeave";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
+import {BaseChartDirective} from "ng2-charts";
 
 @NgModule({
   declarations: [
@@ -227,6 +228,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
         MatDialogModule,
         MatDatepickerInput,
         MatProgressSpinner,
+        BaseChartDirective,
 
 
     ],

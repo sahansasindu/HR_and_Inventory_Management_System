@@ -13,7 +13,7 @@ body {
 .parallel-div {
   display: flex;
   flex-direction: column;
-  background-color: #f1eded;
+  background-color: #ffffff;
   border-radius: 1px;
 }
 
@@ -24,12 +24,12 @@ body {
 
 #div1 {
   height: 790px;
-  background-color: #e8e0e0;
+  background-color: #ffffff;
 }
 
 #div3 {
   margin-left: 3px;
-  background-color: #cfcdcd;
+  background-color: #eae1e1;
   border-radius: 2%;
 }
 
@@ -72,3 +72,77 @@ body {
 
   }
 }
+.card-container {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.card {
+  background-color: #ffffff;
+  border: 4px solid #21ef00;
+  border-radius: 8px;
+  width: 200px;
+  margin: 10px;
+  padding: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.card h3 {
+  font-weight: bold;
+  color: #000000;
+  margin: 0 0 10px;
+  font-size: 1.4em;
+}
+
+.card p {
+  align-items: flex-end;
+  color: #6e0505;
+  font-weight: bold;
+  font-size: 1.2em;
+  background-color: #eded7e;
+}
+
+.chartButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.chart-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.chart-container canvasjs-chart {
+  width: 100%;
+}
+.canvasjs-chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #ccc;
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+}
+
+.canvasjs-chart-legend-item {
+  margin: 10px 20px;
+  padding: 5px 0;
+}
+
+.canvasjs-chart-legend-text {
+  margin-left: 5px;
+}
+
+

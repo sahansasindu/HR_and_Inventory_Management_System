@@ -1,17 +1,31 @@
-
 <div class="d-flex page__box p-1 mt-0">
 
   <div class="parallel-div col-9">
-    <div class="div1 col-4 custom-div" id="div1"><app-notification></app-notification></div>
-    <div class="div2 col-4 custom-div" id="div2"><app-piechart></app-piechart></div>
-  </div>
 
+    <div class="card-container">
+      <div class="card" *ngFor="let card of cards">
+        <h3>{{card.title}}</h3>
+        <p>{{card.value}}</p>
+      </div>
+    </div>
+
+    <div class="chartButton">
+      <button mat-raised-button color="primary" (click)="showDepartmentsChart()">Departments</button>
+      <button mat-raised-button color="primary" (click)="showEmployeesChart()">Employees</button>
+    </div>
+
+    <div class="chart-container" *ngIf="selectedChart === 'departments'">
+      <canvasjs-chart [options]="chartOptionsDep" [styles]="{width: '100%', height:'360px'}" (chartInstance)="getChartInstance1($event)"></canvasjs-chart>
+    </div>
+
+    <div class="chart-container" *ngIf="selectedChart === 'employees'">
+      <canvasjs-chart [options]="chartOptionsEmp" [styles]="{width: '100%', height:'380px'}" (chartInstance)="getChartInstance2($event)"></canvasjs-chart>
+    </div>
+
+  </div>
 
   <div class="left-div col-3 text-right" id="div3">
     <app-notificationcom></app-notificationcom>
   </div>
 
 </div>
-
-
-

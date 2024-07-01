@@ -73,9 +73,9 @@ body {
 }
 .button-container {
   display: flex;
-  justify-content: flex-start; /* Aligns items to the start of the container */
-  margin: 40px 0;
-  gap: 8px; /* This creates a gap between items. Adjust as needed. */
+  justify-content: flex-start; 
+  margin: 30px 0;
+  gap: 8px;
   width: 750px;
 }
 
@@ -135,7 +135,7 @@ body {
 .issue-chart{
   position: relative;
   max-width: 860px;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 .mat-header-row {
   min-width: 100%;
