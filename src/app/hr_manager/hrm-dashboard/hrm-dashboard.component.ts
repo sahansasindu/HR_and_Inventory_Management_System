@@ -9,6 +9,60 @@ import {AxiosService} from "../../axios.service";
 export class HrmDashboardComponent implements OnInit {
 
 
+  chartDep: any;
+
+  chartEmp: any;
+
+  chartOptionsEmp = {
+    animationEnabled: true,
+    title: {
+      text: "Employee Status"
+    },
+    axisX: {
+      labelAngle: 0
+    },
+    axisY: {
+      title: "Number Of Male Employees",
+    },
+    axisY2: {
+      title: "Number Of Female Employees",
+    },
+    toolTip: {
+      shared: true,
+    },
+    legend: {
+      cursor: "pointer",
+      itemclick: function (e: any) {
+        if (typeof (e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+          e.dataSeries.visible = false;
+        }
+        else {
+          e.dataSeries.visible = true;
+        }
+        e.chart.render();
+      }
+    },
+    data: [
+      {
+        type: "column",
+        name: "Total Male Employees",
+        legendText: "Male",
+        showInLegend: true,
+        color: "#00caba",
+        dataPoints: [] as { label: string, y: number }[]
+      },
+      {
+        type: "column",
+        name: "Total Female Employees",
+        legendText: "Female",
+        axisYType: "secondary",
+        showInLegend: true,
+        color: "#ef6f2a",
+        dataPoints: [] as { label: string, y: number }[]
+      }
+    ]
+  };
+
   chartOptionsDep = {
     animationEnabled: true,
     title: {
@@ -48,6 +102,8 @@ export class HrmDashboardComponent implements OnInit {
 
     await this.fetchTotalEmployeeCount();
     await this.fetchDepartmentEmployeeCounts();
+    await this.fetchEmployeeCountsByGender();
+
 
   }
 
@@ -85,68 +141,42 @@ export class HrmDashboardComponent implements OnInit {
       name: department.departmentName,
 
     }));
+
+
+
+    if (this.chartDep) {
+      this.chartDep.render();
+    }
   }
 
+  async fetchEmployeeCountsByGender(): Promise<void> {
+    try {
+      const response = await this.ax.request("GET", "/employeeCountsByGender", {}, {});
+      const data = response.data;
+      console.log(data)
+      this.chartOptionsEmp.data[0].dataPoints = data.map((department: any) => ({
+        label: department.departmentName,
+        y: department.maleCount
+      }));
+      this.chartOptionsEmp.data[1].dataPoints = data.map((department: any) => ({
+        label: department.departmentName,
+        y: department.femaleCount
+      }));
 
-  chartOptionsEmp = {
-    animationEnabled: true,
-    title: {
-      text: "Employee Status"
-    },
-    axisX: {
-      labelAngle: 0
-    },
-    axisY: {
-      title: "Number Of Male Employees"
-    },
-    axisY2: {
-      title: "Number Of Female Employees"
-    },
-    toolTip: {
-      shared: true,
-    },
-    legend:{
-      cursor:"pointer",
-      itemclick: function(e: any){
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-          e.dataSeries.visible = false;
-        }
-        else {
-          e.dataSeries.visible = true;
-        }
-        e.chart.render();
+      if (this.chartEmp) {
+        this.chartEmp.render();
       }
-    },
-    data: [{
-      type: "column",
-      name: "Total male Employees",
-      legendText: "Male",
-      showInLegend: true,
-      color: "#00caba",
-      dataPoints:[
-        {label: "Finance", y: 262},
-        {label: "Human Resource", y: 211},
-        {label: "Marketing", y: 175},
-        {label: "Production", y: 137},
-        {label: "Operating", y: 115},
-        {label: "Sales", y: 104}
-      ]
-    }, {
-      type: "column",
-      name: "Total Female Employees",
-      legendText: "Female",
-      axisYType: "secondary",
-      showInLegend: true,
-      color: "#ef6f2a",
-      dataPoints:[
-        {label: "Finance", y: 100},
-        {label: "Human Resource", y: 150},
-        {label: "Marketing", y: 75},
-        {label: "Production", y: 80},
-        {label: "Operating", y: 90},
-        {label: "Sales", y: 104}
-      ]
-    }]
+    } catch (error) {
+      console.error('Error fetching employee counts by gender:', error);
+    }
+  }
+
+  getChartInstance2(chart: object) {
+    this.chartEmp = chart;
+  }
+
+  getChartInstance1(chart: object) {
+    this.chartDep = chart;
   }
 
   showDepartmentsChart() {
