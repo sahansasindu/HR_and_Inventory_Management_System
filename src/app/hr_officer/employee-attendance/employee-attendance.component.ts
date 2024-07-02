@@ -1,54 +1,43 @@
-import {ChangeDetectorRef, Component} from '@angular/core';
-import {AxiosService} from "../../axios.service";
-import {Router} from "@angular/router";
+import { ChangeDetectorRef, Component } from '@angular/core';
+import { AxiosService } from "../../axios.service";
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-employee-attendance',
   templateUrl: './employee-attendance.component.html',
-  styleUrl: './employee-attendance.component.css'
+  styleUrls: ['./employee-attendance.component.css']
 })
 export class EmployeeAttendanceComponent {
   isVisible1: boolean = true;
   isVisible2: boolean = false;
-
-
-  show() {
-    this.isVisible1 = true;
-    this.isVisible2 = false;
-
-
-  }
-
-  show2() {
-    this.isVisible1 = false;
-    this.isVisible2 = true;
-    this.fetchAttendanceData();
-
-  }
-
-
   loarddata: any[] = [];
   id: any;
-
-
   isLoading: boolean = false;
   intime: string = '';
   outtime: string = '';
   date: any;
   astate: any;
   eid: any;
-  employeeId: any;
+  employeeId: string = '';
   filteredData: any[] = [];
-  selectedDate: any;
+  selectedMonth: string = '';
+  page: number = 1; // <-- current page
+  searchSuggestions: string[] = []; // <-- for storing search suggestions
 
-
-
-  constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {
-  }
-
-
+  constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
   ngOnInit() {
+    this.fetchAttendanceData();
+  }
+
+  show() {
+    this.isVisible1 = true;
+    this.isVisible2 = false;
+  }
+
+  show2() {
+    this.isVisible1 = false;
+    this.isVisible2 = true;
     this.fetchAttendanceData();
   }
 
@@ -57,45 +46,44 @@ export class EmployeeAttendanceComponent {
       .then(response => {
         this.loarddata = response.data;
         this.filteredData = response.data;
+        this.applyFilters();
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
+
   onTimeChange(type: 'in' | 'out', newTime: string) {
     const date = new Date();
-    const timeParts = newTime.split(':'); // Split the time into hours and minutes
-    date.setHours(parseInt(timeParts[0], 10)); // Set the hours part
-    date.setMinutes(parseInt(timeParts[1], 10)); // Set the minutes part
-    date.setSeconds(0); // Set seconds to 0
-    const formattedTime = date.toTimeString().slice(0, 8); // Format as HH:mm:ss
+    const timeParts = newTime.split(':');
+    date.setHours(parseInt(timeParts[0], 10));
+    date.setMinutes(parseInt(timeParts[1], 10));
+    date.setSeconds(0);
+    const formattedTime = date.toTimeString().slice(0, 8);
 
     if (type === 'in') {
-      this.intime = formattedTime; // Set the formatted time for In Time
+      this.intime = formattedTime;
     } else if (type === 'out') {
-      this.outtime = formattedTime; // Set the formatted time for Out Time
+      this.outtime = formattedTime;
     }
   }
 
-
   submitData() {
-
-    if (!this.eid || !this.date || !this.intime|| !this.outtime|| !this.astate) {
+    if (!this.eid || !this.date || !this.intime || !this.outtime || !this.astate) {
       alert('Please fill in all required fields.');
       return;
     }
-    console.log(this.date)
+
     this.axiosService.request(
       "POST",
       "/addAttendance",
       {
         "emp_id": this.eid,
         "date": this.date,
-       "in_time": this.intime,
+        "in_time": this.intime,
         "out_time": this.outtime,
         "attendance_status": this.astate,
-      }
-    ,{}).then(response => {
+      }, {}).then(response => {
       console.log("Response from server:", response);
       alert("User details updated successfully!");
     }).catch(error => {
@@ -106,50 +94,70 @@ export class EmployeeAttendanceComponent {
       }
       alert(errorMessage);
     });
-    this.eid="";
-    this.date="";
-    this.intime="";
-    this.outtime="";
-    this.astate="";
 
+    this.eid = "";
+    this.date = "";
+    this.intime = "";
+    this.outtime = "";
+    this.astate = "";
   }
 
   filterByEmployeeId() {
-    if (this.employeeId === "") {
-      this.fetchAttendanceData();
+    this.applyFilters();
+    this.updateSearchSuggestions();
+  }
+
+  handleMonthChange() {
+    if (this.selectedMonth) {
+      this.applyFilters();
+    }
+  }
+
+  applyFilters() {
+    let filtered = this.filteredData;
+
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      filtered = filtered.filter(item => item.emp_id.toString().toLowerCase().includes(lowerCaseEmpId));
+    }
+
+    if (this.selectedMonth) {
+      const [year, month] = this.selectedMonth.split('-');
+      const formattedMonth = `${year}-${month}`;
+      filtered = filtered.filter(item => {
+        const itemDate = new Date(item.date);
+        const itemYear = itemDate.getFullYear();
+        const itemMonth = itemDate.getMonth() + 1;
+        const itemFormattedMonth = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
+        return itemFormattedMonth === formattedMonth;
+      });
+    }
+
+    this.loarddata = filtered;
+  }
+
+  updateSearchSuggestions() {
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      this.searchSuggestions = this.filteredData
+        .map(item => item.emp_id.toString())
+        .filter(empId => empId.toLowerCase().includes(lowerCaseEmpId));
     } else {
-      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.loarddata = this.filteredData.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+      this.searchSuggestions = [];
     }
   }
 
-  handleDateChange() {
-    if (this.selectedDate instanceof Date === false) {
-      // Convert selectedDate to Date object if it's not already
-      this.selectedDate = new Date(this.selectedDate);
-    }
-    if (this.selectedDate && !isNaN(this.selectedDate.getTime())) {
-      const year = this.selectedDate.getFullYear();
-      const month = this.selectedDate.getMonth() + 1;
-      const formattedDate = `${year}-${month < 10 ? '0' + month : month}`;
-
-      this.filterByDate(formattedDate);
-      console.log(formattedDate);
-    }
+  selectSuggestion(suggestion: string) {
+    this.employeeId = suggestion;
+    this.searchSuggestions = [];
+    this.applyFilters();
   }
 
-  filterByDate(yearMonth: string) {
-    this.loarddata = this.loarddata.filter(item => {
-      const itemDate = new Date(item.date);
-      const itemYear = itemDate.getFullYear();
-      const itemMonth = itemDate.getMonth() + 1;
-      const itemFormattedDate = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
-      return itemFormattedDate === yearMonth;
-    });
+  pageChanged(event: number) {
+    this.page = event;
   }
 
   getCountOfLoadData() {
     return this.loarddata.length;
   }
 }
-

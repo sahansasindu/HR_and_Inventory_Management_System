@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -12,13 +11,11 @@
   </div>
 </nav>
 
-
 <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible1">
   <div class="container">
     <h2 class="text-center"><u>Employee Attendance</u></h2>
     <form>
       <div class="form-group">
-
         <div class="form-group">
           <label for="empId">Employee ID:</label>
           <input type="text" class="form-control" id="empId" name="empId" [(ngModel)]="eid">
@@ -31,7 +28,6 @@
         </select>
       </div>
       <div class="form-group">
-
         <label for="date">Date:</label>
         <input type="date" class="form-control" id="date" name="date" [(ngModel)]="date">
       </div>
@@ -39,20 +35,14 @@
         <label for="inTime">In Time:</label>
         <input type="time" class="form-control" id="inTime" name="inTime" style="margin-bottom: 20px;" [(ngModel)]="intime" (ngModelChange)="onTimeChange('in', $event)">
       </div>
-
       <div class="form-group">
         <label for="outTime">Out Time:</label>
         <input type="time" class="form-control" id="outTime" name="outTime" style="margin-bottom: 20px;" [(ngModel)]="outtime" (ngModelChange)="onTimeChange('out', $event)">
       </div>
-
       <button type="submit" class="btn btn-primary" (click)="submitData()">Submit</button>
     </form>
-
   </div>
 </div>
-
-
-
 
 <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
   <div class="card" style="width:100%">
@@ -60,51 +50,49 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
-        <div class="form-group">
+        <div class="form-group position-relative">
           <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
         </div>
-       &nbsp;
-        &nbsp;    &nbsp; &nbsp; &nbsp;
-
-        <b>Select Date:</b>
-      <div class="form-group">
-        <input type="date" class="form-control" id="datePicker" name="datePicker" [(ngModel)]="selectedDate" (change)="handleDateChange()">
-      </div>
-
-        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Select Month:</b>
+        <div class="form-group">
+          <input type="month" class="form-control" id="monthPicker" name="monthPicker" [(ngModel)]="selectedMonth" (change)="handleMonthChange()">
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <b>Count:</b>&nbsp;
         <div class="form-group">
           {{ getCountOfLoadData() }}
         </div>
-
       </div>
     </div>
     <div class="card-body">
-      <!-- Existing Table -->
-      <div class="card-body">
-        <!-- Existing Table -->
-        <table datatable class="table table-bordered">
-          <thead class="bg-dark text-white">
-          <tr>
-            <td>Emp ID</td>
-            <td>Date</td>
-            <td>In Time</td>
-            <td>Out Time</td>
-            <td>State</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of loarddata">
-            <td>{{ item.emp_id }}</td>
-            <td>{{ item.date }}</td>
-            <td>{{ item.in_time }}</td>
-            <td>{{ item.out_time}}</td>
-            <td>{{ item.attendance_status}}</td>
-
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <table datatable class="table table-bordered">
+        <thead class="bg-dark text-white">
+        <tr>
+          <td>Emp ID</td>
+          <td>Date</td>
+          <td>In Time</td>
+          <td>Out Time</td>
+          <td>State</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of loarddata | paginate: { itemsPerPage: 10, currentPage: page }">
+          <td>{{ item.emp_id }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.in_time }}</td>
+          <td>{{ item.out_time }}</td>
+          <td>{{ item.attendance_status }}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     </div>
   </div>
 </div>
+

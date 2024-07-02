@@ -7,6 +7,7 @@ import { HeaderComponent } from './hr_officer/header/header.component';
 import { SidenavComponent } from './hr_officer/sidenav/sidenav.component';
 import { DashboardComponent } from './hr_officer/dashboard/dashboard.component';
 import {MatDrawerContainer} from "@angular/material/sidenav";
+import { NgxPaginationModule } from 'ngx-pagination'; // <-- import the module
 // Import Angular Material modules
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -229,6 +230,7 @@ import {BaseChartDirective} from "ng2-charts";
         MatDatepickerInput,
         MatProgressSpinner,
         BaseChartDirective,
+      NgxPaginationModule
 
 
     ],
