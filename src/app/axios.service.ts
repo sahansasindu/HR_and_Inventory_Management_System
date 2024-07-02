@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import axios from 'axios';
+import axios, {AxiosError} from 'axios';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,6 +20,10 @@ export class AxiosService {
       data:data,
       headers: headers
     })
+  }
+
+  isAxiosError(error: any): error is AxiosError {
+    return (error as AxiosError).isAxiosError !== undefined;
   }
 
 }
