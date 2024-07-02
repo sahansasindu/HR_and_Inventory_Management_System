@@ -22,6 +22,7 @@ export class AddMedicalComponent {
   report: File | null = null;
   eid: any;
   employeeId: any;
+  page: number = 1; // <-- current page
 
 
   medicalData = {
@@ -120,6 +121,9 @@ export class AddMedicalComponent {
       });
   }
 
+  pageChanged(event: number) {
+    this.page = event;
+  }
   filterByEmployeeId() {
     // Implementation for filtering by employee ID
   }

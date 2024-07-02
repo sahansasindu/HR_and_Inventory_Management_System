@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
@@ -14,8 +13,9 @@
     </ul>
   </div>
 </nav>
+
 <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
-<div class="d-flex page__box p-1 mt-0"*ngIf="isVisible1">
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible1">
   <div class="container">
     <h2 class="text-center"><u>Salary Advance</u></h2>
     <form>
@@ -33,21 +33,16 @@
       </div>
       <div class="form-group">
         <label for="status">Status:</label>
-        <select class="form-control" id="status" name="status"  [(ngModel)]="astatus"  style="margin-bottom: 20px;">
+        <select class="form-control" id="status" name="status" [(ngModel)]="astatus" style="margin-bottom: 20px;">
           <option value="pending">Pending</option>
         </select>
       </div>
-
       <button type="submit" class="btn btn-primary" (click)="submitData1()">Submit</button>
     </form>
   </div>
 </div>
 
 <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
-
-
 <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
   <div class="card" style="width:100%">
     <h3 class="m-3 text-center">View Advance State</h3>
@@ -58,12 +53,9 @@
           <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
         </div>
       </div>
-
     </div>
     <div class="card-body">
-      <!-- Existing Table -->
       <div class="card-body">
-        <!-- Existing Table -->
         <table datatable class="table table-bordered">
           <thead class="bg-dark text-white">
           <tr>
@@ -71,25 +63,24 @@
             <td>Reason</td>
             <td>State</td>
             <td>Emp ID</td>
-
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of loarddata1">
+          <tr *ngFor="let item of loarddata1 | paginate: { itemsPerPage: itemsPerPage, currentPage: p1 }">
             <td>Rs.{{ item.amount }}</td>
             <td>{{ item.reson }}</td>
             <td>{{ item.status }}</td>
-            <td>{{ item.emp_id}}</td>
-
+            <td>{{ item.emp_id }}</td>
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="p1 = $event"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
   <div class="card" style="width:100%">
     <h3 class="m-3 text-center">LOAN STATE</h3>
@@ -100,12 +91,9 @@
           <input type="text" class="form-control" id="empid" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
         </div>
       </div>
-
     </div>
     <div class="card-body">
-      <!-- Existing Table -->
       <div class="card-body">
-        <!-- Existing Table -->
         <table datatable class="table table-bordered">
           <thead class="bg-dark text-white">
           <tr>
@@ -113,19 +101,18 @@
             <td>Loan details</td>
             <td>Loan amount</td>
             <td>Interest amount</td>
-
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of  loarddata">
+          <tr *ngFor="let item of loarddata | paginate: { itemsPerPage: itemsPerPage, currentPage: p2 }">
             <td>{{ item.emp_id }}</td>
             <td>{{ item.loan_details }}</td>
-            <td>Rs.{{ item.loan_amount}}</td>
-            <td>Rs.{{ item.interest_amount}}</td>
-
+            <td>Rs.{{ item.loan_amount }}</td>
+            <td>Rs.{{ item.interest_amount }}</td>
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="p2 = $event"></pagination-controls>
       </div>
     </div>
   </div>

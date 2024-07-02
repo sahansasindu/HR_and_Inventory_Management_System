@@ -63,13 +63,14 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of loandata">
+        <tr *ngFor="let item of loandata| paginate: { itemsPerPage: 10, currentPage: page }">
           <td>{{ item.emp_id }}</td>
           <td>{{ item.submit_date | date: 'yyyy-MM-dd' }}</td>
           <td>{{ item.medical_status }}</td>
         </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     </div>
   </div>
 </div>

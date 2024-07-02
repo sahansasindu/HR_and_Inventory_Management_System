@@ -30,6 +30,7 @@ export class ViewEmployeeComponent implements OnInit {
   address: any;
   dob: any;
   gender: any
+  page: number = 1; // <-- current page
 
   employeeId: any;
   selectedDate: any;
@@ -183,6 +184,10 @@ export class ViewEmployeeComponent implements OnInit {
       }
       alert(errorMessage);
     });
+  }
+
+  pageChanged(event: number) {
+    this.page = event;
   }
 
   back() {

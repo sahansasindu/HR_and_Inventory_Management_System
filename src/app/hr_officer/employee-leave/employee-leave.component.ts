@@ -14,7 +14,6 @@ export class EmployeeLeaveComponent {
   isVisible3: boolean = false;
   isVisible4: boolean = false;
 
-
   empid: any;
   stime: any;
   endtime: any;
@@ -22,15 +21,13 @@ export class EmployeeLeaveComponent {
   reason: any;
   astatus: any;
 
-  employeeId:any;
+  employeeId: any;
   loarddata1: any[] = [];
   loarddata: any[] = [];
   filteredData: any[] = [];
   filteredData2: any[] = [];
-  filteritem1: any[]=[];
-  filteritem: any[]=[];
-
-
+  filteritem1: any[] = [];
+  filteritem: any[] = [];
 
   gempid: string = "";
   intime: string = '';
@@ -39,10 +36,7 @@ export class EmployeeLeaveComponent {
   greason: any;
   gstate: any;
 
-
-
-
-
+  page: number = 1; // <-- current page
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -55,8 +49,7 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = false;
     this.isVisible3 = false;
     this.isVisible4 = false;
-    this.employeeId="";
-
+    this.employeeId = "";
   }
 
   show2() {
@@ -64,8 +57,7 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = true;
     this.isVisible3 = false;
     this.isVisible4 = false;
-    this.employeeId="";
-
+    this.employeeId = "";
   }
 
   show3() {
@@ -73,31 +65,30 @@ export class EmployeeLeaveComponent {
     this.isVisible2 = false;
     this.isVisible3 = true;
     this.isVisible4 = false;
-    this.employeeId="";
+    this.employeeId = "";
     this.fetchLeaveData();
   }
-  show4() {
 
+  show4() {
     this.isVisible1 = false;
     this.isVisible2 = false;
     this.isVisible3 = false;
     this.isVisible4 = true;
-    this. fetchgetepassdata();
-    this.employeeId="";
+    this.fetchgetepassdata();
+    this.employeeId = "";
   }
 
   fetchLeaveData() {
-    this.axiosService.request('GET', 'getLeave', null,{})
+    this.axiosService.request('GET', 'getLeave', null, {})
       .then(response => {
         this.loarddata1 = response.data;
-        this.filteredData =response.data;
+        this.filteredData = response.data;
         console.log(this.loarddata1); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
-
 
   onTimeChange(type: 'in' | 'out', newTime: string) {
     const date = new Date();
@@ -114,12 +105,8 @@ export class EmployeeLeaveComponent {
     }
   }
 
-
-
-
   submitData() {
-
-    if (!this.empid || !this.endtime || !this.ltype|| !this.reason|| !this.stime|| !this.astatus) {
+    if (!this.empid || !this.endtime || !this.ltype || !this.reason || !this.stime || !this.astatus) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -135,7 +122,7 @@ export class EmployeeLeaveComponent {
         "status": this.astatus,
         "emp_id": this.empid
       }
-    ,{}).then(response => {
+      , {}).then(response => {
       console.log("Response from server:", response);
       alert("add leave successfully!");
     }).catch(error => {
@@ -143,41 +130,34 @@ export class EmployeeLeaveComponent {
       alert("Error add leave details. Please try again.");
     });
 
-    this.endtime="";
-    this.ltype="";
-    this.reason="";
-    this.stime="";
-    this.astatus="";
-    this.empid="";
-
+    this.endtime = "";
+    this.ltype = "";
+    this.reason = "";
+    this.stime = "";
+    this.astatus = "";
+    this.empid = "";
   }
 
   filterByEmployeeId() {
-
     if (this.employeeId === "") {
       this.fetchLeaveData();
       this.fetchgetepassdata();
-
     } else {
-      this.loarddata1=this.filteredData;
+      this.loarddata1 = this.filteredData;
       const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
       this.filteritem1 = this.loarddata1.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
       console.log("Filtered data:", this.filteredData);
-      this.loarddata1=this.filteritem1;
+      this.loarddata1 = this.filteritem1;
 
-
-      this.loarddata=this.filteredData2;
+      this.loarddata = this.filteredData2;
       const lowerCaseEmpId2 = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
       this.filteritem = this.loarddata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId2);
-      this.loarddata=this.filteritem;
-
+      this.loarddata = this.filteritem;
     }
   }
 
-
   submitData2() {
-
-    if (!this.date || !this.intime || !this.outtime || !this.greason|| !this.gstate|| !this.gempid) {
+    if (!this.date || !this.intime || !this.outtime || !this.greason || !this.gstate || !this.gempid) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -192,9 +172,8 @@ export class EmployeeLeaveComponent {
         "reson": this.greason,
         "status": this.gstate,
         "emp_id": this.gempid,
-
       }
-      ,{}).then(response => {
+      , {}).then(response => {
       console.log("Response from server:", response);
       alert("add gatepass successfully!");
     }).catch(error => {
@@ -206,32 +185,27 @@ export class EmployeeLeaveComponent {
       alert(errorMessage);
     });
 
-    this.date="";
-    this.intime="";
-    this.outtime="";
-    this.greason="";
-    this.gstate="";
-    this.gempid="";
-
-
+    this.date = "";
+    this.intime = "";
+    this.outtime = "";
+    this.greason = "";
+    this.gstate = "";
+    this.gempid = "";
   }
 
   fetchgetepassdata() {
-
-    this.axiosService.request('GET', '/getGatepass', null,{})
+    this.axiosService.request('GET', '/getGatepass', null, {})
       .then(response => {
         this.loarddata = response.data;
-        this.filteredData2 =response.data;
+        this.filteredData2 = response.data;
         console.log(this.loarddata1); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
-
-
       });
   }
 
-
-
-
+  pageChanged(event: number) {
+    this.page = event;
+  }
 }
