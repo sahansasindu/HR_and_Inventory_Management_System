@@ -119,6 +119,6 @@ export class EmployeeMedical{
               public medical_report:File | null) {
   }
 }
-interface ErrorResponse {
+export interface ErrorResponse {
   message: string;
 }

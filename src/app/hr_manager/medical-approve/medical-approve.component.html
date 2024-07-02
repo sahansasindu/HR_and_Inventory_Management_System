@@ -11,7 +11,7 @@
           </button>
         </mat-form-field>
     <div class="button-container">
-      <button mat-raised-button color="primary" (click)="gotoReport()">View Medical Details</button>
+      <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoReport()">Go to Action</button>
     </div>
     <div class="mat-table-container">
 
@@ -29,7 +29,9 @@
 
         <ng-container matColumnDef="medical_report">
           <mat-header-cell *matHeaderCellDef> Medical Report File </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.medical_report }} </mat-cell>
+          <mat-cell *matCellDef="let element" style="background-color: #b9f3ef;">
+            <a (click)="downloadMedicalReport(element.employee_medical_id)"><b>Click here</b></a>
+          </mat-cell>
         </ng-container>
 
         <ng-container matColumnDef="submit_date">
@@ -39,7 +41,10 @@
 
         <ng-container matColumnDef="medical_status">
           <mat-header-cell *matHeaderCellDef> Action Status </mat-header-cell>
-          <mat-cell *matCellDef="let element"> {{ element.medical_status }} </mat-cell>
+          <mat-cell *matCellDef="let element" [ngClass]="{
+        'status-pending': element.medical_status === 'pending',
+        'status-approved': element.medical_status === 'approved',
+        'status-rejected': element.medical_status === 'rejected'}"> {{ element.medical_status }} </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>

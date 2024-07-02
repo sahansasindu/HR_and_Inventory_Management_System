@@ -47,13 +47,13 @@ body {
 }
 @media (max-width: 768px) {
   .employee-profile-form {
-    width: 80%; /* Adjust the width for medium-sized screens */
+    width: 80%;
   }
 }
 
 @media (max-width: 576px) {
   .employee-profile-form {
-    width: 90%; /* Adjust the width for smaller screens */
+    width: 90%;
   }
 }
 
@@ -84,7 +84,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #51b9c0; /* Or whatever your table header background color is */
+  background: #51b9c0;
   font-weight: bold;
 }
 
@@ -96,7 +96,7 @@ body {
 .mat-cell,
 .mat-header-cell {
   padding: 8px;
-  min-width: 120px; /* Or your preferred min-width */
+  min-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -106,5 +106,16 @@ body {
   margin-top: 10px;
 }
 .highlighted{
-  background-color: #8ab2df;
+  background-color: #b6d4f4;
+}
+.status-pending {
+  background-color: #f3f364;
+}
+
+.status-approved {
+  background-color: #4ee44e;
+}
+
+.status-rejected {
+  background-color: #ec4040;
 }

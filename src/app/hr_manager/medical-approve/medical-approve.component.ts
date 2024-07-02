@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {EmployeeMedical} from "../../model/employeeMedical";
 import {AxiosService} from "../../axios.service";
+import {color} from "chart.js/helpers";
 
 @Component({
   selector: 'app-medical-approve',
@@ -14,7 +15,6 @@ export class MedicalApproveComponent implements OnInit{
   loarddata1: any[] = [];
 
   employeeId: any;
-  private axiosService: any;
 
   constructor(private employeeMedical:EmployeeMedical,private axios:AxiosService) {
 
@@ -33,7 +33,11 @@ export class MedicalApproveComponent implements OnInit{
   ];
 
   selectRowmedicalPDF(row:EmployeeMedical) {
-    this.selectedRow = row;
+    if (this.selectedRow === row) {
+      this.selectedRow = null;
+    } else {
+      this.selectedRow = row;
+    }
   }
 
   //get Employee medical
@@ -42,11 +46,15 @@ export class MedicalApproveComponent implements OnInit{
   gotoReport() {
 
     if (!this.selectedRow) {
-      alert("No row selected")
+      alert("No row selected Please Select Row in Table")
       return;
     }
 
       this.medicalReportVisible=!this.medicalReportVisible;
+
+    if(!this.medicalReportVisible){
+      this.selectedRow=null;
+    }
   }
 
    async MedicalDetails():Promise<void> {
@@ -60,9 +68,34 @@ export class MedicalApproveComponent implements OnInit{
     }
 
   }
+  async downloadMedicalReport(id: number): Promise<void> {
+    try {
+      const response = await this.axios.request2('GET', `/downloadMedicalReport/${id}`, {}, { responseType: 'blob' });
+
+      const contentType = response.headers['content-type'];
+      let fileExtension = 'jpg';
+
+      if (contentType === 'image/png') {
+        fileExtension = 'png';
+      } else if (contentType === 'image/jpeg') {
+        fileExtension = 'jpeg';
+      } else if (contentType === 'image/gif') {
+        fileExtension = 'gif';
+      }
+
+      const url = window.URL.createObjectURL(new Blob([response.data], { type: contentType }));
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `medical_report_${id}.${fileExtension}`;
+      a.click();
+    } catch (error) {
+      console.error('Error downloading Medical Report:', error);
+    }
+  }
+
   fetchEmployeeData() {
 
-    this.axiosService.request('GET', '/getEmployee', {}, {})
+    this.axios.request('GET', '/getEmployee', {}, {})
       .then((response: { data: any[]; }) => {
         this.loarddata1 = response.data;
         this.loarddata = response.data;
@@ -74,6 +107,7 @@ export class MedicalApproveComponent implements OnInit{
       });
   }
 
+
   filterByEmpId() {
     if (this.employeeId === "") {
       this.fetchEmployeeData()
@@ -82,4 +116,6 @@ export class MedicalApproveComponent implements OnInit{
       this.loarddata = this.loarddata1.filter(item => item.employeeid.toString().toLowerCase() === lowerCaseEmpId);
     }
   }
+
+  protected readonly color = color;
 }
