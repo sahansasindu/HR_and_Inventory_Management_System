@@ -1,13 +1,13 @@
-import {ChangeDetectorRef, Component, ElementRef, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { AxiosService } from '../../axios.service';
-import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-medical',
   templateUrl: './add-medical.component.html',
   styleUrls: ['./add-medical.component.css']
 })
-export class AddMedicalComponent {
+export class AddMedicalComponent implements OnInit{
   isVisible1: boolean = true;
   isVisible2: boolean = false;
 
@@ -17,34 +17,23 @@ export class AddMedicalComponent {
   selectedDepartment: string = '';
   isLoading: boolean = false;
 
-  sdate: string = '';
-  mstate: string = '';
+
   report: File | null = null;
-  eid: any;
   employeeId: any;
   page: number = 1; // <-- current page
 
+  ngOnInit() {
+    this.fetchDeductionData();
+  }
 
-  medicalData = {
-    empId: '',
-    submitDate: '',
-    medicalStatus: '',
-    medicalReport: null
-  };
+  employeeMedical:EmployeeMedical=new EmployeeMedical("","","",null);
 
-  @ViewChild('fileInput') fileInput!: ElementRef;
+  constructor(private axiosService: AxiosService,) {}
 
-
-  constructor(
-    private axiosService: AxiosService,
-    private router: Router,
-    private cdr: ChangeDetectorRef
-  ) {}
-
-  handleFileInput(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.medicalData.medicalReport = file;
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length) {
+      this.employeeMedical.medical_report = input.files[0];
     }
   }
 
@@ -60,35 +49,34 @@ export class AddMedicalComponent {
 
 
   async submitData() {
-    const headers = {
-      'Authorization': `Bearer ${this.getAuthToken()}` // Adjust to your token retrieval method
-    };
-
-
     const formData = new FormData();
-    formData.append('emp_id', this.medicalData.empId);
-    formData.append('submit_date', this.medicalData.submitDate);
-    formData.append('medical_status', this.medicalData.medicalStatus);
-    if (this.medicalData.medicalReport) {
-      formData.append('medical_report', this.medicalData.medicalReport);
-    }
 
-    if(formData){
-      alert("Please Fill All The Fields....")
+    formData.append('emp_id', this.employeeMedical.emp_id);
+    formData.append('submit_date', new Date(this.employeeMedical.submit_date).toISOString().split('T')[0]);
+    formData.append('medical_status', this.employeeMedical.medical_status);
+
+    if (this.employeeMedical.medical_report) {
+      formData.append('medical_report', this.employeeMedical.medical_report);
     }
 
     try {
-      const response = await this.axiosService.request('POST', 'addMedical', formData, { headers });
-      console.log('Data submitted successfully', response);
-      await this.router.navigate(['/success']);
-    } catch (error) {
-      console.error('Error submitting data:', error);
+      const response = await this.axiosService.request('POST', '/addMedical', formData, {'Content-Type': 'multipart/form-data'});
+      if (response.data) {
+        alert('Medical data added successfully!');
+      }
+    } catch (error: any) {
+      if (this.axiosService.isAxiosError(error)) {
+        const errorResponse = error.response?.data as ErrorResponse;
+        if (errorResponse && errorResponse.message) {
+          alert("Error submitting medical data: " + errorResponse.message);
+        } else {
+          alert("Error submitting medical data");
+        }
+      } else {
+        alert("An unexpected error occurred");
+      }
+      console.error('Error submitting medical data:', error);
     }
-  }
-
-  getAuthToken() {
-    // Method to retrieve the auth token
-    return localStorage.getItem('authToken') || ''; // Example: Retrieving token from localStorage
   }
 
 
@@ -103,9 +91,7 @@ export class AddMedicalComponent {
     }
   }
 
-  ngOnInit() {
-    this.fetchDeductionData();
-  }
+
 
   fetchDeductionData() {
     this.isLoading = true;
@@ -127,4 +113,16 @@ export class AddMedicalComponent {
   filterByEmployeeId() {
     // Implementation for filtering by employee ID
   }
+}
+
+export class EmployeeMedical{
+
+  constructor(public emp_id:string,
+              public medical_status:string,
+              public submit_date:string,
+              public medical_report:File | null) {
+  }
+}
+export interface ErrorResponse {
+  message: string;
 }
