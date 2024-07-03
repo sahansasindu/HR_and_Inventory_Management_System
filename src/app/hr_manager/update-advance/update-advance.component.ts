@@ -37,7 +37,7 @@ export class UpdateAdvanceComponent {
           this.amount=response.data.amount;
           this.reson=response.data.reson;
           this.astatus=response.data.status;
-          
+
       })
       .catch(error => {
         console.error('Error fetching data:', error);
