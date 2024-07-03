@@ -92,7 +92,7 @@
       <div class="form-group">
         <label for="status">Status:</label>
         <select class="form-control" id="status2" name="status" style="margin-bottom: 20px;" [(ngModel)]="gstate">
-          <option value="present">Pending</option>
+          <option value="pending">Pending</option>
         </select>
       </div>
 
@@ -102,22 +102,33 @@
 
 </div>
 
-  <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
 
-  <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
   <div class="card" style="width:100%">
     <h3 class="m-3 text-center">View Advance State</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
+        <div class="form-group position-relative">
+          <input type="text" class="form-control" id="emp1" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Select Month:</b>
         <div class="form-group">
-
-          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
-
+          <input type="month" class="form-control" id="monthPicker1" name="monthPicker" [(ngModel)]="selectedMonth1" (change)="handleMonthChange()">
         </div>
       </div>
     </div>
+
+
+
     <div class="card-body">
       <!-- Existing Table -->
       <div class="card-body">
@@ -134,7 +145,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of loarddata1">
+          <tr *ngFor="let item of loarddata| paginate: { itemsPerPage: 10, currentPage: page }">
             <td>{{ item.emp_id }}</td>
             <td>{{ item.start_time }}</td>
             <td>{{ item.end_time }}</td>
@@ -144,54 +155,66 @@
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
-  <!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
 
-  <div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
-    <div class="card" style="width:100%">
-      <h3 class="m-3 text-center">GATE PASS STATE</h3>
-      <div class="card-header d-flex justify-content-between align-items-center">
-        <div class="search-bar d-flex align-items-center">
-          <b>Search details :</b>
-          <div class="form-group">
-            <input type="text" class="form-control" id="empid" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">GATE PASS STATE</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group position-relative">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
           </div>
         </div>
-
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Select Month:</b>
+        <div class="form-group">
+          <input type="month" class="form-control" id="monthPicker" name="monthPicker" [(ngModel)]="selectedMonth" (change)="handleMonthChange()">
+        </div>
       </div>
+
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
       <div class="card-body">
         <!-- Existing Table -->
-        <div class="card-body">
-          <!-- Existing Table -->
-          <table datatable class="table table-bordered">
-            <thead class="bg-dark text-white">
-            <tr>
-              <td>Emp ID</td>
-              <td>Date</td>
-              <td>Out Time</td>
-              <td>In Time</td>
-              <td>Reason</td>
-              <td>Status</td>
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Emp ID</td>
+            <td>Date</td>
+            <td>Out Time</td>
+            <td>In Time</td>
+            <td>Reason</td>
+            <td>Status</td>
 
 
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let item of  loarddata">
-              <td>{{ item.emp_id }}</td>
-              <td>{{ item.date | date: 'yyyy-MM-dd'  }}</td>
-              <td>{{ item.out_time }}</td>
-              <td>{{ item.in_time}}</td>
-              <td>{{ item.reson}}</td>
-              <td>{{ item.status}}</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of  loarddata1| paginate: { itemsPerPage: 10, currentPage: page }">
+            <td>{{ item.emp_id }}</td>
+            <td>{{ item.date | date: 'yyyy-MM-dd'  }}</td>
+            <td>{{ item.out_time }}</td>
+            <td>{{ item.in_time}}</td>
+            <td>{{ item.reson}}</td>
+            <td>{{ item.status}}</td>
 
-            </tr>
-            </tbody>
-          </table>
-        </div>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
       </div>
     </div>
   </div>
+</div>

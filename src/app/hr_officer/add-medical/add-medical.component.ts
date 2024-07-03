@@ -20,6 +20,7 @@ export class AddMedicalComponent implements OnInit{
 
   report: File | null = null;
   employeeId: any;
+  page: number = 1; // <-- current page
 
   ngOnInit() {
     this.fetchDeductionData();
@@ -106,6 +107,9 @@ export class AddMedicalComponent implements OnInit{
       });
   }
 
+  pageChanged(event: number) {
+    this.page = event;
+  }
   filterByEmployeeId() {
     // Implementation for filtering by employee ID
   }
