@@ -47,13 +47,13 @@ body {
 }
 @media (max-width: 768px) {
   .employee-profile-form {
-    width: 80%; /* Adjust the width for medium-sized screens */
+    width: 80%;
   }
 }
 
 @media (max-width: 576px) {
   .employee-profile-form {
-    width: 90%; /* Adjust the width for smaller screens */
+    width: 90%;
   }
 }
 
@@ -84,7 +84,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #51b9c0; /* Or whatever your table header background color is */
+  background: #51b9c0;
   font-weight: bold;
 }
 
@@ -96,7 +96,7 @@ body {
 .mat-cell,
 .mat-header-cell {
   padding: 8px;
-  min-width: 120px; /* Or your preferred min-width */
+  min-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -106,5 +106,119 @@ body {
   margin-top: 10px;
 }
 .highlighted{
-  background-color: #8ab2df;
+  background-color: #b9f3ef;
+}
+.status-pending {
+  background-color: #f3f364;
+}
+
+.status-approved {
+  background-color: #4ee44e;
+}
+
+.status-rejected {
+  background-color: #ec4040;
+}
+
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  background-color: #acd5fd;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.popup {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+.close-button2 {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.close-button2 mat-icon {
+
+  font-size: 24px;
+  color: #ff0000;
+}
+
+
+.popup h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 22px;
+  color: #000000;
+  text-align: center;
+}
+
+
+.popup p {
+  margin: 5px 0;
+  font-size: 17px;
+  color: #555555;
+  text-align: left;
+  width: 100%;
+  padding-left: 10px;
+}
+
+
+.medical-summary-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.medical-summary-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+
+.medical-summary-table .approved td {
+  background-color: #4ee44e;
+  color: #000000;
+}
+
+
+.medical-summary-table .rejected td {
+  background-color: #ec4040;
+  color: #000000;
+}
+.details-form .form-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.details-form .form-group label {
+  min-width: 100px;
+}
+.details-form .form-group input{
+  width: 100%;
+}
+.medical-report-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  display: block;
+  margin-top: 10px;
 }

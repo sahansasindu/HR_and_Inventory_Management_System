@@ -17,7 +17,7 @@ export class LeaveApproveComponent implements OnInit{
   leaveHistorySummary: LeaveHistorySummaryDto | null = null;
 
 
-  constructor(private employeeLeave:EmployeeLeave,private axios:AxiosService) {
+  constructor(private axios:AxiosService) {
 
   }
   async ngOnInit() {
@@ -75,7 +75,7 @@ export class LeaveApproveComponent implements OnInit{
 
   }
 
-  async updateMedicalStatus(status: string) {
+  async updateLeaveStatus(status: string) {
     if (this.selectedRow) {
       const confirmUpdate = window.confirm(`Are you sure you want to ${status} this leave request?`);
       if (confirmUpdate) {
