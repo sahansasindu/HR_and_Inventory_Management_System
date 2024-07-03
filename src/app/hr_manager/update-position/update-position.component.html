@@ -1,55 +1,86 @@
 <div class="d-flex page__box p-1 mt-0">
-  <div class="container mt-4">
-    <h2 class="text-center">Update Employee Information</h2>
-    <form>
-      <div class="form-group">
-        <label for="employeeName">Employee Name:</label>
-        <input type="text" class="form-control" id="employeeName" name="employeeName" [(ngModel)]="empname">
+
+  <div class="parallel-div col-9">
+
+    <div *ngIf="!isvisibleAction">
+      <div class="search-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Search By Employee ID</mat-label>
+          <input matInput placeholder="Search by Employee ID" (input)="applyFilter($event)">
+          <button mat-icon-button matSuffix>
+            <mat-icon>search</mat-icon>
+          </button>
+        </mat-form-field>
       </div>
-      <div class="form-group">
-        <label for="address">Address:</label>
-        <input type="text" class="form-control" id="address" name="address" [(ngModel)]="address">
+
+      <div class="button-container">
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('leave')">Leave History</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('medical')">Medical History</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('gatePass')">Gate Passes</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'">CV Details</button>
+        <button mat-flat-button color="primary">Update Details</button>
       </div>
-      <div class="form-group">
-        <label for="contact">Contact No:</label>
-        <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="contactno">
+
+      <div class="mat-table-container">
+        <mat-table [dataSource]="JobPromotionUpdate" class="mat-elevation-z8">
+
+
+          <ng-container matColumnDef="employee_id">
+            <mat-header-cell *matHeaderCellDef>  Employee ID </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.employee_id}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="job_role">
+            <mat-header-cell *matHeaderCellDef>  Job Role </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.job_role }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="salary_type">
+            <mat-header-cell *matHeaderCellDef> Salary Type</mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.salary_type }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="employee_name">
+            <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.employee_name }} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="company_status">
+            <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.company_status}} </mat-cell>
+          </ng-container>
+
+
+          <ng-container matColumnDef="department">
+            <mat-header-cell *matHeaderCellDef> Department  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.department}} </mat-cell>
+          </ng-container>
+
+          <ng-container matColumnDef="sec_id">
+            <mat-header-cell *matHeaderCellDef> Section  </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{ element.sec_id}} </mat-cell>
+          </ng-container>
+
+
+          <!-- Row Definitions -->
+          <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
+          <mat-row *matRowDef="let row; columns: displayedColumns;" [class.highlighted]="row === selectedRow" (click)="selectRow(row)"></mat-row>
+        </mat-table>
       </div>
-      <div class="form-group">
-        <label for="companyStatus">Married or not:</label>
-        <select class="form-control" id="married" name="companyStatus" [(ngModel)]="mstate">
-          <option value="Married">Married</option>
-          <option value="Unmarried">Unmarried</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="departmentId">Department ID:</label>
-        <input type="text" class="form-control" id="departmentId" name="departmentId" [(ngModel)]="Did">
-      </div>
-      <div class="form-group">
-        <label for="sectionId">Section ID:</label>
-        <input type="text" class="form-control" id="sectionId" name="sectionId" style="margin-bottom: 20px;" [(ngModel)]="sid">
-      </div>
-      <div class="form-group">
-        <label for="companyStatus">Company Status:</label>
-        <select class="form-control" id="companyStatus" name="companyStatus" [(ngModel)]="companystate">
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="jobRole">Job Role:</label>
-        <input type="text" class="form-control" id="jobRole" name="jobRole" [(ngModel)]="jrole">
-      </div>
-      <div class="form-group">
-        <label for="salaryType">Salary Type:</label>
-        <select class="form-control" id="salaryType" name="salaryType" [(ngModel)]="satype" id="stype">
-          <option value="hourly">Hourly</option>
-          <option value="monthly">Monthly</option>
-          <option value="annual">Annual</option>
-        </select>
-      </div>
-      <button type="submit" class="btn btn-primary" (click)="back()">Back</button>
-      <button type="submit" class="btn btn-primary" (click)="handleFormSubmit()">Submit</button>
-    </form>
+
+    </div>
+
+    <div *ngIf="isvisibleAction">
+      <button mat-raised-button class="close-button" color="warn" (click)="gotoView('')">Close</button>
+    </div>
+
+  </div>
+
+  <div class="left-div col-3 text-right" id="div3">
+    <app-notificationcom></app-notificationcom>
   </div>
 </div>
