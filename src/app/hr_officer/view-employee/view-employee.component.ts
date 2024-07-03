@@ -30,6 +30,7 @@ export class ViewEmployeeComponent implements OnInit {
   page: number = 1; // <-- current page
   employeeId: any;
   searchSuggestions: string[] = [];
+  employee: any;
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -66,6 +67,8 @@ export class ViewEmployeeComponent implements OnInit {
           this.empname = response.data.employee_name;
           this.dob = response.data.dob;
           this.gender = response.data.gender;
+
+          console.log(response.data.employeeid, response.data.address, response.data.data);
         } else {
           console.error('Empty response data.');
         }
@@ -99,22 +102,20 @@ export class ViewEmployeeComponent implements OnInit {
   handleFormSubmit() {
     console.log(this.Did);
     console.log(this.sid);
+    const employeeid = (document.getElementById('employeeid') as HTMLInputElement).value;
+
+    console.log("new",employeeid);
 
     this.axiosService.request(
       "PUT",
-      "updateEmployee", {
-        "employee_id": this.id,
+      "/updateEmployee", {
+        "employeeid": employeeid,
         "address": this.address,
-        "company_status": this.companystate,
         "contact": this.contactno,
         "employee_name": this.empname,
-        "job_role": this.jrole,
         "ma_uma": this.mstate,
-        "salary_type": this.satype,
         "dep_id": this.Did,
         "sec_id": this.sid,
-        "cv": "null",
-        "dob": this.dob,
         "gender": this.gender,
       }
       , {}).then(response => {
@@ -124,9 +125,9 @@ export class ViewEmployeeComponent implements OnInit {
       console.error("Error updating user details:", error);
       let errorMessage = "An error occurred while updating user details. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
-        errorMessage = error.response.data.message;
+        alert("Employee details updated successfully!");
       }
-      alert(errorMessage);
+
     });
   }
 

@@ -66,6 +66,11 @@
     <h2 class="text-center">Update Employee Information</h2>
     <form>
       <div class="form-group">
+        <label for="employeeid">Employee ID:</label>
+        <input type="text" class="form-control" id="employeeid" name="employeeid" [(ngModel)]="id" readonly>
+      </div>
+
+      <div class="form-group">
         <label for="employeeName">Employee Name:</label>
         <input type="text" class="form-control" id="employeeName" name="employeeName" [(ngModel)]="empname">
       </div>
@@ -77,11 +82,21 @@
         <label for="contact">Contact No:</label>
         <input type="text" class="form-control" id="contact" name="contact" [(ngModel)]="contactno">
       </div>
+
       <div class="form-group">
-        <label for="companyStatus">Married or not:</label>
+        <label for="married">Gender:</label>
+        <select class="form-control" id="gender" name="gender" [(ngModel)]="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+
+
+      <div class="form-group">
+        <label for="married">Married or not:</label>
         <select class="form-control" id="married" name="companyStatus" [(ngModel)]="mstate">
-          <option value="Married">Married</option>
-          <option value="Unmarried">Unmarried</option>
+          <option value="married">Married</option>
+          <option value="unmarried">Unmarried</option>
         </select>
       </div>
       <div class="form-group">
@@ -92,26 +107,9 @@
         <label for="sectionId">Section ID:</label>
         <input type="text" class="form-control" id="sectionId" name="sectionId" style="margin-bottom: 20px;" [(ngModel)]="sid">
       </div>
-      <div class="form-group">
-        <label for="companyStatus">Company Status:</label>
-        <select class="form-control" id="companyStatus" name="companyStatus" [(ngModel)]="companystate">
-          <option value="active">Active</option>
-          <option value="inactive">Inactive</option>
-        </select>
-      </div>
-      <div class="form-group">
-        <label for="jobRole">Job Role:</label>
-        <input type="text" class="form-control" id="jobRole" name="jobRole" [(ngModel)]="jrole">
-      </div>
-      <div class="form-group">
-        <label for="salaryType">Salary Type:</label>
-        <select class="form-control" id="salaryType" name="salaryType" [(ngModel)]="satype" id="stype">
-          <option value="hourly">Hourly</option>
-          <option value="monthly">Monthly</option>
-          <option value="annual">Annual</option>
-        </select>
-      </div>
+
       <button type="submit" class="btn btn-primary" (click)="back()">Back</button>
+      &nbsp;&nbsp;&nbsp;&nbsp;
       <button type="submit" class="btn btn-primary" (click)="handleFormSubmit()">Submit</button>
     </form>
   </div>
