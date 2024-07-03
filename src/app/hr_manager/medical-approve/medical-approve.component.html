@@ -4,12 +4,13 @@
   <div class="parallel-div col-9">
 
   <div class="medical-container" *ngIf="!medicalReportVisible">
-        <mat-form-field appearance="fill">
-          <input matInput placeholder="Enter Employee Id " required (input)="filterByEmpId()">
-          <button mat-icon-button matSuffix>
-            <mat-icon>search</mat-icon>
-          </button>
-        </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Search by Employee ID</mat-label>
+      <input matInput placeholder="Search by Employee ID" (input)="applyFilter($event)">
+      <button mat-icon-button matSuffix>
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
     <div class="button-container">
       <button mat-raised-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoReport()">Go to Action</button>
     </div>
@@ -55,16 +56,73 @@
       </mat-table>
     </div>
   </div>
+
+
+    <div class="popup-container" *ngIf="medicalHistoryVisible">
+      <div class="popup">
+        <button mat-icon-button class="close-button2" (click)="closeMedicalReport()">
+          <mat-icon>close</mat-icon>
+        </button>
+        <h2>Medical History Summary</h2>
+        <table class="medical-summary-table">
+          <tr>
+            <td>Employee ID:</td>
+            <td>{{ medicalHistorySummary?.empId }}</td>
+          </tr>
+          <tr>
+            <td>Employee Name:</td>
+            <td>{{ medicalHistorySummary?.employeeName }}</td>
+          </tr>
+          <tr>
+            <td>Job Role:</td>
+            <td>{{ medicalHistorySummary?.jobRole }}</td>
+          </tr>
+          <tr class="approved">
+            <td>Approved Medicals:</td>
+            <td>{{ medicalHistorySummary?.approvedCount }}</td>
+          </tr>
+          <tr class="rejected">
+            <td>Rejected Medicals:</td>
+            <td>{{ medicalHistorySummary?.rejectedCount }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
     <div class="medi-container" *ngIf="medicalReportVisible">
       <button mat-raised-button class="form-buttons" color="warn" (click)="gotoReport()">Close</button>
 
-        <div class="form-buttons">
-          <button mat-raised-button color="accent">Reject</button>
-          <button mat-raised-button color="primary" type="submit">Approve</button>
+      <div class="button-container">
+        <button mat-raised-button color="primary" (click)="viewMedicaleHistory()">View Employee Medical History</button>
+      </div>
+
+      <form class="details-form">
+
+        <div class="form-group">
+          <label for="employee_medical_id">Employee ID:</label>
+          <input type="text" id="employee_medical_id" [value]="selectedRow?.employee_medical_id" readonly>
         </div>
 
-    </div>
+        <div class="form-group">
+          <label for="emp_id">Employee ID:</label>
+          <input type="text" id="emp_id" [value]="selectedRow?.emp_id" readonly>
+        </div>
 
+        <div class="form-group">
+          <label for="submit-date">Report Submit Date:</label>
+          <input type="text" id="submit-date" [value]="formattedDate" readonly>
+        </div>
+        <div class="form-group">
+          <label for="medical-status">Current Status:</label>
+          <input type="text" id="medical-status" [value]="selectedRow?.medical_status" readonly>
+        </div>
+
+        <div class="form-buttons">
+          <button mat-raised-button color="accent" type="button" (click)="updateMedicalStatus('rejected')">Reject</button>
+          <button mat-raised-button color="primary" type="button" (click)="updateMedicalStatus('approved')">Approve</button>
+        </div>
+      </form>
+    </div>
   </div>
   <div class="left-div col-3 text-right" id="div3">
     <app-notificationcom></app-notificationcom>

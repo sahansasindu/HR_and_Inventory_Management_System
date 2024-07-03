@@ -25,12 +25,14 @@ import {
   RadialLinearScale,
   Scale,
   ScatterController,
+  Ticks,
   TimeScale,
   TimeSeriesScale,
   _detectPlatform,
   adapters,
   animator,
   controllers,
+  defaults,
   elements,
   index,
   layouts,
@@ -44,11 +46,7 @@ import {
   registerables,
   registry,
   scales
-} from "./chunk-SZRNE2QH.js";
-import {
-  Ticks,
-  defaults
-} from "./chunk-2QGNZ3V3.js";
+} from "./chunk-BPVCZTCC.js";
 import "./chunk-CPNXOV62.js";
 export {
   Animation,

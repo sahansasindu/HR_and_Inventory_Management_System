@@ -2,37 +2,48 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {EmployeeMedical} from "../../model/employeeMedical";
 import {AxiosService} from "../../axios.service";
-import {color} from "chart.js/helpers";
+import {DatePipe} from "@angular/common";
+
 
 @Component({
   selector: 'app-medical-approve',
   templateUrl: './medical-approve.component.html',
-  styleUrl: './medical-approve.component.css'
+  styleUrl: './medical-approve.component.css',
+  providers: [DatePipe]
 })
 export class MedicalApproveComponent implements OnInit{
 
-  loarddata: any[] = [];
-  loarddata1: any[] = [];
 
-  employeeId: any;
+  selectedRow: EmployeeMedical | null = null;
+  formattedDate!: string | null;
+  medicalHistoryVisible: boolean=false;
+  medicalHistorySummary: MedicalHistorySummaryDto | null = null;
 
-  constructor(private employeeMedical:EmployeeMedical,private axios:AxiosService) {
+  constructor(private axios:AxiosService,private datePipe: DatePipe) {
 
   }
 
   async ngOnInit() {
+
+    this.dataSource.filterPredicate = (data: EmployeeMedical, filter: string) => {
+      return data.emp_id.toLowerCase().includes(filter);
+    };
     await this.MedicalDetails();
-    this.fetchEmployeeData();
+  }
+
+  applyFilter(event: Event): void {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
   displayedColumns: string[] = ['employee_medical_id', 'emp_id','medical_report', 'submit_date', 'medical_status'];
   dataSource = new MatTableDataSource<EmployeeMedical>([]);
-  selectedRow: EmployeeMedical | null = null;
   ELEMENT_DATA: EmployeeMedical[] = [
 
   ];
 
   selectRowmedicalPDF(row:EmployeeMedical) {
+
     if (this.selectedRow === row) {
       this.selectedRow = null;
     } else {
@@ -45,8 +56,10 @@ export class MedicalApproveComponent implements OnInit{
 
   gotoReport() {
 
+    this.formattedDate = this.datePipe.transform(this.selectedRow?.submit_date, 'MMM d, yyyy');
+
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      alert("Please Check Medical Report First....")
       return;
     }
 
@@ -92,30 +105,53 @@ export class MedicalApproveComponent implements OnInit{
       console.error('Error downloading Medical Report:', error);
     }
   }
+  async viewMedicaleHistory() {
 
-  fetchEmployeeData() {
+    const empId=(document.getElementById('emp_id') as HTMLInputElement).value;
+    try {
+      const response = await this.axios.request('GET', `/getMedicalHistorySummary?empId=${empId}`, {}, {});
+      this.medicalHistorySummary = response.data;
+      this.medicalHistoryVisible = true;
+      console.log('Medical History Summary:', this.medicalHistorySummary);
+    } catch (error) {
+      console.error('Error fetching Medical History Summary:', error);
+    }
 
-    this.axios.request('GET', '/getEmployee', {}, {})
-      .then((response: { data: any[]; }) => {
-        this.loarddata1 = response.data;
-        this.loarddata = response.data;
 
-        console.log(this.loarddata); // Corrected logging statement
-      })
-      .catch((error: any) => {
-        console.error('Error fetching data:', error);
-      });
   }
+  closeMedicalReport() {
 
+    this.medicalHistoryVisible = false;
 
-  filterByEmpId() {
-    if (this.employeeId === "") {
-      this.fetchEmployeeData()
-    } else {
-      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.loarddata = this.loarddata1.filter(item => item.employeeid.toString().toLowerCase() === lowerCaseEmpId);
+  }
+  async updateMedicalStatus(status: string) {
+
+    if (this.selectedRow) {
+      const confirmUpdate = window.confirm(`Are you sure you want to ${status} this Medical request?`);
+      if (confirmUpdate) {
+        await this.saveStatusUpdate(this.selectedRow.employee_medical_id, status);
+      }
     }
   }
 
-  protected readonly color = color;
+  async saveStatusUpdate(employee_medical_id: number, status: string): Promise<void> {
+    try {
+      await this.axios.request('PUT', `/updateMedicalStatus?employee_medical_id=${employee_medical_id}&status=${status}`,{},{});
+      alert('Medical status updated successfully.....');
+      await this.MedicalDetails(); // Refresh leave details after update
+    } catch (error) {
+      console.error('Error updating Medical Status:', error);
+      alert('Error updating Medical Status:');
+    }
+  }
+
+}
+export interface MedicalHistorySummaryDto{
+
+  approvedCount: number;
+  rejectedCount: number;
+  empId: string;
+  employeeName: string;
+  jobRole: string;
+
 }
