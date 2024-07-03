@@ -5,13 +5,13 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
-        <div class="form-group">
+        <div class="form-group position-relative">
           <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
-        </div>
-        &nbsp;
-        <b>Select Date:</b>
-        <div class="form-group">
-          <input type="date" class="form-control" id="datePicker" name="datePicker" [(ngModel)]="selectedDate" (change)="handleDateChange()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

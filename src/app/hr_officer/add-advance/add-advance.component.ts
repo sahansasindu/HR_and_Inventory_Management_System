@@ -19,15 +19,17 @@ export class AddAdvanceComponent {
 
   employeeId: any;
 
-  filteredData: any[] = [];
+
   loarddata1: any[] = [];
-  filteredData2: any[] = [];
+  filteredData1: any[] = [];
   loarddata: any[] = [];
+  filteredData: any[] = [];
 
   // Pagination properties
   p1: number = 1;
   p2: number = 1;
   itemsPerPage: number = 10;
+  searchSuggestions: string[] = [];
 
   show() {
     this.isVisible1 = true;
@@ -54,32 +56,7 @@ export class AddAdvanceComponent {
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
-  filterByEmployeeId() {
-    if (this.employeeId === '') {
-      this.fetchAdvance();
-      this.fetchLoan();
-    } else {
-      const lowerCaseEmpId = this.employeeId.toString().toLowerCase();
-      this.loarddata1 = this.filteredData.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
-      this.loarddata = this.filteredData2.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
-    }
-  }
 
-  ngOnInit() {
-    this.fetchAdvance();
-    this.fetchLoan();
-  }
-
-  fetchAdvance() {
-    this.axiosService.request('GET', '/getAdvance', null, {})
-      .then(response => {
-        this.loarddata1 = response.data;
-        this.filteredData = response.data;
-      })
-      .catch(error => {
-        console.error('Error fetching data:', error);
-      });
-  }
 
   submitData1() {
     if (!this.empid || !this.amount || !this.reson) {
@@ -114,10 +91,67 @@ export class AddAdvanceComponent {
     this.axiosService.request('GET', '/getLoan', null, {})
       .then(response => {
         this.loarddata = response.data;
-        this.filteredData2 = response.data;
+        this.filteredData = response.data;
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
+
+  ngOnInit() {
+    this.fetchAdvance();
+    this.fetchLoan();
+  }
+
+  fetchAdvance() {
+    this.axiosService.request('GET', '/getAdvance', null, {})
+      .then(response => {
+        this.loarddata1 = response.data;
+        this.filteredData1 = response.data;
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+
+
+
+
+  filterByEmployeeId() {
+    this.applyFilters();
+    this.updateSearchSuggestions();
+  }
+
+
+  applyFilters() {
+    let filteredadvanceData = this.filteredData;
+    let filteredloanData = this.filteredData1;
+
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      filteredadvanceData = filteredadvanceData.filter(item => item.emp_id.toString().toLowerCase().includes(lowerCaseEmpId));
+      filteredloanData = filteredloanData.filter(item => item.emp_id.toString().toLowerCase().includes(lowerCaseEmpId));
+    }
+
+    this.loarddata = filteredadvanceData;
+    this.loarddata1 = filteredloanData;
+  }
+
+  updateSearchSuggestions() {
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      this.searchSuggestions = this.filteredData
+        .map(item => item.emp_id.toString())
+        .filter(empId => empId.toLowerCase().includes(lowerCaseEmpId));
+    } else {
+      this.searchSuggestions = [];
+    }
+  }
+
+  selectSuggestion(suggestion: string) {
+    this.employeeId = suggestion;
+    this.searchSuggestions = [];
+    this.applyFilters();
+  }
+
 }

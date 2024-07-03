@@ -11,8 +11,6 @@ export class ViewEmployeeComponent implements OnInit {
 
   loarddata: any[] = [];
   id: any;
-  loarddata1: any[] = [];
-
 
 
   isVisible1: boolean = true;
@@ -33,7 +31,9 @@ export class ViewEmployeeComponent implements OnInit {
   page: number = 1; // <-- current page
 
   employeeId: any;
-  selectedDate: any;
+  searchSuggestions: string[] = [];
+  filteredData: any[] = [];
+
 
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
@@ -47,8 +47,9 @@ export class ViewEmployeeComponent implements OnInit {
 
     this.axiosService.request('GET', '/getEmployee', {}, {})
       .then(response => {
-        this.loarddata1 = response.data;
+
         this.loarddata = response.data;
+        this.filteredData = response.data;
 
         console.log(this.loarddata); // Corrected logging statement
       })
@@ -58,42 +59,7 @@ export class ViewEmployeeComponent implements OnInit {
   }
 
 
-  filterByEmployeeId() {
-    if (this.employeeId === "") {
-      this.fetchEmployeeData()
-    } else {
-      const lowerCaseEmpId = this.employeeId ? this.employeeId.toString().toLowerCase() : '';
-      this.loarddata = this.loarddata1.filter(item => item.employeeid.toString().toLowerCase() === lowerCaseEmpId);
-    }
-  }
 
-  handleDateChange() {
-    if (this.selectedDate instanceof Date === false) {
-      // Convert selectedDate to Date object if it's not already
-      this.selectedDate = new Date(this.selectedDate);
-    }
-    if (this.selectedDate && !isNaN(this.selectedDate.getTime())) {
-      const year = this.selectedDate.getFullYear();
-      const month = this.selectedDate.getMonth() + 1;
-      const formattedDate = `${year}-${month < 10 ? '0' + month : month}`;
-
-      this.filterByDate(formattedDate);
-
-    }
-  }
-
-  filterByDate(yearMonth: string) {
-    console.log(yearMonth);
-    this.loarddata = this.loarddata.filter(item => {
-      const itemDate = new Date(item.dob);
-      const itemYear = itemDate.getFullYear();
-      const itemMonth = itemDate.getMonth() + 1;
-      const itemFormattedDate = `${itemYear}-${itemMonth < 10 ? '0' + itemMonth : itemMonth}`;
-      return itemFormattedDate === yearMonth;
-
-      console.log(itemFormattedDate);
-    });
-  }
 
   fetchEmployeeByID() {
 
@@ -184,6 +150,45 @@ export class ViewEmployeeComponent implements OnInit {
       }
       alert(errorMessage);
     });
+  }
+
+
+
+  filterByEmployeeId() {
+    this.applyFilters();
+    this.updateSearchSuggestions();
+  }
+
+
+
+  applyFilters() {
+    let filtered = this.filteredData;
+
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      filtered = filtered.filter(item => item.emp_id.toString().toLowerCase().includes(lowerCaseEmpId));
+    }
+
+
+
+    this.loarddata = filtered;
+  }
+
+  updateSearchSuggestions() {
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toLowerCase();
+      this.searchSuggestions = this.filteredData
+        .map(item => item.emp_id.toString())
+        .filter(empId => empId.toLowerCase().includes(lowerCaseEmpId));
+    } else {
+      this.searchSuggestions = [];
+    }
+  }
+
+  selectSuggestion(suggestion: string) {
+    this.employeeId = suggestion;
+    this.searchSuggestions = [];
+    this.applyFilters();
   }
 
   pageChanged(event: number) {

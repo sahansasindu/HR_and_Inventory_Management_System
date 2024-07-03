@@ -30,13 +30,14 @@ export class UpdateAdvanceComponent {
   }
 
   fetchInvoiceData() {
+    console.log(this.id);
     this.axiosService.request('GET', `/getAdvanceByID/${this.id}`, null,{})
       .then(response => {
           this.empid=response.data.emp_id;
           this.amount=response.data.amount;
           this.reson=response.data.reson;
           this.astatus=response.data.status;
-
+          
       })
       .catch(error => {
         console.error('Error fetching data:', error);

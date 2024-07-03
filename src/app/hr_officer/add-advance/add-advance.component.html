@@ -49,8 +49,13 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
-        <div class="form-group">
+        <div class="form-group position-relative">
           <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -59,18 +64,20 @@
         <table datatable class="table table-bordered">
           <thead class="bg-dark text-white">
           <tr>
+            <td>Emp ID</td>
             <td>Amount</td>
             <td>Reason</td>
             <td>State</td>
-            <td>Emp ID</td>
+
           </tr>
           </thead>
           <tbody>
           <tr *ngFor="let item of loarddata1 | paginate: { itemsPerPage: itemsPerPage, currentPage: p1 }">
+            <td>{{ item.emp_id }}</td>
             <td>Rs.{{ item.amount }}</td>
             <td>{{ item.reson }}</td>
             <td>{{ item.status }}</td>
-            <td>{{ item.emp_id }}</td>
+
           </tr>
           </tbody>
         </table>
@@ -87,8 +94,13 @@
     <div class="card-header d-flex justify-content-between align-items-center">
       <div class="search-bar d-flex align-items-center">
         <b>Search details :</b>
-        <div class="form-group">
-          <input type="text" class="form-control" id="empid" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+        <div class="form-group position-relative">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
         </div>
       </div>
     </div>

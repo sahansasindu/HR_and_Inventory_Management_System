@@ -156,7 +156,6 @@ export class EmployeeAttendanceComponent {
   pageChanged(event: number) {
     this.page = event;
   }
-
   getCountOfLoadData() {
     return this.loarddata.length;
   }
