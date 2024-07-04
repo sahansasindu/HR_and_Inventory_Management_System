@@ -14,7 +14,7 @@
       </div>
 
       <div class="button-container">
-        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView()">View Details</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView()">Check Details</button>
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'">CV Details</button>
         <button mat-flat-button color="primary">Update Details</button>
       </div>
@@ -72,12 +72,86 @@
 
     </div>
 
-    <div *ngIf="isvisibleAction">
-      <button mat-raised-button class="close-button" color="warn" (click)="gotoView()">Close</button>
+      <div *ngIf="isvisibleAction">
+
+        <div *ngIf="selectedRow" class="form-container2">
+
+          <div class="button-container2">
+            <button mat-raised-button class="close-button" color="warn" (click)="gotoView()">Close</button>
+            <button mat-flat-button color="primary" (click)="showDivLeaves()">Leaves</button>
+            <button mat-flat-button color="primary" (click)="showDivMedicals()">Medicals</button>
+            <button mat-flat-button color="primary" (click)="showDivGate()">Gate Passes</button>
+            <button mat-flat-button color="primary" (click)="showDivAttendance()">Attendance</button>
+          </div>
+
+          <form [formGroup]="form" class="employee-form">
+            <table class="form-table">
+              <tr>
+                <td rowspan="4">
+                  <img [src]="getEmployeeImage(selectedRow.gender)" alt="Employee Image" class="employee-image">
+                </td>
+                <td class="form-group custom-form-field">
+                  <label><b>Employee ID :</b></label>
+                  <input type="text" formControlName="employee_id" readonly>
+                </td>
+                <td class="form-group custom-form-field">
+                  <label><b>Job Role :</b></label>
+                  <input type="text" formControlName="job_role" readonly>
+                </td>
+              </tr>
+              <tr>
+                <td class="form-group custom-form-field">
+                  <label><b>Salary Type :</b></label>
+                  <input type="text" formControlName="salary_type" readonly>
+                </td>
+                <td class="form-group custom-form-field">
+                  <label><b>Employee Name :</b></label>
+                  <input type="text" formControlName="employee_name" readonly>
+                </td>
+              </tr>
+              <tr>
+                <td class="form-group custom-form-field">
+                  <label><b>Company Status :</b></label>
+                  <input type="text" formControlName="company_status" readonly>
+                </td>
+                <td class="form-group custom-form-field">
+                  <label><b>Department :</b></label>
+                  <input type="text" formControlName="department" readonly>
+                </td>
+              </tr>
+              <tr>
+                <td class="form-group custom-form-field">
+                  <label><b>Section ID :</b></label>
+                  <input type="text" formControlName="sec_id" readonly>
+                </td>
+                <td class="form-group custom-form-field">
+                  <label><b>Gender :</b></label>
+                  <input type="text" formControlName="gender" readonly>
+                </td>
+              </tr>
+            </table>
+          </form>
+        </div>
+
+          <div class="chart-container-leave" *ngIf="Leaves">
+            leave
+          </div>
+
+          <div class="chart-container-medical" *ngIf="Medicals">
+            medical
+          </div>
+
+          <div class="chart-container-gatepass" *ngIf="Gate">
+            gatepass
+          </div>
+
+          <div class="chart-container-attendance" *ngIf="Attendance">
+            attendance
+          </div>
+
+      </div>
+
     </div>
-
-  </div>
-
   <div class="left-div col-3 text-right" id="div3">
     <app-notificationcom></app-notificationcom>
   </div>

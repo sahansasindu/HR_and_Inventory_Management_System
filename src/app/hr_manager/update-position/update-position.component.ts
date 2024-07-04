@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../axios.service";
 import Swal from 'sweetalert2';
+import {FormBuilder, FormGroup} from "@angular/forms";
 
 @Component({
   selector: 'app-update-position',
@@ -10,7 +11,21 @@ import Swal from 'sweetalert2';
 })
 export class UpdatePositionComponent implements OnInit{
 
-  constructor(private axiosService:AxiosService) {
+  form: FormGroup;
+
+  constructor(private axiosService:AxiosService, private fb: FormBuilder) {
+
+    this.form = this.fb.group({
+      employee_id: [''],
+      job_role: [''],
+      salary_type: [''],
+      employee_name: [''],
+      company_status: [''],
+      department: [''],
+      sec_id: [''],
+      gender: ['']
+    });
+
   }
 
   async ngOnInit() {
@@ -19,7 +34,7 @@ export class UpdatePositionComponent implements OnInit{
       return data.employee_id.toLowerCase().includes(filter);
     };
 
-    await this.fetchEmptyBottleDetails();
+    await this.getEmployeeToPromotionUpdate();
   }
 
   applyFilter(event: Event): void {
@@ -39,13 +54,15 @@ export class UpdatePositionComponent implements OnInit{
   selectRow(row: UpdatePromotion) {
     if (this.selectedRow === row) {
       this.selectedRow = null;
+      this.form.reset();
     } else {
       this.selectedRow = row;
+      this.form.patchValue(row);
     }
   }
 
   //get employee details
-  async fetchEmptyBottleDetails() {
+  async getEmployeeToPromotionUpdate() {
     try {
       const response = await this.axiosService.request('GET', '/getEmployeeToPromotionUpdate', {},{});
       this.JobPromotionUpdate.data = response.data;
@@ -57,6 +74,7 @@ export class UpdatePositionComponent implements OnInit{
   }
 
   isvisibleAction :boolean=false;
+
 
   gotoView() {
 
@@ -74,8 +92,53 @@ export class UpdatePositionComponent implements OnInit{
 
     if(!this.isvisibleAction){
       this.selectedRow=null;
+      this.form.reset();
     }
 
+    this.Leaves=false;
+    this.Medicals=false;
+    this.Gate=false;
+    this.Attendance=false;
+
+  }
+
+  getEmployeeImage(gender: string): string {
+    return gender === 'male' ? '/assets/images/male.png' : '/assets/images/female.png';
+  }
+
+  Leaves: boolean=false;
+  Medicals: boolean = false;
+  Gate: boolean = false;
+  Attendance: boolean = false;
+
+  showDivLeaves() {
+
+    this.Leaves=true;
+    this.Medicals=false;
+    this.Gate=false;
+    this.Attendance=false;
+
+  }
+
+  showDivMedicals() {
+    this.Leaves=false;
+    this.Medicals=true;
+    this.Gate=false;
+    this.Attendance=false;
+  }
+
+  showDivGate() {
+    this.Leaves=false;
+    this.Medicals=false;
+    this.Gate=true;
+    this.Attendance=false;
+  }
+
+  showDivAttendance() {
+    this.Leaves=false;
+    this.Medicals=false;
+    this.Gate=false;
+    this.Attendance=true;
   }
 }
 
