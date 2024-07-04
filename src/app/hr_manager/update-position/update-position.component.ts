@@ -58,7 +58,7 @@ export class UpdatePositionComponent implements OnInit{
 
   isvisibleAction :boolean=false;
 
-  gotoView(action: string) {
+  gotoView() {
 
     if (!this.selectedRow) {
       Swal.fire({

@@ -14,9 +14,7 @@
       </div>
 
       <div class="button-container">
-        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('leave')">Leave History</button>
-        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('medical')">Medical History</button>
-        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView('gatePass')">Gate Passes</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView()">View Details</button>
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'">CV Details</button>
         <button mat-flat-button color="primary">Update Details</button>
       </div>
@@ -75,7 +73,7 @@
     </div>
 
     <div *ngIf="isvisibleAction">
-      <button mat-raised-button class="close-button" color="warn" (click)="gotoView('')">Close</button>
+      <button mat-raised-button class="close-button" color="warn" (click)="gotoView()">Close</button>
     </div>
 
   </div>

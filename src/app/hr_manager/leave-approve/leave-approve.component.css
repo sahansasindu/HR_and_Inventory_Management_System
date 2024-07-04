@@ -73,6 +73,9 @@ body {
   }
 }
 
+.highlighted{
+  background-color: #ccdff5;
+}
 .medical-container {
   display: flex;
   flex-direction: column;
@@ -84,7 +87,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 10;
-  background: #51b9c0; /* Or whatever your table header background color is */
+  background: #51b9c0;
   font-weight: bold;
 }
 
@@ -96,7 +99,7 @@ body {
 .mat-cell,
 .mat-header-cell {
   padding: 8px;
-  min-width: 120px; /* Or your preferred min-width */
+  min-width: 120px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -104,9 +107,6 @@ body {
 .close-button{
   margin-left: 20px;
   margin-top: 10px;
-}
-.highlighted{
-  background-color: #8ab2df;
 }
 
 .status-pending {
