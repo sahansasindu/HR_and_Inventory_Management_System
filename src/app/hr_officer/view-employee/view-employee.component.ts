@@ -86,18 +86,6 @@ export class ViewEmployeeComponent implements OnInit {
     console.log(this.id);
   }
 
-  Delete(id: any) {
-    this.axiosService.request('DELETE', 'deleteEmployee', { employee_id: id }, {})
-      .then(response => {
-        this.fetchEmployeeData();
-        console.log("Response from server:", response);
-        alert("Employee details deleted successfully!");
-      })
-      .catch(error => {
-        console.error("Error deleting Deduction:", error);
-        alert("Error deleting Deduction!");
-      });
-  }
 
   handleFormSubmit() {
     console.log(this.Did);
@@ -175,5 +163,6 @@ export class ViewEmployeeComponent implements OnInit {
   back() {
     this.isVisible1 = true;
     this.isVisible2 = false;
+    this.fetchEmployeeData();
   }
 }

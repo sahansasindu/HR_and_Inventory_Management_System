@@ -14,6 +14,7 @@ export class SalaryAdvanceComponent {
   filtereddata: any[] = [];
   isLoading: boolean = false;
   employeeId: any;
+  page: number = 1; // <-- current page
 
 
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
@@ -62,24 +63,25 @@ export class SalaryAdvanceComponent {
 
   Delete(id: any) {
 
+    if (confirm('Are you sure you want to delete this deduction?')) {
+      this.axiosService.request('DELETE', 'deleteAdvance', {advance_salary_id: id}, {})
+        .then(response => {
 
-    this.axiosService.request('DELETE', 'deleteAdvance', { advance_salary_id: id },{})
-      .then(response => {
+          this.fetchAdvance();
+          console.log("Response from server:", response);
 
-        this.fetchAdvance();
-        console.log("Response from server:", response);
-
-        alert("Advance deleted successfully!");
-
-
-
-      })
-      .catch(error => {
-        console.error("Error deleting Allowance:", error);
-        alert("Error deleting Allowance!");
+          alert("Advance deleted successfully!");
 
 
-      });
+        })
+        .catch(error => {
+          console.error("Error deleting Allowance:", error);
+          alert("Error deleting Allowance!");
+
+
+        });
+    }
+
   }
 
   filterByEmployeeId() {
@@ -90,5 +92,10 @@ export class SalaryAdvanceComponent {
       this.advancedata = this.filtereddata.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
     }
   }
+
+  pageChanged(event: number) {
+    this.page = event;
+  }
+
 
 }

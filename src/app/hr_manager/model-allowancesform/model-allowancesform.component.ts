@@ -49,5 +49,16 @@ export class ModelAllowancesformComponent {
       section_name: this.section_name,
     };
     this.formSubmit.emit(formData);
+    this.clearForm();
+  }
+  clearForm() {
+   this.depName="";
+   this.job_role="";
+   this.salary_type="";
+   this.section_name="";
+   this.allowance_amount="";
+   this.allowance_type="";
+   this.allowance="";
+
   }
 }

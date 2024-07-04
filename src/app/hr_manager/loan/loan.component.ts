@@ -15,6 +15,7 @@ export class LoanComponent implements OnInit  {
   filtereddata: any[] = [];
   isLoading: boolean = false;
   employeeId: any;
+  page: number = 1; // <-- current page
 
 
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
@@ -69,24 +70,22 @@ export class LoanComponent implements OnInit  {
 
   Delete(id: any) {
 
+    if (confirm('Are you sure you want to delete this loan?')) {
+      this.axiosService.request('DELETE', '/deleteLoan', {loan_id: id}, {})
+        .then(response => {
 
-    this.axiosService.request('DELETE', '/deleteLoan', { loan_id: id },{})
-      .then(response => {
+          this.fetchLoan();
+          console.log("Response from server:", response);
 
-        this.fetchLoan();
-        console.log("Response from server:", response);
+          alert("Loan deleted successfully!");
 
-        alert("Loan deleted successfully!");
+        })
+        .catch(error => {
+          console.error("Error deleting Deduction:", error);
+          alert("Error deleting Deduction!");
 
-
-
-      })
-      .catch(error => {
-        console.error("Error deleting Deduction:", error);
-        alert("Error deleting Deduction!");
-
-
-      });
+        });
+    }
   }
 
 
@@ -95,4 +94,11 @@ export class LoanComponent implements OnInit  {
     this.router.navigate(['./add-loan']);
 
   }
+
+  pageChanged(event: number) {
+    this.page = event;
+  }
+
+
+
 }

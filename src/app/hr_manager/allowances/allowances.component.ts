@@ -17,6 +17,7 @@ export class AllowancesComponent {
   salaryheader2: any[] = [];
   selectedDepartment: string = "";
   isLoading: boolean = false;
+  page: number = 1; // <-- current page
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
 
   filterByDepartment() {
@@ -78,24 +79,28 @@ export class AllowancesComponent {
 
   Delete(id: any) {
 
+    if (confirm('Are you sure you want to delete this allowances?')) {
+      this.axiosService.request('DELETE', 'deleteAllowance', {allowances_id: id}, {})
+        .then(response => {
 
-    this.axiosService.request('DELETE', 'deleteAllowance', { allowances_id: id },{})
-      .then(response => {
+          this.fetchInvoiceData();
+          console.log("Response from server:", response);
 
-        this.fetchInvoiceData();
-        console.log("Response from server:", response);
-
-        alert("Allowance deleted successfully!");
-
-
-
-      })
-      .catch(error => {
-        console.error("Error deleting Allowance:", error);
-        alert("Error deleting Allowance!");
+          alert("Allowance deleted successfully!");
 
 
-      });
+        })
+        .catch(error => {
+          console.error("Error deleting Allowance:", error);
+          alert("Error deleting Allowance!");
+
+
+        });
+    }
+  }
+
+  pageChanged(event: number) {
+    this.page = event;
   }
 
 }

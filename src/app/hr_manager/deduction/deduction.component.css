@@ -130,3 +130,16 @@
     transform: rotate(360deg);
   }
 }
+
+.card{
+  border: 1px solid #eae8e8;
+}
+/* Add this to your CSS file */
+table {
+  border: 1px solid black; /* Add border to the table */
+  border-collapse: collapse; /* Ensure borders are not doubled */
+}
+
+table th, table td {
+  border: 1px solid black; /* Add border to table cells */
+}

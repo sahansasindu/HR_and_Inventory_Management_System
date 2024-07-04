@@ -1,8 +1,3 @@
-/* styles.css */
-
-@import "../hrm-dashboard/hrm-dashboard.component.css";
-
-/* Customize card background and border */
 .card {
   background-color: #85b5cc;
   border: 1px solid #000000;
@@ -12,12 +7,13 @@
   display: flex;
   justify-content: center; /* Horizontal centering */
   align-items: center; /* Vertical centering */
+  margin: 10px; /* Adjust margin as needed */
 }
 
 /* Customize card body padding, width, and height */
 .card-body {
-  width: 80%; /* Full width for better responsiveness */
-  height: 250px; /* Change height as needed */
+  width: 100%; /* Full width for better responsiveness */
+  height: 238px; /* Change height as needed */
   padding: 20px; /* Add padding for better spacing */
   box-sizing: border-box; /* Include padding in the width calculation */
 
@@ -62,41 +58,43 @@
   }
 }
 
-
 .page__box {
   display: flex;
   flex-direction: column; /* Stack items vertically */
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
-  height: 140vh; /* Adjust height for full viewport height */
+  height: 100vh; /* Adjust height for full viewport height */
 }
 
-#box2{
+#box2 {
   display: flex;
   flex-direction: column; /* Stack items vertically */
   justify-content: center; /* Center items horizontally */
   align-items: center; /* Center items vertically */
   height: 100vh; /* Adjust height for full viewport height */
-
 }
 
-
-
-
-
-.card {
-  margin: 10px; /* Adjust margin as needed */
-}
 h1 {
   position: absolute; /* Position the element absolutely */
   top: 100px; /* Position at the top of its containing element */
   left: 50%; /* Center horizontally */
   transform: translateX(-50%); /* Adjust for centering */
   margin-top: 5px; /* Add top margin for spacing */
-
 }
 
 .card-body img {
-  max-width: 100%; /* Ensure images don't exceed card width */
+  position: absolute; /* Position the image absolutely within the card body */
+  top: 0; /* Align the image to the top */
+  right: 40%; /* Align the image to the left */
+  max-width: 60%; /* Ensure images don't exceed card width */
   max-height: 100%; /* Ensure images don't exceed card height */
+  border-radius: 30px;
+}
+
+h5 {
+  position: absolute; /* Position the element absolutely */
+  top: 100px; /* Position at the top of its containing element */
+  left: 80%; /* Center horizontally */
+  transform: translateX(-50%); /* Adjust for centering */
+  margin-top: 5px; /* Add top margin for spacing */
 }
