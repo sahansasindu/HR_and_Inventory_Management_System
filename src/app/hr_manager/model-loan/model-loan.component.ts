@@ -53,6 +53,13 @@ export class ModelLoanComponent {
 
     };
     this.formSubmit.emit(formData);
+    this.clearForm();
+  }
+  clearForm() {
+   this.lempid="";
+   this.loandetails="";
+   this.lamount="";
+   this.liamount="";
   }
 
 }

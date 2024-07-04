@@ -47,5 +47,16 @@ export class ModelDeductionformComponent {
       section_name: this.section_name,
     };
     this.formSubmit.emit(formData);
+    this.clearForm();
+  }
+
+  clearForm() {
+   this.depName="";
+   this.job_role="";
+   this.salary_type="";
+   this.section_name="";
+   this.deduction_type="";
+   this.deductionamount=null;
+
   }
 }

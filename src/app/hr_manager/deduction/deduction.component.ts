@@ -17,6 +17,7 @@ export class DeductionComponent implements OnInit {
   salaryheader2: any[] = [];
   selectedDepartment: string = "";
   isLoading: boolean = false;
+  page: number = 1; // <-- current page
   constructor(private axiosService: AxiosService,private router: Router,private cdr: ChangeDetectorRef) {}
 
   filterByDepartment() {
@@ -78,24 +79,26 @@ export class DeductionComponent implements OnInit {
 
   Delete(id: any) {
 
+    if (confirm('Are you sure you want to delete this deduction?')) {
+      this.axiosService.request('DELETE', 'deleteDeduction', {deduction_id: id}, {})
+        .then(response => {
 
-    this.axiosService.request('DELETE', 'deleteDeduction', { deduction_id: id },{})
-      .then(response => {
+          this.fetchDeductionData();
+          console.log("Response from server:", response);
 
-        this.fetchDeductionData();
-        console.log("Response from server:", response);
+          alert("Deduction deleted successfully!");
 
-        alert("Deduction deleted successfully!");
+        })
+        .catch(error => {
+          console.error("Error deleting Deduction:", error);
+          alert("Error deleting Deduction!");
 
-
-
-      })
-      .catch(error => {
-        console.error("Error deleting Deduction:", error);
-        alert("Error deleting Deduction!");
-
-
-      });
+        });
+    }
   }
+  pageChanged(event: number) {
+    this.page = event;
+  }
+
 
 }

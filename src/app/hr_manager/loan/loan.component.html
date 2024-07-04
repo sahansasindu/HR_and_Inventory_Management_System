@@ -33,7 +33,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of loarddata">
+          <tr *ngFor="let item of loarddata| paginate: { itemsPerPage: 10, currentPage: page }">
             <td>{{ item.emp_id }}</td>
             <td>{{ item.loan_details }}</td>
             <td>Rs.{{ item.loan_amount }}</td>
@@ -45,10 +45,12 @@
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
       </div>
     </div>
   </div>
 </div>
+
 
 
 

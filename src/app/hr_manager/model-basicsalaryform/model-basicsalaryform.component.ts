@@ -59,7 +59,23 @@ export class ModelBasicsalaryformComponent {
       section_name: this.section_name,
       subsistant: this.subsistant,
     };
+
     this.formSubmit.emit(formData);
+    this.clearForm();
   }
 
+  clearForm() {
+    this.basicamount = '';
+    this.br1 = '';
+    this.br2 = '';
+    this.depName = '';
+    this.gpass_amount = '';
+    this.Initial_days = '';
+    this.nopay_amount = '';
+    this.job_role = '';
+    this.ot_amount = '';
+    this.salary_type = '';
+    this.section_name = '';
+    this.subsistant = '';
+  }
 }

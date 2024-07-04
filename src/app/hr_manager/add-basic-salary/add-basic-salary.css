@@ -5,6 +5,7 @@
   flex-direction: column;
   gap: 20px;
   padding: 10px;
+
 }
 
 .second-part {
@@ -130,3 +131,18 @@
     transform: rotate(360deg);
   }
 }
+
+.card{
+  border: 1px solid #ffffff;
+}
+
+/* Add this to your CSS file */
+table {
+  border: 1px solid black; /* Add border to the table */
+  border-collapse: collapse; /* Ensure borders are not doubled */
+}
+
+table th, table td {
+  border: 1px solid black; /* Add border to table cells */
+}
+

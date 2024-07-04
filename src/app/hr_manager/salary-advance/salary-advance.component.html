@@ -30,7 +30,7 @@
           </tr>
           </thead>
           <tbody>
-          <tr *ngFor="let item of advancedata">
+          <tr *ngFor="let item of advancedata| paginate: { itemsPerPage: 10, currentPage: page }">
             <td>{{ item.emp_id }}</td>
             <td>Rs.{{ item.amount }}</td>
             <td>{{ item.reson }}</td>
@@ -42,6 +42,7 @@
           </tr>
           </tbody>
         </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
       </div>
     </div>
   </div>
