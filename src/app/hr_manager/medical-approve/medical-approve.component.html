@@ -45,7 +45,7 @@
           <mat-cell *matCellDef="let element" [ngClass]="{
         'status-pending': element.medical_status === 'pending',
         'status-approved': element.medical_status === 'approved',
-        'status-rejected': element.medical_status === 'rejected'}"> {{ element.medical_status }} </mat-cell>
+        'status-rejected': element.medical_status === 'rejected'}"> <b>{{ element.medical_status }}</b> </mat-cell>
         </ng-container>
 
         <mat-header-row *matHeaderRowDef="displayedColumns" class="mat-header-row"></mat-header-row>
