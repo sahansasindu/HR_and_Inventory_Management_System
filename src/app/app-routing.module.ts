@@ -63,6 +63,7 @@ import {HrmManageProfileComponent} from "./hr_manager/hrm-manage-profile/hrm-man
 import {MailBoxComponent} from "./common/mail-box/mail-box.component";
 import {ChatBoxComponent} from "./common/chat-box/chat-box.component";
 import {ResetpwordComponent} from "./common/resetpword/resetpword.component";
+import {UpdatePositionComponent} from "./hr_manager/update-position/update-position.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -93,6 +94,7 @@ const routes: Routes = [
       { path: '', redirectTo: 'hrmdashboard', pathMatch: 'full' },
 
       { path: 'hrmdashboard', component: HrmDashboardComponent },
+      {path:"manage-promotion",component: UpdatePositionComponent},
       { path: 'esc', component: EmployeeSalaryComponent},
       { path: 'hrm-dashboard', component: HrmDashboardComponent },
       { path: 'add-employee', component:  AddNewEmployeeComponent },

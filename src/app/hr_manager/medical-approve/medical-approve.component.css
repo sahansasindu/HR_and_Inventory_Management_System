@@ -109,15 +109,15 @@ body {
   background-color: #b9f3ef;
 }
 .status-pending {
-  background-color: #f3f364;
+  background-color: #f3f376;
 }
 
 .status-approved {
-  background-color: #4ee44e;
+  background-color: #6ef66e;
 }
 
 .status-rejected {
-  background-color: #ec4040;
+  background-color: #e86060;
 }
 
 .popup-container {
