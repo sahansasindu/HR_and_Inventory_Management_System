@@ -15,7 +15,7 @@
 
       <div class="button-container">
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView()">Check Details</button>
-        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'">CV Details</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="getEmployeeCVbyID()">CV Details</button>
         <button mat-flat-button color="primary">Update Details</button>
       </div>
 
@@ -74,15 +74,21 @@
 
       <div *ngIf="isvisibleAction">
 
+
+
         <div *ngIf="selectedRow" class="form-container2">
 
           <div class="button-container2">
-            <button mat-raised-button class="close-button" color="warn" (click)="gotoView()">Close</button>
-            <button mat-flat-button color="primary" (click)="showDivLeaves()">Leaves</button>
-            <button mat-flat-button color="primary" (click)="showDivMedicals()">Medicals</button>
-            <button mat-flat-button color="primary" (click)="showDivGate()">Gate Passes</button>
-            <button mat-flat-button color="primary" (click)="showDivAttendance()">Attendance</button>
+            <button mat-flat-button [color]="Leaves ? 'accent' : 'primary'" (click)="showDivLeaves()">Leaves</button>
+            <button mat-flat-button [color]="Medicals ? 'accent' : 'primary'" (click)="showDivMedicals()">Medicals</button>
+            <button mat-flat-button [color]="Gate ? 'accent' : 'primary'" (click)="showDivGate()">Gate Passes</button>
+            <button mat-flat-button [color]="Attendance ? 'accent' : 'primary'" (click)="showDivAttendance()">Attendance</button>
+
+            <button mat-icon-button class="close-button2" (click)="gotoView()">
+              <mat-icon>close</mat-icon>
+            </button>
           </div>
+
 
           <form [formGroup]="form" class="employee-form">
             <table class="form-table">
@@ -129,6 +135,33 @@
                   <input type="text" formControlName="gender" readonly>
                 </td>
               </tr>
+
+              <tr>
+
+                <td class="form-group">
+                  <label style="font-size: 15px;color: black"> <b>Select Month and Year</b> </label>
+                </td>
+                <td colspan="2">
+                  <div class="flex-container">
+                      <div>
+                        <select id="selectedMonth">
+                          <option selected>Month</option>
+                          <option *ngFor="let month of months" [value]="month.value">{{ month.name }}</option>
+                        </select>
+                      </div>
+                      <div>
+                        <select id="selectedYear">
+                          <option selected>Year</option>
+                          <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                        </select>
+                      </div>
+                      <button mat-flat-button color="primary" (click)="searchDetails()">Search</button>
+                  </div>
+
+                </td>
+
+              </tr>
+
             </table>
           </form>
         </div>
@@ -146,7 +179,9 @@
           </div>
 
           <div class="chart-container-attendance" *ngIf="Attendance">
-            attendance
+            <div style="margin-top: 50px;margin-left: 45px">
+              <canvasjs-chart [options]="chartOptionsAttendance" [styles]="{width: '90%', height:'320px'}"></canvasjs-chart>
+            </div>
           </div>
 
       </div>
