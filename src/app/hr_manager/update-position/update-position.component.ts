@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../axios.service";
 import Swal from 'sweetalert2';
 import {FormBuilder, FormGroup} from "@angular/forms";
+import {CanvasJS} from "@canvasjs/angular-stockcharts";
 
 @Component({
   selector: 'app-update-position',
@@ -14,6 +15,8 @@ export class UpdatePositionComponent implements OnInit {
   form: FormGroup;
 
   years: number[] = [];
+
+  chartOptionsAttendance: any;
 
 
   constructor(private axiosService: AxiosService, private fb: FormBuilder) {
@@ -41,6 +44,38 @@ export class UpdatePositionComponent implements OnInit {
     for (let year = currentYear - 10; year <= currentYear + 10; year++) {
       this.years.push(year);
     }
+
+    this.chartOptionsAttendance = {
+      animationEnabled: true,
+      exportEnabled: true,
+      title: {
+        text: "Monthly Attendance"
+      },
+      axisY: {
+        title: "Attendance Status",
+        interval: 1,
+        maximum: 1,
+        labelFormatter: function (e: any) {
+          return "";
+        }
+      },
+      axisX: {
+        interval: 1,
+        intervalType: "day",
+        valueFormatString: "DD MMM",
+        labelFormatter: function (e: any) {
+          const date = new Date(e.value);
+          const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };
+          return date.toLocaleDateString('en-US', options);
+        }
+      },
+      data: [{
+        type: "column",
+        dataPoints: [],
+        markerType: "circle", // Custom marker type
+        markerColor: "#000000" // Custom marker color
+      }]
+    };
 
     await this.getEmployeeToPromotionUpdate();
   }
@@ -195,7 +230,8 @@ export class UpdatePositionComponent implements OnInit {
     {value: 12, name: 'December'}
   ];
 
-  searchDetails() {
+  async searchDetails() {
+
     const selectedMonthElement = document.getElementById('selectedMonth') as HTMLSelectElement;
     const selectedYearElement = document.getElementById('selectedYear') as HTMLSelectElement;
 
@@ -220,39 +256,70 @@ export class UpdatePositionComponent implements OnInit {
       });
     }else {
 
+      const employeeId = document.getElementById('employee_id') as HTMLSelectElement;
+      const empId = employeeId.value;
+
+      if(this.Attendance){
+
+        const url = `/getAttendanceByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+
+        try {
+
+          const response = await this.axiosService.request('GET', url, {}, {});
+          console.log('Response data:', response);
+          const data = response.data;
+          this.updateChart(data);
+
+        } catch (error) {
+          console.error('Error fetching purchase details:', error);
+          alert('Failed to fetch purchase details');
+        }
+
+      }else if(this.Leaves){
+
+      }else if(this.Gate){
+
+      }else if(this.Medicals){
+
+      }
+
+      this.renderChart();
+
     }
   }
 
-  //for attendance chart
-  chart: any;
+  totalPresents = 0;
+  totalAbsents = 0;
+  totalLates = 0;
 
-  chartOptionsAttendance = {
-    animationEnabled: true,
-    exportEnabled: true,
-    title: {
-      text: "Stock Movement"
-    },
-    axisY: {
-      title: "Stock in Hand"
-    },
-    data: [{
-      type: "stepLine",
-      dataPoints: [
-        { x: new Date(2021, 0, 1), y: 1792 },
-        { x: new Date(2021, 1, 1), y: 1326 },
-        { x: new Date(2021, 2, 1), y: 1955 },
-        { x: new Date(2021, 3, 1), y: 1727 },
-        { x: new Date(2021, 4, 1), y: 1085 },
-        { x: new Date(2021, 5, 1), y: 1523 },
-        { x: new Date(2021, 6, 1), y: 1257 },
-        { x: new Date(2021, 7, 1), y: 1520 },
-        { x: new Date(2021, 8, 1), y: 1853 },
-        { x: new Date(2021, 9, 1), y: 1738 },
-        { x: new Date(2021, 10, 1), y: 1754 },
-        { x: new Date(2021, 11, 1), y: 1624 }
-      ]
-    }]
+
+  //update Attendance chart
+  updateChart(data: any) {
+
+    this.totalPresents = data.filter((d: any) => d.status === 'present').length;
+    this.totalAbsents = data.filter((d: any) => d.status === 'absent').length;
+    this.totalLates = data.filter((d: any) => d.status === 'late').length;
+
+    const dataPoints = data.map((d: any) => {
+      return {
+        x: new Date(d.date),
+        y: 1,
+        color: d.status === 'late' ? '#f1903f' : d.status === 'absent' ? '#fa5959' : '#399339',
+        toolTipContent: `{x}: ${d.status.charAt(0).toUpperCase() + d.status.slice(1)}`, // Tooltip content
+        markerType: "triangle",
+        markerColor: d.status === 'late' ? '#f1903f' : d.status === 'absent' ? '#fa5959' : '#399339'
+      };
+    });
+
+    this.chartOptionsAttendance.data[0].dataPoints = dataPoints;
+
   }
+
+  renderChart() {
+    const chart = new CanvasJS.Chart("chartContainer", this.chartOptionsAttendance);
+    chart.render();
+  }
+
 
 }
 export interface UpdatePromotion {

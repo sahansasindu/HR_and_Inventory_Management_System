@@ -189,3 +189,14 @@ body {
   cursor: pointer;
   outline: none;
 }
+.chart-container-attendance .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-attendance .totals {
+  margin-bottom: 10px;
+}
+
+.totals{
+  text-align: center;
+}

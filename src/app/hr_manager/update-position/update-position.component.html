@@ -98,7 +98,7 @@
                 </td>
                 <td class="form-group custom-form-field">
                   <label><b>Employee ID :</b></label>
-                  <input type="text" formControlName="employee_id" readonly>
+                  <input type="text" formControlName="employee_id" id="employee_id" readonly>
                 </td>
                 <td class="form-group custom-form-field">
                   <label><b>Job Role :</b></label>
@@ -179,8 +179,13 @@
           </div>
 
           <div class="chart-container-attendance" *ngIf="Attendance">
-            <div style="margin-top: 50px;margin-left: 45px">
-              <canvasjs-chart [options]="chartOptionsAttendance" [styles]="{width: '90%', height:'320px'}"></canvasjs-chart>
+
+            <div style="margin-top: 30px;margin-left: 50px">
+
+              <div class="totals">
+                <p> | Total Presents : {{ totalPresents }}  | Total Absents : {{ totalAbsents }}  | Total Late : {{ totalLates }} |</p>
+              </div>
+              <div id="chartContainer" style="height: 300px; width: 90%;"></div>
             </div>
           </div>
 
