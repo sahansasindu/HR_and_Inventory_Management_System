@@ -17,6 +17,9 @@ export class UpdatePositionComponent implements OnInit {
   years: number[] = [];
 
   chartOptionsAttendance: any;
+  chartOptionsMedical: any;
+  chartOptionsGatePass: any;
+  chartOptionsLeave: any;
 
 
   constructor(private axiosService: AxiosService, private fb: FormBuilder) {
@@ -77,6 +80,57 @@ export class UpdatePositionComponent implements OnInit {
       }]
     };
 
+
+    this.chartOptionsMedical = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly Medical Details"
+      },
+      data: [{
+        type: "pie",
+        startAngle: -90,
+        indexLabel: "{name}: {y}",
+        yValueFormatString: "#,###.##'%'",
+        dataPoints: [
+          { y: 14.1, name: "Approved Medicals" },
+          { y: 28.2, name: "Rejected Medicals" }
+        ]
+      }]
+    }
+
+    this.chartOptionsGatePass = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly GatePass Details"
+      },
+      data: [{
+        type: "pie",
+        startAngle: -90,
+        indexLabel: "{name}: {y}",
+        yValueFormatString: "#,###.##'%'",
+        dataPoints: [
+          { y: 14.1, name: "Approved GatePasses" },
+          { y: 28.2, name: "Rejected GatePasses" }
+        ]
+      }]
+    }
+
+    this.chartOptionsLeave = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly Leave Details"
+      },
+      data: [{
+        type: "pie",
+        startAngle: -90,
+        indexLabel: "{name}: {y}",
+        yValueFormatString: "#,###.##'%'",
+        dataPoints: [
+          { y: 14.1, name: "Approved Leaves" },
+          { y: 28.2, name: "Rejected Leaves" }
+        ]
+      }]
+    }
     await this.getEmployeeToPromotionUpdate();
   }
 
@@ -269,6 +323,7 @@ export class UpdatePositionComponent implements OnInit {
           console.log('Response data:', response);
           const data = response.data;
           this.updateChart(data);
+          this.renderChart();
 
         } catch (error) {
           console.error('Error fetching purchase details:', error);
@@ -277,13 +332,17 @@ export class UpdatePositionComponent implements OnInit {
 
       }else if(this.Leaves){
 
+        this.renderChart4();
+
       }else if(this.Gate){
+
+        this.renderChart3();
 
       }else if(this.Medicals){
 
-      }
+        this.renderChart2();
 
-      this.renderChart();
+      }
 
     }
   }
@@ -316,7 +375,22 @@ export class UpdatePositionComponent implements OnInit {
   }
 
   renderChart() {
-    const chart = new CanvasJS.Chart("chartContainer", this.chartOptionsAttendance);
+    const chart = new CanvasJS.Chart("chartContainerAttendance", this.chartOptionsAttendance);
+    chart.render();
+  }
+
+  renderChart2() {
+    const chart = new CanvasJS.Chart("chartContainerMedical", this.chartOptionsMedical);
+    chart.render();
+  }
+
+  renderChart3() {
+    const chart = new CanvasJS.Chart("chartContainerGatePass", this.chartOptionsGatePass);
+    chart.render();
+  }
+
+  renderChart4() {
+    const chart = new CanvasJS.Chart("chartContainerLeave", this.chartOptionsLeave);
     chart.render();
   }
 

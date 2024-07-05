@@ -167,15 +167,27 @@
         </div>
 
           <div class="chart-container-leave" *ngIf="Leaves">
-            leave
+
+            <div style="margin-top: 30px;margin-left: 50px">
+              <div id="chartContainerLeave" style="height: 300px; width: 90%;"></div>
+            </div>
+
           </div>
 
           <div class="chart-container-medical" *ngIf="Medicals">
-            medical
+
+            <div style="margin-top: 30px;margin-left: 50px">
+              <div id="chartContainerMedical" style="height: 300px; width: 90%;"></div>
+            </div>
+
           </div>
 
           <div class="chart-container-gatepass" *ngIf="Gate">
-            gatepass
+
+            <div style="margin-top: 30px;margin-left: 50px">
+              <div id="chartContainerGatePass" style="height: 300px; width: 90%;"></div>
+            </div>
+
           </div>
 
           <div class="chart-container-attendance" *ngIf="Attendance">
@@ -185,7 +197,7 @@
               <div class="totals">
                 <p> | Total Presents : {{ totalPresents }}  | Total Absents : {{ totalAbsents }}  | Total Late : {{ totalLates }} |</p>
               </div>
-              <div id="chartContainer" style="height: 300px; width: 90%;"></div>
+              <div id="chartContainerAttendance" style="height: 300px; width: 90%;"></div>
             </div>
           </div>
 
