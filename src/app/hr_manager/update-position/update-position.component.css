@@ -212,3 +212,64 @@ body {
   margin: 0;
   font-weight: bold;
 }
+.details-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  flex-basis: 150px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.form-row input,
+.form-row select {
+  flex-grow: 1;
+}
+
+.form-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th {
+  background-color: #3498db;
+  color: #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+.table td,
+.table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.header-row th {
+  background-color: #3498db;
+  color: #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+.approved-status {
+  color: #085e2e;
+}
+
+.rejected-status {
+  color: #aa1809;
+}

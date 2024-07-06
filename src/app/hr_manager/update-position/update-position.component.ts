@@ -19,7 +19,12 @@ export class UpdatePositionComponent implements OnInit {
   chartOptionsAttendance: any;
   chartOptionsMedical: any;
   chartOptionsGatePass: any;
-  chartOptionsLeave: any;
+
+  page:number=1;
+
+  pageChanged(event: number) {
+    this.page = event;
+  }
 
 
   constructor(private axiosService: AxiosService, private fb: FormBuilder) {
@@ -134,7 +139,6 @@ export class UpdatePositionComponent implements OnInit {
     this.isvisibleAction = !this.isvisibleAction;
 
     if (!this.isvisibleAction) {
-      this.selectedRow = null;
       this.form.reset();
     }
 
@@ -160,6 +164,11 @@ export class UpdatePositionComponent implements OnInit {
     this.Medicals = false;
     this.Gate = false;
     this.Attendance = false;
+
+    const selectElement = document.getElementById('selectedMonth') as HTMLSelectElement | null;
+    if (selectElement) {
+      selectElement.value = "Month";
+    }
 
   }
 
@@ -247,90 +256,103 @@ export class UpdatePositionComponent implements OnInit {
         text: "Please select an View details button.",
         confirmButtonText: 'Ok'
       });
-      return;
+    }else if(this.Leaves){
+
+      if (selectedYear==="Year") {
+
+        Swal.fire({
+          icon: 'warning',
+          title: 'Select Month And Year',
+          text: "Please select Month and Year to get employee details.",
+          confirmButtonText: 'Ok'
+        });
+      }else {
+        const employeeId = document.getElementById('employee_id') as HTMLSelectElement;
+        const empId = employeeId.value;
+
+        const url = `/getLeavesByMonthAndYear/${empId}/${selectedYear}`;
+
+        try {
+
+          const response = await this.axiosService.request('GET', url, {}, {});
+          console.log('Response data:', response);
+          const data = response.data;
+          this.leaveDetails =data;
+          this.updateTable(data);
+
+        } catch (error) {
+          console.error('Error fetching purchase details:', error);
+          alert('Failed to fetch purchase details');
+        }
+      }
     }
-    if (selectedMonth==="Month" || selectedYear==="Year") {
-      Swal.fire({
-        icon: 'warning',
-        title: 'Select Month And Year',
-        text: "Please select Month and Year to get employee details.",
-        confirmButtonText: 'Ok'
-      });
-    }else {
+    else{
+      if (selectedMonth==="Month" || selectedYear==="Year") {
+        Swal.fire({
+          icon: 'warning',
+          title: 'Select Month And Year',
+          text: "Please select Month and Year to get employee details.",
+          confirmButtonText: 'Ok'
+        });
+      }else {
 
-      const employeeId = document.getElementById('employee_id') as HTMLSelectElement;
-      const empId = employeeId.value;
+        const employeeId = document.getElementById('employee_id') as HTMLSelectElement;
+        const empId = employeeId.value;
 
-      if(this.Attendance){
+        if(this.Attendance){
 
-        const url = `/getAttendanceByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+          const url = `/getAttendanceByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
 
-        try {
+          try {
 
-          const response = await this.axiosService.request('GET', url, {}, {});
-          console.log('Response data:', response);
-          const data = response.data;
-          this.updateChart(data);
-          this.renderChart();
+            const response = await this.axiosService.request('GET', url, {}, {});
+            console.log('Response data:', response);
+            const data = response.data;
+            this.updateChart(data);
+            this.renderChart();
 
-        } catch (error) {
-          console.error('Error fetching purchase details:', error);
-          alert('Failed to fetch purchase details');
-        }
+          } catch (error) {
+            console.error('Error fetching purchase details:', error);
+            alert('Failed to fetch purchase details');
+          }
 
-      }else if(this.Leaves){
+        }else if(this.Gate){
 
-        const url = `/getLeavesByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+          const url = `/getGatePassByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
 
-        try {
+          try {
 
-          const response = await this.axiosService.request('GET', url, {}, {});
-          console.log('Response data:', response);
-          const data = response.data;
-          this.updateChart4(data);
-          this.renderChart4();
+            const response = await this.axiosService.request('GET', url, {}, {});
+            console.log('Response data:', response);
+            const data = response.data;
+            this.updateChart3(data);
+            this.renderChart3();
 
-        } catch (error) {
-          console.error('Error fetching purchase details:', error);
-          alert('Failed to fetch purchase details');
-        }
+          } catch (error) {
+            console.error('Error fetching purchase details:', error);
+            alert('Failed to fetch purchase details');
+          }
 
-      }else if(this.Gate){
+        }else if(this.Medicals){
 
-        const url = `/getGatePassByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+          const url = `/getMedicalByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
 
-        try {
+          try {
 
-          const response = await this.axiosService.request('GET', url, {}, {});
-          console.log('Response data:', response);
-          const data = response.data;
-          this.updateChart3(data);
-          this.renderChart3();
+            const response = await this.axiosService.request('GET', url, {}, {});
+            console.log('Response data:', response);
+            const data = response.data;
+            this.updateChart2(data);
+            this.renderChart2();
 
-        } catch (error) {
-          console.error('Error fetching purchase details:', error);
-          alert('Failed to fetch purchase details');
-        }
+          } catch (error) {
+            console.error('Error fetching purchase details:', error);
+            alert('Failed to fetch purchase details');
+          }
 
-      }else if(this.Medicals){
-
-        const url = `/getMedicalByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
-
-        try {
-
-          const response = await this.axiosService.request('GET', url, {}, {});
-          console.log('Response data:', response);
-          const data = response.data;
-          this.updateChart2(data);
-          this.renderChart2();
-
-        } catch (error) {
-          console.error('Error fetching purchase details:', error);
-          alert('Failed to fetch purchase details');
         }
 
       }
-
     }
   }
 
@@ -470,53 +492,49 @@ export class UpdatePositionComponent implements OnInit {
   }
 
 
+  leaveDetails: any[] = [];
   //update Leaves
-  updateChart4(data: any) {
+
+  updateTable(data: any) {
 
     this.approved = data.filter((d: any) => d.status === 'approved').length;
     this.rejected = data.filter((d: any) => d.status === 'rejected').length;
 
 
-    const dataPoints = data.map((d: any) => ({
-      x: new Date(d.date),
-      y: 1,
-      color: d.status === 'approved' ? '#20ff00' : '#ff0000',
-      toolTipContent: `{x}: ${d.status.charAt(0).toUpperCase() + d.status.slice(1)}`,
-      markerType: "circle",
-      markerColor: d.status === 'approved' ? '#20ff00' : '#ff0000'
-    }));
-
-    this.chartOptionsLeave = {
-      animationEnabled: true,
-      title: {
-        text: "Monthly Leaves Details"
-      },
-      axisY: {
-        title: "Leave Status",
-        interval: 1,
-        labelFormatter: () => ""
-      },
-      axisX: {
-        interval: 1,
-        intervalType: "day",
-        valueFormatString: "DD MMM",
-        labelFormatter: (e: any) => {
-          const date = new Date(e.value);
-          const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };
-          return date.toLocaleDateString('en-US', options);
-        }
-      },
-      data: [{
-        type: "scatter",
-        dataPoints: dataPoints,
-      }]
-    };
-
   }
 
-  renderChart4() {
-    const chart = new CanvasJS.Chart("chartContainerLeave", this.chartOptionsLeave);
-    chart.render();
+  isvisibleUpdate: boolean=false;
+
+  goToUpdate() {
+
+    if (!this.selectedRow) {
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Employee Selected',
+        text: "Please select an employee's details by clicking on a table row.",
+        confirmButtonText: 'Ok'
+      });
+      return;
+    }
+
+    Swal.fire({
+      title: 'Are you sure you Check Employee Details?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+      cancelButtonText: 'No'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.isvisibleUpdate=!this.isvisibleUpdate;
+      }
+    });
+  }
+
+  goToBack() {
+    if(this.isvisibleUpdate){
+      this.isvisibleUpdate=!this.isvisibleUpdate;
+      this.selectedRow=null;
+    }
   }
 
 

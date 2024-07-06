@@ -41,7 +41,7 @@ export class HeaderstoremanagerComponent implements OnInit {
       title: 'Are you sure you want to logout?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, logout',
+      confirmButtonText: 'Yes, log Out',
       cancelButtonText: 'Cancel'
     }).then((result) => {
       if (result.isConfirmed) {

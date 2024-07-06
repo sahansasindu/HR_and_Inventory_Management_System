@@ -2,7 +2,7 @@
 
   <div class="parallel-div col-9">
 
-    <div *ngIf="!isvisibleAction">
+    <div *ngIf="!isvisibleAction && !isvisibleUpdate">
       <div class="search-container">
         <mat-form-field appearance="fill">
           <mat-label>Search By Employee ID</mat-label>
@@ -16,7 +16,7 @@
       <div class="button-container">
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="gotoView()">Check Details</button>
         <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="getEmployeeCVbyID()">CV Details</button>
-        <button mat-flat-button color="primary">Update Details</button>
+        <button mat-flat-button [color]="selectedRow ? 'accent' : 'primary'" (click)="goToUpdate()">Update Details</button>
       </div>
 
       <div class="mat-table-container">
@@ -174,7 +174,29 @@
                 <p> | Approved Leaves : {{ approved }}  | Rejected Leaves : {{ rejected }} |</p>
               </div>
 
-              <div id="chartContainerLeave" style="height: 300px; width: 90%;margin-top: 30px;"></div>
+              <div style="margin-top: 30px;">
+                <table class="table">
+                  <thead>
+                  <tr>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr *ngFor="let leave of leaveDetails | paginate: { itemsPerPage: 5, currentPage: page }">
+                    <td>{{ leave.starDate}}</td>
+                    <td>{{ leave.endDate}}</td>
+                    <td [ngClass]="{'approved-status': leave.status === 'approved', 'rejected-status': leave.status === 'rejected'}">
+                      {{ leave.status }}
+                  </tr>
+                  </tbody>
+                </table>
+
+                <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+
+              </div>
+
             </div>
 
           </div>
@@ -217,6 +239,53 @@
             </div>
           </div>
 
+      </div>
+
+      <div *ngIf="isvisibleUpdate" class="production-forms-details-container">
+
+        <button mat-raised-button class="form-buttons" color="warn" (click)="goToBack()">Close</button>
+
+        <form class="details-form">
+
+          <div class="form-row">
+            <label for="employee_idUpdate">Employee ID :</label>
+            <input type="text" id="employee_idUpdate" [value]="selectedRow?.employee_id" readonly>
+          </div>
+
+          <div class="form-row">
+            <label for="department">Department :</label>
+            <input type="text" id="department" [value]="selectedRow?.department" readonly>
+          </div>
+
+          <div class="form-row">
+            <label for="sec_id">Section :</label>
+            <input type="text" id="sec_id" [value]="selectedRow?.sec_id" readonly>
+          </div>
+
+          <div class="form-row">
+            <label for="employee_name">Name :</label>
+            <input type="text" id="employee_name" [value]="selectedRow?.employee_name" readonly>
+          </div>
+
+          <div class="form-row">
+            <label for="company_status">Current Status:</label>
+            <input type="text" id="company_status" [value]="selectedRow?.company_status">
+          </div>
+
+          <div class="form-row">
+            <label for="job_role">Job Role:</label>
+            <input type="text" id="job_role" [value]="selectedRow?.job_role">
+          </div>
+
+          <div class="form-row">
+            <label for="salary_type">Salary Type:</label>
+            <input type="text" id="salary_type" [value]="selectedRow?.salary_type">
+          </div>
+
+          <div class="form-buttons">
+            <button mat-raised-button color="primary" type="button">Update</button>
+          </div>
+        </form>
       </div>
 
     </div>
