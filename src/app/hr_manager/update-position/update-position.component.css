@@ -120,3 +120,156 @@ body {
   gap: 8px;
   width: 800px;
 }
+.form-container2 {
+  display: flex;
+  background-color: #c3e1ff;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  padding: 7px;
+  border: none;
+
+}
+
+.employee-image {
+  width: 150px;
+  height: 150px;
+  padding: 10px 10px 10px 10px;
+}
+.form-table {
+  border-collapse: separate;
+  border-spacing: 3px 3px;
+}
+
+.custom-form-field {
+  padding: 3px;
+}
+
+.custom-form-field label {
+  margin-bottom: 3px;
+  color: #000000;
+  font-size: 1.1em;
+}
+
+.custom-form-field input {
+
+  padding: 3px;
+  font-size: 1.0em;
+  color: #515050;
+  background-color: #c3e1ff;
+  border:none;
+}
+
+.button-container2 {
+  display: flex;
+  justify-content: flex-start;
+  margin: 10px 0;
+  gap: 8px;
+}
+.flex-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.flex-container select,
+.flex-container button {
+  margin-left: 10px;
+}
+.flex-container select{
+  border: #165065;
+  border-radius: 5px;
+  padding: 9px 9px 9px 9px;
+}
+
+.close-button2 {
+  margin-left: 50px;
+  margin-top: -6px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+.chart-container-attendance .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-attendance .totals {
+  margin-bottom: 10px;
+}
+
+.totals{
+  text-align: center;
+}
+.chart-container-medical .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-gatepass .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-leave .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.details-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.form-row {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.form-row label {
+  flex-basis: 150px;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.form-row input,
+.form-row select {
+  flex-grow: 1;
+}
+
+.form-buttons {
+  margin-top: 20px;
+  text-align: center;
+}
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+
+.table th {
+  background-color: #3498db;
+  color: #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+.table td,
+.table th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.header-row th {
+  background-color: #3498db;
+  color: #000000;
+  padding: 8px;
+  text-align: left;
+}
+
+.approved-status {
+  color: #085e2e;
+}
+
+.rejected-status {
+  color: #aa1809;
+}

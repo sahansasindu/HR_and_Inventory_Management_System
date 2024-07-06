@@ -10,12 +10,8 @@
   </a>
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./manage-promotion']">
-    <mat-icon>person</mat-icon> Promotion Manage
+    <mat-icon>person</mat-icon>Manage Performance
   </a>
-
-  <a mat-list-item routerLinkActive="list-item-active" >
-    <mat-icon>format_list_bulleted</mat-icon>  Leave & Medical  </a>
-
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./add-employee']">
     <mat-icon>person_add</mat-icon> Add New Employee
@@ -30,7 +26,7 @@
   </a>
 
 
-  <a mat-list-item routerLinkActive="list-item-active" >
+  <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./employee-attendance-HR-manager']">
     <mat-icon>fact_check</mat-icon> Employee Attendance
   </a>
 
@@ -49,11 +45,12 @@
     <mat-icon>currency_exchange</mat-icon> Employee Salary
   </a>
 
+  <!--
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./mailboxNavigate']">
     <mat-icon>mail</mat-icon> Mail</a>
 
   <a mat-list-item routerLinkActive="list-item-active" [routerLink]="['./chatboxNavigate']">
-    <mat-icon>chat</mat-icon>Message</a>
+    <mat-icon>chat</mat-icon>Message</a> -->
 
 
 
@@ -61,5 +58,5 @@
     <mat-icon>manage_accounts</mat-icon> Manage Accounts
   </a>
 
-  <button mat-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button>
+  <!--<button mat-button class="link-btn" (click)="logout()" ><mat-icon>logout</mat-icon>Logout</button> -->
 </mat-nav-list>
