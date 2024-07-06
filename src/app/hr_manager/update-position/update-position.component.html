@@ -169,7 +169,12 @@
           <div class="chart-container-leave" *ngIf="Leaves">
 
             <div style="margin-top: 30px;margin-left: 50px">
-              <div id="chartContainerLeave" style="height: 300px; width: 90%;"></div>
+
+              <div class="totals">
+                <p> | Approved Leaves : {{ approved }}  | Rejected Leaves : {{ rejected }} |</p>
+              </div>
+
+              <div id="chartContainerLeave" style="height: 300px; width: 90%;margin-top: 30px;"></div>
             </div>
 
           </div>
@@ -177,7 +182,12 @@
           <div class="chart-container-medical" *ngIf="Medicals">
 
             <div style="margin-top: 30px;margin-left: 50px">
-              <div id="chartContainerMedical" style="height: 300px; width: 90%;"></div>
+
+              <div class="totals">
+                <p> | Approved Medicals : {{ approved }}  | Rejected Medicals : {{ rejected }} |</p>
+              </div>
+
+              <div id="chartContainerMedical" style="height: 300px; width: 90%;margin-top: 30px;"></div>
             </div>
 
           </div>
@@ -185,7 +195,13 @@
           <div class="chart-container-gatepass" *ngIf="Gate">
 
             <div style="margin-top: 30px;margin-left: 50px">
-              <div id="chartContainerGatePass" style="height: 300px; width: 90%;"></div>
+
+              <div class="totals">
+                <p> | Approved GatePasses : {{ approved }}  | Rejected GatePasses : {{ rejected }} |</p>
+              </div>
+
+
+              <div id="chartContainerGatePass" style="height: 300px; width: 90%;margin-top: 30px;"></div>
             </div>
 
           </div>

@@ -200,3 +200,15 @@ body {
 .totals{
   text-align: center;
 }
+.chart-container-medical .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-gatepass .totals p {
+  margin: 0;
+  font-weight: bold;
+}
+.chart-container-leave .totals p {
+  margin: 0;
+  font-weight: bold;
+}

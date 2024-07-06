@@ -79,58 +79,6 @@ export class UpdatePositionComponent implements OnInit {
         markerColor: "#000000" // Custom marker color
       }]
     };
-
-
-    this.chartOptionsMedical = {
-      animationEnabled: true,
-      title: {
-        text: "Monthly Medical Details"
-      },
-      data: [{
-        type: "pie",
-        startAngle: -90,
-        indexLabel: "{name}: {y}",
-        yValueFormatString: "#,###.##'%'",
-        dataPoints: [
-          { y: 14.1, name: "Approved Medicals" },
-          { y: 28.2, name: "Rejected Medicals" }
-        ]
-      }]
-    }
-
-    this.chartOptionsGatePass = {
-      animationEnabled: true,
-      title: {
-        text: "Monthly GatePass Details"
-      },
-      data: [{
-        type: "pie",
-        startAngle: -90,
-        indexLabel: "{name}: {y}",
-        yValueFormatString: "#,###.##'%'",
-        dataPoints: [
-          { y: 14.1, name: "Approved GatePasses" },
-          { y: 28.2, name: "Rejected GatePasses" }
-        ]
-      }]
-    }
-
-    this.chartOptionsLeave = {
-      animationEnabled: true,
-      title: {
-        text: "Monthly Leave Details"
-      },
-      data: [{
-        type: "pie",
-        startAngle: -90,
-        indexLabel: "{name}: {y}",
-        yValueFormatString: "#,###.##'%'",
-        dataPoints: [
-          { y: 14.1, name: "Approved Leaves" },
-          { y: 28.2, name: "Rejected Leaves" }
-        ]
-      }]
-    }
     await this.getEmployeeToPromotionUpdate();
   }
 
@@ -332,25 +280,68 @@ export class UpdatePositionComponent implements OnInit {
 
       }else if(this.Leaves){
 
-        this.renderChart4();
+        const url = `/getLeavesByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+
+        try {
+
+          const response = await this.axiosService.request('GET', url, {}, {});
+          console.log('Response data:', response);
+          const data = response.data;
+          this.updateChart4(data);
+          this.renderChart4();
+
+        } catch (error) {
+          console.error('Error fetching purchase details:', error);
+          alert('Failed to fetch purchase details');
+        }
 
       }else if(this.Gate){
 
-        this.renderChart3();
+        const url = `/getGatePassByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+
+        try {
+
+          const response = await this.axiosService.request('GET', url, {}, {});
+          console.log('Response data:', response);
+          const data = response.data;
+          this.updateChart3(data);
+          this.renderChart3();
+
+        } catch (error) {
+          console.error('Error fetching purchase details:', error);
+          alert('Failed to fetch purchase details');
+        }
 
       }else if(this.Medicals){
 
-        this.renderChart2();
+        const url = `/getMedicalByMonthAndYear/${empId}/${selectedMonth}/${selectedYear}`;
+
+        try {
+
+          const response = await this.axiosService.request('GET', url, {}, {});
+          console.log('Response data:', response);
+          const data = response.data;
+          this.updateChart2(data);
+          this.renderChart2();
+
+        } catch (error) {
+          console.error('Error fetching purchase details:', error);
+          alert('Failed to fetch purchase details');
+        }
 
       }
 
     }
   }
 
+
   totalPresents = 0;
   totalAbsents = 0;
   totalLates = 0;
 
+
+  approved=0;
+  rejected=0;
 
   //update Attendance chart
   updateChart(data: any) {
@@ -373,10 +364,53 @@ export class UpdatePositionComponent implements OnInit {
     this.chartOptionsAttendance.data[0].dataPoints = dataPoints;
 
   }
-
   renderChart() {
     const chart = new CanvasJS.Chart("chartContainerAttendance", this.chartOptionsAttendance);
     chart.render();
+  }
+
+
+  //update Medical
+  updateChart2(data: any) {
+
+    this.approved = data.filter((d: any) => d.status === 'approved').length;
+    this.rejected = data.filter((d: any) => d.status === 'rejected').length;
+
+
+    const dataPoints = data.map((d: any) => ({
+      x: new Date(d.date),
+      y: 1,
+      color: d.status === 'approved' ? '#20ff00' : '#ff0000',
+      toolTipContent: `{x}: ${d.status.charAt(0).toUpperCase() + d.status.slice(1)}`,
+      markerType: "circle",
+      markerColor: d.status === 'approved' ? '#20ff00' : '#ff0000'
+    }));
+
+    this.chartOptionsMedical = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly Medical Details"
+      },
+      axisY: {
+        title: "Medical Status",
+        interval: 1,
+        labelFormatter: () => ""
+      },
+      axisX: {
+        interval: 1,
+        intervalType: "day",
+        valueFormatString: "DD MMM",
+        labelFormatter: (e: any) => {
+          const date = new Date(e.value);
+          const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };
+          return date.toLocaleDateString('en-US', options);
+        }
+      },
+      data: [{
+        type: "scatter",
+        dataPoints: dataPoints,
+      }]
+    };
   }
 
   renderChart2() {
@@ -384,9 +418,100 @@ export class UpdatePositionComponent implements OnInit {
     chart.render();
   }
 
+
+
+  //update Gate Pass
+  updateChart3(data: any) {
+
+    this.approved = data.filter((d: any) => d.status === 'approved').length;
+    this.rejected = data.filter((d: any) => d.status === 'rejected').length;
+
+
+    const dataPoints = data.map((d: any) => ({
+      x: new Date(d.date),
+      y: 1,
+      color: d.status === 'approved' ? '#20ff00' : '#ff0000',
+      toolTipContent: `{x}: ${d.status.charAt(0).toUpperCase() + d.status.slice(1)}`,
+      markerType: "circle",
+      markerColor: d.status === 'approved' ? '#20ff00' : '#ff0000'
+    }));
+
+    this.chartOptionsGatePass = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly GatePass Details"
+      },
+      axisY: {
+        title: "GatePass Status",
+        interval: 1,
+        labelFormatter: () => ""
+      },
+      axisX: {
+        interval: 1,
+        intervalType: "day",
+        valueFormatString: "DD MMM",
+        labelFormatter: (e: any) => {
+          const date = new Date(e.value);
+          const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };
+          return date.toLocaleDateString('en-US', options);
+        }
+      },
+      data: [{
+        type: "scatter",
+        dataPoints: dataPoints,
+      }]
+    };
+
+  }
+
   renderChart3() {
     const chart = new CanvasJS.Chart("chartContainerGatePass", this.chartOptionsGatePass);
     chart.render();
+  }
+
+
+  //update Leaves
+  updateChart4(data: any) {
+
+    this.approved = data.filter((d: any) => d.status === 'approved').length;
+    this.rejected = data.filter((d: any) => d.status === 'rejected').length;
+
+
+    const dataPoints = data.map((d: any) => ({
+      x: new Date(d.date),
+      y: 1,
+      color: d.status === 'approved' ? '#20ff00' : '#ff0000',
+      toolTipContent: `{x}: ${d.status.charAt(0).toUpperCase() + d.status.slice(1)}`,
+      markerType: "circle",
+      markerColor: d.status === 'approved' ? '#20ff00' : '#ff0000'
+    }));
+
+    this.chartOptionsLeave = {
+      animationEnabled: true,
+      title: {
+        text: "Monthly Leaves Details"
+      },
+      axisY: {
+        title: "Leave Status",
+        interval: 1,
+        labelFormatter: () => ""
+      },
+      axisX: {
+        interval: 1,
+        intervalType: "day",
+        valueFormatString: "DD MMM",
+        labelFormatter: (e: any) => {
+          const date = new Date(e.value);
+          const options: Intl.DateTimeFormatOptions = { day: '2-digit', month: 'short' };
+          return date.toLocaleDateString('en-US', options);
+        }
+      },
+      data: [{
+        type: "scatter",
+        dataPoints: dataPoints,
+      }]
+    };
+
   }
 
   renderChart4() {
