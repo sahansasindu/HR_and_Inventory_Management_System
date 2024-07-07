@@ -187,7 +187,11 @@ export class ManageUserComponent implements OnInit{
         }
       }).catch(error => {
         if (error.response && error.response.data && error.response.data.message) {
-          alert(error.response.data.message);
+          Swal.fire({
+            icon: 'info',
+            title: 'Error',
+            text: error.response.data.message,
+          });
         } else {
           Swal.fire({
             icon: 'error',
@@ -224,7 +228,18 @@ export class ManageUserComponent implements OnInit{
       return;
     }
 
-    if (confirm(`Are you sure you want to delete User ${(document.getElementById('user_name') as HTMLInputElement).value}?`)) {
+    const confirmed = await Swal.fire({
+      title: 'Confirm Deletion',
+      text: `Are you sure you want to delete User ${(document.getElementById('user_name') as HTMLInputElement).value}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    });
+
+    if (confirmed.isConfirmed) {
+
       let userId = (document.getElementById('user_id') as HTMLInputElement).value;
       const token = localStorage.getItem('currentUser');
       const headers = {

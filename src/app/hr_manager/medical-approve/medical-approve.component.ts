@@ -132,8 +132,16 @@ export class MedicalApproveComponent implements OnInit{
   async updateMedicalStatus(status: string) {
 
     if (this.selectedRow) {
-      const confirmUpdate = window.confirm(`Are you sure you want to ${status} this Medical request?`);
-      if (confirmUpdate) {
+      const confirmed = await Swal.fire({
+        title: 'Confirm Medical Status Update',
+        text: `Are you sure you want to ${status} this Medical request?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+      });
+      if (confirmed.isConfirmed) {
         await this.saveStatusUpdate(this.selectedRow.employee_medical_id, status);
       }
     }
