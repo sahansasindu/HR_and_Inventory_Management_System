@@ -1,0 +1,190 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="show()">ADD DEPARTMENT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show2()">ADD SECTION</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show3()">VIEW DEPARTMENT</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show4()">VIEW SECTION</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!------------------------------------------------------------------------------------------>
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible1">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">ADD DEPARMENT</h2>
+    <form>
+      <div class="form-group">
+        <label for="depId1">Department ID:</label>
+        <input type="text" class="form-control" id="depId1" name="depId" [(ngModel)]="depid">
+      </div>
+      <div class="form-group">
+        <label for="depname">Department Name:</label>
+        <input type="text" class="form-control" id="depname" name="depname" [(ngModel)]="depname">
+      </div>
+      <div class="form-group">
+        <label for="startTime">Start Date:</label>
+        <input type="date" class="form-control" id="startTime" name="startTime" [(ngModel)]="sdate">
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData()">Submit</button>
+    </form>
+  </div>
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
+  <div class="container mt-4">
+    <h2 class="text-center mb-4">ADD SECTION</h2>
+    <form>
+      <div class="form-group">
+        <label for="secid">Section ID:</label>
+        <input type="text" class="form-control" id="secid" name="empId" [(ngModel)]="secid" >
+      </div>
+      <div class="form-group">
+        <label for="secname">Section Name:</label>
+        <input type="text" class="form-control" id="secname" name="secname" [(ngModel)]="secname" >
+      </div>
+      <div class="form-group">
+        <label for="sdate">Start Date:</label>
+        <input type="date" class="form-control" id="sdate" name="sdate" [(ngModel)]="sdate">
+      </div>
+      <div class="form-group">
+        <label for="depId">Department ID:</label>
+        <input type="text" class="form-control" id="depId" name="depId" [(ngModel)]="depid" >
+      </div>
+
+      <button type="submit" class="btn btn-primary" (click)="submitData2()">Submit</button>
+    </form>
+  </div>
+
+</div>
+
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">View Department</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group position-relative">
+          <input type="text" class="form-control" id="emp1" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Select Month:</b>
+        <div class="form-group">
+          <input type="month" class="form-control" id="monthPicker1" name="monthPicker" [(ngModel)]="selectedMonth1" (change)="handleMonthChange()">
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Department ID</td>
+            <td>Department Name</td>
+            <td>Start Date</td>
+            <td>Head Of Department</td>
+            <td>Action</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of loarddata| paginate: { itemsPerPage: 10, currentPage: page }">
+            <td>{{ item.department_id }}</td>
+            <td>{{ item.department_name }}</td>
+            <td>{{ item.start_date | date: 'yyyy-MM-dd'  }}</td>
+            <td>{{ item.head_of_department.employee_name}}</td>
+            <td style="white-space: nowrap;">
+              <a class="btn btn-primary" (click)="Update(item.basic_salary_id)">Update</a>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>
+<!--------------------------------------------------------------------------------------------------------------------------------------------- -->
+
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible4">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">View Section</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group position-relative">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+          <div class="suggestions-list position-absolute bg-white border" *ngIf="searchSuggestions.length">
+            <div class="suggestion-item" *ngFor="let suggestion of searchSuggestions" (click)="selectSuggestion(suggestion)">
+              {{ suggestion }}
+            </div>
+          </div>
+        </div>
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        <b>Select Month:</b>
+        <div class="form-group">
+          <input type="month" class="form-control" id="monthPicker" name="monthPicker" [(ngModel)]="selectedMonth" (change)="handleMonthChange()">
+        </div>
+      </div>
+
+    </div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <div class="card-body">
+        <!-- Existing Table -->
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <td>Section ID</td>
+            <td>Section Name</td>
+            <td>Start Date</td>
+            <td>Department ID</td>
+            <td>Section Of Head</td>
+            <td>Action</td>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of  loarddata1| paginate: { itemsPerPage: 10, currentPage: page }">
+            <td>{{ item.section_id }}</td>
+            <td>{{ item.section_name }}</td>
+            <td>{{ item.start_date | date: 'yyyy-MM-dd'  }}</td>
+            <td>{{ item.dep_id}}</td>
+            <td>{{ item.section_of_head}}</td>
+            <td style="white-space: nowrap;">
+              <a class="btn btn-primary" (click)="Update(item.basic_salary_id)">Update</a>
+            </td>
+
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div>
+    </div>
+  </div>
+</div>

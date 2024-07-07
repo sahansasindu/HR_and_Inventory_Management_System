@@ -1,20 +1,85 @@
+body, html {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Move content to the bottom */
+
+}
+
 .generate-salary-heading {
   font-size: 24px;
   margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
 }
 
 .form-group {
   margin-bottom: 15px;
-  padding-right: 20px;
-  padding-left: 20px;
 }
 
-#gbutton{
-
-  margin-left: 20px;
+#sgeneratesection {
+  background-color: #b9dade; /* Form background color */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 700px;
+  margin: 20px auto;
+  padding: 20px;
 }
-.bordered-section {
-  border: 2px solid #ccc;
-  padding: 10px;
+
+#sgeneratesection .form-control {
   border-radius: 5px;
+  padding: 0.5rem;
+}
+
+#bonusCheckbox + label {
+  margin-left: 8px;
+}
+
+#bonusAmount {
+  margin-top: 8px;
+}
+
+#bonusCheckbox {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+#gbutton {
+  border-radius: 5px;
+}
+
+.page__box {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card {
+  border: none;
+}
+
+.card-header {
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #e3e3e3;
+  border-radius: 10px 10px 0 0;
+}
+
+.card-body {
+  padding: 20px;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+.bg-primary {
+  background-color: #007bff !important;
+}
+
+.bg-primary th {
+  color: white;
+}
+
+.font-weight-bold {
+  font-weight: 600;
 }
