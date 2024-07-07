@@ -112,7 +112,11 @@ import {EmployeeLeave} from "./model/employeeLeave";
 import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {BaseChartDirective} from "ng2-charts";
 import { UpdatePositionComponent } from './hr_manager/update-position/update-position.component';
+import { DepartmentandsectionComponent } from './hr_manager/departmentandsection/departmentandsection.component';
+import { UpdatedepartmentComponent } from './hr_manager/updatedepartment/updatedepartment.component';
+import { UpdatesectionComponent } from './hr_manager/updatesection/updatesection.component';
 import { EmployeeattendacehrComponent } from './hr_manager/employeeattendacehr/employeeattendacehr.component';
+
 
 @NgModule({
   declarations: [
@@ -195,7 +199,10 @@ import { EmployeeattendacehrComponent } from './hr_manager/employeeattendacehr/e
     MailBoxComponent,
     ChatBoxComponent,
     UpdatePositionComponent,
-    EmployeeattendacehrComponent,
+    DepartmentandsectionComponent,
+    UpdatedepartmentComponent,
+    UpdatesectionComponent,
+    EmployeeattendacehrComponent
 
 
   ],

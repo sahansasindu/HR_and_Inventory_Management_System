@@ -86,6 +86,16 @@ export class EmployeeAttendanceComponent {
       }, {}).then(response => {
       console.log("Response from server:", response);
       alert("User details updated successfully!");
+
+      // Call the attendanceforsalary method after a successful submission
+      this.attendanceforsalary(this.eid, this.date);
+
+      // Clear the fields after submission
+      this.eid = "";
+      this.date = "";
+      this.intime = "";
+      this.outtime = "";
+      this.astate = "";
     }).catch(error => {
       console.error("Error updating user details:", error);
       let errorMessage = "An error occurred while updating user details. Please try again later.";
@@ -94,13 +104,29 @@ export class EmployeeAttendanceComponent {
       }
       alert(errorMessage);
     });
-
-    this.eid = "";
-    this.date = "";
-    this.intime = "";
-    this.outtime = "";
-    this.astate = "";
   }
+
+
+  attendanceforsalary(empId: string, date: string) {
+    console.log(`Sending payroll request for empId: ${empId}, date: ${date}`);
+
+    this.axiosService.request(
+      "POST",
+      `/daily-payroll?empId=${empId}&date=${date}`,
+      null
+    ).then(response => {
+      console.log("Response from server:", response);
+      alert("Payroll processed successfully!");
+    }).catch(error => {
+      console.error("Error processing payroll:", error);
+      let errorMessage = "An error occurred while processing payroll. Please try again later.";
+      if (error.response && error.response.data && error.response.data.message) {
+        errorMessage = error.response.data.message;
+      }
+      alert(errorMessage);
+    });
+  }
+  
 
   filterByEmployeeId() {
     this.applyFilters();

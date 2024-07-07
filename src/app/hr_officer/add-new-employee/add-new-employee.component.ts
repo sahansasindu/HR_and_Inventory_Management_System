@@ -13,7 +13,11 @@ export class AddNewEmployeeComponent {
   employee: Employee = new Employee('', '', '', '', '', '', '', '', '', '', '', '', null);
 
 
+
   constructor(private axiosService: AxiosService, private router: Router) {}
+
+
+
 
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -50,5 +54,6 @@ export class AddNewEmployeeComponent {
       console.error('Error adding employee:', error);
     }
   }
+
 
 }

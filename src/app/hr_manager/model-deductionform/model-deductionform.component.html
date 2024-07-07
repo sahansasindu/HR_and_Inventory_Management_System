@@ -21,11 +21,22 @@
               <label for="deduction_type">Deduction Type:</label>
               <select id="deduction_type" [(ngModel)]="deduction_type" name="deduction_type" class="form-control" required>
                 <option value="" selected disabled>Select a deduction type</option>
-                <option value="Production">Production</option>
-                <option value="Store">Stores</option>
-                <option value="Office staff">Office staff</option>
+                <option value="No pay Cut">No pay Cut</option>
+                <option value="Gate Pass">Gate Pass</option>
+                <option value="Welfare Deduction">Welfare Deduction</option>
+                <option value="Telephone Deduction">Telephone Deduction</option>
+                <option value="Meals Allowances Amount">Meals Allowances Amount</option>
+                <option value="Income tax deduction">Income tax deduction</option>
+                <option value="Salary Advance">Salary Advance</option>
+                <option value="Last month salary deduction">Last month salary deduction</option>
+                <option value="Canteen deduction">Canteen deduction</option>
+                <option value="EPF">EPF</option>
+                <option value="Batch Allowance Deduction">Batch Allowance Deduction</option>
+                <option value="Worm egg bottles Deduction">Worm egg bottles Deduction</option>
+                <option value="Bottle Cut Amount">Bottle Cut Amount</option>
               </select>
             </div>
+
 
 
 
@@ -39,6 +50,9 @@
                 <option value="Administration">Administration</option>
                 <option value="Quality assurance">Quality assurance</option>
                 <option value="Production">Production</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Stores">Stores</option>
+                <option value="Transport">Transport</option>
               </select>
             </div>
 
@@ -46,10 +60,46 @@
               <label for="jrole">Job role:</label>
               <select id="jrole" [(ngModel)]="job_role" name="role" class="form-control" required>
                 <option value="" selected disabled>Select a role</option>
-                <option value="HR manager">HR manager</option>
+                <option value="Chairman">Chairman</option>
+                <option value="Managing Director">Managing Director</option>
+                <option value="Director">Director</option>
                 <option value="Accountant">Accountant</option>
-                <option value="Production manager">Production manager</option>
-                <option value="Store keeper">Store keeper</option>
+                <option value="Finance Manager">Finance Manager</option>
+                <option value="Finance Executive">Finance Executive</option>
+                <option value="Head of Marketing">Head of Marketing</option>
+                <option value="National Sales Manager">National Sales Manager</option>
+                <option value="Regional Manager">Regional Manager</option>
+                <option value="Senior Marketing Executive">Senior Marketing Executive</option>
+
+                <option value="Area Manager">Area Manager</option>
+                <option value="Marketing Executive">Marketing Executive</option>
+                <option value="Sales Representative">Sales Representative</option>
+                <option value="Outlet cashier">Outlet cashier</option>
+                <option value="HR Manager">HR Manager</option>
+                <option value="HR Executive">HR Executive</option>
+                <option value="Head of QA">Head of QA</option>
+                <option value="QA Manager">QA Manager</option>
+                <option value="QA Executive">QA Executive</option>
+                <option value="Head of Production">Head of Production</option>
+
+                <option value="Production Manager">Production Manager</option>
+                <option value="Operation Manager">Operation Manager</option>
+                <option value="Production Supervisor">Production Supervisor</option>
+                <option value="Machine Operator">Machine Operator</option>
+                <option value="Production Assistant">Production Assistant</option>
+                <option value="Head of Maintenance">Head of Maintenance</option>
+                <option value="Technician">Technician</option>
+                <option value="Electrician">Electrician</option>
+                <option value="Assistant">Assistant</option>
+                <option value="Head of Stores">Head of Stores</option>
+
+                <option value="Storekeeper">Storekeeper</option>
+                <option value="Store Assistant">Store Assistant</option>
+                <option value="Transport Manager">Transport Manager</option>
+                <option value="Drivers">Drivers</option>
+                <option value="Helpers">Helpers</option>
+                <option value="Head of Security">Head of Security</option>
+                <option value="Security Officer">Security Officer</option>
               </select>
             </div>
 
