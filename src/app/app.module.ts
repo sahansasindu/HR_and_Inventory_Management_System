@@ -115,6 +115,8 @@ import { UpdatePositionComponent } from './hr_manager/update-position/update-pos
 import { DepartmentandsectionComponent } from './hr_manager/departmentandsection/departmentandsection.component';
 import { UpdatedepartmentComponent } from './hr_manager/updatedepartment/updatedepartment.component';
 import { UpdatesectionComponent } from './hr_manager/updatesection/updatesection.component';
+import { EmployeeattendacehrComponent } from './hr_manager/employeeattendacehr/employeeattendacehr.component';
+
 
 @NgModule({
   declarations: [
@@ -200,6 +202,7 @@ import { UpdatesectionComponent } from './hr_manager/updatesection/updatesection
     DepartmentandsectionComponent,
     UpdatedepartmentComponent,
     UpdatesectionComponent,
+    EmployeeattendacehrComponent
 
 
   ],

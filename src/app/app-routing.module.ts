@@ -65,6 +65,8 @@ import {ChatBoxComponent} from "./common/chat-box/chat-box.component";
 import {ResetpwordComponent} from "./common/resetpword/resetpword.component";
 import {UpdatePositionComponent} from "./hr_manager/update-position/update-position.component";
 import {DepartmentandsectionComponent} from "./hr_manager/departmentandsection/departmentandsection.component";
+import {EmployeeattendacehrComponent} from "./hr_manager/employeeattendacehr/employeeattendacehr.component";
+
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -100,6 +102,7 @@ const routes: Routes = [
       { path: 'hrm-dashboard', component: HrmDashboardComponent },
       { path: 'add-employee', component:  AddNewEmployeeComponent },
       {path:'emp-details',component: EmpDetailsComponent},
+      {path:'employee-attendance-HR-manager',component: EmployeeattendacehrComponent},
       {path:'medical-approve',component: MedicalApproveComponent},
       {path:'manage-user',component: ManageUserComponent},
       {path:'HrmManageProfile',component: HrmManageProfileComponent},
