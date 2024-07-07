@@ -155,6 +155,7 @@ export class HrmDashboardComponent implements OnInit {
 
   async fetchTotalCurrentGatePassEmployeeCount(){
 
+
   }
 
 

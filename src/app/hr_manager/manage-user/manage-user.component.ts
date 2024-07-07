@@ -4,6 +4,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {User} from "../../model/usermodel";
 import {MailServiceService} from "../../service/services/mail-service.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 
 
 
@@ -74,7 +75,11 @@ export class ManageUserComponent implements OnInit{
   swaptoDeleteUser() {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Row Selected',
+        text: 'Please select a row in the table.',
+      });
       return;
     }
 
@@ -117,17 +122,41 @@ export class ManageUserComponent implements OnInit{
     createUse.password=createUse.empID;
 
     if (createUse.username === "" || createUse.email === "" || createUse.contact === "" || createUse.role === "" || createUse.empID === "") {
-      alert("Please Fill All Fields...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Fields',
+        text: 'Please fill out all fields.',
+      });
     } else if (createUse.username.length > 8 || createUse.username.length < 3) {
-      alert("Please use between 3 and 8 characters for the username...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Username Length',
+        text: 'Please use between 3 and 8 characters for the username.',
+      });
     } else if (createUse.password.length < 8 || createUse.password.length > 10) {
-      alert("Please use between 8 and 10 characters for the password...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Password Length',
+        text: 'Please use between 5 and 8 characters for the password.',
+      });
     } else if (!createUse.isValidEmail()) {
-      alert("Please enter a valid email...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email.',
+      });
     } else if (!createUse.isValidPhoneNumber(createUse.contact)) {
-      alert("Please enter a valid phone number...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Phone Number',
+        text: 'Please enter a valid phone number.',
+      });
     }else if(createUse.contact.length < 10) {
-      alert("Please enter a valid phone number...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Phone Number',
+        text: 'Please enter a valid phone number.',
+      });
     }else {
 
       console.log(createUse)
@@ -142,7 +171,11 @@ export class ManageUserComponent implements OnInit{
         if (response.data && response.data.message) {
           alert(response.data.message);
         } else {
-          alert("User created successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'User Created',
+            text: 'User created successfully!',
+          });
           this.getAllUsers();
           // After successful user registration
           this.sendMail.sendEmail({
@@ -156,7 +189,11 @@ export class ManageUserComponent implements OnInit{
         if (error.response && error.response.data && error.response.data.message) {
           alert(error.response.data.message);
         } else {
-          alert("An error occurred while registering the user.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while creating the user.',
+          });
         }
       });
     }
@@ -179,7 +216,11 @@ export class ManageUserComponent implements OnInit{
     let reason = (document.getElementById('reason_status') as HTMLInputElement).value;
 
     if (reason === "") {
-      alert("Please Enter a Valid Delete Reason...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Delete Reason',
+        text: 'Please enter a valid delete reason.',
+      });
       return;
     }
 
@@ -195,19 +236,36 @@ export class ManageUserComponent implements OnInit{
         deleteReason: reason
       }, headers).then(response => {
         if (response.data && response.data.message) {
-          alert(response.data.message);
+          Swal.fire({
+            icon: 'info',
+            title: 'Response Message',
+            text: response.data.message,
+          });
           this.getAllUsers(); // Refresh the table data
           this.clearData();
         } else {
-          alert("User deleted successfully!");
+          Swal.fire({
+            icon: 'success',
+            title: 'User Deleted',
+            text: 'User deleted successfully!',
+          });
           this.getAllUsers(); // Refresh the table data
           this.clearData();
         }
       }).catch(error => {
         if (error.response && error.response.data && error.response.data.message) {
-          alert(error.response.data.message);
+
+          Swal.fire({
+            icon: 'info',
+            title: 'Response Message',
+            text: error.response.data.message,
+          });
         } else {
-          alert("An error occurred while deleting the user.");
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'An error occurred while deleting the user.',
+          });
         }
       });
     }

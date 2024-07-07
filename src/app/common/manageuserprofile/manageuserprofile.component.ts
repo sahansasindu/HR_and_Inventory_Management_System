@@ -4,6 +4,7 @@ import { User } from '../../model/usermodel';
 import { UserService } from '../../service/services/user.service';
 import { isPlatformBrowser } from '@angular/common';
 import { AxiosService } from "../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-manageuserprofile',
@@ -93,12 +94,20 @@ export class ManageuserprofileComponent implements OnInit {
       if (id) {
         const isEmptyField = Object.values(formValue).some(value => !value);
         if (isEmptyField) {
-          alert("Please fill out all fields");
+          Swal.fire({
+            icon: 'warning',
+            title: 'Incomplete Fields',
+            text: 'Please fill out all fields.',
+          });
           return;
         }
 
         if(!this.isValidEmail(formValue.email)){
-          alert("Please enter valid email");
+          Swal.fire({
+            icon: 'error',
+            title: 'Invalid Email',
+            text: 'Please enter a valid email address.',
+          });
           return;
         }
         this.ax.request(
@@ -113,7 +122,11 @@ export class ManageuserprofileComponent implements OnInit {
           }
         ).then(response => {
           // Handle successful response
-          alert('Profile updated successfully');
+          Swal.fire({
+            icon: 'success',
+            title: 'Profile Updated',
+            text: 'Your profile has been updated successfully!',
+          });
           this.userService.setUser(response.data);
           this.updateForm(response.data);
           this.loadFormState();
@@ -121,13 +134,21 @@ export class ManageuserprofileComponent implements OnInit {
           // Handle errors specifically
           if (error.response && error.response.data) {
             // Check if there's a specific message to display
-            alert(error.response.data.message || "An error occurred while updating the user details.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Error Updating User Details',
+              text: error.response.data.message || "An error occurred while updating the user details.",
+            });
           } else {
             alert("An error occurred, and no specific details were provided.");
           }
         });
       } else {
-        alert("User ID is null.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Error Occurred',
+          text: 'An error occurred, and no specific details were provided.',
+        });
       }
     }
   }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AxiosService} from "../../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-monthly-production-report',
@@ -19,7 +20,11 @@ export class MonthlyProductionReportComponent {
 
   async search() {
     if (!this.fromMonth) {
-      alert("Please select Month");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Date',
+        text: 'Please select a Month',
+      });
       return;
     }
 
@@ -44,8 +49,11 @@ export class MonthlyProductionReportComponent {
         .filter(p => p.finishedState === 'Bad')
         .reduce((total, p) => total + p.amount, 0);
     } catch (error) {
-      console.error('Error fetching monthly productions:', error);
-      alert('Failed to fetch monthly productions');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching monthly productions',
+      });
     }
   }
 
@@ -57,8 +65,11 @@ export class MonthlyProductionReportComponent {
 
       this.totalIssues = this.monthlymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
     } catch (error) {
-      console.error('Error fetching monthly issues:', error);
-      alert('Failed to fetch monthly issues');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching monthly issues',
+      });
     }
   }
 }

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AxiosService} from "../../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-weekly-production-report',
@@ -20,7 +21,11 @@ export class WeeklyProductionReportComponent {
 
   async search() {
     if (!this.fromDate || !this.toDate) {
-      alert("Please select both from and to dates");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Week',
+        text: 'Please select a Week Duration..',
+      });
       return;
     }
 
@@ -46,8 +51,11 @@ export class WeeklyProductionReportComponent {
         .filter(p => p.finishedState === 'Bad')
         .reduce((total, p) => total + p.amount, 0);
     } catch (error) {
-      console.error('Error fetching weekly productions:', error);
-      alert('Failed to fetch weekly productions');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching weekly productions',
+      });
     }
   }
 
@@ -59,8 +67,11 @@ export class WeeklyProductionReportComponent {
 
       this.totalIssues = this.weeklymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
     } catch (error) {
-      console.error('Error fetching weekly issues:', error);
-      alert('Failed to fetch weekly issues');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching weekly issues',
+      });
     }
   }
 }
