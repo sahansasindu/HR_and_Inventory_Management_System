@@ -64,6 +64,7 @@ import {MailBoxComponent} from "./common/mail-box/mail-box.component";
 import {ChatBoxComponent} from "./common/chat-box/chat-box.component";
 import {ResetpwordComponent} from "./common/resetpword/resetpword.component";
 import {UpdatePositionComponent} from "./hr_manager/update-position/update-position.component";
+import {DepartmentandsectionComponent} from "./hr_manager/departmentandsection/departmentandsection.component";
 
 const routes: Routes = [
   {path:'',component:LoginComponent},
@@ -105,6 +106,8 @@ const routes: Routes = [
       {path:'leave-approve',component: LeaveApproveComponent},
       { path: 'mailboxNavigate', component: MailBoxComponent},
       { path: 'chatboxNavigate', component: ChatBoxComponent},
+      { path: 'chatboxNavigate', component: ChatBoxComponent},
+      { path: 'departmentandsection', component: DepartmentandsectionComponent},
 
     ]},
     {path:'storekeeper',component:ContainerstoreComponent,children:[

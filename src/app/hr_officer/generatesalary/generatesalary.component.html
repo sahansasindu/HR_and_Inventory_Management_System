@@ -1,66 +1,52 @@
-<div id="sgeneratesection" class="bordered-section">
-  <h3 class="generate-salary-heading">GENERATE SALARY</h3>
-  <div class="form-group">
-    <label for="department">Select Department:</label>
-    <select id="department" class="form-control" required>
-      <option value="" selected disabled>Select Department</option>
-      <option value="Financial">Financial</option>
-      <option value="Human resources">Human resources</option>
-      <option value="Sales marketing">Sales and Marketing</option>
-      <option value="Administration">Administration</option>
-      <option value="Quality assurance">Quality assurance</option>
-      <option value="Production">Production</option>
-      <option value="All">All</option>
-    </select>
+<div id="sgeneratesection" class="bordered-section p-4">
+  <h3 class="generate-salary-heading text-center">Generate Salary</h3>
+  <div class="form-group mt-4">
+    <label for="employeeId" class="font-weight-bold">Employee ID:</label>
+    <input id="employeeId" type="text" class="form-control form-control-sm" [(ngModel)]="empid" required>
   </div>
-  <div class="form-group mt-3">
-    <label for="employeeId">Employee ID:</label>
-    <select id="employeeId" class="form-control" required>
-      <option value="" selected disabled>Select Employee ID</option>
-      <!-- Populate Employee IDs dynamically here -->
-    </select>
+  <div class="form-group mt-4">
+    <label for="month" class="font-weight-bold">Select Month:</label>
+    <input id="month" type="month" class="form-control form-control-sm" required>
   </div>
-  <div class="form-group mr-2">
-    <label for="date">Select Date:</label>
-    <input id="date" type="date" class="form-control" required>
+  <div class="form-group mt-4 d-flex align-items-center">
+    <input id="bonusCheckbox" type="checkbox" class="mr-2" [(ngModel)]="isBonusChecked">
+    <label for="bonusCheckbox" class="font-weight-bold mb-0">Include Bonus</label>
   </div>
-  <button id="gbutton" class="btn btn-primary ml-auto">Generate</button>
+  <div *ngIf="isBonusChecked" class="form-group mt-4">
+    <label for="bonusAmount" class="font-weight-bold">Bonus Amount:</label>
+    <input id="bonusAmount" type="number" class="form-control form-control-sm" [(ngModel)]="bonusAmount">
+  </div>
+  <button id="gbutton" class="btn btn-primary mt-4 w-100" (click)="generateSalary()">Generate</button>
 </div>
 
 
-
-
-
-<div class="d-flex page__box p-1 mt-0">
-  <div>
-
-  </div>
-  <div class="card" style="width:100%">
-    <h3 class="m-3 text-center">Employee monthly salary</h3>
+<div class="d-flex page__box p-4 mt-4">
+  <div class="card w-100">
+    <h3 class="m-3 text-center">Employee Monthly Salary</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="search-bar d-flex align-items-center">
+      <div class="search-bar d-flex align-items-center w-100">
         <b>Search details:</b>
-        <div class="form-group mr-2">
-          <label for="selectDate">Select Date:</label>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectDate" class="font-weight-bold">Select Date:</label>
           <select id="selectDate" class="form-control" required>
             <option value="" selected disabled>Select Date</option>
             <!-- Populate Dates dynamically here -->
           </select>
         </div>
-        <div class="form-group mr-2">
-          <label for="selectEmpId">Select Emp ID:</label>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectEmpId" class="font-weight-bold">Select Emp ID:</label>
           <select id="selectEmpId" class="form-control" required>
             <option value="" selected disabled>Select Emp ID</option>
             <!-- Populate Employee IDs dynamically here -->
           </select>
         </div>
-        <div class="form-group">
-          <label for="selectEmpId">Select department:</label>
-          <select class="form-control" required>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectDepartment" class="font-weight-bold">Select Department:</label>
+          <select id="selectDepartment" class="form-control" required>
             <option value="" selected disabled>Select a department</option>
             <option value="Financial">Financial</option>
             <option value="Human resources">Human resources</option>
-            <option value="Sels markating">Sales and marketing</option>
+            <option value="Sales marketing">Sales and marketing</option>
             <option value="Administration">Administration</option>
             <option value="Quality assurance">Quality assurance</option>
             <option value="Production">Production</option>
@@ -70,34 +56,28 @@
       </div>
     </div>
     <div class="card-body">
-      <!-- Existing Table -->
-      <div class="card-body">
-        <!-- Existing Table -->
-        <table datatable class="table table-bordered">
-          <thead class="bg-dark text-white">
-          <tr>
-            <td>Emp ID</td>
-            <td>Start Date</td>
-            <td>End Date</td>
-            <td>Leave Type</td>
-            <td>Reason</td>
-            <td>State</td>
-          </tr>
-          </thead>
-          <tbody>
-          <tr *ngFor="let item of loandata">
-            <td>{{ item.emp_id }}</td>
-            <td>{{ item.start_time }}</td>
-            <td>{{ item.end_time }}</td>
-            <td>{{ item.leave_type}}</td>
-            <td>{{ item.reason}}</td>
-            <td>{{ item.status}}</td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+      <table datatable class="table table-bordered">
+        <thead class="bg-primary text-white">
+        <tr>
+          <th>Emp ID</th>
+          <th>Start Date</th>
+          <th>End Date</th>
+          <th>Leave Type</th>
+          <th>Reason</th>
+          <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of loandata">
+          <td>{{ item.emp_id }}</td>
+          <td>{{ item.start_time }}</td>
+          <td>{{ item.end_time }}</td>
+          <td>{{ item.leave_type}}</td>
+          <td>{{ item.reason}}</td>
+          <td>{{ item.status}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </div>
-
-
