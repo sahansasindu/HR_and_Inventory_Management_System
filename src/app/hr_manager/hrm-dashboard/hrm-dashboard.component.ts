@@ -93,6 +93,9 @@ export class HrmDashboardComponent implements OnInit {
   selectedChart: string = 'departments';
 
   totalEmployees:number=0;
+  totalAbsents:number=0;
+  totalWorking:number=0;
+  totalGatePasses:number=0;
 
   departmentEmployeeCounts: DepartmentEmployeeCount[] = [];
 
@@ -101,6 +104,9 @@ export class HrmDashboardComponent implements OnInit {
   async ngOnInit() {
 
     await this.fetchTotalEmployeeCount();
+    await this.fetchTotalCurrentWorkingEmployeeCount();
+    await this.fetchTotalTodayAbsentEmployeeCount();
+    await this.fetchTotalCurrentGatePassEmployeeCount();
     await this.fetchDepartmentEmployeeCounts();
     await this.fetchEmployeeCountsByGender();
 
@@ -109,9 +115,9 @@ export class HrmDashboardComponent implements OnInit {
 
   cards = [
     { title: 'Company Total Employees', value: 0 },
-    { title: 'Currently working Employees', value: 183 },
-    { title: 'Today Absent Employees', value: 10 },
-    { title: 'Currently Gate pass', value: 5 }
+    { title: 'Currently working Employees', value: 0 },
+    { title: 'Today Absent Employees', value: 0 },
+    { title: 'Currently Gate passes', value: 5 }
   ];
 
   async fetchTotalEmployeeCount(): Promise<void> {
@@ -123,6 +129,35 @@ export class HrmDashboardComponent implements OnInit {
       console.error('Error fetching total employee count:', error);
     }
   }
+
+  async fetchTotalCurrentWorkingEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/totalWorking", {}, {});
+      this.totalWorking = response.data;
+      this.cards[1].value = this.totalWorking;
+    } catch (error) {
+      console.error('Error fetching total Working employee count:', error);
+    }
+
+  }
+
+  async fetchTotalTodayAbsentEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/totalAbsent", {}, {});
+      this.totalAbsents = response.data;
+      this.cards[2].value = this.totalAbsents;
+    } catch (error) {
+      console.error('Error fetching total absent employee count:', error);
+    }
+  }
+
+  async fetchTotalCurrentGatePassEmployeeCount(){
+
+  }
+
+
 
   async fetchDepartmentEmployeeCounts(): Promise<void> {
     try {
