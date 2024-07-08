@@ -1,9 +1,9 @@
 import {
-  MatDividerModule
-} from "./chunk-EPYO47GF.js";
-import {
   NG_VALUE_ACCESSOR
 } from "./chunk-DIPAVTK6.js";
+import {
+  MatDividerModule
+} from "./chunk-EPYO47GF.js";
 import {
   SelectionModel
 } from "./chunk-BTH5AZGM.js";
