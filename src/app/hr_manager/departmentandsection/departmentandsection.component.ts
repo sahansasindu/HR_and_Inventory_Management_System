@@ -79,6 +79,7 @@ export class DepartmentandsectionComponent {
   }
 
   fetchLeaveData() {
+
     this.axiosService.request('GET', '/getDepartment', {}, {})
       .then(response => {
         this.loarddata = response.data;

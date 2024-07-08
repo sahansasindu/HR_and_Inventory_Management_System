@@ -9,9 +9,11 @@ import {Router} from "@angular/router";
 })
 export class GeneratesalaryComponent {
   isVisible1: boolean = true;
-  isVisible2: boolean = false;
+  isVisible2: boolean = true;
+  isVisible3: boolean = false;
 
   loandata: any[] = [];
+  loandata2: any[] = [];
   id: any;
   salaryheader: any[] = [];
   salaryheader2: any[] = [];
@@ -30,12 +32,15 @@ export class GeneratesalaryComponent {
 
   show() {
     this.isVisible1 = true;
-    this.isVisible2 = false;
+    this.isVisible2 = true;
+    this.isVisible3 = false;
   }
 
   show2() {
     this.isVisible1 = false;
-    this.isVisible2 = true;
+    this.isVisible2 = false;
+    this.isVisible3 = true;
+    this.fetchMonthlySalaryData();
   }
 
 
@@ -51,6 +56,7 @@ export class GeneratesalaryComponent {
 
     // Perform any further actions needed with the selected data
     this.attendanceforsalary(selectedEmployeeId, selectedMonth, bonus);
+    this.getmonthlysalaty(selectedEmployeeId, selectedMonth);
   }
 
   attendanceforsalary(empId: string, date: string, bonus: number | null) {
@@ -98,7 +104,7 @@ export class GeneratesalaryComponent {
 
   fetchDeductionData() {
     this.isLoading = true;
-    this.axiosService.request('GET', 'getLeave', null, {})
+    this.axiosService.request('GET', 'geemployeedailypayroll', null, {})
       .then(response => {
         // console.log('Fetched data:', response.data); // Log the fetched data
         this.salaryheader2 = response.data;
@@ -112,13 +118,24 @@ export class GeneratesalaryComponent {
       });
   }
 
-  addloandetails() {
-    this.router.navigate(['./add-deduction']);
+
+  fetchMonthlySalaryData() {
+    this.isLoading = true;
+    this.axiosService.request('GET', 'getMonthlySalary', null, {})
+      .then(response => {
+
+        this.loandata2 = response.data;
+        this.isLoading = false;
+        // Update Invoiceheader with the fetched data
+        console.log(this.loandata); // Corrected logging statement
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
   }
 
-  Update(id: any) {
-    this.router.navigate(['deductionupdate', id]);
-  }
+
+
 
   submitData() {
     this.axiosService.request(
@@ -138,5 +155,9 @@ export class GeneratesalaryComponent {
       console.error("Error updating user details:", error);
       alert("Error updating user details. Please try again.");
     });
+  }
+
+  private getmonthlysalaty(selectedEmployeeId: string, selectedMonth: string) {
+
   }
 }

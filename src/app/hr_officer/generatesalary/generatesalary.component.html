@@ -1,4 +1,17 @@
-<div id="sgeneratesection" class="bordered-section p-4">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" (click)="show()">Generate Salary</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show2()">View month</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div id="sgeneratesection" class="bordered-section p-4" *ngIf="isVisible1">
   <h3 class="generate-salary-heading text-center">Generate Salary</h3>
   <div class="form-group mt-4">
     <label for="employeeId" class="font-weight-bold">Employee ID:</label>
@@ -19,8 +32,67 @@
   <button id="gbutton" class="btn btn-primary mt-4 w-100" (click)="generateSalary()">Generate</button>
 </div>
 
+<div class="d-flex page__box p-4 mt-4" *ngIf="isVisible2">
+  <div class="card w-100">
+    <h3 class="m-3 text-center">Employee Daily Payroll</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center w-100">
+        <b>Search details:</b>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectDate" class="font-weight-bold">Select Date:</label>
+          <select id="selectDate" class="form-control" required>
+            <option value="" selected disabled>Select Date</option>
+            <!-- Populate Dates dynamically here -->
+          </select>
+        </div>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectEmpId" class="font-weight-bold">Select Emp ID:</label>
+          <select id="selectEmpId" class="form-control" required>
+            <option value="" selected disabled>Select Emp ID</option>
+            <!-- Populate Employee IDs dynamically here -->
+          </select>
+        </div>
+        <div class="form-group mr-2 ml-3">
+          <label for="selectDepartment" class="font-weight-bold">Select Department:</label>
+          <select id="selectDepartment" class="form-control" required>
+            <option value="" selected disabled>Select a department</option>
+            <option value="Financial">Financial</option>
+            <option value="Human resources">Human resources</option>
+            <option value="Sales marketing">Sales and marketing</option>
+            <option value="Administration">Administration</option>
+            <option value="Quality assurance">Quality assurance</option>
+            <option value="Production">Production</option>
+            <option value="All">All</option>
+          </select>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <table datatable class="table table-bordered">
+        <thead class="bg-primary text-white">
+        <tr>
+          <th>Emp ID</th>
+          <th>Working Hours</th>
+          <th>OT Amount</th>
+          <th>Shift Amount</th>
+          <th>Total Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of loandata">
+          <td>{{ item.emp_id }}</td>
+          <td>{{ item.working_hours }}</td>
+          <td>Rs {{ item.ot_amount }}</td>
+          <td>Rs {{ item.shift_amount }}</td>
+          <td>Rs {{ item.total_amount }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
-<div class="d-flex page__box p-4 mt-4">
+<div class="d-flex page__box p-4 mt-4" *ngIf="isVisible3">
   <div class="card w-100">
     <h3 class="m-3 text-center">Employee Monthly Salary</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -60,21 +132,35 @@
         <thead class="bg-primary text-white">
         <tr>
           <th>Emp ID</th>
-          <th>Start Date</th>
-          <th>End Date</th>
-          <th>Leave Type</th>
-          <th>Reason</th>
-          <th>Status</th>
+          <th>Salary Type</th>
+          <th>Job Role</th>
+          <th>Date</th>
+          <th>Bonus Amount</th>
+          <th>Allowance Amount</th>
+          <th>Deduction Amount</th>
+          <th>EPF</th>
+          <th>ETF</th>
+          <th>Loan Deduction</th>
+          <th>Advance Deduction</th>
+          <th>Gross Basic Salary</th>
+          <th>Net Salary</th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of loandata">
+        <tr *ngFor="let item of loandata2">
           <td>{{ item.emp_id }}</td>
-          <td>{{ item.start_time }}</td>
-          <td>{{ item.end_time }}</td>
-          <td>{{ item.leave_type}}</td>
-          <td>{{ item.reason}}</td>
-          <td>{{ item.status}}</td>
+          <td>{{ item.salary_type }}</td>
+          <td>{{ item.job_role }}</td>
+          <td>{{ item.date }}</td>
+          <td>Rs {{ item.bonus_amount }}</td>
+          <td>Rs {{ item.allowancess_amount }}</td>
+          <td>Rs {{ item.deduction_amount }}</td>
+          <td>Rs {{ item.epf }}</td>
+          <td>Rs {{ item.etf }}</td>
+          <td>Rs {{ item.loan_deduction }}</td>
+          <td>Rs {{ item.advance_salary }}</td>
+          <td>Rs {{ item.gross_basic_salary }}</td>
+          <td>Rs {{ item.net_salary }}</td>
         </tr>
         </tbody>
       </table>
