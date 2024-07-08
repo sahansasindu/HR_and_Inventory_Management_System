@@ -85,7 +85,7 @@ export class ResetpwordComponent {
         alert("Invalid OTP.");
       }
     } catch (error) {
-      alert("OTP verified successfully!");
+      alert("Invalid OTP!");
     }
   }
 

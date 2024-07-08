@@ -56,7 +56,7 @@ export class ViewEmployeeComponent implements OnInit {
       });
   }
 
-
+  //change load data by filtering employee id
   filterByEmployeeId() {
     if (this.employeeId === "") {
       this.fetchEmployeeData()
@@ -66,7 +66,7 @@ export class ViewEmployeeComponent implements OnInit {
     }
   }
 
-  handleDateChange() {
+  /*handleDateChange() {
     if (this.selectedDate instanceof Date === false) {
       // Convert selectedDate to Date object if it's not already
       this.selectedDate = new Date(this.selectedDate);
@@ -92,7 +92,7 @@ export class ViewEmployeeComponent implements OnInit {
 
       console.log(itemFormattedDate);
     });
-  }
+  }*/
 
   fetchEmployeeByID() {
 

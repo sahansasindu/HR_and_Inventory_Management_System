@@ -17,6 +17,8 @@
 
       <div class="table-container mat-elevation-z8">
 
+        <!--view all users-->
+
         <table mat-table [dataSource]="dataSourceUser" class="mat-elevation-z8">
 
           <!-- ID Column -->
@@ -101,13 +103,10 @@
       <form class="details-form" name="deleteUser">
         <h2>Delete User Details</h2>
 
-        <label for="id">User ID:</label>
-        <input type="text" id="id" name="id" required>
-
         <label for="username">Username:</label>
         <input type="text" id="user_name" name="username" required>
 
-        <label for="employee">Employee:</label>
+        <label for="employee">Employee Id:</label>
         <input type="text" id="emp" name="employee" required>
 
         <label for="email">Email:</label>

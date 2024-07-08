@@ -39,6 +39,7 @@ export class ManageUserComponent implements OnInit{
 
   swaptoCreateUser() {
 
+    //when click on button visible create user form
     this.isCreateUser=!this.isCreateUser;
     if(this.isCreateUser){
       this.isDeleteUser=false;
@@ -128,17 +129,32 @@ export class ManageUserComponent implements OnInit{
     }
 
   }
-  async deleteUser(id: number): Promise<void>{
-    if (confirm(`Are you sure you want to delete user with ID ${id}?`)) {
+  /*async deleteUser(id: number): Promise<void>{
+    if (confirm(`Are you sure you want to delete this user?`)) {
       try {
         await this.userService.deleteUser(id).toPromise();
-        alert(`User with ID ${id} deleted successfully.`);
+        alert(`Deleted successfully.`);
         await this.getAllUsers(); // Refresh the user list after deletion
       } catch (error) {
         console.error(`Error deleting user: ${error}`);
         alert(`An error occurred while deleting the user.`);
       }
     }
+  }*/
+
+  async deleteUser(id: number): Promise<void> {
+    if (confirm(`Are you sure you want to delete this user?`)) {
+      try {
+        await this.axservice.request("DELETE", `/deleteUserDetails/${id}`, {},{});
+        alert(`Deleted successfully.`);
+        // Remove the user from the data source
+        this.dataSourceUser.data = this.dataSourceUser.data.filter(user => user.id !== id);
+      } catch (error) {
+        console.error(`Error deleting user: ${error}`);
+        alert(`An error occurred while deleting the user.`);
+      }
+    }
   }
+
 
 }
