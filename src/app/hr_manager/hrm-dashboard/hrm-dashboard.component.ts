@@ -109,6 +109,7 @@ export class HrmDashboardComponent implements OnInit {
     await this.fetchTotalCurrentGatePassEmployeeCount();
     await this.fetchDepartmentEmployeeCounts();
     await this.fetchEmployeeCountsByGender();
+    await this.workingAndAbsentEmployeeDetails();
 
 
   }
@@ -119,6 +120,17 @@ export class HrmDashboardComponent implements OnInit {
     { title: 'Today Absent Employees', value: 0 },
     { title: 'Currently Gate passes', value: 5 }
   ];
+
+  // Define a type for the card titles
+  currentCard: { title: string, value: number } | null = null;
+
+  viewDetails(card: { title: string, value: number }) {
+    this.currentCard = card;
+  }
+
+  closeDetails() {
+    this.currentCard = null;
+  }
 
   async fetchTotalEmployeeCount(): Promise<void> {
     try {
@@ -223,8 +235,38 @@ export class HrmDashboardComponent implements OnInit {
     this.selectedChart = 'employees';
   }
 
+  employeesWorking: WorkingAndAbsentEmployeeDetails[] = [];
+  employeesAbsent: WorkingAndAbsentEmployeeDetails[] = [];
+
+  //get all absent and present employees
+  async workingAndAbsentEmployeeDetails(): Promise<void> {
+
+    try {
+      const response = await this.ax.request("GET","/WorkingAndAbsentEmployeeDetails",{},{});
+      const allEmployees: WorkingAndAbsentEmployeeDetails[] = response.data;
+
+      this.employeesWorking = allEmployees.filter(emp => emp.attendance_status === 'present');
+      this.employeesAbsent = allEmployees.filter(emp => emp.attendance_status === 'absent');
+
+      console.log('Working Employees:', this.employeesWorking);
+      console.log('Absent Employees:', this.employeesAbsent);
+    } catch (error) {
+      console.error('Error fetching WorkingAndAbsentEmployeeDetails', error);
+    }
+  }
+
 }
 interface DepartmentEmployeeCount {
   departmentName: string;
   employeeCount: number;
+}
+export interface WorkingAndAbsentEmployeeDetails {
+
+   emp_id:string;
+   name:string;
+   department:string;
+   section:string;
+   jobRole:string;
+   attendance_status:string;
+
 }
