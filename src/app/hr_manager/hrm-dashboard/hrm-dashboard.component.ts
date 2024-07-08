@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AxiosService} from "../../axios.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {AxiosService} from "../../axios.service";
   templateUrl: './hrm-dashboard.component.html',
   styleUrl: './hrm-dashboard.component.css'
 })
-export class HrmDashboardComponent implements OnInit {
+export class HrmDashboardComponent implements OnInit{
 
 
   chartDep: any;
@@ -106,13 +106,18 @@ export class HrmDashboardComponent implements OnInit {
     await this.fetchTotalEmployeeCount();
     await this.fetchTotalCurrentWorkingEmployeeCount();
     await this.fetchTotalTodayAbsentEmployeeCount();
-    await this.fetchTotalCurrentGatePassEmployeeCount();
     await this.fetchDepartmentEmployeeCounts();
     await this.fetchEmployeeCountsByGender();
     await this.workingAndAbsentEmployeeDetails();
+    await this.fetchTotalCurrentGatePassEmployeeCount();
+
 
 
   }
+
+  employeesWorking: WorkingAndAbsentEmployeeDetails[] = [];
+  employeesAbsent: WorkingAndAbsentEmployeeDetails[] = [];
+  currentGatePass:CurrentGatePassView[]=[];
 
   cards = [
     { title: 'Company Total Employees', value: 0 },
@@ -228,9 +233,6 @@ export class HrmDashboardComponent implements OnInit {
     this.selectedChart = 'employees';
   }
 
-  employeesWorking: WorkingAndAbsentEmployeeDetails[] = [];
-  employeesAbsent: WorkingAndAbsentEmployeeDetails[] = [];
-  currentGatePass:CurrentGatePassView[]=[];
 
   //get all absent and present employees
   async workingAndAbsentEmployeeDetails(): Promise<void> {
@@ -259,9 +261,8 @@ export class HrmDashboardComponent implements OnInit {
       this.currentGatePass = allgatepasses.filter(emp => emp.status === 'approved');
       this.totalGatePasses = this.currentGatePass.length;
       this.cards[3].value = this.totalGatePasses;
-
-      console.log(this.totalGatePasses);
       console.log(this.currentGatePass);
+
     } catch (error) {
     console.error('Error fetching fetchTotalCurrentGatePassEmployeeCount', error);
    }
