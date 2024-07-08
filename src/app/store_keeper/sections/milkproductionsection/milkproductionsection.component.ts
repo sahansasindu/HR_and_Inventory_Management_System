@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../../axios.service";
 import {isPlatformBrowser} from "@angular/common";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-milkproductionsection',
@@ -134,7 +135,11 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleProdctionChnages(): void {
 
     if (!this.selectedRow2) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Row Selected',
+        text: 'Please select a row in the table.',
+      });
       return;
     }
 
@@ -180,7 +185,11 @@ export class MilkproductionsectionComponent implements OnInit{
   toggleUpdate(): void {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Row Selected',
+        text: 'Please select a row in the table.',
+      });
       return;
     }
 
@@ -244,7 +253,11 @@ export class MilkproductionsectionComponent implements OnInit{
 
     // Early validation to ensure all fields are filled
     if (isNaN(finishedBottles) || add_date === "" || add_batch_code==="" || add_status==="") {
-      alert("Please Fill All Details");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Details',
+        text: 'Please fill all details.',
+      });
       return;
     }
 
@@ -268,7 +281,11 @@ export class MilkproductionsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Submission successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
           }
         })
         .catch(error => {
@@ -281,8 +298,11 @@ export class MilkproductionsectionComponent implements OnInit{
         });
     } catch (error) {
 
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Submitting Form',
+        text: 'There was an error submitting the form. Please try again later.',
+      });
     }
     await this.fetchfinishedMilkBottleDetails();
 
@@ -303,8 +323,11 @@ export class MilkproductionsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Update successful")
-            console.log('Update successful', response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Update Successful',
+              text: 'The update was successful!',
+            });
           }
         })
         .catch(error => {
@@ -317,8 +340,11 @@ export class MilkproductionsectionComponent implements OnInit{
         });
       await this.fetchfinishedMilkBottleDetails();
     } catch (error) {
-      alert("Error updating details")
-      console.error('Error updating details', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Updating Details',
+        text: 'There was an error updating details. Please try again later.',
+      });
     }
 
   }
@@ -344,7 +370,11 @@ export class MilkproductionsectionComponent implements OnInit{
     const IssueBottles = parseInt(inputIssedamage);
 
     if (isNaN(IssueBottles) || inputIssuename === "" || inputEmpID==="" || issue_submit_date==="") {
-      alert("Please Fill All Details");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Details',
+        text: 'Please fill all details.',
+      });
       return;
     }
 
@@ -365,7 +395,11 @@ export class MilkproductionsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Submission successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
             this.gettAllIssueByEmployee();
           }
         })
@@ -379,8 +413,11 @@ export class MilkproductionsectionComponent implements OnInit{
         });
     } catch (error) {
 
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Submitting Form',
+        text: 'There was an error submitting the form. Please try again later.',
+      });
     }
 
   }
@@ -410,8 +447,11 @@ export class MilkproductionsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Update successful")
-            console.log('Update successful', response);
+            Swal.fire({
+              icon: 'success',
+              title: 'Update Successful',
+              text: 'The update was successful!',
+            });
           }
         })
         .catch(error => {
@@ -424,8 +464,11 @@ export class MilkproductionsectionComponent implements OnInit{
         });
       await this.gettAllIssueByEmployee();
     } catch (error) {
-      alert("Error updating details")
-      console.error('Error updating details', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Updating Details',
+        text: 'There was an error updating details. Please try again later.',
+      });
     }
 
   }

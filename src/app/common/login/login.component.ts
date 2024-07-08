@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import {UserService} from "../../service/services/user.service";
 import {AuthService} from "../../model/authservice/auth.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,11 @@ export class LoginComponent {
 
   async userLogin() {
     if (this.inputusername === "" || this.inputpassword === "") {
-      alert("Please enter username and password.");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Fields',
+        text: 'Please enter both username and password.',
+      });
       return;
     }
 
@@ -37,7 +42,11 @@ export class LoginComponent {
 
       const roleBasedRoute = this.routes[user.role as UserRole];
       if (!roleBasedRoute) {
-        alert("Role not recognized, cannot navigate to dashboard.");
+        Swal.fire({
+          icon: 'error',
+          title: 'Role Not Recognized',
+          text: 'Cannot navigate to dashboard. Role is not recognized.',
+        });
         return;
       }
 
@@ -45,10 +54,12 @@ export class LoginComponent {
 
     } catch (error) {
 
-      alert("user name or password not matched")
+      Swal.fire({
+        icon: 'error',
+        title: 'Authentication Failed',
+        text: 'Username or password not matched. Please try again.',
+      });
       console.log(error)
-      this.inputusername='';
-      this.inputpassword='';
     }
   }
 

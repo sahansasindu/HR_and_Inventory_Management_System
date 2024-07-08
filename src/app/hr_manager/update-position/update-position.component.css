@@ -241,7 +241,7 @@ body {
   text-align: center;
 }
 .table {
-  width: 100%;
+  width: 95%;
   border-collapse: collapse;
   margin-top: 10px;
 }
@@ -267,9 +267,9 @@ body {
 }
 
 .approved-status {
-  color: #085e2e;
+  background-color: #29fa87;
 }
 
 .rejected-status {
-  color: #aa1809;
+  background-color: #f85b4a;
 }

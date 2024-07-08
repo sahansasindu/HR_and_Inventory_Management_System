@@ -102,8 +102,16 @@ export class LeaveApproveComponent implements OnInit{
 
   async updateLeaveStatus(status: string) {
     if (this.selectedRow) {
-      const confirmUpdate = window.confirm(`Are you sure you want to ${status} this leave request?`);
-      if (confirmUpdate) {
+      const result = await Swal.fire({
+        icon: 'question',
+        title: 'Confirmation',
+        text: `Are you sure you want to ${status} this leave request?`,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      });
+
+      if (result.isConfirmed) {
         await this.saveStatusUpdate(this.selectedRow.employee_leave_id, status);
       }
     }
@@ -112,11 +120,18 @@ export class LeaveApproveComponent implements OnInit{
   async saveStatusUpdate(employee_leave_id: number, status: string): Promise<void> {
     try {
       await this.axios.request('PUT', `/updateLeaveStatus?employee_leave_id=${employee_leave_id}&status=${status}`,{},{});
-      alert('Leave Status Updated:');
+      Swal.fire({
+        icon: 'success',
+        title: 'Leave Status Updated',
+        text: 'Leave status has been successfully updated.',
+      });
       await this.LeaveDetails(); // Refresh leave details after update
     } catch (error) {
-      console.error('Error updating Leave Status:', error);
-      alert('Error updating Leave Status:');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error updating Leave Status.',
+      });
     }
   }
 
@@ -186,25 +201,37 @@ export class LeaveApproveComponent implements OnInit{
 
 
   async updateGatePassStatus(status: string) {
-
     if (this.selectedRow2) {
-      const confirmUpdate = window.confirm(`Are you sure you want to ${status} this GatePass request?`);
-      if (confirmUpdate) {
+      const result = await Swal.fire({
+        icon: 'question',
+        title: 'Confirmation',
+        text: `Are you sure you want to ${status} this GatePass request?`,
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      });
+
+      if (result.isConfirmed) {
         await this.saveGatePassStatusUpdate(this.selectedRow2.employee_gate_pass_id, status);
       }
     }
-
-
   }
 
   async saveGatePassStatusUpdate(employee_gate_pass_id: number, status: string): Promise<void> {
     try {
       await this.axios.request('PUT',`/updateGatePassStatus?employee_gate_pass_id=${employee_gate_pass_id}&status=${status}`,{},{});
-      alert('GatePass Status Updated..');
+      Swal.fire({
+        icon: 'success',
+        title: 'GatePass Status Updated',
+        text: 'GatePass status has been successfully updated.',
+      });
       await this.getGatePass();
     } catch (error) {
-      console.error('Error updating GatePass Status:', error);
-      alert('Error updating GatePass Status:');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error updating GatePass status.',
+      });
     }
   }
 

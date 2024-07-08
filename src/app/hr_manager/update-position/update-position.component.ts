@@ -537,6 +537,82 @@ export class UpdatePositionComponent implements OnInit {
     }
   }
 
+  /*statusOptions: string[] = ['Permanent', 'Temporary'];
+  salaryTypes: string[] = ['Office Staff', 'Production', 'Stores'];
+
+  jobRoles: string[] = ['Chairman','Managing Director','Director',
+  'Accountant','Finance Manager','Finance Executive',
+  'Head of Marketing','National Sales Manager','Regional Manager',
+  'Senior Marketing Executive','Area Manager','Marketing Executive',
+  'Sales Representative','Outlet cashier','HR Manager','HR Executive',
+  'Head od QA','QA Manager','QA Executive','Head od Production',
+  'Production Manager','Operation Manager','Production Supervisor',
+  'Machine Operator','Production Assistant','Head of Maintenance',
+  'Technician','Electrician','Assistant','Head of Stores',
+  'storekeeper','Store Assistant','Transport Manager','Drivers',
+  'Helpers','Head of Security','Security Officer'];*/
+
+  async updateEmployeePosition() {
+
+    const employeeId=(document.getElementById('employee_idUpdate') as HTMLInputElement).value;
+    const status=(document.getElementById('company_status') as HTMLInputElement).value;
+    const salaryType=(document.getElementById('salary_type') as HTMLInputElement).value;
+    const jobRole=(document.getElementById('job_role') as HTMLInputElement).value;
+
+    const updateEmployeePerformance: UpdateEmployeePerformance = {
+      employeeId,
+      status,
+      salaryType,
+      jobRole
+    };
+
+    if(status==="" || salaryType==="" || jobRole===""){
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Empty Field..',
+        text: "Please Fill All Fields in the Form..",
+        confirmButtonText: 'Ok'
+      });
+
+    }else {
+      Swal.fire({
+        title: 'Are you sure Update Employee Performance Details?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes',
+        cancelButtonText: 'No'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.updateConform(updateEmployeePerformance);
+        }
+      });
+    }
+
+  }
+
+  async updateConform(updateEmployeePerformance: UpdateEmployeePerformance) {
+    try {
+      const response = await this.axiosService.request('PUT', '/updateEmployeePerformance', updateEmployeePerformance, {});
+      await Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data,
+        confirmButtonText: 'Ok'
+      });
+      await this.getEmployeeToPromotionUpdate();
+      this.goToBack();
+
+    } catch (error) {
+      await Swal.fire({
+        icon: 'error',
+        title: 'UnSuccess',
+        text: "Error updating employee performance",
+        confirmButtonText: 'Ok'
+      });
+    }
+  }
+
 
 }
 export interface UpdatePromotion {
@@ -550,4 +626,11 @@ export interface UpdatePromotion {
   sec_id:string;
   gender:string;
 
+}
+export interface UpdateEmployeePerformance{
+
+  employeeId:string;
+  status:string;
+  salaryType:string;
+  jobRole:string;
 }

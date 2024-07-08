@@ -4,6 +4,7 @@ import {AgentService} from "../../../service/services/agent.service";
 import {Agent} from "../../../model/agentmodel";
 import {AxiosService} from "../../../axios.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-loardingsection',
@@ -127,7 +128,11 @@ export class LoardingsectionComponent implements OnInit{
 
   toggleUpdate(): void {
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Row Selected',
+        text: 'Please select a row in the table.',
+      });
       return;
     }
 
@@ -182,7 +187,11 @@ export class LoardingsectionComponent implements OnInit{
 
     // Early validation to ensure all fields are filled
     if (isNaN(milkBottles) || isNaN(getagentID) || date === "" || batchCode==="") {
-      alert("Please Fill All Details");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Details',
+        text: 'Please fill all details.',
+      });
       return;
     }
 
@@ -208,7 +217,11 @@ export class LoardingsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Submission successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
             this.fetchLoridingDetails();
           }
         })
@@ -218,12 +231,19 @@ export class LoardingsectionComponent implements OnInit{
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
-            alert("Submission Fail");
+            Swal.fire({
+              icon: 'error',
+              title: 'Submission Failed',
+              text: 'There was an error submitting the form. Please try again later.',
+            });
           }
         });
     } catch (error) {
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Failed',
+        text: 'There was an error submitting the form. Please try again later.',
+      });
     }
 
   }
@@ -270,7 +290,11 @@ export class LoardingsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Update successful")
+            Swal.fire({
+              icon: 'success',
+              title: 'Update Successful',
+              text: 'The record has been updated successfully!',
+            });
             console.log('Update successful', response);
             this.fetchLoridingDetails();
           }
@@ -279,12 +303,19 @@ export class LoardingsectionComponent implements OnInit{
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
-            alert("An error occurred while Updating  Details.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Update Error',
+              text: 'An error occurred while updating details. Please try again later.',
+            });
           }
         });
     } catch (error) {
-      alert("Error updating details")
-      console.error('Error updating details', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Update Error',
+        text: 'An error occurred while updating details. Please try again later.',
+      });
 
     }
   }

@@ -118,7 +118,7 @@
             <td>{{ item.department_id }}</td>
             <td>{{ item.department_name }}</td>
             <td>{{ item.start_date | date: 'yyyy-MM-dd'  }}</td>
-            <td>{{ item.head_of_department.employee_name}}</td>
+            <td>{{ item.head_of_department}}</td>
             <td style="white-space: nowrap;">
               <a class="btn btn-primary" (click)="Update(item.basic_salary_id)">Update</a>
             </td>
