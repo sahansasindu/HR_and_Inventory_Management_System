@@ -1,14 +1,18 @@
 <div class="d-flex page__box p-1 mt-0">
-
   <div class="parallel-div col-9">
-
     <div class="card-container">
       <div class="card" *ngFor="let card of cards">
         <h3>{{card.title}}</h3>
         <p>{{card.value}}</p>
+        <button
+          *ngIf="card.title === 'Currently working Employees' || card.title === 'Today Absent Employees' || card.title === 'Currently Gate passes'"
+          style="background-color: #ffffff;border: 1px solid #ffffff;border-radius: 5px;color: black"
+          (click)="viewDetails(card)">
+          <b>View</b>
+        </button>
+
       </div>
     </div>
-
     <div class="chartButton">
       <button mat-raised-button color="primary" (click)="showDepartmentsChart()">Departments</button>
       <button mat-raised-button color="primary" (click)="showEmployeesChart()">Employees</button>
@@ -26,6 +30,99 @@
 
   <div class="left-div col-3 text-right" id="div3">
     <app-notificationcom></app-notificationcom>
+  </div>
+
+</div>
+
+<div *ngIf="currentCard" class="popup">
+
+  <div class="popup-content">
+    <span class="close-btn" (click)="closeDetails()">&times;</span>
+
+    <h1 style="text-align: center;"><b>{{currentCard.title}}</b></h1>
+
+    <div class="employee-table" *ngIf="currentCard.title === 'Currently working Employees'">
+      <table>
+        <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Section</th>
+          <th>Job Position</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let emp of employeesWorking">
+          <td>{{emp.emp_id}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.section}}</td>
+          <td>{{emp.jobRole}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+    <div class="employee-table" *ngIf="currentCard.title === 'Today Absent Employees'">
+      <table>
+        <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Section</th>
+          <th>Job Position</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <tr *ngFor="let emp of employeesAbsent">
+          <td>{{emp.emp_id}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.section}}</td>
+          <td>{{emp.jobRole}}</td>
+        </tr>
+
+        </tbody>
+      </table>
+    </div>
+
+
+
+    <div class="employee-table" *ngIf="currentCard.title === 'Currently Gate passes'">
+      <table>
+        <thead>
+        <tr>
+          <th>Employee ID</th>
+          <th>Name</th>
+          <th>Department</th>
+          <th>Section</th>
+          <th>Job Position</th>
+          <th>Start Time</th>
+          <th>End Time</th>
+          <th>Time Countdown</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let emp of currentGatePass">
+
+          <td>{{emp.emp_id}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.section}}</td>
+          <td>{{emp.jobRole}}</td>
+          <td>{{emp.in_time}}</td>
+          <td>{{emp.out_time}}</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
 </div>
