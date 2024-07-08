@@ -118,7 +118,7 @@ export class HrmDashboardComponent implements OnInit {
     { title: 'Company Total Employees', value: 0 },
     { title: 'Currently working Employees', value: 0 },
     { title: 'Today Absent Employees', value: 0 },
-    { title: 'Currently Gate passes', value: 5 }
+    { title: 'Currently Gate passes', value: 0 }
   ];
 
   // Define a type for the card titles
@@ -164,13 +164,6 @@ export class HrmDashboardComponent implements OnInit {
       console.error('Error fetching total absent employee count:', error);
     }
   }
-
-  async fetchTotalCurrentGatePassEmployeeCount(){
-
-
-  }
-
-
 
   async fetchDepartmentEmployeeCounts(): Promise<void> {
     try {
@@ -237,6 +230,7 @@ export class HrmDashboardComponent implements OnInit {
 
   employeesWorking: WorkingAndAbsentEmployeeDetails[] = [];
   employeesAbsent: WorkingAndAbsentEmployeeDetails[] = [];
+  currentGatePass:CurrentGatePassView[]=[];
 
   //get all absent and present employees
   async workingAndAbsentEmployeeDetails(): Promise<void> {
@@ -255,6 +249,24 @@ export class HrmDashboardComponent implements OnInit {
     }
   }
 
+  async fetchTotalCurrentGatePassEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/fetchTotalCurrentGatePassEmployeeCount", {}, {});
+
+      const allgatepasses: CurrentGatePassView[] = response.data;
+
+      this.currentGatePass = allgatepasses.filter(emp => emp.status === 'approved');
+      this.totalGatePasses = this.currentGatePass.length;
+      this.cards[3].value = this.totalGatePasses;
+
+      console.log(this.totalGatePasses);
+      console.log(this.currentGatePass);
+    } catch (error) {
+    console.error('Error fetching fetchTotalCurrentGatePassEmployeeCount', error);
+   }
+  }
+
 }
 interface DepartmentEmployeeCount {
   departmentName: string;
@@ -268,5 +280,17 @@ export interface WorkingAndAbsentEmployeeDetails {
    section:string;
    jobRole:string;
    attendance_status:string;
+
+}
+export interface CurrentGatePassView{
+
+  emp_id:string;
+  name:string;
+  department:string;
+  section:string;
+  jobRole:string;
+  status:string;
+  in_time:string;
+  out_time:string;
 
 }

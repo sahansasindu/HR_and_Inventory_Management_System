@@ -108,14 +108,15 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td></td>
+        <tr *ngFor="let emp of currentGatePass">
+
+          <td>{{emp.emp_id}}</td>
+          <td>{{emp.name}}</td>
+          <td>{{emp.department}}</td>
+          <td>{{emp.section}}</td>
+          <td>{{emp.jobRole}}</td>
+          <td>{{emp.in_time}}</td>
+          <td>{{emp.out_time}}</td>
           <td></td>
         </tr>
         </tbody>
