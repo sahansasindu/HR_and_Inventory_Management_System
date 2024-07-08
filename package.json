@@ -28,6 +28,7 @@
     "@canvasjs/angular-stockcharts": "^1.2.0",
     "axios": "^1.6.8",
     "canvasjs": "^1.8.3",
+    "canvg": "^4.0.2",
     "chart.js": "^4.4.3",
     "chartjs-plugin-datalabels": "^2.2.0",
     "cors": "^2.8.5",
