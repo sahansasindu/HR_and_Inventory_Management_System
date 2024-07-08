@@ -102,18 +102,39 @@
           <div class="form-group">
             <label for="salaryType">Salary Type:</label>
             <select class="form-control" id="salaryType" name="salaryType" [(ngModel)]="employee.salary_type">
-              <option value="hourly">Hourly</option>
-              <option value="monthly">Monthly</option>
-              <option value="annual">Annual</option>
+              <option value="Production">Production</option>
+              <option value="Store">Stores</option>
+              <option value="Office staff">Office staff</option>
             </select>
           </div>
           <div class="form-group">
-            <label for="departmentId">Department ID:</label>
-            <input type="text" class="form-control" id="departmentId" name="departmentId" [(ngModel)]="employee.dep_id">
+            <label for="departmentId">Department :</label>
+            <select class="form-control" id="departmentId" name="departmentId" [(ngModel)]="employee.dep_id">
+              <option value="" selected>Select Department</option>
+              <option value="DEP01">Production</option>
+              <option value="DEP02">Administration</option>
+              <option value="DEP03">Finance</option>
+              <option value="DEP04">Sales and Marketing</option>
+              <option value="DEP05">Human Resource</option>
+              <option value="DEP06">Quality Assurance</option>
+              <option value="DEP07">Maintenance</option>
+              <option value="DEP08">Stores</option>
+              <option value="DEP09">Transport</option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="sectionId">Section ID:</label>
-            <input type="text" class="form-control" id="sectionId" name="sectionId" [(ngModel)]="employee.sec_id" style="margin-bottom: 20px;">
+            <label for="sectionId">Section :</label>
+
+            <select class="form-control" id="sectionId" name="sectionId" [(ngModel)]="employee.sec_id">
+              <option value="" selected>Select Section</option>
+              <option value="SEC01">Bottle washing</option>
+              <option value="SEC02">Yogurt section</option>
+              <option value="SEC03">UHT</option>
+              <option value="SEC04">Packet</option>
+              <option value="SEC05">Ice cream</option>
+              <option value="SEC06">Milk taffy</option>
+
+            </select>
           </div>
           <button type="button" class="btn btn-primary" (click)="submitData()">Submit</button>
         </form>

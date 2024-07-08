@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
 import {Employee} from "../../model/employeemodel";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-add-new-employee',
@@ -42,17 +43,31 @@ export class AddNewEmployeeComponent {
     formData.append('dep_id', this.employee.dep_id);
     formData.append('sec_id', this.employee.sec_id);
 
+    if(this.employee.employeeid==='' || this.employee.employee_name==='' || this.employee.address==='' || this.employee.job_role==='' || this.employee.salary_type==='' ||
+      this.employee.dob==='' || this.employee.gender==='' || this.employee.ma_uma==='' ||
+      this.employee.contact==='' || this.employee.company_status===''){
+
+      Swal.fire({
+        title: 'Please Check Details..',
+        text: 'Some Details are missing Please Check From....',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+
+      return;
+
+    }
+
     if (this.employee.cv) {
       formData.append('cv', this.employee.cv);
     }
-
-    try {
-      const response = await this.axiosService.request('POST', '/addEmployee', formData, { 'Content-Type': 'multipart/form-data' });
-      console.log('Response from server:', response);
-      alert('Employee added successfully!');
-    } catch (error) {
-      console.error('Error adding employee:', error);
-    }
+    await this.axiosService.request('POST', '/addEmployee', formData, { 'Content-Type': 'multipart/form-data' });
+      Swal.fire({
+        title: 'Success!',
+        text: 'Employee added successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
   }
 
 
