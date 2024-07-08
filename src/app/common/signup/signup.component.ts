@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import {AxiosService} from "../../axios.service";
 import {response} from "express";
 import {User} from "../../model/usermodel";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-signup',
@@ -47,17 +48,41 @@ export class SignupComponent {
     user.empID=this.inputempID;
 
     if (user.username === "" || user.password === "" || user.email === "" || user.contact === "" || user.role === "" || user.empID === "") {
-      alert("Please Fill All Fields...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Fields',
+        text: 'Please fill out all fields.',
+      });
     } else if (user.username.length > 8 || user.username.length < 3) {
-      alert("Please use between 3 and 8 characters for the username...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Username Length',
+        text: 'Please use between 3 and 8 characters for the username.',
+      });
     } else if (user.password.length < 8 || user.password.length > 10) {
-      alert("Please use between 8 and 10 characters for the password...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Password Length',
+        text: 'Please use between 5 and 8 characters for the password.',
+      });
     } else if (!user.isValidEmail()) {
-      alert("Please enter a valid email...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Email',
+        text: 'Please enter a valid email.',
+      });
     } else if (!user.isValidPhoneNumber(user.contact)) {
-      alert("Please enter a valid phone number...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Phone Number',
+        text: 'Please enter a valid phone number.',
+      });
     }else if(user.contact.length < 10) {
-      alert("Please enter a valid phone number...");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Invalid Phone Number',
+        text: 'Please enter a valid phone number.',
+      });
     }else {
 
       this.axiosService.request(
@@ -74,23 +99,38 @@ export class SignupComponent {
         .then(response => {
 
           if (response.data && response.data.message) {
-            alert(response.data.message);
+            Swal.fire({
+              icon: 'info',
+              title: 'API Response',
+              text: response.data.message,
+            });
           } else {
-            alert("User registered successfully!");
+            Swal.fire({
+              icon: 'success',
+              title: 'Registration Successful',
+              text: 'User registered successfully!',
+            });
             this.clearData();
             this.cancelPage();
           }
         })
         .catch(error => {
           if (error.response && error.response.data && error.response.data.message) {
-            alert(error.response.data.message);
+            Swal.fire({
+              icon: 'info',
+              title: 'API Response',
+              text: error.response.data.message,
+            });
           } else {
-            alert("An error occurred while registering the user.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Registration Error',
+              text: 'An error occurred while registering the user.',
+            });
           }
         });
     }
   }
-
 
   cancelPage(): void {
     this.router.navigate(['/login']);

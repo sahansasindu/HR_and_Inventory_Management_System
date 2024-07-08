@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AxiosService} from "../../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-agent-weekly-report',
@@ -19,7 +20,12 @@ export class AgentWeeklyReportComponent {
 
   async search() {
     if (!this.fromDate || !this.toDate) {
-      alert("Please select both from and to dates");
+
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Week',
+        text: 'Please select a Week Duration..',
+      });
       return;
     }
     const fromFormattedDate = new Date(this.fromDate).toISOString().split('T')[0];
@@ -38,8 +44,11 @@ export class AgentWeeklyReportComponent {
       console.log(this.weeklyReports);
       this.totalAmount = this.weeklyReports.reduce((total, report) => total + report.totalAmount, 0);
     } catch (error) {
-      console.error('Error fetching weekly reports:', error);
-      alert('Failed to fetch weekly reports');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching Weekly reports',
+      });
     }
   }
 }

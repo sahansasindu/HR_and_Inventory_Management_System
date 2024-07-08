@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../../axios.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {isPlatformBrowser} from "@angular/common";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-washingsection',
@@ -77,7 +78,11 @@ export class WashingsectionComponent implements OnInit{
   toggleUpdate(): void {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No Row Selected',
+        text: 'Please select a row in the table.',
+      });
       return;
     }
 
@@ -116,7 +121,11 @@ export class WashingsectionComponent implements OnInit{
 
     // Early validation to ensure all fields are filled
     if (isNaN(damageBottles) || get_Date === "" || get_Empoyee_Id==="") {
-      alert("Please Fill All Details");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Incomplete Details',
+        text: 'Please fill all details.',
+      });
       return;
     }
 
@@ -138,7 +147,11 @@ export class WashingsectionComponent implements OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Submission successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
 
             //console.log('Submission successful', response);
           }
@@ -153,8 +166,11 @@ export class WashingsectionComponent implements OnInit{
         });
     } catch (error) {
 
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Submitting Form',
+        text: 'There was an error submitting the form. Please try again later.',
+      });
     }
     await this.fetchdamageBottleDetails();
   }
@@ -172,8 +188,11 @@ export class WashingsectionComponent implements OnInit{
         if (response.data && response.data.message) {
           alert(response.data.message);
         } else {
-          alert("Update successful")
-          console.log('Update successful', response);
+          Swal.fire({
+            icon: 'success',
+            title: 'Update Successful',
+            text: 'The update was successful!',
+          });
         }
       })
         .catch(error => {
@@ -186,8 +205,11 @@ export class WashingsectionComponent implements OnInit{
         });
       await this.fetchdamageBottleDetails();
     } catch (error) {
-      alert("Error updating details")
-      console.error('Error updating details', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Updating Details',
+        text: 'There was an error updating details. Please try again later.',
+      });
     }
 
   }

@@ -6,16 +6,13 @@
     <div class="agent-management-container" *ngIf="!isAddAgentVisible && !isUpdateAgentVisible && !isRemoveAgentVisible && !isviweAgentVisible">
 
       <div class="search-container">
-
         <mat-form-field appearance="fill">
-          <mat-label>Search</mat-label>
-          <input matInput placeholder="Search">
+          <mat-label>Search By Agent name Or Agency name</mat-label>
+          <input matInput placeholder="Search" [formControl]="searchControl">
           <button mat-icon-button matSuffix>
             <mat-icon>search</mat-icon>
           </button>
-
         </mat-form-field>
-
       </div>
 
       <!--

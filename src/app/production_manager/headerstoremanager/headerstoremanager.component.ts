@@ -41,8 +41,8 @@ export class HeaderstoremanagerComponent implements OnInit {
       title: 'Are you sure you want to logout?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Yes, log Out',
-      cancelButtonText: 'Cancel'
+      confirmButtonText: 'log out',
+      cancelButtonText: 'cancel'
     }).then((result) => {
       if (result.isConfirmed) {
         this.authService.logout();

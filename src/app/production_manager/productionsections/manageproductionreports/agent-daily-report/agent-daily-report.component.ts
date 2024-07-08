@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
 import {AxiosService} from "../../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-agent-daily-report',
@@ -16,7 +17,11 @@ export class AgentDailyReportComponent{
 
   async search() {
     if (!this.selectedDate) {
-      alert("Please select a date");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Date',
+        text: 'Please select a date',
+      });
       return;
     }
 
@@ -34,8 +39,11 @@ export class AgentDailyReportComponent{
       console.log(this.dailyReports);
       this.totalAmount = this.dailyReports.reduce((total, report) => total + report.totalAmount, 0);
     } catch (error) {
-      console.error('Error fetching daily reports:', error);
-      alert('Failed to fetch daily reports');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching daily reports',
+      });
     }
   }
 }

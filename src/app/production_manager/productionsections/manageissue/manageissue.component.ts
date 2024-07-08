@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {MatTableDataSource} from "@angular/material/table";
 import {ProductionIssue} from "../../../model/issuemodel";
 import {AxiosService} from "../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-manageissue',
@@ -59,7 +60,11 @@ export class ManageissueComponent implements data,OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Submission successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission successful',
+              text: 'Issue Details Submission successful',
+            });
             inputField.value='';
             this.getIssueDetails();
           }
@@ -68,12 +73,19 @@ export class ManageissueComponent implements data,OnInit{
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
-            alert("Submission Fail");
+            Swal.fire({
+              icon: 'error',
+              title: 'Submission Unsuccessful',
+              text: 'Issue Details Submission Unsuccessful',
+            });
           }
         });
     } catch (error) {
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Submission Unsuccessful',
+        text: 'Issue Details Submission Unsuccessful',
+      });
     }
   }
 
@@ -112,7 +124,11 @@ export class ManageissueComponent implements data,OnInit{
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Issue updated successfully");
+            Swal.fire({
+              icon: 'success',
+              title: 'Updated successfully',
+              text: 'Issue updated successfully',
+            });
             this.getIssueDetails();
           }
         })
@@ -120,12 +136,19 @@ export class ManageissueComponent implements data,OnInit{
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
-            alert("Failed to update issue");
+            Swal.fire({
+              icon: 'error',
+              title: 'Updated Unsuccessfully',
+              text: 'Issue updated Unsuccessful..',
+            });
           }
         });
     } catch (error) {
-      alert("Error updating issue");
-      console.error('Error updating issue', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Updated Unsuccessfully',
+        text: 'Issue updated Unsuccessful..',
+      });
     } finally {
       element.editing = false;
     }
@@ -186,7 +209,11 @@ export class ManageissueComponent implements data,OnInit{
   async getMonthlyIssue() {
 
     if (!this.selectedMonth || !this.selectedYear) {
-      alert('Please select both month and year.');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Month and Year',
+        text: 'Please select both month and year',
+      });
     } else {
 
       console.log(`Selected Month: ${this.selectedMonth}, Selected Year: ${this.selectedYear}`);
@@ -204,8 +231,11 @@ export class ManageissueComponent implements data,OnInit{
         this.updateChart(dataPoints);
 
       } catch (error) {
-        console.error('Error fetching purchase details:', error);
-        alert('Failed to fetch purchase details');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error fetching purchase details',
+        });
       }
     }
   }

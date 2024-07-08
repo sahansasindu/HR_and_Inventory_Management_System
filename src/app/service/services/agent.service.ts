@@ -3,6 +3,7 @@ import {Agent} from "../../model/agentmodel";
 import {HttpClient} from "@angular/common/http";
 import {AxiosService} from "../../axios.service";
 import {isPlatformBrowser} from "@angular/common";
+import Swal from "sweetalert2";
 
 @Injectable({
   providedIn: 'root'
@@ -46,14 +47,23 @@ export class AgentService {
             alert(response.data.message);
           } else {
 
-            alert("Registration successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Success',
+              text: 'Agent Registration Success..',
+            });
 
           }
         })
         .catch(error => {
 
           if (error.response && error.response.data && error.response.data.message) {
-            alert(error.response.data.message);
+
+            Swal.fire({
+              icon: 'error',
+              title: 'Unsuccessful',
+              text: error.response.data.message,
+            });
           } else {
 
           }
@@ -61,8 +71,11 @@ export class AgentService {
 
     } catch (error) {
 
-      alert("Error Registration form");
-      console.error('Error Registration form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Unsuccessful',
+        text: 'Registration Unsuccessful...',
+      });
     }
     return agent;
   }
@@ -80,20 +93,36 @@ export class AgentService {
         .then(response => {
           if (response.data && response.data.message) {
             alert(response.data.message);
+
           } else {
-            alert("Deletion successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Agent Deleted',
+              text: 'Agent Deleted Successfully...',
+            });
           }
         })
         .catch(error => {
           if (error.response && error.response.data && error.response.data.message) {
-            alert(error.response.data.message);
+            Swal.fire({
+              icon: 'error',
+              title: 'Agent Not Deleted',
+              text: 'Agent Deleted UnSuccessfully...',
+            });
           } else {
-            alert("An error occurred during deletion.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Agent Not Deleted',
+              text: 'Agent Deleted UnSuccessfully...',
+            });
           }
         });
     } catch (error) {
-      alert("Error deleting agent");
-      console.error('Error deleting agent:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Agent Not Deleted',
+        text: 'Agent Deleted UnSuccessfully...',
+      });
     }
   }
 
@@ -122,7 +151,11 @@ export class AgentService {
             alert(response.data.message);
           } else {
 
-            alert("Update successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Agent Details Updated',
+              text: 'Agent Details Updated Successfully...',
+            });
 
           }
         })
@@ -135,8 +168,11 @@ export class AgentService {
           }
         });
     } catch (error) {
-      alert("Error Update Agent");
-      console.error('Error Update Agent Details:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Agent Not Updated',
+        text: 'Agent Updated UnSuccessfully...',
+      });
     }
 
     return agent;
@@ -184,7 +220,11 @@ export class AgentService {
           if (response.data && response.data.message) {
             alert(response.data.message);
           } else {
-            alert("Agent undeletion successful");
+            Swal.fire({
+              icon: 'success',
+              title: 'Agent Undo Success',
+              text: 'Agent Undo Successfully...',
+            });
           }
         })
         .catch(error => {
@@ -192,12 +232,19 @@ export class AgentService {
           if (error.response && error.response.data && error.response.data.message) {
             alert(error.response.data.message);
           } else {
-            alert("An error occurred during undeletion.");
+            Swal.fire({
+              icon: 'error',
+              title: 'Agent Not Undo',
+              text: 'Agent Undo UnSuccessfully...',
+            });
           }
         });
     } catch (error) {
-      alert("Error undeleting agent");
-      console.error('Error undeleting agent:', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Agent Not Undo',
+        text: 'Agent Undo UnSuccessfully...',
+      });
     }
   }
 

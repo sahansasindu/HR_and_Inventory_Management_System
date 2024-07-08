@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {EmployeeMedical} from "../../model/employeeMedical";
 import {AxiosService} from "../../axios.service";
 import {DatePipe} from "@angular/common";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -59,7 +60,11 @@ export class MedicalApproveComponent implements OnInit{
     this.formattedDate = this.datePipe.transform(this.selectedRow?.submit_date, 'MMM d, yyyy');
 
     if (!this.selectedRow) {
-      alert("Please Check Medical Report First....")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Medical Report Check',
+        text: 'Please Check Medical Report First....',
+      });
       return;
     }
 
@@ -127,8 +132,16 @@ export class MedicalApproveComponent implements OnInit{
   async updateMedicalStatus(status: string) {
 
     if (this.selectedRow) {
-      const confirmUpdate = window.confirm(`Are you sure you want to ${status} this Medical request?`);
-      if (confirmUpdate) {
+      const confirmed = await Swal.fire({
+        title: 'Confirm Medical Status Update',
+        text: `Are you sure you want to ${status} this Medical request?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, update it!'
+      });
+      if (confirmed.isConfirmed) {
         await this.saveStatusUpdate(this.selectedRow.employee_medical_id, status);
       }
     }
@@ -137,11 +150,18 @@ export class MedicalApproveComponent implements OnInit{
   async saveStatusUpdate(employee_medical_id: number, status: string): Promise<void> {
     try {
       await this.axios.request('PUT', `/updateMedicalStatus?employee_medical_id=${employee_medical_id}&status=${status}`,{},{});
-      alert('Medical status updated successfully.....');
+      Swal.fire({
+        icon: 'success',
+        title: 'Medical Status Updated',
+        text: 'Medical status updated successfully.....',
+      });
       await this.MedicalDetails(); // Refresh leave details after update
     } catch (error) {
-      console.error('Error updating Medical Status:', error);
-      alert('Error updating Medical Status:');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error updating Medical Status:',
+      });
     }
   }
 

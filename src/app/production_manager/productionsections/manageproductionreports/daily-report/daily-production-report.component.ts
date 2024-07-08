@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AxiosService} from "../../../../axios.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-daily-production-report',
@@ -20,7 +21,11 @@ export class DailyProductionReportComponent {
 
   async search() {
     if (!this.selectedDate) {
-      alert("Please select a date");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Date',
+        text: 'Please select a date',
+      });
       return;
     }
 
@@ -45,8 +50,12 @@ export class DailyProductionReportComponent {
         .filter(p => p.finishedState === 'Bad')
         .reduce((total, p) => total + p.amount, 0);
     } catch (error) {
-      console.error('Error fetching daily productions:', error);
-      alert('Failed to fetch daily productions');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching daily productions',
+      });
     }
   }
 
@@ -57,8 +66,12 @@ export class DailyProductionReportComponent {
       console.log(this.dailymilkIssues)
       this.totalIssues = this.dailymilkIssues.reduce((total, issue) => total + issue.numberOfBottles, 0);
     } catch (error) {
-      console.error('Error fetching daily issues:', error);
-      alert('Failed to fetch daily issues');
+
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Error fetching daily issues',
+      });
     }
   }
 }

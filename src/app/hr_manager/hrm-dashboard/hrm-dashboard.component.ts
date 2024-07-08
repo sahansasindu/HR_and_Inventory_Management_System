@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AxiosService} from "../../axios.service";
 
 @Component({
@@ -6,7 +6,7 @@ import {AxiosService} from "../../axios.service";
   templateUrl: './hrm-dashboard.component.html',
   styleUrl: './hrm-dashboard.component.css'
 })
-export class HrmDashboardComponent implements OnInit {
+export class HrmDashboardComponent implements OnInit{
 
 
   chartDep: any;
@@ -93,6 +93,9 @@ export class HrmDashboardComponent implements OnInit {
   selectedChart: string = 'departments';
 
   totalEmployees:number=0;
+  totalAbsents:number=0;
+  totalWorking:number=0;
+  totalGatePasses:number=0;
 
   departmentEmployeeCounts: DepartmentEmployeeCount[] = [];
 
@@ -101,18 +104,38 @@ export class HrmDashboardComponent implements OnInit {
   async ngOnInit() {
 
     await this.fetchTotalEmployeeCount();
+    await this.fetchTotalCurrentWorkingEmployeeCount();
+    await this.fetchTotalTodayAbsentEmployeeCount();
     await this.fetchDepartmentEmployeeCounts();
     await this.fetchEmployeeCountsByGender();
+    await this.workingAndAbsentEmployeeDetails();
+    await this.fetchTotalCurrentGatePassEmployeeCount();
+
 
 
   }
 
+  employeesWorking: WorkingAndAbsentEmployeeDetails[] = [];
+  employeesAbsent: WorkingAndAbsentEmployeeDetails[] = [];
+  currentGatePass:CurrentGatePassView[]=[];
+
   cards = [
     { title: 'Company Total Employees', value: 0 },
-    { title: 'Currently working Employees', value: 183 },
-    { title: 'Today Absent Employees', value: 10 },
-    { title: 'Currently Gate pass', value: 5 }
+    { title: 'Currently working Employees', value: 0 },
+    { title: 'Today Absent Employees', value: 0 },
+    { title: 'Currently Gate passes', value: 0 }
   ];
+
+  // Define a type for the card titles
+  currentCard: { title: string, value: number } | null = null;
+
+  viewDetails(card: { title: string, value: number }) {
+    this.currentCard = card;
+  }
+
+  closeDetails() {
+    this.currentCard = null;
+  }
 
   async fetchTotalEmployeeCount(): Promise<void> {
     try {
@@ -121,6 +144,29 @@ export class HrmDashboardComponent implements OnInit {
       this.cards[0].value = this.totalEmployees;
     } catch (error) {
       console.error('Error fetching total employee count:', error);
+    }
+  }
+
+  async fetchTotalCurrentWorkingEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/totalWorking", {}, {});
+      this.totalWorking = response.data;
+      this.cards[1].value = this.totalWorking;
+    } catch (error) {
+      console.error('Error fetching total Working employee count:', error);
+    }
+
+  }
+
+  async fetchTotalTodayAbsentEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/totalAbsent", {}, {});
+      this.totalAbsents = response.data;
+      this.cards[2].value = this.totalAbsents;
+    } catch (error) {
+      console.error('Error fetching total absent employee count:', error);
     }
   }
 
@@ -187,8 +233,65 @@ export class HrmDashboardComponent implements OnInit {
     this.selectedChart = 'employees';
   }
 
+
+  //get all absent and present employees
+  async workingAndAbsentEmployeeDetails(): Promise<void> {
+
+    try {
+      const response = await this.ax.request("GET","/WorkingAndAbsentEmployeeDetails",{},{});
+      const allEmployees: WorkingAndAbsentEmployeeDetails[] = response.data;
+
+      this.employeesWorking = allEmployees.filter(emp => emp.attendance_status === 'present');
+      this.employeesAbsent = allEmployees.filter(emp => emp.attendance_status === 'absent');
+
+      console.log('Working Employees:', this.employeesWorking);
+      console.log('Absent Employees:', this.employeesAbsent);
+    } catch (error) {
+      console.error('Error fetching WorkingAndAbsentEmployeeDetails', error);
+    }
+  }
+
+  async fetchTotalCurrentGatePassEmployeeCount(){
+
+    try {
+      const response = await this.ax.request("GET", "/fetchTotalCurrentGatePassEmployeeCount", {}, {});
+
+      const allgatepasses: CurrentGatePassView[] = response.data;
+
+      this.currentGatePass = allgatepasses.filter(emp => emp.status === 'approved');
+      this.totalGatePasses = this.currentGatePass.length;
+      this.cards[3].value = this.totalGatePasses;
+      console.log(this.currentGatePass);
+
+    } catch (error) {
+    console.error('Error fetching fetchTotalCurrentGatePassEmployeeCount', error);
+   }
+  }
+
 }
 interface DepartmentEmployeeCount {
   departmentName: string;
   employeeCount: number;
+}
+export interface WorkingAndAbsentEmployeeDetails {
+
+   emp_id:string;
+   name:string;
+   department:string;
+   section:string;
+   jobRole:string;
+   attendance_status:string;
+
+}
+export interface CurrentGatePassView{
+
+  emp_id:string;
+  name:string;
+  department:string;
+  section:string;
+  jobRole:string;
+  status:string;
+  in_time:string;
+  out_time:string;
+
 }

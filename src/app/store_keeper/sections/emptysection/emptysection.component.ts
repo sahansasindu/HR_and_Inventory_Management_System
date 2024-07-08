@@ -3,6 +3,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {AxiosService} from "../../../axios.service";
 import { isPlatformBrowser } from '@angular/common';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 @Component({
   selector: 'app-emptysection',
   templateUrl: './emptysection.component.html',
@@ -80,7 +81,11 @@ export class EmptysectionComponent implements OnInit{
 
   toggleUpdate(): void {
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'No row selected',
+        text: 'Please select a row in the table',
+      });
       return;
     }
 
@@ -119,11 +124,19 @@ export class EmptysectionComponent implements OnInit{
 
     // Early validation to ensure all fields are filled
     if (isNaN(emptyBottles) || isNaN(damageBottles) || dateValue === "") {
-      alert("Please Fill All Details");
+      Swal.fire({
+        icon: 'warning',
+        title: 'Please Fill All Details',
+        text: 'Ensure all required fields are completed.',
+      });
       return;
     }
     if(emptyBottles<damageBottles){
-      alert("Invalid Input");
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Input',
+        text: 'Empty bottles cannot be less than damaged bottles.',
+      });
       return;
     }
 
@@ -143,12 +156,18 @@ export class EmptysectionComponent implements OnInit{
 
     try {
       const response = await this.axiosService.request("POST", "/adddailyemptybottles", formElement, headers);
-      alert("Submission successful");
-      console.log('Submission successful', response);
+      Swal.fire({
+        icon: 'success',
+        title: 'Submission Successful',
+        text: 'Your form has been submitted successfully!',
+      });
       await this.fetchEmptyBottleDetails();
     } catch (error) {
-      alert("Error submitting form");
-      console.error('Error submitting form', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Submitting Form',
+        text: 'There was an error submitting the form. Please try again later.',
+      });
     }
   }
 
@@ -190,12 +209,18 @@ export class EmptysectionComponent implements OnInit{
     console.log(formData)
     try {
       const response = await this.axiosService.request('PUT', '/updateEmptyBottle', formData, headers);
-      alert("Update successful")
-      console.log('Update successful', response);
+      Swal.fire({
+        icon: 'success',
+        title: 'Update Successful',
+        text: 'The record has been updated successfully!',
+      });
       await this.fetchEmptyBottleDetails();
     } catch (error) {
-      alert("Error updating details")
-      console.error('Error updating details', error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error Updating Details',
+        text: 'There was an error updating the details. Please try again later.',
+      });
 
     }
   }

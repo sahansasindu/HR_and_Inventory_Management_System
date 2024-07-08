@@ -5,6 +5,7 @@ import {AgentService} from "../../../service/services/agent.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AxiosService} from "../../../axios.service";
 import {CanvasJS} from "@canvasjs/angular-stockcharts";
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -19,6 +20,9 @@ export class ManageagentComponent implements OnInit{
   showUndoOption: boolean = false;
   undoRequested: boolean = false;
   undoTimeout: any;
+
+  searchControl = new FormControl();
+
 
   totalPurchase: number = 0;
 
@@ -71,6 +75,10 @@ export class ManageagentComponent implements OnInit{
 
   async ngOnInit() {
 
+    this.searchControl.valueChanges.subscribe(value => {
+      this.applyFilter(value);
+    });
+
     this.dataSourceAgent.data = await this.agentService.getAllAgents();
 
     const currentYear = new Date().getFullYear();
@@ -78,6 +86,11 @@ export class ManageagentComponent implements OnInit{
       this.years.push(year);
     }
     this.agentDetailsChart();
+
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSourceAgent.filter = filterValue.trim().toLowerCase();
   }
 
   registerNewAnget() {
@@ -92,7 +105,11 @@ export class ManageagentComponent implements OnInit{
   updateAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Agent Row selected',
+        text: 'Please select a Agent Details To Update..',
+      });
       return;
     }
 
@@ -120,9 +137,14 @@ export class ManageagentComponent implements OnInit{
   deleteAnget() {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Agent Row selected',
+        text: 'Please select a Agent Details To Delete..',
+      });
       return;
     }
+
 
     this.deleteFormAgent.setValue({
       remo_agent_id:this.selectedRow.agent_id,
@@ -170,9 +192,14 @@ export class ManageagentComponent implements OnInit{
   viweagentboughtMilk() {
 
     if (!this.selectedRow) {
-      alert("No row selected Please Select Row in Table")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Agent Row selected',
+        text: 'Please select a Agent Details To view Monthly Purchase Details..',
+      });
       return;
     }
+
 
     this.isviweAgentVisible = !this.isviweAgentVisible;
     if (this.isviweAgentVisible) {
@@ -197,8 +224,12 @@ export class ManageagentComponent implements OnInit{
   async searchPurchaseDetails(){
 
     if (!this.selectedMonth || !this.selectedYear) {
-      alert('Please select both month and year.');
-    } else {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Select Month and Year',
+        text: 'Please select Month and Year to view Chart..',
+      });
+      return;    } else {
 
       const agentId = this.agentIdChart.nativeElement.innerText;
 
@@ -223,12 +254,18 @@ export class ManageagentComponent implements OnInit{
           });
           this.renderChart();
         } else {
-          console.error('Expected an array but got:', data);
-          alert('Unexpected response format. Please try again later.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Error fetching purchase details..',
+          });
         }
       } catch (error) {
-        console.error('Error fetching purchase details:', error);
-        alert('Failed to fetch purchase details');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error fetching purchase details..',
+        });
       }
 
 
@@ -299,19 +336,35 @@ export class ManageagentComponent implements OnInit{
     agent.contact_number=(document.getElementById('addContact') as HTMLInputElement).value;
 
     if(agent.agent_name==="" || agent.agency_name==="" || agent.address==="" || agent.email==="" || agent.contact_number===""){
-      alert("Please Fill All Details")
+      Swal.fire({
+        icon: 'error',
+        title: 'Agent Details',
+        text: 'Some Details are missing Please Check Form Before Submit..',
+      });
       return;
     }
     if(!agent.isValidEmail()){
-      alert("Please Enter Valid Email")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Email Address',
+        text: 'You Entered Email address are invalid Please Check it..',
+      });
       return;
     }
     if(!agent.isValidPhoneNumber()){
-      alert("Please Enter Valid Mobile NUmber")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Contact Number',
+        text: 'You Entered Contact Number are invalid Please Check it..',
+      });
       return;
     }
     if (agent.contact_number.length<10){
-      alert("Invalid Phone Number")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Contact Number',
+        text: 'You Entered Contact Number are invalid Please Check it..',
+      });
       return;
     }
 
@@ -338,19 +391,35 @@ export class ManageagentComponent implements OnInit{
     updatedAgent.email = this.updateFormAgent.get("updateAgentEmail")?.value;
 
     if(updatedAgent.agent_id=="" || updatedAgent.agent_name==="" || updatedAgent.address==="" || updatedAgent.agency_name==="" || updatedAgent.contact_number==="" || updatedAgent.email===""){
-      alert("Please Fill All Details")
+      Swal.fire({
+        icon: 'error',
+        title: 'Agent Details',
+        text: 'Some Details are missing Please Check Form Before Submit..',
+      });
       return;
     }
     if(!updatedAgent.isValidEmail()){
-      alert("Please Enter Valid Email")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Email Address',
+        text: 'You Entered Email address are invalid Please Check it..',
+      });
       return;
     }
     if(!updatedAgent.isValidPhoneNumber()){
-      alert("Please Enter Valid Mobile NUmber")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Contact Number',
+        text: 'You Entered Contact Number are invalid Please Check it..',
+      });
       return;
     }
     if (updatedAgent.contact_number.length<10){
-      alert("Invalid Phone Number")
+      Swal.fire({
+        icon: 'error',
+        title: 'Invalid Contact Number',
+        text: 'You Entered Contact Number are invalid Please Check it..',
+      });
       return;
     }
 
@@ -377,7 +446,11 @@ export class ManageagentComponent implements OnInit{
     deletedAgent.deleteReason=this.deleteFormAgent.get("reason_status")?.value;
 
     if(deletedAgent.deleteReason===null){
-      alert("Please Should Enter Valid Reason...")
+      Swal.fire({
+        icon: 'warning',
+        title: 'Reson Status',
+        text: 'Please Enter Valid Delete Reson..',
+      });
       return;
     }
     this.currentAgentIdForDeletion = deletedAgent.agent_id;
@@ -394,13 +467,16 @@ export class ManageagentComponent implements OnInit{
 
           await this.ngOnInit();
         } catch (error) {
-          console.error('Error deleting agent:', error);
-          alert("Error deleting agent");
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Agent Delete Unsuccessful..',
+          });
         }
       }
       this.showUndoOption = false;
       this.currentAgentIdForDeletion = null;
-    }, 10000);
+    }, 7000);
   }
 
   async undoDelete() {
@@ -413,8 +489,12 @@ export class ManageagentComponent implements OnInit{
         await this.agentService.undoDeleteAgent(this.currentAgentIdForDeletion);
         await this.ngOnInit();
       } catch (error) {
-        console.error('Error undoing agent deletion:', error);
-        alert("Error undoing deletion");
+
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error undoing agent deletion..',
+        });
       }
       this.showUndoOption = false;
       this.currentAgentIdForDeletion = null;
