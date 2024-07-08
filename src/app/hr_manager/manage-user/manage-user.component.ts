@@ -210,7 +210,6 @@ export class ManageUserComponent implements OnInit{
       const response = await this.axservice.request('GET', '/getallUsers', {}, {});
       this.dataSourceUser.data = response.data; // <-- This line is causing the error
       this.ELEMENT_DATA_AGENT = this.dataSourceUser.data;
-      console.log('User Details fetched successfully:', response.data);
     } catch (error) {
       console.error('Error fetching User Details:', error);
     }
