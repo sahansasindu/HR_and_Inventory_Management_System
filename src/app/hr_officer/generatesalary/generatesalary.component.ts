@@ -2,6 +2,7 @@
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {AxiosService} from "../../axios.service";
 import {Router} from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-generatesalary',
@@ -85,14 +86,26 @@ export class GeneratesalaryComponent {
       {}
     ).then(response => {
       console.log("Response from server:", response);
-      alert("Payroll processed successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Payroll processed successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
     }).catch(error => {
       console.error("Error processing payroll:", error);
       let errorMessage = "An error occurred while processing payroll. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       }
-      alert(errorMessage);
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+
     });
   }
 

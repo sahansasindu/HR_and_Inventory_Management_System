@@ -2,6 +2,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-view-employee',
@@ -94,6 +95,20 @@ export class ViewEmployeeComponent implements OnInit {
 
     console.log("new",employeeid);
 
+    if(this.employeeId === '' || this.address === '' || this.contactno === '' || this.empname === '' ||
+      this.mstate === '' || this.Did === '' || this.sid === '' || this.gender === '' ){
+
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill in all required fields.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+
+      return;
+
+    }
+
     this.axiosService.request(
       "PUT",
       "/updateEmployee", {
@@ -108,12 +123,24 @@ export class ViewEmployeeComponent implements OnInit {
       }
       , {}).then(response => {
       console.log("Response from server:", response);
-      alert("Employee details updated successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Employee details updated successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
     }).catch(error => {
       console.error("Error updating user details:", error);
       let errorMessage = "An error occurred while updating user details. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
-        alert("Employee details updated successfully!");
+        Swal.fire({
+          title: 'Error!',
+          text: 'Employee details updated Unsuccessful!',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+
       }
 
     });

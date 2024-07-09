@@ -7,6 +7,7 @@
 <div class="report-container">
   <h1><b>Weekly Milk Production by Company</b></h1>
   <h3 style="text-align: right">Lucky Lanka Milk Processing Company</h3>
+  <h4 style="text-align: right">Bibulewela, Karagoda, Uyangoda, Mathara</h4>
   <hr style="border: 3px solid #000000;"/>
 
   <h3><b>Milk Production</b></h3>
@@ -19,7 +20,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let production of weeklymilkProductions">
+    <tr *ngFor="let production of weeklymilkProductions ;">
       <td>{{ production.amount }}</td>
       <td>{{ production.batchCode }}</td>
       <td>{{ production.finishedState }}</td>

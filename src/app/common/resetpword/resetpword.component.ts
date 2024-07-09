@@ -120,9 +120,9 @@ export class ResetpwordComponent {
       }
     } catch (error) {
       Swal.fire({
-        icon: 'success',
-        title: 'OTP Verified',
-        text: 'OTP verified successfully!',
+        icon: 'error',
+        title: 'Invalid OTP',
+        text: 'Invalid OTP. Please enter a valid OTP and try again.',
       });
     }
   }

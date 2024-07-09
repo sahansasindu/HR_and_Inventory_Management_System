@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-employee-leave',
@@ -107,7 +108,13 @@ export class EmployeeLeaveComponent implements OnInit {
 
   submitData() {
     if (!this.empid || !this.endtime || !this.ltype || !this.reason || !this.stime || !this.astatus) {
-      alert('Please fill in all required fields.');
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill in all required fields.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+
       return;
     }
 
@@ -123,10 +130,22 @@ export class EmployeeLeaveComponent implements OnInit {
         "emp_id": this.empid
       }, {}).then(response => {
       console.log("Response from server:", response);
-      alert("add leave successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Leave added successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
     }).catch(error => {
       console.error("Error adding leave details:", error);
-      alert("Error adding leave details. Please try again.");
+      Swal.fire({
+        title: 'Error!',
+        text: 'Error adding leave details. Please try again.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+
     });
 
     this.empid = this.endtime = this.ltype = this.reason = this.stime = this.astatus = "";
@@ -134,7 +153,13 @@ export class EmployeeLeaveComponent implements OnInit {
 
   submitData2() {
     if (!this.date || !this.intime || !this.outtime || !this.greason || !this.gstate || !this.gempid) {
-      alert('Please fill in all required fields.');
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill in all required fields.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+
       return;
     }
 
@@ -149,14 +174,25 @@ export class EmployeeLeaveComponent implements OnInit {
         "emp_id": this.gempid,
       }, {}).then(response => {
       console.log("Response from server:", response);
-      alert("add gatepass successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Gatepass added successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
     }).catch(error => {
       console.error("Error adding gatepass details:", error);
       let errorMessage = "An error occurred while updating user details. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       }
-      alert(errorMessage);
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
     });
 
     this.date = this.intime = this.outtime = this.greason = this.gstate = this.gempid = "";
