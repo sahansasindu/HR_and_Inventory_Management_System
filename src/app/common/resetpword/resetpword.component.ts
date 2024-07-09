@@ -30,7 +30,6 @@ export class ResetpwordComponent {
         text: 'Please enter a valid Employee ID and Email.',
       });
       return;
-      return;
     }
 
 
@@ -68,7 +67,7 @@ export class ResetpwordComponent {
           Swal.fire({
             icon: 'success',
             title: 'OTP Sent',
-            text: 'OTP sent successfully!',
+            text: 'OTP sent successfully Please check your email.!',
           });
         } else {
           Swal.fire({
@@ -120,9 +119,9 @@ export class ResetpwordComponent {
       }
     } catch (error) {
       Swal.fire({
-        icon: 'success',
-        title: 'OTP Verified',
-        text: 'OTP verified successfully!',
+        icon: 'error',
+        title: 'Invalid OTP',
+        text: 'Invalid OTP. Please enter a valid OTP and try again.',
       });
     }
   }

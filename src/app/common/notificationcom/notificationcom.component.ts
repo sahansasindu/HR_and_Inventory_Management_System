@@ -62,6 +62,7 @@ export class NotificationcomComponent implements OnInit{
     await this.fetchEmployeesWithBirthdaysToday();
   }
 
+  //fetch data from the backend
   async fetchEmployeesWithBirthdaysToday(): Promise<void> {
     try {
       const response = await this.ax.request("GET","/todayBirthdays",{},{});
