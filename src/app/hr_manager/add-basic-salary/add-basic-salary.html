@@ -7,14 +7,16 @@
         <b>Search details :</b>
         <div class="form-group">
           <select   [(ngModel)]="selectedDepartment" class="form-control" (change)="filterByDepartment()" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial </option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sels markating">Sels and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
+            <option value="" selected>Select Department</option>
+            <option value="DEP01">Production</option>
+            <option value="DEP02">Administration</option>
+            <option value="DEP03">Finance</option>
+            <option value="DEP04">Sales and Marketing</option>
+            <option value="DEP05">Human Resource</option>
+            <option value="DEP06">Quality Assurance</option>
+            <option value="DEP07">Maintenance</option>
+            <option value="DEP08">Stores</option>
+            <option value="DEP09">Transport</option>
           </select>
         </div>
       </div>
@@ -40,7 +42,7 @@
             <td>Subsistence</td>
             <td>Ot Amount</td>
             <td>Initial Days</td>
-            <td>Initial Nopay Amount</td>
+            <td>Initial No pay Amount</td>
             <td>Get Pass Amount</td>
             <td>Action</td>
           </tr>
