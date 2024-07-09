@@ -66,6 +66,9 @@ export class GeneratesalaryComponent {
     // Perform any further actions needed with the selected data
     this.attendanceforsalary(selectedEmployeeId, selectedMonth, bonus);
     this.getmonthlysalaty(selectedEmployeeId, selectedMonth);
+
+    this.empid="";
+
   }
 
   attendanceforsalary(empId: string, date: string, bonus: number | null) {

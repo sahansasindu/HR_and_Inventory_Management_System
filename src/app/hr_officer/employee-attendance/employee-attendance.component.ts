@@ -69,7 +69,7 @@ export class EmployeeAttendanceComponent {
   }
 
   submitData() {
-    if (!this.eid || !this.date || !this.intime || !this.outtime || !this.astate) {
+    if (!this.eid || !this.date || !this.astate) {
       alert('Please fill in all required fields.');
       return;
     }
