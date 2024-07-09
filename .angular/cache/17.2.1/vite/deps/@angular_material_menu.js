@@ -19,6 +19,11 @@ import {
   trigger
 } from "./chunk-PF7TOPSH.js";
 import {
+  CdkScrollableModule
+} from "./chunk-FK7CE7DB.js";
+import "./chunk-BTH5AZGM.js";
+import {
+
   DOWN_ARROW,
   Directionality,
   ENTER,

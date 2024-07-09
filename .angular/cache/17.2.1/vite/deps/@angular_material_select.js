@@ -39,6 +39,13 @@ import {
   trigger
 } from "./chunk-PF7TOPSH.js";
 import {
+  CdkScrollableModule,
+  ViewportRuler
+} from "./chunk-FK7CE7DB.js";
+import {
+  SelectionModel
+} from "./chunk-BTH5AZGM.js";
+import {
   A,
   ActiveDescendantKeyManager,
   DOWN_ARROW,
