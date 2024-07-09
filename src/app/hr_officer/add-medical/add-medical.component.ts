@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import { AxiosService } from '../../axios.service';
+import Swal from "sweetalert2";
 
 
 @Component({
@@ -62,18 +63,39 @@ export class AddMedicalComponent implements OnInit{
     try {
       const response = await this.axiosService.request('POST', '/addMedical', formData, {'Content-Type': 'multipart/form-data'});
       if (response.data) {
-        alert('Medical data added successfully!');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Medical data added successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+
       }
     } catch (error: any) {
       if (this.axiosService.isAxiosError(error)) {
         const errorResponse = error.response?.data as ErrorResponse;
         if (errorResponse && errorResponse.message) {
-          alert("Error submitting medical data: " + errorResponse.message);
+          Swal.fire({
+            title: 'Error!',
+            text: "Error submitting medical data: " + errorResponse.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         } else {
-          alert("Error submitting medical data");
+          Swal.fire({
+            title: 'Error!',
+            text: "Error submitting medical data: " + errorResponse.message,
+            icon: 'error',
+            confirmButtonText: 'OK'
+          });
         }
       } else {
-        alert("An unexpected error occurred");
+        Swal.fire({
+          title: 'Error!',
+          text: "Error submitting medical data: ",
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
       }
       console.error('Error submitting medical data:', error);
     }

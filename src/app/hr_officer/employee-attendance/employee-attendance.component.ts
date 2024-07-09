@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { Router } from "@angular/router";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-employee-attendance',
@@ -70,7 +71,13 @@ export class EmployeeAttendanceComponent {
 
   submitData() {
     if (!this.eid || !this.date || !this.astate) {
-      alert('Please fill in all required fields.');
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill in all required fields.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
+
       return;
     }
 
@@ -85,7 +92,13 @@ export class EmployeeAttendanceComponent {
         "attendance_status": this.astate,
       }, {}).then(response => {
       console.log("Response from server:", response);
-      alert("User details updated successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'User details updated successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
 
       // Call the attendanceforsalary method after a successful submission
       this.attendanceforsalary(this.eid, this.date);
@@ -102,7 +115,13 @@ export class EmployeeAttendanceComponent {
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       }
-      alert(errorMessage);
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+
     });
   }
 
@@ -116,14 +135,26 @@ export class EmployeeAttendanceComponent {
       null
     ).then(response => {
       console.log("Response from server:", response);
-      alert("Payroll processed successfully!");
+      Swal.fire({
+        title: 'Success!',
+        text: 'Payroll processed successfully!',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
     }).catch(error => {
       console.error("Error processing payroll:", error);
       let errorMessage = "An error occurred while processing payroll. Please try again later.";
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
       }
-      alert(errorMessage);
+      Swal.fire({
+        title: 'Error!',
+        text: errorMessage,
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+
     });
   }
 
