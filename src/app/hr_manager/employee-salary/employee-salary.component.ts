@@ -17,7 +17,7 @@ export class EmployeeSalaryComponent implements OnInit {
 
   card1() {
 
-    this.router.navigate(['./mdc']); // Navigate to 'esc/mdc' route
+    this.router.navigate(['./dailypayroll']); // Navigate to 'esc/mdc' route
   }
 
   card2() {
@@ -25,7 +25,7 @@ export class EmployeeSalaryComponent implements OnInit {
   }
 
   card3() {
-    console.log("Work for Card 3");
+    this.router.navigate(['./employeemonthlysalary']);
   }
 
   card4() {

@@ -1,3 +1,4 @@
+
 import {ChangeDetectorRef, Component} from '@angular/core';
 import {AxiosService} from "../../axios.service";
 import {Router} from "@angular/router";
@@ -12,8 +13,10 @@ export class GeneratesalaryComponent {
   isVisible2: boolean = true;
   isVisible3: boolean = false;
 
-  loandata: any[] = [];
-  loandata2: any[] = [];
+  dailypayroll: any[] = [];
+  monthlysalary: any[] = [];
+  filtereddata: any[] = [];
+  filtereddata2: any[] = [];
   id: any;
   salaryheader: any[] = [];
   salaryheader2: any[] = [];
@@ -27,6 +30,12 @@ export class GeneratesalaryComponent {
   astatus: any;
   isBonusChecked: boolean = false;
   bonusAmount: number | null = null;
+
+
+  employeeId: any = '';
+  employeeId1: any = '';
+  selectedMonth: any = '';
+  page: number = 1; // <-- current page
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -86,18 +95,6 @@ export class GeneratesalaryComponent {
 
 
 
-  filterByDepartment() {
-    console.log(this.selectedDepartment);
-
-    if (this.selectedDepartment == "All") {
-      this.fetchDeductionData();
-    } else {
-      this.loandata = this.salaryheader2;
-      this.salaryheader = this.loandata.filter(item => item.department_name === this.selectedDepartment);
-      this.loandata = this.salaryheader;
-    }
-  }
-
   ngOnInit() {
     this.fetchDeductionData();
   }
@@ -107,11 +104,11 @@ export class GeneratesalaryComponent {
     this.axiosService.request('GET', 'geemployeedailypayroll', null, {})
       .then(response => {
         // console.log('Fetched data:', response.data); // Log the fetched data
-        this.salaryheader2 = response.data;
-        this.loandata = response.data;
+        this.filtereddata = response.data;
+        this.dailypayroll = response.data;
         this.isLoading = false;
         // Update Invoiceheader with the fetched data
-        console.log(this.loandata); // Corrected logging statement
+        console.log(this.dailypayroll); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -124,10 +121,10 @@ export class GeneratesalaryComponent {
     this.axiosService.request('GET', 'getMonthlySalary', null, {})
       .then(response => {
 
-        this.loandata2 = response.data;
+        this.monthlysalary = response.data;
         this.isLoading = false;
         // Update Invoiceheader with the fetched data
-        console.log(this.loandata); // Corrected logging statement
+        console.log(this.dailypayroll); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
@@ -137,27 +134,52 @@ export class GeneratesalaryComponent {
 
 
 
-  submitData() {
-    this.axiosService.request(
-      "POST",
-      "addLeave", {
-        "end_time": this.endtime,
-        "leave_type": this.ltype,
-        "reson": this.reason,
-        "start_time": this.stime,
-        "status": this.astatus,
-        "emp_id": this.empid
-      }
-      , {}).then(response => {
-      console.log("Response from server:", response);
-      alert("User details updated successfully!");
-    }).catch(error => {
-      console.error("Error updating user details:", error);
-      alert("Error updating user details. Please try again.");
-    });
-  }
-
   private getmonthlysalaty(selectedEmployeeId: string, selectedMonth: string) {
 
   }
+
+  pageChanged(event: number) {
+    this.page = event;
+  }
+
+  filterByEmployeeId() {
+    let filtered = this.filtereddata;
+
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toString().toLowerCase();
+      filtered = filtered.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+    }
+
+    if (this.selectedMonth) {
+      const [year, month] = this.selectedMonth.split('-');
+      filtered = filtered.filter(item => {
+        const itemDate = new Date(item.date);
+        return itemDate.getFullYear() === parseInt(year) && (itemDate.getMonth() + 1) === parseInt(month);
+      });
+    }
+
+    this.dailypayroll = filtered;
+  }
+
+  filterByEmployeeId1() {
+    let filtered = this.filtereddata2;
+
+    if (this.employeeId) {
+      const lowerCaseEmpId = this.employeeId.toString().toLowerCase();
+      filtered = filtered.filter(item => item.emp_id.toString().toLowerCase() === lowerCaseEmpId);
+    }
+
+    if (this.selectedMonth) {
+      const [year, month] = this.selectedMonth.split('-');
+      filtered = filtered.filter(item => {
+        const itemDate = new Date(item.date);
+        return itemDate.getFullYear() === parseInt(year) && (itemDate.getMonth() + 1) === parseInt(month);
+      });
+    }
+
+    this.monthlysalary = filtered;
+  }
+
+
+
 }
