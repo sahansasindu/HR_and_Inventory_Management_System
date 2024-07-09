@@ -241,7 +241,7 @@ export class HrmDashboardComponent implements OnInit{
       const response = await this.ax.request("GET","/WorkingAndAbsentEmployeeDetails",{},{});
       const allEmployees: WorkingAndAbsentEmployeeDetails[] = response.data;
 
-      this.employeesWorking = allEmployees.filter(emp => emp.attendance_status === 'present');
+      this.employeesWorking = allEmployees.filter(emp => emp.attendance_status === 'present' || emp.attendance_status==='late');
       this.employeesAbsent = allEmployees.filter(emp => emp.attendance_status === 'absent');
 
       console.log('Working Employees:', this.employeesWorking);

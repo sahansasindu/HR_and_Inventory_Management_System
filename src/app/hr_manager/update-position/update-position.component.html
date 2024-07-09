@@ -269,17 +269,63 @@
 
           <div class="form-row">
             <label for="company_status">Current Status:</label>
-            <input type="text" id="company_status" [value]="selectedRow?.company_status">
+            <select class="form-control" id="company_status" name="company_status" [value]="selectedRow?.company_status">
+              <option value="permanent">Permanent</option>
+              <option value="temporary">Temporary</option>
+            </select>
           </div>
 
           <div class="form-row">
             <label for="job_role">Job Role:</label>
-            <input type="text" id="job_role" [value]="selectedRow?.job_role">
+            <select id="job_role" [value]="selectedRow?.job_role" name="job_role" class="form-control" required>
+              <option value="" selected disabled>Select a role</option>
+              <option value="Chairman">Chairman</option>
+              <option value="Managing Director">Managing Director</option>
+              <option value="Director">Director</option>
+              <option value="Accountant">Accountant</option>
+              <option value="Finance Manager">Finance Manager</option>
+              <option value="Finance Executive">Finance Executive</option>
+              <option value="Head of Marketing">Head of Marketing</option>
+              <option value="National Sales Manager">National Sales Manager</option>
+              <option value="Regional Manager">Regional Manager</option>
+              <option value="Senior Marketing Executive">Senior Marketing Executive</option>
+              <option value="Area Manager">Area Manager</option>
+              <option value="Marketing Executive">Marketing Executive</option>
+              <option value="Sales Representative">Sales Representative</option>
+              <option value="Outlet Cashier">Outlet Cashier</option>
+              <option value="HR Manager">HR Manager</option>
+              <option value="HR Executive">HR Executive</option>
+              <option value="Head of QA">Head of QA</option>
+              <option value="QA Manager">QA Manager</option>
+              <option value="QA Executive">QA Executive</option>
+              <option value="Head of Production">Head of Production</option>
+              <option value="Production Manager">Production Manager</option>
+              <option value="Operation Manager">Operation Manager</option>
+              <option value="Production Supervisor">Production Supervisor</option>
+              <option value="Machine Operator">Machine Operator</option>
+              <option value="Production Assistant">Production Assistant</option>
+              <option value="Head of Maintenance">Head of Maintenance</option>
+              <option value="Technician">Technician</option>
+              <option value="Electrician">Electrician</option>
+              <option value="Assistant">Assistant</option>
+              <option value="Head of Stores">Head of Stores</option>
+              <option value="Storekeeper">Storekeeper</option>
+              <option value="Store Assistant">Store Assistant</option>
+              <option value="Transport Manager">Transport Manager</option>
+              <option value="Drivers">Drivers</option>
+              <option value="Helpers">Helpers</option>
+              <option value="Head of Security">Head of Security</option>
+              <option value="Security Officer">Security Officer</option>
+            </select>
           </div>
 
           <div class="form-row">
             <label for="salary_type">Salary Type:</label>
-            <input type="text" id="salary_type" [value]="selectedRow?.salary_type">
+            <select id="salary_type" name="salary_type" [value]="selectedRow?.salary_type">
+              <option value="Production">Production</option>
+              <option value="Store">Stores</option>
+              <option value="Office staff">Office staff</option>
+            </select>
           </div>
 
           <div class="form-buttons">

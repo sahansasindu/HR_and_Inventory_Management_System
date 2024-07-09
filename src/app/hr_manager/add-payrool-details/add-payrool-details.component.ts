@@ -1,12 +1,16 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AxiosService } from '../../axios.service'; // Import AxiosService
+import { AxiosService } from '../../axios.service';
+import {FormsModule} from "@angular/forms"; // Import AxiosService
 
 @Component({
-  selector: 'app-add-payrool-details',
-  templateUrl: './add-payrool-details.component.html',
-  standalone: true,
-  styleUrls: ['./add-payrool-details.component.css']
+    selector: 'app-add-payrool-details',
+    templateUrl: './add-payrool-details.component.html',
+    standalone: true,
+    imports: [
+        FormsModule
+    ],
+    styleUrls: ['./add-payrool-details.component.css']
 })
 export class AddPayroolDetailsComponent {
   basicamount: any;

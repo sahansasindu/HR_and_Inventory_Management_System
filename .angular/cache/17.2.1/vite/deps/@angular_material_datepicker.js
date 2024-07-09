@@ -32,6 +32,9 @@ import {
   TemplatePortal
 } from "./chunk-K4B7OG32.js";
 import {
+  CdkScrollableModule
+} from "./chunk-FK7CE7DB.js";
+import "./chunk-BTH5AZGM.js";
   animate,
   keyframes,
   state,
