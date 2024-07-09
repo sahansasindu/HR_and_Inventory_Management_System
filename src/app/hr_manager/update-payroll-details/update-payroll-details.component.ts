@@ -2,13 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { AxiosService } from "../../axios.service";
 import { ActivatedRoute } from "@angular/router";
 import { Router } from '@angular/router';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @Component({
-  selector: 'app-update-payroll-details',
-  templateUrl: './update-payroll-details.component.html',
-  standalone: true,
-  styleUrls: ['./update-payroll-details.component.css']
+    selector: 'app-update-payroll-details',
+    templateUrl: './update-payroll-details.component.html',
+    standalone: true,
+  imports: [
+    ReactiveFormsModule,
+    FormsModule
+  ],
+    styleUrls: ['./update-payroll-details.component.css']
 })
 export class UpdatePayrollDetailsComponent implements OnInit {
   id: any;
