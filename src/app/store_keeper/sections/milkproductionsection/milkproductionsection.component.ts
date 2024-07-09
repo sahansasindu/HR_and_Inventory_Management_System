@@ -174,8 +174,9 @@ export class MilkproductionsectionComponent implements OnInit{
       this.isProductionVisible=false;
     }
   }
-  toggleProdction(): void {
+  async toggleProdction(){
     this.isProductionVisible = !this.isProductionVisible;
+    await this.fetchfinishedMilkBottleDetails();
 
     if (this.isProductionVisible) {
       this.isUpdateVisible = false;
@@ -279,7 +280,11 @@ export class MilkproductionsectionComponent implements OnInit{
         .then(response => {
 
           if (response.data && response.data.message) {
-            alert(response.data.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
           } else {
             Swal.fire({
               icon: 'success',
