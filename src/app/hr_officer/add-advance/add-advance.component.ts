@@ -1,6 +1,7 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { AxiosService } from '../../axios.service';
 import { Router } from '@angular/router';
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-add-advance',
@@ -60,7 +61,12 @@ export class AddAdvanceComponent {
 
   submitData1() {
     if (!this.empid || !this.amount || !this.reson) {
-      alert('Please fill in all required fields.');
+      Swal.fire({
+        title: 'Warning!',
+        text: 'Please fill in all required fields.',
+        icon: 'warning',
+        confirmButtonText: 'OK'
+      });
       return;
     }
 
@@ -71,12 +77,23 @@ export class AddAdvanceComponent {
       status: this.astatus,
     }, {})
       .then(response => {
-        alert('Add advance successfully!');
+        Swal.fire({
+          title: 'Success!',
+          text: 'Add advance successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
         this.resetForm();
       })
       .catch(error => {
         console.error('Error updating user details:', error);
-        alert(error.response?.data?.message || 'An error occurred while updating user details. Please try again later.');
+        Swal.fire({
+          title: 'Error!',
+          text: error.response?.data?.message || 'An error occurred while updating user details. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+
       });
   }
 
