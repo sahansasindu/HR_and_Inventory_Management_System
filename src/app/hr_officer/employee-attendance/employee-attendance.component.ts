@@ -69,7 +69,7 @@ export class EmployeeAttendanceComponent {
   }
 
   submitData() {
-    if (!this.eid || !this.date || !this.intime || !this.outtime || !this.astate) {
+    if (!this.eid || !this.date || !this.astate) {
       alert('Please fill in all required fields.');
       return;
     }
@@ -116,7 +116,7 @@ export class EmployeeAttendanceComponent {
       null
     ).then(response => {
       console.log("Response from server:", response);
-      //alert("Payroll processed successfully!");
+      alert("Payroll processed successfully!");
     }).catch(error => {
       console.error("Error processing payroll:", error);
       let errorMessage = "An error occurred while processing payroll. Please try again later.";

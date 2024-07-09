@@ -116,6 +116,8 @@ import { DepartmentandsectionComponent } from './hr_manager/departmentandsection
 import { UpdatedepartmentComponent } from './hr_manager/updatedepartment/updatedepartment.component';
 import { UpdatesectionComponent } from './hr_manager/updatesection/updatesection.component';
 import { EmployeeattendacehrComponent } from './hr_manager/employeeattendacehr/employeeattendacehr.component';
+import { EmployeedailypayrollComponent } from './hr_manager/employeedailypayroll/employeedailypayroll.component';
+import { EmployeemonthlysalaryComponent } from './hr_manager/employeemonthlysalary/employeemonthlysalary.component';
 
 
 @NgModule({
@@ -202,7 +204,9 @@ import { EmployeeattendacehrComponent } from './hr_manager/employeeattendacehr/e
     DepartmentandsectionComponent,
     UpdatedepartmentComponent,
     UpdatesectionComponent,
-    EmployeeattendacehrComponent
+    EmployeeattendacehrComponent,
+    EmployeedailypayrollComponent,
+    EmployeemonthlysalaryComponent
 
 
   ],
