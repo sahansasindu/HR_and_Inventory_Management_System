@@ -5,7 +5,7 @@
         <a class="nav-link" (click)="show()">Generate Salary</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" (click)="show2()">View month</a>
+        <a class="nav-link" (click)="show2()">View Monthly Salary</a>
       </li>
     </ul>
   </div>
@@ -32,46 +32,33 @@
   <button id="gbutton" class="btn btn-primary mt-4 w-100" (click)="generateSalary()">Generate</button>
 </div>
 
-<div class="d-flex page__box p-4 mt-4" *ngIf="isVisible2">
-  <div class="card w-100">
+
+<!-- Payroll Management Details Section -->
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible2">
+
     <h3 class="m-3 text-center">Employee Daily Payroll</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="search-bar d-flex align-items-center w-100">
-        <b>Search details:</b>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectDate" class="font-weight-bold">Select Date:</label>
-          <select id="selectDate" class="form-control" required>
-            <option value="" selected disabled>Select Date</option>
-            <!-- Populate Dates dynamically here -->
-          </select>
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
         </div>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectEmpId" class="font-weight-bold">Select Emp ID:</label>
-          <select id="selectEmpId" class="form-control" required>
-            <option value="" selected disabled>Select Emp ID</option>
-            <!-- Populate Employee IDs dynamically here -->
-          </select>
-        </div>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectDepartment" class="font-weight-bold">Select Department:</label>
-          <select id="selectDepartment" class="form-control" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial</option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sales marketing">Sales and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
-          </select>
+        &nbsp;
+        <b>Select Month :</b>
+        <div class="form-group ml-2">
+          <input type="month" class="form-control" id="month" name="month" [(ngModel)]="selectedMonth" (change)="filterByEmployeeId()">
         </div>
       </div>
+
     </div>
-    <div class="card-body">
+  <div>
+    <div class="card-body" >
+      <!-- Existing Table -->
       <table datatable class="table table-bordered">
-        <thead class="bg-primary text-white">
+        <thead class="bg-dark text-white">
         <tr>
           <th>Emp ID</th>
+          <th>Date</th>
           <th>Working Hours</th>
           <th>OT Amount</th>
           <th>Shift Amount</th>
@@ -79,8 +66,9 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let item of loandata">
+        <tr *ngFor="let item of dailypayroll | paginate: { itemsPerPage: 10, currentPage: page }">
           <td>{{ item.emp_id }}</td>
+          <td>{{ item.date }}</td>
           <td>{{ item.working_hours }}</td>
           <td>Rs {{ item.ot_amount }}</td>
           <td>Rs {{ item.shift_amount }}</td>
@@ -88,82 +76,76 @@
         </tr>
         </tbody>
       </table>
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
     </div>
-  </div>
+
+</div>
 </div>
 
-<div class="d-flex page__box p-4 mt-4" *ngIf="isVisible3">
-  <div class="card w-100">
-    <h3 class="m-3 text-center">Employee Monthly Salary</h3>
+
+
+
+<!-- Payroll Management Details Section -->
+<div class="d-flex page__box p-1 mt-0" *ngIf="isVisible3">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">MONTHLY SALARY</h3>
     <div class="card-header d-flex justify-content-between align-items-center">
-      <div class="search-bar d-flex align-items-center w-100">
-        <b>Search details:</b>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectDate" class="font-weight-bold">Select Date:</label>
-          <select id="selectDate" class="form-control" required>
-            <option value="" selected disabled>Select Date</option>
-            <!-- Populate Dates dynamically here -->
-          </select>
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId1" placeholder="Enter Employee ID" required (input)="filterByEmployeeId1()">
         </div>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectEmpId" class="font-weight-bold">Select Emp ID:</label>
-          <select id="selectEmpId" class="form-control" required>
-            <option value="" selected disabled>Select Emp ID</option>
-            <!-- Populate Employee IDs dynamically here -->
-          </select>
-        </div>
-        <div class="form-group mr-2 ml-3">
-          <label for="selectDepartment" class="font-weight-bold">Select Department:</label>
-          <select id="selectDepartment" class="form-control" required>
-            <option value="" selected disabled>Select a department</option>
-            <option value="Financial">Financial</option>
-            <option value="Human resources">Human resources</option>
-            <option value="Sales marketing">Sales and marketing</option>
-            <option value="Administration">Administration</option>
-            <option value="Quality assurance">Quality assurance</option>
-            <option value="Production">Production</option>
-            <option value="All">All</option>
-          </select>
+        &nbsp;
+        <b>Select Month :</b>
+        <div class="form-group ml-2">
+          <input type="month" class="form-control" id="month" name="month" [(ngModel)]="selectedMonth" (change)="filterByEmployeeId1()">
         </div>
       </div>
+
     </div>
+  </div>
+  <div>
     <div class="card-body">
-      <table datatable class="table table-bordered">
-        <thead class="bg-primary text-white">
-        <tr>
-          <th>Emp ID</th>
-          <th>Salary Type</th>
-          <th>Job Role</th>
-          <th>Date</th>
-          <th>Bonus Amount</th>
-          <th>Allowance Amount</th>
-          <th>Deduction Amount</th>
-          <th>EPF</th>
-          <th>ETF</th>
-          <th>Loan Deduction</th>
-          <th>Advance Deduction</th>
-          <th>Gross Basic Salary</th>
-          <th>Net Salary</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let item of loandata2">
-          <td>{{ item.emp_id }}</td>
-          <td>{{ item.salary_type }}</td>
-          <td>{{ item.job_role }}</td>
-          <td>{{ item.date }}</td>
-          <td>Rs {{ item.bonus_amount }}</td>
-          <td>Rs {{ item.allowancess_amount }}</td>
-          <td>Rs {{ item.deduction_amount }}</td>
-          <td>Rs {{ item.epf }}</td>
-          <td>Rs {{ item.etf }}</td>
-          <td>Rs {{ item.loan_deduction }}</td>
-          <td>Rs {{ item.advance_salary }}</td>
-          <td>Rs {{ item.gross_basic_salary }}</td>
-          <td>Rs {{ item.net_salary }}</td>
-        </tr>
-        </tbody>
-      </table>
+      <!-- Existing Table -->
+      <div class="card-body">
+        <table datatable class="table table-bordered">
+          <thead class="bg-dark text-white">
+          <tr>
+            <th>Emp ID</th>
+            <th>Salary Type</th>
+            <th>Job Role</th>
+            <th>Date</th>
+            <th>Bonus Amount</th>
+            <th>Allowance Amount</th>
+            <th>Deduction Amount</th>
+            <th>EPF</th>
+            <th>ETF</th>
+            <th>Loan Deduction</th>
+            <th>Advance Deduction</th>
+            <th>Gross Basic Salary</th>
+            <th>Net Salary</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let item of monthlysalary | paginate: { itemsPerPage: 10, currentPage: page }">
+            <td>{{ item.emp_id }}</td>
+            <td>{{ item.salary_type }}</td>
+            <td>{{ item.job_role }}</td>
+            <td>{{ item.date }}</td>
+            <td>Rs {{ item.bonus_amount }}</td>
+            <td>Rs {{ item.allowancess_amount }}</td>
+            <td>Rs {{ item.deduction_amount }}</td>
+            <td>Rs {{ item.epf }}</td>
+            <td>Rs {{ item.etf }}</td>
+            <td>Rs {{ item.loan_deduction }}</td>
+            <td>Rs {{ item.advance_salary }}</td>
+            <td>Rs {{ item.gross_basic_salary }}</td>
+            <td>Rs {{ item.net_salary }}</td>
+          </tr>
+          </tbody>
+        </table>
+        <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+      </div>
     </div>
   </div>
 </div>

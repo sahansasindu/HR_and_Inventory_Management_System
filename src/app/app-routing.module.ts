@@ -66,6 +66,8 @@ import {ResetpwordComponent} from "./common/resetpword/resetpword.component";
 import {UpdatePositionComponent} from "./hr_manager/update-position/update-position.component";
 import {DepartmentandsectionComponent} from "./hr_manager/departmentandsection/departmentandsection.component";
 import {EmployeeattendacehrComponent} from "./hr_manager/employeeattendacehr/employeeattendacehr.component";
+import {EmployeedailypayrollComponent} from "./hr_manager/employeedailypayroll/employeedailypayroll.component";
+import {EmployeemonthlysalaryComponent} from "./hr_manager/employeemonthlysalary/employeemonthlysalary.component";
 
 
 const routes: Routes = [
@@ -157,6 +159,8 @@ const routes: Routes = [
   { path: 'add-loan', component: AddLoanComponent},
   { path: 'update-loan/:id', component: UpdateLoanComponent},
   { path: 'update-advance/:id', component: UpdateAdvanceComponent},
+  { path: 'dailypayroll', component: EmployeedailypayrollComponent},
+  { path: 'employeemonthlysalary', component: EmployeemonthlysalaryComponent},
 
 
   // Other routes if needed

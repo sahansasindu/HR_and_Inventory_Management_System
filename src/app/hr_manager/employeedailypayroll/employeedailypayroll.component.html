@@ -1,0 +1,50 @@
+<!-- Payroll Management Details Section -->
+<div class="d-flex page__box p-1 mt-0">
+  <div class="card" style="width:100%">
+    <h3 class="m-3 text-center">Employee Daily Payroll</h3>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div class="search-bar d-flex align-items-center">
+        <b>Search details :</b>
+        <div class="form-group">
+          <input type="text" class="form-control" id="emp" name="empId" [(ngModel)]="employeeId" placeholder="Enter Employee ID" required (input)="filterByEmployeeId()">
+        </div>
+        &nbsp;
+        <b>Select Month :</b>
+        <div class="form-group ml-2">
+          <input type="month" class="form-control" id="month" name="month" [(ngModel)]="selectedMonth" (change)="filterByEmployeeId()">
+        </div>
+      </div>
+      <div class="btn-group">
+        <a class="btn btn-primary" (click)="Back()">Back</a>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="card-body">
+      <!-- Existing Table -->
+      <table datatable class="table table-bordered">
+        <thead class="bg-dark text-white">
+        <tr>
+          <th>Emp ID</th>
+          <th>Date</th>
+          <th>Working Hours</th>
+          <th>OT Amount</th>
+          <th>Shift Amount</th>
+          <th>Total Amount</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of advancedata | paginate: { itemsPerPage: 10, currentPage: page }">
+          <td>{{ item.emp_id }}</td>
+          <td>{{ item.date }}</td>
+          <td>{{ item.working_hours }}</td>
+          <td>Rs {{ item.ot_amount }}</td>
+          <td>Rs {{ item.shift_amount }}</td>
+          <td>Rs {{ item.total_amount }}</td>
+        </tr>
+        </tbody>
+      </table>
+      <pagination-controls (pageChange)="pageChanged($event)"></pagination-controls>
+    </div>
+  </div>
+</div>
