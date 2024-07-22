@@ -1,0 +1,69 @@
+/* General Table Styling */
+table {
+  width: 80%;
+  border: 2px solid #000; /* Add a thicker border around the table */
+  border-collapse: collapse;
+  margin: 20px auto; /* Center the table horizontally */
+  font-family: Arial, sans-serif;
+}
+
+/* Table Cell and Header Styling */
+td, th {
+  border: 1px solid #000; /* Add a thicker border around cells */
+  text-align: left;
+  padding: 8px;
+}
+
+/* Header Styling */
+.header {
+  background-color: #f2f2f2;
+  font-size: 18px; /* Reduce font size */
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 0; /* Reduce padding */
+}
+
+/* Section Title Styling */
+.section-title {
+  background-color: #e6e6e6;
+  font-weight: bold;
+  text-align: center;
+  padding: 8px 0; /* Reduce padding */
+}
+
+/* Data Styling */
+td {
+  font-size: 12px; /* Reduce font size */
+}
+
+b {
+  font-weight: bold;
+}
+
+/* PDF Button Styling */
+.btn-custom {
+  background-color: #4CAF50; /* Green background */
+  border: none; /* Remove border */
+  color: white; /* White text */
+  padding: 12px 24px; /* Add some padding */
+  text-align: center; /* Center the text */
+  text-decoration: none; /* Remove underline */
+  display: inline-block; /* Make the button inline-block */
+  font-size: 16px; /* Increase font size */
+  margin: 10px 2px; /* Add some margin */
+  cursor: pointer; /* Add a pointer cursor on hover */
+  border-radius: 12px; /* Add rounded corners */
+  transition: background-color 0.3s ease; /* Add transition for hover effect */
+}
+
+/* Hover Effect for Custom Button */
+.btn-custom:hover {
+  background-color: #000000; /* Darker green on hover */
+}
+
+/* Button Container Styling */
+.button-container {
+  display: flex;
+  justify-content: flex-end; /* Align the button to the right */
+  margin-right: 30px; /* Add some margin to the right */
+}

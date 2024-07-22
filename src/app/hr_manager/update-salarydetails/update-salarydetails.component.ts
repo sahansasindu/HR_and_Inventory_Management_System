@@ -26,7 +26,7 @@ export class UpdateSalarydetailsComponent implements OnInit{
     ot_amount:null,
     salary_type:"",
     section_name:"",
-    subsistant:null,
+    late_hours_amount:null,
 
   };
 

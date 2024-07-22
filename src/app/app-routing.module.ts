@@ -68,6 +68,7 @@ import {DepartmentandsectionComponent} from "./hr_manager/departmentandsection/d
 import {EmployeeattendacehrComponent} from "./hr_manager/employeeattendacehr/employeeattendacehr.component";
 import {EmployeedailypayrollComponent} from "./hr_manager/employeedailypayroll/employeedailypayroll.component";
 import {EmployeemonthlysalaryComponent} from "./hr_manager/employeemonthlysalary/employeemonthlysalary.component";
+import {SalaryReportComponent}from "./hr_officer/salary-report/salary-report.component";
 
 
 const routes: Routes = [
@@ -91,6 +92,7 @@ const routes: Routes = [
       { path: 'generetesalary', component: GeneratesalaryComponent  },
       { path: 'mailboxNavigate', component: MailBoxComponent},
       { path: 'chatboxNavigate', component: ChatBoxComponent},
+      { path: 'monthlysalary', component: SalaryReportComponent},
     //  { path: 'home', component: HomeComponent }, production_copy_dilshan
 
     ]},
@@ -161,6 +163,7 @@ const routes: Routes = [
   { path: 'update-advance/:id', component: UpdateAdvanceComponent},
   { path: 'dailypayroll', component: EmployeedailypayrollComponent},
   { path: 'employeemonthlysalary', component: EmployeemonthlysalaryComponent},
+
 
 
   // Other routes if needed

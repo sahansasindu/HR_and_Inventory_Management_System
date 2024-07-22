@@ -7,6 +7,13 @@
       <li class="nav-item">
         <a class="nav-link" (click)="show2()">View Monthly Salary</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show3()">Monthly Salary Report</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" (click)="show4()">ETF Report</a>
+      </li>
+
     </ul>
   </div>
 </nav>
@@ -149,3 +156,48 @@
     </div>
   </div>
 </div>
+
+
+
+<div *ngIf="isVisible4">
+<div id="salary-report" class="bordered-section p-4" >
+  <h3>Salary Report</h3>
+  <div class="d-flex align-items-center form-group mt-4">
+    <label for="employeeId1" class="mr-2">Employee ID:</label>
+    <input id="employeeId1" type="text" class="form-control form-control-sm mr-2" [(ngModel)]="employeeId1">
+    <label for="month1" class="mr-2">Select Month:</label>
+    <input id="month1" type="month" class="form-control form-control-sm mr-2" [(ngModel)]="selectedMonth">
+    <button class="btn btn-primary" (click)="getSalaryReport()">Get report</button>
+  </div>
+</div>
+  <!-- Display Salary Report -->
+  <div *ngIf="salaryreport">
+    <app-salary-report [salaryReport]="salaryreport"></app-salary-report>
+  </div>
+
+</div>
+
+
+
+
+<div *ngIf="isVisible5">
+<div id="ETF-report" class="bordered-section p-4" >
+  <h3>ETF Report</h3>
+  <div class="d-flex align-items-center form-group mt-4">
+    <label for="etfmonth1" class="mr-2">Select Month:</label>
+    <input id="etfmonth1" type="month" class="form-control form-control-sm mr-2" [(ngModel)]="selectedMonth1">
+    <button class="btn btn-primary" (click)="getETFReport()">Get report</button>
+  </div>
+</div>
+<!-- Display Salary Report -->
+<div *ngIf="etfreport">
+  <app-epf-report [etfreport]="etfreport"></app-epf-report>
+</div>
+
+</div>
+
+
+
+
+
+

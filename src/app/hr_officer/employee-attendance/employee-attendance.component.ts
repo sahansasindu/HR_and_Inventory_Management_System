@@ -24,6 +24,7 @@ export class EmployeeAttendanceComponent {
   selectedMonth: string = '';
   page: number = 1; // <-- current page
   searchSuggestions: string[] = []; // <-- for storing search suggestions
+  isVisible3: any;
 
   constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
 
@@ -34,6 +35,7 @@ export class EmployeeAttendanceComponent {
   show() {
     this.isVisible1 = true;
     this.isVisible2 = false;
+    this.isVisible3 = false;
   }
 
   show2() {
@@ -215,5 +217,14 @@ export class EmployeeAttendanceComponent {
   }
   getCountOfLoadData() {
     return this.loarddata.length;
+  }
+
+  show3() {
+
+    this.isVisible1 = false;
+    this.isVisible2 = true;
+    this.isVisible3 = true;
+    this.fetchAttendanceData();
+
   }
 }

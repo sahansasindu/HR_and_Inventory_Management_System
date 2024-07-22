@@ -12,21 +12,20 @@ import Swal from "sweetalert2";
 export class GeneratesalaryComponent {
   isVisible1: boolean = true;
   isVisible2: boolean = true;
+  isVisible4: boolean = false;
   isVisible3: boolean = false;
+  isVisible5: boolean = false;
 
   dailypayroll: any[] = [];
   monthlysalary: any[] = [];
   filtereddata: any[] = [];
   filtereddata2: any[] = [];
+  salaryreport: any = [];
+  etfreport: any = [];
+
   id: any;
-  salaryheader: any[] = [];
-  salaryheader2: any[] = [];
-  selectedDepartment: string = "";
   isLoading: boolean = false;
   empid: any;
-  stime: any;
-  endtime: any;
-  ltype: any;
   reason: any;
   astatus: any;
   isBonusChecked: boolean = false;
@@ -36,22 +35,58 @@ export class GeneratesalaryComponent {
   employeeId: any = '';
   employeeId1: any = '';
   selectedMonth: any = '';
+  selectedMonth1: any = '';
   page: number = 1; // <-- current page
 
-  constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {}
+
+  constructor(private axiosService: AxiosService, private router: Router, private cdr: ChangeDetectorRef) {
+  }
 
   show() {
     this.isVisible1 = true;
     this.isVisible2 = true;
     this.isVisible3 = false;
+    this.isVisible4 = false;
+    this.isVisible5 = false;
+    this.salaryreport=null;
+    this.etfreport=null;
+
   }
 
   show2() {
     this.isVisible1 = false;
     this.isVisible2 = false;
     this.isVisible3 = true;
+    this.isVisible4 = false;
+    this.isVisible5 = false;
     this.fetchMonthlySalaryData();
+    this.salaryreport=null;
+    this.etfreport=null;
+
   }
+
+  show3() {
+    this.isVisible1 = false;
+    this.isVisible2 = false;
+    this.isVisible3 = false;
+    this.isVisible4 = true;
+    this.isVisible5 = false;
+    this.etfreport=null;
+
+
+  }
+
+  show4() {
+    this.isVisible1 = false;
+    this.isVisible2 = false;
+    this.isVisible3 = false;
+    this.isVisible4 = false;
+    this.isVisible5 = true;
+    this.salaryreport=null;
+
+
+  }
+
 
 
 
@@ -68,7 +103,9 @@ export class GeneratesalaryComponent {
     this.attendanceforsalary(selectedEmployeeId, selectedMonth, bonus);
     this.getmonthlysalaty(selectedEmployeeId, selectedMonth);
 
-    this.empid="";
+
+    this.empid = "";
+    this.bonusAmount=null;
 
   }
 
@@ -110,12 +147,11 @@ export class GeneratesalaryComponent {
   }
 
 
-
   ngOnInit() {
-    this.fetchDeductionData();
+    this.getdailypayroll();
   }
 
-  fetchDeductionData() {
+  getdailypayroll() {
     this.isLoading = true;
     this.axiosService.request('GET', 'geemployeedailypayroll', null, {})
       .then(response => {
@@ -140,14 +176,12 @@ export class GeneratesalaryComponent {
         this.monthlysalary = response.data;
         this.isLoading = false;
         // Update Invoiceheader with the fetched data
-        console.log(this.dailypayroll); // Corrected logging statement
+        console.log(this.monthlysalary); // Corrected logging statement
       })
       .catch(error => {
         console.error('Error fetching data:', error);
       });
   }
-
-
 
 
   private getmonthlysalaty(selectedEmployeeId: string, selectedMonth: string) {
@@ -198,4 +232,98 @@ export class GeneratesalaryComponent {
 
 
 
+
+
+  getSalaryReport() {
+    const empId = this.employeeId1;
+    const date = this.selectedMonth;
+
+    if (!empId || !date) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please enter both Employee ID and Month.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    const url = `/monthltysalaryReport?empId=${empId}&date=${date}`;
+
+    console.log(`Sending payroll request for empId: ${empId}, date: ${date}`);
+
+    this.axiosService.request("GET", url, {})
+      .then(response => {
+        this.salaryreport = response.data;
+        console.log(this.salaryreport);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Salary report generated successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        this.employeeId1=null;
+        this.selectedMonth=null;
+        this.show3();
+      })
+      .catch(error => {
+        console.error("Error fetching salary report:", error);
+        let errorMessage = "An error occurred while fetching the salary report. Please try again later.";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+        Swal.fire({
+          title: 'Error!',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
+  }
+
+  getETFReport() {
+
+    const date = this.selectedMonth1;
+
+    if (!date) {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Please enter Month.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+      return;
+    }
+
+    const url = `/epfReport?&date=${date}`;
+
+    console.log(`Sending payroll request for empId:date: ${date}`);
+
+    this.axiosService.request("GET", url, {})
+      .then(response => {
+        this.etfreport = response.data;
+        console.log(this.etfreport);
+        Swal.fire({
+          title: 'Success!',
+          text: 'Salary report generated successfully!',
+          icon: 'success',
+          confirmButtonText: 'OK'
+        });
+        this.selectedMonth1=null;
+      })
+      .catch(error => {
+        console.error("Error fetching salary report:", error);
+        let errorMessage = "An error occurred while fetching the salary report. Please try again later.";
+        if (error.response && error.response.data && error.response.data.message) {
+          errorMessage = error.response.data.message;
+        }
+        Swal.fire({
+          title: 'Error!',
+          text: errorMessage,
+          icon: 'error',
+          confirmButtonText: 'OK'
+        });
+      });
+
+  }
 }

@@ -22,7 +22,7 @@ export class ModelBasicsalaryformComponent {
   @Input() ot_amount: any;
   @Input() salary_type: string = '';
   @Input() section_name: string = '';
-  @Input() subsistant: any;
+  @Input() late_hours_amount: any;
 
   constructor() { }
 
@@ -57,7 +57,7 @@ export class ModelBasicsalaryformComponent {
       ot_amount: this.ot_amount,
       salary_type: this.salary_type,
       section_name: this.section_name,
-      subsistant: this.subsistant,
+      late_hours_amount: this.late_hours_amount,
     };
 
     this.formSubmit.emit(formData);
@@ -76,6 +76,6 @@ export class ModelBasicsalaryformComponent {
     this.ot_amount = '';
     this.salary_type = '';
     this.section_name = '';
-    this.subsistant = '';
+    this.late_hours_amount = '';
   }
 }
