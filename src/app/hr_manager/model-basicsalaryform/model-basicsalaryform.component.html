@@ -32,15 +32,15 @@
               <select id="depName" [(ngModel)]="depName"  name="depName" class="form-control" required>
                 <option value="" selected disabled>Select a department</option>
                 <option value="" selected>Select Department</option>
-                <option value="DEP01">Production</option>
-                <option value="DEP02">Administration</option>
-                <option value="DEP03">Finance</option>
-                <option value="DEP04">Sales and Marketing</option>
-                <option value="DEP05">Human Resource</option>
-                <option value="DEP06">Quality Assurance</option>
-                <option value="DEP07">Maintenance</option>
-                <option value="DEP08">Stores</option>
-                <option value="DEP09">Transport</option>
+                <option value="Production">Production</option>
+                <option value="Administration">Administration</option>
+                <option value="Finance">Finance</option>
+                <option value="Sales and Marketing">Sales and Marketing</option>
+                <option value="Human Resource">Human Resource</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Stores">Stores</option>
+                <option value="Transport">Transport</option>
               </select>
             </div>
 
@@ -127,20 +127,28 @@
               <label for="section_name">Section name:</label>
               <select id="section_name" [(ngModel)]="section_name" name="section_name" class="form-control" required>
                 <option value="" selected disabled>Select a section name</option>
-                <option value="SEC01">Bottle washing</option>
-                <option value="SEC02">Yogurt section</option>
-                <option value="SEC03">UHT</option>
-                <option value="SEC04">Packet</option>
-                <option value="SEC05">Ice cream</option>
-                <option value="SEC06">Milk taffy</option>
+                <option value="Bottle washing">Bottle washing</option>
+                <option value="Yogurt section">Yogurt section</option>
+                <option value="UHT">UHT</option>
+                <option value="Packet">Packet</option>
+                <option value="Ice cream">Ice cream</option>
+                <option value="Milk taffy">Milk taffy</option>
+                <option value="Administration">Administration</option>
+                <option value="Finance">Finance</option>
+                <option value="Sales and Marketing">Sales and Marketing</option>
+                <option value="Human Resource">Human Resource</option>
+                <option value="Quality Assurance">Quality Assurance</option>
+                <option value="Maintenance">Maintenance</option>
+                <option value="Stores">Stores</option>
+                <option value="Transport">Transport</option>
               </select>
             </div>
 
 
 
             <div class="form-group">
-              <label for="subsistant">Subsistant</label>
-              <input type="number" id="subsistant" name="subsistant"  [(ngModel)]="subsistant"  class="form-control" placeholder="subsistant" maxlength="10">
+              <label for="subsistant">Late hour amount</label>
+              <input type="number" id="subsistant" name="subsistant"  [(ngModel)]="late_hours_amount"  class="form-control" placeholder="subsistant" maxlength="10">
             </div>
 
 

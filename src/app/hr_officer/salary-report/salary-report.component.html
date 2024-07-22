@@ -1,0 +1,89 @@
+<div id="salary-report-content">
+  <table border="1" cellspacing="0" cellpadding="5">
+    <tr>
+      <td colspan="5" class="header" style="text-align: center; font-weight: bold;">LUCKY LANKA PLC</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="header" style="text-align: center; font-weight: bold;">Pay Slip</td>
+    </tr>
+    <tr>
+      <td>Month:</td>
+      <td colspan="2">{{ salaryReport?.month }}</td>
+      <td>Year:</td>
+      <td>{{ salaryReport?.year }}</td>
+    </tr>
+    <tr>
+      <td>Name:</td>
+      <td colspan="4">{{ salaryReport?.emp_Name }}</td>
+    </tr>
+    <tr>
+      <td>EPF Number:</td>
+      <td colspan="4">{{ salaryReport?.emp_id }}</td>
+    </tr>
+    <tr>
+      <td>Job title:</td>
+      <td colspan="4">{{ salaryReport?.job_role }}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="section-title" style="text-align: center; font-weight: bold;">CONSOLIDATED SALARY</td>
+    </tr>
+    <tr>
+      <td>Total Basic Salary (with BA1 & BA2)</td>
+      <td colspan="4">{{ salaryReport?.total_basicsalary }}</td>
+    </tr>
+    <tr>
+      <td colspan="5" class="section-title" style="text-align: center; font-weight: bold;">ALLOWANCES</td>
+    </tr>
+    <tr>
+      <td>Add: OT Pay</td>
+      <td colspan="4">{{ salaryReport?.total_otamount }}</td>
+    </tr>
+    <tr>
+      <td>Add: Bonus</td>
+      <td colspan="4">{{ salaryReport?.bonus_amount }}</td>
+    </tr>
+    <tr>
+      <td>Add: Allowance</td>
+      <td colspan="4">{{ salaryReport?.allowancess_amount }}</td>
+    </tr>
+    <tr>
+      <td><b>Gross Salary</b></td>
+      <td colspan="4"><b>{{ salaryReport?.gross_basic_salary }}</b></td>
+    </tr>
+    <tr>
+      <td colspan="5" class="section-title" style="text-align: center; font-weight: bold;">OTHER DEDUCTIONS</td>
+    </tr>
+    <tr>
+      <td>Other total deduction</td>
+      <td colspan="4">{{ salaryReport?.deduction_amount }}</td>
+    </tr>
+    <tr>
+      <td>Loan deduction</td>
+      <td colspan="4">{{ salaryReport?.loan_deduction }}</td>
+    </tr>
+    <tr>
+      <td>Advance deduction</td>
+      <td colspan="4">{{ salaryReport?.advance_salary }}</td>
+    </tr>
+    <tr>
+      <td>E.P.F. 8%</td>
+      <td colspan="4">{{ salaryReport?.epf }}</td>
+    </tr>
+    <tr>
+      <td>EPF-Co. Contribution 12%</td>
+      <td colspan="4">{{ salaryReport?.cepf }}</td>
+    </tr>
+    <tr>
+      <td>ETF 3%</td>
+      <td colspan="4">{{ salaryReport?.etf }}</td>
+    </tr>
+    <tr>
+      <td><b>NET PAY</b></td>
+      <td colspan="4"><b>{{ salaryReport?.net_salary }}</b></td>
+    </tr>
+  </table>
+</div>
+
+<div class="button-container" style="margin-top: 20px; text-align: center;">
+  <button class="btn btn-custom" (click)="downloadPDF()">Download PDF</button>
+</div>

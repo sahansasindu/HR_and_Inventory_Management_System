@@ -229,3 +229,88 @@ table {
 table th, table td {
   border: 1px solid black; /* Add border to table cells */
 }
+
+.generate-salary-heading {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+#salary-report {
+  background-color: #b9dade; /* Form background color */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Adjust width to fit both sections */
+  margin: 20px;
+  padding: 20px;
+}
+
+#salary-report .form-control {
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+#salary-report .d-flex {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+}
+
+#salary-report button {
+  border-radius: 5px;
+}
+
+@media (max-width: 480px) {
+  #salary-report .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #salary-report .form-control, #salary-report button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+
+/* Styles for isVisible5 (ETF Report) section */
+#ETF-report {
+  background-color: #b9dade; /* Form background color */
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: 100%; /* Adjust width to fit both sections */
+  margin: 20px;
+  padding: 20px;
+}
+
+#ETF-report .form-control {
+  border-radius: 5px;
+  padding: 0.5rem;
+}
+
+#ETF-report .d-flex {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Space between elements */
+}
+
+#ETF-report button {
+  border-radius: 5px;
+}
+
+@media (max-width: 480px) {
+  #ETF-report .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  #ETF-report .form-control, #ETF-report button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}

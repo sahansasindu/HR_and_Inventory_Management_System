@@ -46,7 +46,7 @@ export class UpdateAllowancedetailsComponent implements OnInit {
       allowances_id: this.id
     };
 
-    this.axiosService.request("PUT", "/updateLone", updatedFormData,{}) // Changed from "/updateDeduction" to "/updateAllowance"
+    this.axiosService.request("PUT", "/updateAllowance", updatedFormData,{}) // Changed from "/updateDeduction" to "/updateAllowance"
       .then(response => {
         console.log("Response from server:", response);
         alert("loan details add successfully!");

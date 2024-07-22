@@ -1,0 +1,33 @@
+<div class="container" id="salary-report-content">
+  <table>
+    <thead>
+    <tr>
+      <th colspan="6"><h1>LUCKY LANKA PLC</h1></th>
+    </tr>
+    <tr>
+      <th colspan="6">EPF Deduction Report</th>
+    </tr>
+    <tr>
+      <th>Employee ID</th>
+      <th>Employee Name</th>
+      <th>Contribution for EPF %8</th>
+      <th>Company Contribution for EPF %12</th>
+      <th>Company Contribution for ETF %3</th>
+      <th>Date</th> <!-- Added Date column -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let report of etfreport">
+      <td>{{ report.emp_id }}</td>
+      <td>{{ report.emp_Name }}</td>
+      <td>{{ report.epf }}</td>
+      <td>{{ report.cepf }}</td>
+      <td>{{ report.etf }}</td>
+      <td>{{ report.date }}</td> <!-- Displaying date for each entry -->
+    </tr>
+    </tbody>
+  </table>
+</div>
+<div class="button-container" style="margin-top: 20px; text-align: center;">
+  <button class="btn btn-custom" (click)="downloadPDF()">Download PDF</button>
+</div>
