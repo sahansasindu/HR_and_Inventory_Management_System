@@ -145,7 +145,11 @@ export class WashingsectionComponent implements OnInit{
         .then(response => {
 
           if (response.data && response.data.message) {
-            alert(response.data.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
           } else {
             Swal.fire({
               icon: 'success',
@@ -159,7 +163,11 @@ export class WashingsectionComponent implements OnInit{
         .catch(error => {
 
           if (error.response && error.response.data && error.response.data.message) {
-            alert(error.response.data.message);
+            Swal.fire({
+              icon: 'success',
+              title: 'Submission Successful',
+              text: 'Your form has been submitted successfully!',
+            });
           } else {
 
           }
