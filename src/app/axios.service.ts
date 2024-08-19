@@ -6,7 +6,7 @@ import axios, {AxiosError} from 'axios';
 export class AxiosService {
 
   constructor() {
-    axios.defaults.baseURL="http://localhost:8080/hrandproduction"
+    axios.defaults.baseURL="http://luckylankahrandproduction.eu-north-1.elasticbeanstalk.com"
     axios.defaults.headers.post["Content-Type"]="application/json"
   }
 
